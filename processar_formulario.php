@@ -7,7 +7,10 @@ $dbname = 'alpha_db'; // Nome do banco de dados correto
 
 // Cria a conexão
 $connex = new mysqli($host, $user, $password, $dbname);
-
+echo'<pre>';
+print_r($user);
+echo'<pre>';
+exit;
 // Verifica se houve algum erro na conexão
 if ($connex->connect_errno) {
     echo "Erro: " . $connex->connect_error;
