@@ -1,0 +1,3 @@
+# Configuração básica do PHP
+RewriteEngine On
+RewriteBase /
