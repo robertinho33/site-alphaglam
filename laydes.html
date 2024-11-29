@@ -20,7 +20,8 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
+            width: 100%;
+            max-width: 400px;
         }
         form h1 {
             text-align: center;
@@ -29,15 +30,15 @@
         label {
             display: block;
             margin-bottom: 5px;
+            font-weight: bold;
         }
-        input[type="text"],
-        input[type="email"],
-        button {
+        input, select, button {
             width: 100%;
             padding: 10px;
             margin-bottom: 15px;
             border: 1px solid #ccc;
             border-radius: 5px;
+            font-size: 16px;
         }
         button {
             background-color: #4CAF50;
@@ -59,70 +60,59 @@
         <label for="instagram">Instagram</label>
         <input type="text" id="instagram" name="instagram" placeholder="Digite seu Instagram" required>
 
-        <label for="whatsApp">whatsApp</label>
-        <input type="text" id="whatsApp" name="whatsApp" placeholder="Digite seu whatsApp" required>
-        
-        <label for="data">Data</label>
-        <input type="datetime-local" id="data" name="data" required>
+        <label for="whatsApp">WhatsApp</label>
+        <input type="text" id="whatsApp" name="whatsApp" placeholder="Digite seu WhatsApp" required>
+
+        <label for="dataHorarioAtual">Data e Hora (Atual)</label>
+        <input type="datetime-local" id="dataHorarioAtual" name="dataHorarioAtual" required>
         <script>
-          const dataInput = document.getElementById('data');
-          const agora = new Date();
-          const formatoISO = agora.toISOString().slice(0, 16); // Pega data e hora no formato ISO sem segundos
-          dataInput.value = formatoISO; // Define o valor inicial como a data e hora atuais
+            const dataHorarioAtual = document.getElementById('dataHorarioAtual');
+            const agora = new Date();
+            const formatoISO = agora.toISOString().slice(0, 16);
+            dataHorarioAtual.value = formatoISO;
         </script>
-           
-        <button type="submit">Enviar</button>
- 
-        <div><h1>Agendamento de Horário</h1></div> 
-    
-        <!-- Campo de Profissionais -->
+
+        <h1>Agendamento de Horário</h1>
+
         <label for="profissional">Selecione o profissional:</label>
         <select id="profissional" name="profissional" required>
-        <option value="">Escolha um profissional</option>
-        <option value="profissional1">Maria - Especialista em Cabelos</option>
-        <option value="profissional2">João - Barbeiro</option>
-        <option value="profissional3">Ana - Estética Facial</option>
-        <option value="profissional4">Carlos - Design de Unhas</option>
+            <option value="">Escolha um profissional</option>
+            <option value="profissional1">Maria - Especialista em Cabelos</option>
+            <option value="profissional2">João - Barbeiro</option>
+            <option value="profissional3">Ana - Estética Facial</option>
+            <option value="profissional4">Carlos - Design de Unhas</option>
         </select>
-        <br><br>
 
-        <!-- Campo de Serviços -->
         <label for="servico">Selecione o serviço:</label>
         <select id="servico" name="servico" required>
-        <option value="">Escolha um serviço</option>
-        <option value="corte">Corte de Cabelo</option>
-        <option value="pintura">Pintura de Cabelo</option>
-        <option value="alisamento">Alisamento</option>
-        <option value="barba">Barba</option>
-        <option value="depilacao">Depilação</option>
-        <option value="facial">Limpeza Facial</option>
-        <option value="maquiagem">Maquiagem</option>
-        <option value="unhas">Design de Unhas</option>
-        <option value="massagem">Massagem Relaxante</option>
+            <option value="">Escolha um serviço</option>
+            <option value="corte">Corte de Cabelo</option>
+            <option value="pintura">Pintura de Cabelo</option>
+            <option value="alisamento">Alisamento</option>
+            <option value="barba">Barba</option>
+            <option value="depilacao">Depilação</option>
+            <option value="facial">Limpeza Facial</option>
+            <option value="maquiagem">Maquiagem</option>
+            <option value="unhas">Design de Unhas</option>
+            <option value="massagem">Massagem Relaxante</option>
         </select>
-        <br><br>
 
-        <!-- Campo de Data -->
-        <label for="data">Selecione a data:</label>
-        <input type="date" id="data" name="data" required>
-        <br><br>
+        <label for="dataAgendamento">Data</label>
+        <input type="date" id="dataAgendamento" name="dataAgendamento" required>
 
-        <!-- Campo de Horário -->
-        <label for="horario">Selecione o horário:</label>
+        <label for="horario">Horário</label>
         <input type="time" id="horario" name="horario" required>
-        <br><br>
+
+        <script>
+            const dataAgendamento = document.getElementById('dataAgendamento');
+            const hoje = new Date();
+            const ano = hoje.getFullYear();
+            const mes = String(hoje.getMonth() + 1).padStart(2, '0');
+            const dia = String(hoje.getDate()).padStart(2, '0');
+            dataAgendamento.min = `${ano}-${mes}-${dia}`;
+        </script>
 
         <button type="submit">Agendar</button>
-  </form>
-
-  <script>
-    // Define a data mínima como o dia atual
-    const dataInput = document.getElementById('data');
-    const hoje = new Date();
-    const ano = hoje.getFullYear();
-    const mes = String(hoje.getMonth() + 1).padStart(2, '0'); // Mês começa em 0
-    const dia = String(hoje.getDate()).padStart(2, '0');
-    dataInput.min = `${ano}-${mes}-${dia}`;
-  </script>
+    </form>
 </body>
 </html>
