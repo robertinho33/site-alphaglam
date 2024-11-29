@@ -70,13 +70,11 @@
           const formatoISO = agora.toISOString().slice(0, 16); // Pega data e hora no formato ISO sem segundos
           dataInput.value = formatoISO; // Define o valor inicial como a data e hora atuais
         </script>
-        
-   
+           
         <button type="submit">Enviar</button>
-    </form>
  
   <h1>Agendamento de Horário</h1>
-  <form action="/submit" method="POST">
+  
     <!-- Campo de Profissionais -->
     <label for="profissional">Selecione o profissional:</label>
     <select id="profissional" name="profissional" required>
