@@ -143,7 +143,17 @@ images.forEach(image => {
 
         // Atualiza a exibição do carrinho
         updateCart();
+        
     });
+    document.getElementById('already-registered').addEventListener('click', () => {
+    const formCadastro = document.getElementById('form-cadastro');
+    const formCarrinho = document.getElementById('form-carrinho');
+    
+    // Alterna a visibilidade dos formulários
+    formCadastro.style.display = 'none'; // Esconde o formulário de cadastro
+    formCarrinho.style.display = 'block'; // Exibe o formulário simples no carrinho
+});
+
 });
 
 // Atualiza o carrinho na tela
