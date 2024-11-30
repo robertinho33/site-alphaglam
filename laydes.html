@@ -9,18 +9,87 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f9f9f9;
+            background-color: #fdf7e1;
             display: flex;
             flex-direction: column;
             align-items: center;
+            color: #6b4f32;
+        }
+
+        header {
+            width: 100%;
+            background-color: #f7e6c2;
+            padding: 10px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        header .menu {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+        }
+
+        header .menu button {
+            background: none;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            color: #6b4f32;
+            position: relative;
+        }
+
+        header .menu button:hover {
+            color: #d4a760;
+        }
+
+        header .menu ul {
+            list-style: none;
+            position: absolute;
+            top: 30px;
+            right: 0;
+            background: #f7e6c2;
+            border-radius: 5px;
+            padding: 10px 0;
+            display: none;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        header .menu button:focus + ul, header .menu ul:hover {
+            display: block;
+        }
+
+        header .menu ul li {
+            padding: 5px 15px;
+        }
+
+        header .menu ul li a {
+            text-decoration: none;
+            color: #6b4f32;
+        }
+
+        header .menu ul li a:hover {
+            color: #d4a760;
         }
 
         .image-grid {
+            overflow-x: auto;
             display: flex;
             gap: 15px;
-            margin: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
+            margin: 20px 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #d4a760;
+            scrollbar-width: thin;
+            scrollbar-color: #d4a760 transparent;
+        }
+
+        .image-grid::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .image-grid::-webkit-scrollbar-thumb {
+            background: #d4a760;
+            border-radius: 5px;
         }
 
         .image-grid img {
@@ -49,6 +118,7 @@
 
         .cart h2 {
             text-align: center;
+            color: #6b4f32;
         }
 
         .cart ul {
@@ -74,6 +144,7 @@
             text-align: center;
             font-weight: bold;
             margin: 10px 0;
+            color: #6b4f32;
         }
 
         .buttons {
@@ -81,9 +152,9 @@
             justify-content: space-between;
         }
 
-        .buttons a, .buttons button {
+        .buttons button {
             text-decoration: none;
-            background-color: #4CAF50;
+            background-color: #d4a760;
             color: white;
             padding: 10px;
             border-radius: 5px;
@@ -92,8 +163,8 @@
             border: none;
         }
 
-        .buttons button:hover, .buttons a:hover {
-            background-color: #45a049;
+        .buttons button:hover {
+            background-color: #b08b5b;
         }
 
         form {
@@ -109,6 +180,7 @@
         form h1 {
             text-align: center;
             margin-bottom: 20px;
+            color: #6b4f32;
         }
 
         label {
@@ -121,24 +193,32 @@
             width: 100%;
             padding: 10px;
             margin-bottom: 15px;
-            border: 1px solid #ccc;
+            border: 1px solid #d4a760;
             border-radius: 5px;
         }
 
         button {
-            background-color: #4CAF50;
+            background-color: #d4a760;
             color: white;
             cursor: pointer;
             border: none;
         }
 
         button:hover {
-            background-color: #45a049;
+            background-color: #b08b5b;
         }
     </style>
 </head>
 <body>
-    <!-- Carrinho de Compras -->
+    <header>
+        <div class="menu">
+            <button>☰ Menu</button>
+            <ul>
+                <li><a href="index.html">Voltar</a></li>
+            </ul>
+        </div>
+    </header>
+
     <div class="image-grid">
         <img src="https://images.yampi.io/unsafe/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/mascara-liquida-liquid-mask-ecobelle-200-ml-66fd5cae45ed1-large.png" alt="Imagem 1" data-name="Máscara Líquida" data-price="50">
         <img src="https://images.yampi.io/unsafe/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/finalizador-termico-coco-camomila-by-vitoria-lima-200-ml-667c4d7031e63-large.png" alt="Imagem 2" data-name="Finalizador Térmico" data-price="40">
@@ -153,79 +233,14 @@
         <ul id="cart-items"></ul>
         <div class="total" id="total-price">Total: R$ 0,00</div>
         <div class="buttons">
-            <a href="index.html">Voltar</a>
             <button id="checkout-btn">Finalizar Compra</button>
         </div>
     </div>
 
-    <!-- Formulário de Cadastro -->
     <form action="https://getform.io/f/ayvvqnnb" method="POST">
         <h1>Cadastro Ladies</h1>
         <label for="nome">Nome</label>
-        <input type="text" id="nome" name="nome" placeholder="Digite seu nome Ladies" required>
-        <label for="instagram">Instagram</label>
-        <input type="text" id="instagram" name="instagram" placeholder="Digite seu Instagram Ladies" required>
-        <label for="whatsApp">WhatsApp</label>
-        <input type="text" id="whatsApp" name="whatsApp" placeholder="Digite seu WhatsApp Ladies" required>
+        <input type="text" id="nome" name="nome" required>
     </form>
-
-    <!-- Formulário de Agendamento -->
-    <form action="https://getform.io/f/ayvvqnnb" method="POST">
-        <h1>Agendamento Ladies</h1>
-        <label for="dataHorarioAtual">Data e Hora (Atual)</label>
-        <input type="datetime-local" id="dataHorarioAtual" name="dataHorarioAtual" required>
-        <label for="profissional">Selecione o profissional:</label>
-        <select id="profissional" name="profissional" required>
-            <option value="">Escolha um profissional</option>
-            <option value="profissional1">Maria - Especialista em Cabelos</option>
-            <option value="profissional2">João - Barbeiro</option>
-        </select>
-        <label for="servico">Selecione o serviço:</label>
-        <select id="servico" name="servico" required>
-            <option value="">Escolha um serviço</option>
-            <option value="corte">Corte de Cabelo</option>
-        </select>
-        <label for="dataAgendamento">Data</label>
-        <input type="date" id="dataAgendamento" name="dataAgendamento" required>
-        <label for="horario">Horário</label>
-        <input type="time" id="horario" name="horario" required>
-        <button type="submit">Agendar</button>
-    </form>
-
-    <script>
-        const images = document.querySelectorAll('.image-grid img');
-        const cartItems = document.getElementById('cart-items');
-        const totalPriceEl = document.getElementById('total-price');
-        const checkoutBtn = document.getElementById('checkout-btn');
-        let cart = [];
-        let totalPrice = 0;
-
-        images.forEach(img => {
-            img.addEventListener('click', () => {
-                const name = img.getAttribute('data-name');
-                const price = parseFloat(img.getAttribute('data-price'));
-                const src = img.getAttribute('src');
-                cart.push({ name, price, src });
-                totalPrice += price;
-                updateCart();
-            });
-        });
-
-        function updateCart() {
-            cartItems.innerHTML = cart.map(item => `
-                <li>
-                    <img src="${item.src}" alt="${item.name}">
-                    ${item.name} - R$ ${item.price.toFixed(2)}
-                </li>
-            `).join('');
-            totalPriceEl.textContent = `Total: R$ ${totalPrice.toFixed(2)}`;
-        }
-
-        checkoutBtn.addEventListener('click', () => {
-            const items = cart.map(item => `${item.name} - R$ ${item.price.toFixed(2)}`).join('%0A');
-            const message = `Olá! Gostaria de finalizar o seguinte pedido:%0A%0A${items}%0A%0ATotal: R$ ${totalPrice.toFixed(2)}`;
-            window.open(`https://wa.me/5511986215473?text=${message}`, '_blank');
-        });
-    </script>
 </body>
 </html>
