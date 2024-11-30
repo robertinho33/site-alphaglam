@@ -69,13 +69,13 @@
     </form>
 
     <script>
-    let cart = [];
+   let cart = [];
 
 const images = document.querySelectorAll('.image-grid img');
 const cartItems = document.getElementById('cart-items');
 const totalPrice = document.getElementById('total-price');
-const checkoutBtn = document.getElementById('checkout-btn');
 
+// Adiciona os produtos ao carrinho quando clicados
 images.forEach(image => {
     image.addEventListener('click', () => {
         const name = image.getAttribute('data-name');
@@ -88,23 +88,41 @@ images.forEach(image => {
     });
 });
 
+// Atualiza o carrinho na tela
 function updateCart() {
     cartItems.innerHTML = '';  // Limpa o carrinho antes de atualizar
     let total = 0;
-    cart.forEach(item => {
+
+    cart.forEach((item, index) => {
         const li = document.createElement('li');
         
         // Cria um elemento de lista com a imagem e o nome + preço
         li.innerHTML = `
             <img src="${item.src}" alt="${item.name}" style="width: 50px; height: auto; margin-right: 10px; border-radius: 5px;">
             ${item.name} - R$ ${item.price.toFixed(2)}
+            <button class="remove-item" data-index="${index}">Excluir</button>  <!-- Botão de excluir -->
         `;
+        
+        // Adiciona o item ao carrinho
         cartItems.appendChild(li);
+        
+        // Soma o preço total
         total += item.price;
     });
 
     totalPrice.textContent = `Total: R$ ${total.toFixed(2)}`;
+
+    // Adiciona a funcionalidade de exclusão ao botão
+    const removeButtons = document.querySelectorAll('.remove-item');
+    removeButtons.forEach(button => {
+        button.addEventListener('click', (event) => {
+            const index = event.target.getAttribute('data-index');
+            cart.splice(index, 1);  // Remove o item do carrinho
+            updateCart();  // Atualiza o carrinho após remoção
+        });
+    });
 }
+
 
 checkoutBtn.addEventListener('click', () => {
     if (cart.length === 0) {
