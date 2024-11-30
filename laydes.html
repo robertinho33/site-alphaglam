@@ -26,11 +26,8 @@
         <img src="https://images.yampi.io/assets/stores/grupo-ecobelle/uploads/images/mascara-liquida-liquid-mask-ecobelle-200-ml-66fd5cae45ed1-large.png" alt="Máscara Líquida" data-name="Máscara Líquida" data-price="50">
         <img src="https://images.yampi.io/assets/stores/grupo-ecobelle/uploads/images/finalizador-termico-coco-camomila-by-vitoria-lima-200-ml-667c4d7031e63-large.png" alt="Finalizador Térmico" data-name="Finalizador Térmico" data-price="40">
         <img src="https://images.yampi.io/assets/stores/grupo-ecobelle/uploads/images/kit-coco-camomila-by-vitoria-lima-ecobelle-300-ml-66cf3cd879731-large.png" alt="Kit Coco e Camomila" data-name="Kit Coco e Camomila" data-price="100">
-        <img src="https://images.yampi.io/assets/stores/grupo-ecobelle/uploads/images/reparador-de-pontas-coco-camomila-by-vitoria-lima-60-ml-667c4fc05a4cb-large.png" alt="Reparador de Pontas" data-name="Reparador de Pontas" data-price="30">
-        <img src="https://images.yampi.io/assets/stores/grupo-ecobelle/uploads/images/condicionador-coco-camomila-by-vitoria-lima-ecobelle-300-ml-667ac92af0520-large.png" alt="Condicionador Coco e Camomila" data-name="Condicionador Coco e Camomila" data-price="45">
     </div>
 
-    <!-- Carrinho -->
     <div class="cart">
         <h2>Meu Carrinho</h2>
         <ul id="cart-items"></ul>
@@ -53,8 +50,9 @@
             img.addEventListener('click', () => {
                 const name = img.getAttribute('data-name');
                 const price = parseFloat(img.getAttribute('data-price'));
-                
-                cart.push({ name, price });
+                const src = img.getAttribute('src');
+
+                cart.push({ name, price, src });
                 totalPrice += price;
 
                 updateCart();
@@ -62,7 +60,12 @@
         });
 
         function updateCart() {
-            cartItems.innerHTML = cart.map(item => `<li>${item.name} - R$ ${item.price.toFixed(2)}</li>`).join('');
+            cartItems.innerHTML = cart.map(item => `
+                <li>
+                    <img src="${item.src}" alt="${item.name}">
+                    ${item.name} - R$ ${item.price.toFixed(2)}
+                </li>
+            `).join('');
             totalPriceEl.textContent = `Total: R$ ${totalPrice.toFixed(2)}`;
         }
 
