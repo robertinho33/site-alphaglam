@@ -112,10 +112,17 @@ checkoutBtn.addEventListener('click', () => {
         return;  // Não permite finalizar se o carrinho estiver vazio
     }
 
+    // Monta a lista de itens do carrinho
     const items = cart.map(item => `${item.name} - R$ ${item.price.toFixed(2)}`).join('%0A');
-    const message = `Olá! Gostaria de finalizar o seguinte pedido:%0A%0A${items}%0A%0ATotal: R$ ${totalPrice.textContent.replace('Total: R$', '').trim()}`;
-    window.open(`https://wa.me/5511986215473?text=${encodeURIComponent(message)}`, '_blank');
+    // Prepara a mensagem para envio
+    const total = totalPrice.textContent.replace('Total: R$', '').trim();  // Extrai o valor do total
+    const message = `Olá! Gostaria de finalizar o seguinte pedido:%0A%0A${items}%0A%0ATotal: R$ ${total}`;
+
+    // Envia a mensagem no WhatsApp
+    const whatsappUrl = `https://wa.me/5511986215473?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
 });
+
 
 </script>
 </body>
