@@ -74,6 +74,7 @@
 const images = document.querySelectorAll('.image-grid img');
 const cartItems = document.getElementById('cart-items');
 const totalPrice = document.getElementById('total-price');
+const checkoutBtn = document.getElementById('checkout-btn'); // Correção: Captura do botão de finalização
 
 // Adiciona os produtos ao carrinho quando clicados
 images.forEach(image => {
@@ -123,23 +124,21 @@ function updateCart() {
     });
 }
 
-
+// Lógica para finalizar a compra e enviar o pedido via WhatsApp
 checkoutBtn.addEventListener('click', () => {
     if (cart.length === 0) {
-        alert("O carrinho está vazio! Adicione itens antes de finalizar.");
-        return;  // Não permite finalizar se o carrinho estiver vazio
+        alert('Adicione ao menos um item ao carrinho antes de finalizar a compra.');
+        return;
     }
 
-    // Monta a lista de itens do carrinho
     const items = cart.map(item => `${item.name} - R$ ${item.price.toFixed(2)}`).join('%0A');
-    // Prepara a mensagem para envio
-    const total = totalPrice.textContent.replace('Total: R$', '').trim();  // Extrai o valor do total
+    const total = cart.reduce((sum, item) => sum + item.price, 0).toFixed(2);
     const message = `Olá! Gostaria de finalizar o seguinte pedido:%0A%0A${items}%0A%0ATotal: R$ ${total}`;
 
-    // Envia a mensagem no WhatsApp
-    const whatsappUrl = `https://wa.me/5511986215473?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, '_blank');
+    // Envia o pedido para o WhatsApp
+    window.open(`https://wa.me/5511986215473?text=${message}`, '_blank');
 });
+
 
 
 
