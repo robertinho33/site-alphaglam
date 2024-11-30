@@ -65,13 +65,14 @@ header .menu ul li a:hover {
     color: #d4a760;
 }
 
+/* Grid com rolagem horizontal para as imagens */
 .image-grid {
-    overflow-x: auto;
-    display: flex;
+    display: flex;  /* Usando flexbox para alinhamento de itens em linha */
     gap: 15px;
     margin: 20px 10px;
     padding-bottom: 10px;
     border-bottom: 1px solid #d4a760;
+    overflow-x: auto;  /* Permite rolagem horizontal */
     scrollbar-width: thin;
     scrollbar-color: #d4a760 transparent;
 }
@@ -86,7 +87,7 @@ header .menu ul li a:hover {
 }
 
 .image-grid img {
-    width: 150px;
+    width: 150px;  /* Tamanho fixo para as imagens */
     height: auto;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -200,37 +201,3 @@ button {
 button:hover {
     background-color: #b08b5b;
 }
-.image-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Ajuste para múltiplas colunas responsivas */
-    gap: 15px;
-    margin: 20px;
-    padding-bottom: 10px;
-    overflow-x: auto; /* Permite rolagem horizontal */
-    scrollbar-width: thin;
-    scrollbar-color: #d4a760 transparent;
-}
-
-.image-grid::-webkit-scrollbar {
-    height: 8px;
-}
-
-.image-grid::-webkit-scrollbar-thumb {
-    background: #d4a760;
-    border-radius: 5px;
-}
-
-.image-grid img {
-    width: 100%; /* Imagem ocupa toda a coluna */
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.image-grid img:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
