@@ -201,12 +201,12 @@ button:hover {
     background-color: #b08b5b;
 }
 .image-grid {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr); /* Cria 6 colunas iguais */
-    gap: 15px;
-    margin: 20px;
-    padding-bottom: 10px;
+    display: flex;
     overflow-x: auto; /* Permite rolagem horizontal */
+    gap: 15px;
+    margin: 20px 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #d4a760;
     scrollbar-width: thin;
     scrollbar-color: #d4a760 transparent;
 }
@@ -221,7 +221,7 @@ button:hover {
 }
 
 .image-grid img {
-    width: 100%; /* Faz a imagem ocupar toda a coluna */
+    width: 150px; /* Tamanho fixo para as imagens */
     height: auto;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
