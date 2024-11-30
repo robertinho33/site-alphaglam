@@ -69,7 +69,7 @@
     </form>
 
     <script>
-      let cart = [];
+    let cart = [];
 
 const images = document.querySelectorAll('.image-grid img');
 const cartItems = document.getElementById('cart-items');
@@ -80,7 +80,8 @@ images.forEach(image => {
     image.addEventListener('click', () => {
         const name = image.getAttribute('data-name');
         const price = parseFloat(image.getAttribute('data-price'));
-        cart.push({ name, price });
+        const src = image.getAttribute('src');  // Captura a imagem do produto
+        cart.push({ name, price, src }); // Agora também inclui a imagem
 
         // Atualiza a exibição do carrinho
         updateCart();
@@ -88,11 +89,16 @@ images.forEach(image => {
 });
 
 function updateCart() {
-    cartItems.innerHTML = '';
+    cartItems.innerHTML = '';  // Limpa o carrinho antes de atualizar
     let total = 0;
     cart.forEach(item => {
         const li = document.createElement('li');
-        li.textContent = `${item.name} - R$ ${item.price.toFixed(2)}`;
+        
+        // Cria um elemento de lista com a imagem e o nome + preço
+        li.innerHTML = `
+            <img src="${item.src}" alt="${item.name}" style="width: 50px; height: auto; margin-right: 10px; border-radius: 5px;">
+            ${item.name} - R$ ${item.price.toFixed(2)}
+        `;
         cartItems.appendChild(li);
         total += item.price;
     });
@@ -101,10 +107,16 @@ function updateCart() {
 }
 
 checkoutBtn.addEventListener('click', () => {
+    if (cart.length === 0) {
+        alert("O carrinho está vazio! Adicione itens antes de finalizar.");
+        return;  // Não permite finalizar se o carrinho estiver vazio
+    }
+
     const items = cart.map(item => `${item.name} - R$ ${item.price.toFixed(2)}`).join('%0A');
-    const message = `Olá! Gostaria de finalizar o seguinte pedido:%0A%0A${items}%0A%0ATotal: R$ ${totalPrice.toFixed(2)}`;
-    window.open(`https://wa.me/5511986215473?text=${message}`, '_blank');
+    const message = `Olá! Gostaria de finalizar o seguinte pedido:%0A%0A${items}%0A%0ATotal: R$ ${totalPrice.textContent.replace('Total: R$', '').trim()}`;
+    window.open(`https://wa.me/5511986215473?text=${encodeURIComponent(message)}`, '_blank');
 });
+
 </script>
 </body>
 </html>
