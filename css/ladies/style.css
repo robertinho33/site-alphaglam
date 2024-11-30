@@ -201,12 +201,12 @@ button:hover {
     background-color: #b08b5b;
 }
 .image-grid {
-    display: flex;
-    overflow-x: auto; /* Permite rolagem horizontal */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Ajuste para múltiplas colunas responsivas */
     gap: 15px;
-    margin: 20px 10px;
+    margin: 20px;
     padding-bottom: 10px;
-    border-bottom: 1px solid #d4a760;
+    overflow-x: auto; /* Permite rolagem horizontal */
     scrollbar-width: thin;
     scrollbar-color: #d4a760 transparent;
 }
@@ -221,7 +221,7 @@ button:hover {
 }
 
 .image-grid img {
-    width: 150px; /* Tamanho fixo para as imagens */
+    width: 100%; /* Imagem ocupa toda a coluna */
     height: auto;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
