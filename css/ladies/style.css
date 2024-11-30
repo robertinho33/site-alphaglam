@@ -65,7 +65,7 @@ header .menu ul li a:hover {
     color: #d4a760;
 }
 
-/* Grid com rolagem horizontal para as imagens */
+/* Grid com rolagem horizontal para as imagens, com limite de 6 itens */
 .image-grid {
     display: flex;  /* Usando flexbox para alinhamento de itens em linha */
     gap: 15px;
@@ -75,6 +75,7 @@ header .menu ul li a:hover {
     overflow-x: auto;  /* Permite rolagem horizontal */
     scrollbar-width: thin;
     scrollbar-color: #d4a760 transparent;
+    max-width: calc(6 * 150px + 5 * 15px); /* Limite de 6 imagens + espaços entre elas */
 }
 
 .image-grid::-webkit-scrollbar {
