@@ -112,8 +112,8 @@
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             margin: 20px;
-            width: 80%;
-            max-width: 400px;
+            width: 90%;
+            max-width: 500px;
         }
 
         .cart h2 {
@@ -173,8 +173,8 @@
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             margin: 20px;
-            width: 80%;
-            max-width: 400px;
+            width: 90%;
+            max-width: 500px;
         }
 
         form h1 {
@@ -224,8 +224,8 @@
         <img src="https://images.yampi.io/unsafe/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/finalizador-termico-coco-camomila-by-vitoria-lima-200-ml-667c4d7031e63-large.png" alt="Imagem 2" data-name="Finalizador Térmico" data-price="40">
         <img src="https://images.yampi.io/unsafe/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/kit-coco-camomila-by-vitoria-lima-ecobelle-300-ml-66cf3cd879731-large.png" alt="Imagem 3" data-name="Kit Coco e Camomila" data-price="100">
         <img src="https://images.yampi.io/inOUrVjOuPjvtnpVYzL9K3-xPCg=/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/kit-pimenta-rosa-eco-belle-64ef8bb1e85f1-large.png" alt="Imagem 4" data-name="Kit Pimenta Rosa" data-price="130">
-        <img src="https://images.yampi.io/BHaubHu5dG9dtvDfoDfvRrI7LB0=/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/kit-manutencao-home-care-silver-ecobelle-300ml-3-itens-67412ba3969a3-large.png" alt="Imagem 5" data-name="kit manutencao home care silver ecobelle 300ml 3 itens" data-price="130">
-        <img src="https://images.yampi.io/7rhO9gyuipnSCstiL7EtGLEiFaY=/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/kit-doeden-capim-limao-alecrim-6479e42ea3cfc-large.png" alt="Imagem 6" data-name="kit doeden capim limao alecrim" data-price="100">
+        <img src="https://images.yampi.io/BHaubHu5dG9dtvDfoDfvRrI7LB0=/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/kit-manutencao-home-care-silver-ecobelle-300ml-3-itens-67412ba3969a3-large.png" alt="Imagem 5" data-name="Kit Manutenção Home Care" data-price="130">
+        <img src="https://images.yampi.io/7rhO9gyuipnSCstiL7EtGLEiFaY=/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/kit-doeden-capim-limao-alecrim-6479e42ea3cfc-large.png" alt="Imagem 6" data-name="Kit Capim Limão Alecrim" data-price="100">
     </div>
 
     <div class="cart">
@@ -241,6 +241,61 @@
         <h1>Cadastro Ladies</h1>
         <label for="nome">Nome</label>
         <input type="text" id="nome" name="nome" required>
+        <label for="telefone">Telefone</label>
+        <input type="text" id="telefone" name="telefone" required>
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+        <label for="data">Data de Agendamento</label>
+        <input type="date" id="data" name="data" required>
+        <label for="horario">Horário de Agendamento</label>
+        <select id="horario" name="horario" required>
+            <option value="10:00">10:00</option>
+            <option value="14:00">14:00</option>
+            <option value="16:00">16:00</option>
+            <option value="18:00">18:00</option>
+        </select>
+        <button type="submit">Agendar</button>
     </form>
+
+    <script>
+        let cart = [];
+
+        const images = document.querySelectorAll('.image-grid img');
+        const cartItems = document.getElementById('cart-items');
+        const totalPrice = document.getElementById('total-price');
+        const checkoutBtn = document.getElementById('checkout-btn');
+
+        images.forEach(image => {
+            image.addEventListener('click', () => {
+                const name = image.getAttribute('data-name');
+                const price = parseFloat(image.getAttribute('data-price'));
+                cart.push({ name, price });
+
+                // Update the cart display
+                updateCart();
+            });
+        });
+
+        function updateCart() {
+            cartItems.innerHTML = '';
+            let total = 0;
+            cart.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = `${item.name} - R$ ${item.price.toFixed(2)}`;
+                cartItems.appendChild(li);
+                total += item.price;
+            });
+
+            totalPrice.textContent = `Total: R$ ${total.toFixed(2)}`;
+        }
+
+        checkoutBtn.addEventListener('click', () => {
+            if (cart.length === 0) {
+                alert("O carrinho está vazio!");
+                return;
+            }
+            alert("Compra finalizada!");
+        });
+    </script>
 </body>
 </html>
