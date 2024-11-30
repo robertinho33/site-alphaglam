@@ -21,57 +21,7 @@
         <img src="https://images.yampi.io/uoifIvz628_6W2-FSoMnFFOC8A4=/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/mascara-de-tratamento-la-boue-blanc-ecobelle-500ml-6479f8ff1c5a8-large.png" alt="Imagem 9">
         <img src="https://images.yampi.io/QN24T6MtjFtcfCTLzQe1SJVnoKg=/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/mascara-de-tratamento-la-boue-vert-ecobelle-500ml-647a0104c6827-large.png" alt="Imagem 10">
     </div>
-       <!-- Galeria de Produtos -->
-    <div class="image-grid">
-        <img src="https://images.yampi.io/assets/stores/grupo-ecobelle/uploads/images/mascara-liquida-liquid-mask-ecobelle-200-ml-66fd5cae45ed1-large.png" alt="Máscara Líquida" data-name="Máscara Líquida" data-price="50">
-        <img src="https://images.yampi.io/assets/stores/grupo-ecobelle/uploads/images/finalizador-termico-coco-camomila-by-vitoria-lima-200-ml-667c4d7031e63-large.png" alt="Finalizador Térmico" data-name="Finalizador Térmico" data-price="40">
-        <img src="https://images.yampi.io/assets/stores/grupo-ecobelle/uploads/images/kit-coco-camomila-by-vitoria-lima-ecobelle-300-ml-66cf3cd879731-large.png" alt="Kit Coco e Camomila" data-name="Kit Coco e Camomila" data-price="100">
-        <img src="https://images.yampi.io/assets/stores/grupo-ecobelle/uploads/images/reparador-de-pontas-coco-camomila-by-vitoria-lima-60-ml-667c4fc05a4cb-large.png" alt="Reparador de Pontas" data-name="Reparador de Pontas" data-price="30">
-        <img src="https://images.yampi.io/assets/stores/grupo-ecobelle/uploads/images/condicionador-coco-camomila-by-vitoria-lima-ecobelle-300-ml-667ac92af0520-large.png" alt="Condicionador Coco e Camomila" data-name="Condicionador Coco e Camomila" data-price="45">
-    </div>
-
-    <!-- Carrinho -->
-    <div class="cart">
-        <h2>Meu Carrinho</h2>
-        <ul id="cart-items"></ul>
-        <div class="total" id="total-price">Total: R$ 0,00</div>
-        <div class="buttons">
-            <a href="index.html">Voltar</a>
-            <button id="checkout-btn">Finalizar Compra</button>
-        </div>
-    </div>
-
-    <script>
-        const images = document.querySelectorAll('.image-grid img');
-        const cartItems = document.getElementById('cart-items');
-        const totalPriceEl = document.getElementById('total-price');
-        const checkoutBtn = document.getElementById('checkout-btn');
-        let cart = [];
-        let totalPrice = 0;
-
-        images.forEach(img => {
-            img.addEventListener('click', () => {
-                const name = img.getAttribute('data-name');
-                const price = parseFloat(img.getAttribute('data-price'));
-                
-                cart.push({ name, price });
-                totalPrice += price;
-
-                updateCart();
-            });
-        });
-
-        function updateCart() {
-            cartItems.innerHTML = cart.map(item => `<li>${item.name} - R$ ${item.price.toFixed(2)}</li>`).join('');
-            totalPriceEl.textContent = `Total: R$ ${totalPrice.toFixed(2)}`;
-        }
-
-        checkoutBtn.addEventListener('click', () => {
-            const items = cart.map(item => `${item.name} - R$ ${item.price.toFixed(2)}`).join('%0A');
-            const message = `Olá! Gostaria de finalizar o seguinte pedido:%0A%0A${items}%0A%0ATotal: R$ ${totalPrice.toFixed(2)}`;
-            window.open(`https://wa.me/5511992261100?text=${message}`, '_blank');
-        });
-    </script>
+    
     <form action="https://getform.io/f/ayvvqnnb" method="POST">
         <h1>Formulário Ladies</h1>
 
