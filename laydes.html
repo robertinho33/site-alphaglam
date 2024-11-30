@@ -1,214 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro e Agendamento Ladies</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #fdf7e1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: #6b4f32;
-        }
-
-        header {
-            width: 100%;
-            background-color: #f7e6c2;
-            padding: 10px 20px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            position: relative;
-        }
-
-        header .menu {
-            position: absolute;
-            top: 10px;
-            right: 20px;
-        }
-
-        header .menu button {
-            background: none;
-            border: none;
-            font-size: 18px;
-            cursor: pointer;
-            color: #6b4f32;
-            position: relative;
-        }
-
-        header .menu button:hover {
-            color: #d4a760;
-        }
-
-        header .menu ul {
-            list-style: none;
-            position: absolute;
-            top: 30px;
-            right: 0;
-            background: #f7e6c2;
-            border-radius: 5px;
-            padding: 10px 0;
-            display: none;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        header .menu button:focus + ul, header .menu ul:hover {
-            display: block;
-        }
-
-        header .menu ul li {
-            padding: 5px 15px;
-        }
-
-        header .menu ul li a {
-            text-decoration: none;
-            color: #6b4f32;
-        }
-
-        header .menu ul li a:hover {
-            color: #d4a760;
-        }
-
-        .image-grid {
-            overflow-x: auto;
-            display: flex;
-            gap: 15px;
-            margin: 20px 10px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #d4a760;
-            scrollbar-width: thin;
-            scrollbar-color: #d4a760 transparent;
-        }
-
-        .image-grid::-webkit-scrollbar {
-            height: 8px;
-        }
-
-        .image-grid::-webkit-scrollbar-thumb {
-            background: #d4a760;
-            border-radius: 5px;
-        }
-
-        .image-grid img {
-            width: 150px;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .image-grid img:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .cart {
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            margin: 20px;
-            width: 90%;
-            max-width: 500px;
-        }
-
-        .cart h2 {
-            text-align: center;
-            color: #6b4f32;
-        }
-
-        .cart ul {
-            list-style: none;
-            padding: 0;
-            margin: 10px 0;
-        }
-
-        .cart ul li {
-            display: flex;
-            align-items: center;
-            margin: 10px 0;
-        }
-
-        .cart ul li img {
-            width: 50px;
-            height: auto;
-            margin-right: 10px;
-            border-radius: 5px;
-        }
-
-        .total {
-            text-align: center;
-            font-weight: bold;
-            margin: 10px 0;
-            color: #6b4f32;
-        }
-
-        .buttons {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .buttons button {
-            text-decoration: none;
-            background-color: #d4a760;
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            text-align: center;
-            cursor: pointer;
-            border: none;
-        }
-
-        .buttons button:hover {
-            background-color: #b08b5b;
-        }
-
-        form {
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            margin: 20px;
-            width: 90%;
-            max-width: 500px;
-        }
-
-        form h1 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #6b4f32;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        input, select, button {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #d4a760;
-            border-radius: 5px;
-        }
-
-        button {
-            background-color: #d4a760;
-            color: white;
-            cursor: pointer;
-            border: none;
-        }
-
-        button:hover {
-            background-color: #b08b5b;
-        }
-    </style>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Cadastro e Agendamento Ladies</title>
+        <link rel="stylesheet" href="css/ladies/style.css">
+    </head>
+    
 <body>
     <header>
         <div class="menu">
@@ -220,6 +19,18 @@
     </header>
 
     <div class="image-grid">
+        <img src="https://images.yampi.io/unsafe/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/mascara-liquida-liquid-mask-ecobelle-200-ml-66fd5cae45ed1-large.png" alt="Imagem 1" data-name="Máscara Líquida" data-price="50">
+        <img src="https://images.yampi.io/unsafe/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/finalizador-termico-coco-camomila-by-vitoria-lima-200-ml-667c4d7031e63-large.png" alt="Imagem 2" data-name="Finalizador Térmico" data-price="40">
+        <img src="https://images.yampi.io/unsafe/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/kit-coco-camomila-by-vitoria-lima-ecobelle-300-ml-66cf3cd879731-large.png" alt="Imagem 3" data-name="Kit Coco e Camomila" data-price="100">
+        <img src="https://images.yampi.io/inOUrVjOuPjvtnpVYzL9K3-xPCg=/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/kit-pimenta-rosa-eco-belle-64ef8bb1e85f1-large.png" alt="Imagem 4" data-name="Kit Pimenta Rosa" data-price="130">
+        <img src="https://images.yampi.io/BHaubHu5dG9dtvDfoDfvRrI7LB0=/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/kit-manutencao-home-care-silver-ecobelle-300ml-3-itens-67412ba3969a3-large.png" alt="Imagem 5" data-name="Kit Manutenção Home Care" data-price="130">
+        <img src="https://images.yampi.io/7rhO9gyuipnSCstiL7EtGLEiFaY=/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/kit-doeden-capim-limao-alecrim-6479e42ea3cfc-large.png" alt="Imagem 6" data-name="Kit Capim Limão Alecrim" data-price="100">
+        <img src="https://images.yampi.io/unsafe/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/mascara-liquida-liquid-mask-ecobelle-200-ml-66fd5cae45ed1-large.png" alt="Imagem 1" data-name="Máscara Líquida" data-price="50">
+        <img src="https://images.yampi.io/unsafe/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/finalizador-termico-coco-camomila-by-vitoria-lima-200-ml-667c4d7031e63-large.png" alt="Imagem 2" data-name="Finalizador Térmico" data-price="40">
+        <img src="https://images.yampi.io/unsafe/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/kit-coco-camomila-by-vitoria-lima-ecobelle-300-ml-66cf3cd879731-large.png" alt="Imagem 3" data-name="Kit Coco e Camomila" data-price="100">
+        <img src="https://images.yampi.io/inOUrVjOuPjvtnpVYzL9K3-xPCg=/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/kit-pimenta-rosa-eco-belle-64ef8bb1e85f1-large.png" alt="Imagem 4" data-name="Kit Pimenta Rosa" data-price="130">
+        <img src="https://images.yampi.io/BHaubHu5dG9dtvDfoDfvRrI7LB0=/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/kit-manutencao-home-care-silver-ecobelle-300ml-3-itens-67412ba3969a3-large.png" alt="Imagem 5" data-name="Kit Manutenção Home Care" data-price="130">
+        <img src="https://images.yampi.io/7rhO9gyuipnSCstiL7EtGLEiFaY=/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/kit-doeden-capim-limao-alecrim-6479e42ea3cfc-large.png" alt="Imagem 6" data-name="Kit Capim Limão Alecrim" data-price="100">
         <img src="https://images.yampi.io/unsafe/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/mascara-liquida-liquid-mask-ecobelle-200-ml-66fd5cae45ed1-large.png" alt="Imagem 1" data-name="Máscara Líquida" data-price="50">
         <img src="https://images.yampi.io/unsafe/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/finalizador-termico-coco-camomila-by-vitoria-lima-200-ml-667c4d7031e63-large.png" alt="Imagem 2" data-name="Finalizador Térmico" data-price="40">
         <img src="https://images.yampi.io/unsafe/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/kit-coco-camomila-by-vitoria-lima-ecobelle-300-ml-66cf3cd879731-large.png" alt="Imagem 3" data-name="Kit Coco e Camomila" data-price="100">
