@@ -3,22 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulário Laydes</title>
-       <!-- Custom styles for this template -->
-  <link href="css/ladies/style.css" rel="stylesheet" />
+    <title>Formulário Ladies</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #e5e5e5;
+            border-radius: 10px;
+            background: #ffffff;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 1.8rem;
+            color: #c9a335;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-size: 1rem;
+            color: #666;
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #d9d9d9;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        input:focus, select:focus {
+            border-color: #c9a335;
+            outline: none;
+            box-shadow: 0 0 5px rgba(201, 163, 53, 0.5);
+        }
+
+        button {
+            background: #c9a335;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background: #b2932e;
+        }
+
+        @media (max-width: 600px) {
+            form {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <form action="https://getform.io/f/ayvvqnnb"method="POST">
-          
-        <h1>Formulário Laydes</h1>
+    <form action="https://getform.io/f/ayvvqnnb" method="POST">
+        <h1>Formulário Ladies</h1>
+
         <label for="nome">Nome</label>
-        <input type="text" id="nome" name="nome" placeholder="Digite seu nome" required>
+        <input type="text" id="nome" name="nome" placeholder="Digite seu nome Ladies" required>
 
         <label for="instagram">Instagram</label>
-        <input type="text" id="instagram" name="instagram" placeholder="Digite seu Instagram" required>
+        <input type="text" id="instagram" name="instagram" placeholder="Digite seu Instagram Ladies" required>
 
         <label for="whatsApp">WhatsApp</label>
-        <input type="text" id="whatsApp" name="whatsApp" placeholder="Digite seu WhatsApp" required>
+        <input type="text" id="whatsApp" name="whatsApp" placeholder="Digite seu WhatsApp Ladies" required>
 
         <label for="dataHorarioAtual">Data e Hora (Atual)</label>
         <input type="datetime-local" id="dataHorarioAtual" name="dataHorarioAtual" required>
@@ -56,10 +125,8 @@
 
         <label for="dataAgendamento">Data</label>
         <input type="date" id="dataAgendamento" name="dataAgendamento" required>
-
         <label for="horario">Horário</label>
         <input type="time" id="horario" name="horario" required>
-
         <script>
             const dataAgendamento = document.getElementById('dataAgendamento');
             const hoje = new Date();
