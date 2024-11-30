@@ -107,6 +107,34 @@
             }
             alert("Compra finalizada!");
         });
+
+        images.forEach(img => {
+            img.addEventListener('click', () => {
+                const name = img.getAttribute('data-name');
+                const price = parseFloat(img.getAttribute('data-price'));
+                const src = img.getAttribute('src');
+                cart.push({ name, price, src });
+                totalPrice += price;
+                updateCart();
+            });
+        });
+
+        function updateCart() {
+            cartItems.innerHTML = cart.map(item => `
+                <li>
+                    <img src="${item.src}" alt="${item.name}">
+                    ${item.name} - R$ ${item.price.toFixed(2)}
+                </li>
+            `).join('');
+            totalPriceEl.textContent = `Total: R$ ${totalPrice.toFixed(2)}`;
+        }
+
+        checkoutBtn.addEventListener('click', () => {
+            const items = cart.map(item => `${item.name} - R$ ${item.price.toFixed(2)}`).join('%0A');
+            const message = `Olá! Gostaria de finalizar o seguinte pedido:%0A%0A${items}%0A%0ATotal: R$ ${totalPrice.toFixed(2)}`;
+            window.open(`https://wa.me/5511986215473?text=${message}`, '_blank');
+        });
+   
     </script>
 </body>
 </html>
