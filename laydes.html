@@ -47,11 +47,11 @@
             <button id="checkout-btn">Finalizar Compra</button>
         </div>
     </div>
-    <div>       
-        <button type="button" class="btn btn-primary"name="não-tenho-cadastro">não tenho cadastro</button>
-         <br>
-         <button id="already-registered">Já tenho cadastro</button>
-
+    <div>
+        <button type="button" class="btn btn-primary" name="não-tenho-cadastro">Não tenho cadastro</button>
+        <br>
+        <button id="already-registered">Já tenho cadastro</button>
+    </div>
          <!-- Formulário de Cadastro -->
          <div id="form-cadastro">
              <h1>Cadastro Ladies</h1>
@@ -206,8 +206,21 @@ checkoutBtn.addEventListener('click', () => {
     window.open(`https://wa.me/5511986215473?text=${message}`, '_blank');
 });
 
+document.getElementById('already-registered').addEventListener('click', () => {
+    const formCadastro = document.getElementById('form-cadastro');
+    const formCarrinho = document.getElementById('form-carrinho');
 
+    formCadastro.style.display = 'none'; // Esconde o formulário de cadastro
+    formCarrinho.style.display = 'block'; // Exibe o formulário do carrinho
+});
 
+document.querySelector('button[name="não-tenho-cadastro"]').addEventListener('click', () => {
+    const formCadastro = document.getElementById('form-cadastro');
+    const formCarrinho = document.getElementById('form-carrinho');
+
+    formCadastro.style.display = 'block'; // Exibe o formulário de cadastro
+    formCarrinho.style.display = 'none'; // Esconde o formulário do carrinho
+});
 
 </script>
 </body>

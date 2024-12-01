@@ -202,3 +202,14 @@ button {
 button:hover {
     background-color: #b08b5b;
 }
+#form-cadastro, #form-carrinho {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    display: none; /* Ambos começam escondidos */
+}
+
+#form-cadastro {
+    display: block; /* Exibe o formulário de cadastro por padrão */
+}
