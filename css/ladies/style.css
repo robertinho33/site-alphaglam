@@ -211,5 +211,9 @@ button:hover {
 }
 
 #form-cadastro {
-    display: block; /* Exibe o formulário de cadastro por padrão */
+    display: none; /* Inicia escondido */
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
 }
