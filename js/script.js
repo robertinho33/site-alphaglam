@@ -91,3 +91,35 @@ document.addEventListener('DOMContentLoaded', () => {
     formCadastro.style.display = 'none';
     formCarrinho.style.display = 'none';
 });
+document.addEventListener('DOMContentLoaded', () => {
+    const images = document.querySelectorAll('.product-image');
+    const productCard = document.getElementById('product-card');
+    const cardImage = document.getElementById('card-image');
+    const cardTitle = document.getElementById('card-title');
+    const cardDescription = document.getElementById('card-description');
+    const cardPrice = document.getElementById('card-price');
+    const closeCardButton = document.getElementById('close-card');
+
+    images.forEach(image => {
+        image.addEventListener('click', () => {
+            const name = image.getAttribute('data-name');
+            const description = image.getAttribute('data-description');
+            const price = image.getAttribute('data-price');
+            const src = image.getAttribute('src');
+
+            // Atualiza o conteúdo do card
+            cardImage.src = src;
+            cardTitle.textContent = name;
+            cardDescription.textContent = description;
+            cardPrice.textContent = `Preço: R$ ${parseFloat(price).toFixed(2)}`;
+
+            // Exibe o card
+            productCard.classList.remove('hidden');
+        });
+    });
+
+    closeCardButton.addEventListener('click', () => {
+        // Oculta o card
+        productCard.classList.add('hidden');
+    });
+});
