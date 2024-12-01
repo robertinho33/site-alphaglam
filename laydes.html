@@ -98,130 +98,99 @@
             <option value="18:00">18:00</option>
             <option value="10:00">19:00</option>
          </select>
-         <label for="Servicos">Serviços</label>
-         <input type="Servicos" id="Servicos" name="Servicos" required>
-          <button type="submit">Agendar</button>
+         <label for="servicos">Serviços</label>
+         <input type="text" id="servicos" name="servicos" required>
+         <button type="submit">Agendar</button>
     </form>
 </div>
     <script>
-   let cart = [];
+   // Array para armazenar os itens do carrinho
+let cart = [];
 
+// Seletores principais
 const images = document.querySelectorAll('.image-grid img');
 const cartItems = document.getElementById('cart-items');
 const totalPrice = document.getElementById('total-price');
-const checkoutBtn = document.getElementById('checkout-btn'); // Correção: Captura do botão de finalização
+const checkoutBtn = document.getElementById('checkout-btn');
+const formCadastro = document.getElementById('form-cadastro');
+const formCarrinho = document.getElementById('form-carrinho');
+const btnJaTenhoCadastro = document.getElementById('already-registered');
+const btnNaoTenhoCadastro = document.querySelector('button[name="não-tenho-cadastro"]');
 
-// Adiciona os produtos ao carrinho quando clicados
-images.forEach(image => {
-    image.addEventListener('click', () => {
-        const name = image.getAttribute('data-name');
-        const price = parseFloat(image.getAttribute('data-price'));
-        const src = image.getAttribute('src');  // Captura a imagem do produto
-        cart.push({ name, price, src }); // Agora também inclui a imagem
-
-        // Atualiza a exibição do carrinho
-        updateCart();
-        
-    });
-    document.getElementById('already-registered').addEventListener('click', () => {
-    const formCadastro = document.getElementById('form-cadastro');
-    const formCarrinho = document.getElementById('form-carrinho');
-    
-    // Alterna a visibilidade dos formulários
-    formCadastro.style.display = 'none'; // Esconde o formulário de cadastro
-    formCarrinho.style.display = 'block'; // Exibe o formulário simples no carrinho
-});
-
-});
-
-// Atualiza o carrinho na tela
+// Função para atualizar o carrinho
 function updateCart() {
-    cartItems.innerHTML = '';  // Limpa o carrinho antes de atualizar
+    cartItems.innerHTML = ''; // Limpa o carrinho
     let total = 0;
 
+    // Adiciona os itens no carrinho
     cart.forEach((item, index) => {
         const li = document.createElement('li');
-        
-        // Cria um elemento de lista com a imagem e o nome + preço
         li.innerHTML = `
             <img src="${item.src}" alt="${item.name}" style="width: 50px; height: auto; margin-right: 10px; border-radius: 5px;">
             ${item.name} - R$ ${item.price.toFixed(2)}
-            <button class="remove-item" data-index="${index}">Excluir</button>  <!-- Botão de excluir -->
+            <button class="remove-item" data-index="${index}">Excluir</button>
         `;
-        
-        // Adiciona o item ao carrinho
         cartItems.appendChild(li);
-        
-        // Soma o preço total
         total += item.price;
     });
 
+    // Atualiza o preço total
     totalPrice.textContent = `Total: R$ ${total.toFixed(2)}`;
 
-    // Adiciona a funcionalidade de exclusão ao botão
+    // Adiciona funcionalidade de exclusão
     const removeButtons = document.querySelectorAll('.remove-item');
     removeButtons.forEach(button => {
         button.addEventListener('click', (event) => {
             const index = event.target.getAttribute('data-index');
-            cart.splice(index, 1);  // Remove o item do carrinho
-            updateCart();  // Atualiza o carrinho após remoção
+            cart.splice(index, 1); // Remove item do carrinho
+            updateCart(); // Atualiza o carrinho
         });
     });
 }
 
-// Lógica para finalizar a compra e enviar o pedido via WhatsApp
+// Evento para adicionar itens ao carrinho
+images.forEach(image => {
+    image.addEventListener('click', () => {
+        const name = image.getAttribute('data-name');
+        const price = parseFloat(image.getAttribute('data-price'));
+        const src = image.getAttribute('src');
+        cart.push({ name, price, src });
+        updateCart(); // Atualiza o carrinho após adicionar
+    });
+});
+
+// Evento para alternar entre os formulários
+btnJaTenhoCadastro.addEventListener('click', () => {
+    formCadastro.style.display = 'none'; // Esconde o formulário de cadastro
+    formCarrinho.style.display = 'block'; // Mostra o formulário do carrinho
+});
+
+btnNaoTenhoCadastro.addEventListener('click', () => {
+    formCadastro.style.display = 'block'; // Mostra o formulário de cadastro
+    formCarrinho.style.display = 'none'; // Esconde o formulário do carrinho
+});
+
+// Finalizar compra e enviar pedido via WhatsApp
 checkoutBtn.addEventListener('click', () => {
     if (cart.length === 0) {
         alert('Adicione ao menos um item ao carrinho antes de finalizar a compra.');
         return;
     }
 
+    // Cria a mensagem para WhatsApp
     const items = cart.map(item => `${item.name} - R$ ${item.price.toFixed(2)}`).join('%0A');
     const total = cart.reduce((sum, item) => sum + item.price, 0).toFixed(2);
     const message = `Olá! Gostaria de finalizar o seguinte pedido:%0A%0A${items}%0A%0ATotal: R$ ${total}`;
 
-    // Envia o pedido para o WhatsApp
+    // Abre o WhatsApp com a mensagem
     window.open(`https://wa.me/5511986215473?text=${message}`, '_blank');
 });
 
-document.getElementById('already-registered').addEventListener('click', () => {
-    const formCadastro = document.getElementById('form-cadastro');
-    const formCarrinho = document.getElementById('form-carrinho');
-
-    formCadastro.style.display = 'none'; // Esconde o formulário de cadastro
-    formCarrinho.style.display = 'block'; // Exibe o formulário do carrinho
-});
-
-document.querySelector('button[name="não-tenho-cadastro"]').addEventListener('click', () => {
-    const formCadastro = document.getElementById('form-cadastro');
-    const formCarrinho = document.getElementById('form-carrinho');
-
-    formCadastro.style.display = 'block'; // Exibe o formulário de cadastro
-    formCarrinho.style.display = 'none'; // Esconde o formulário do carrinho
-});
+// Inicialização ao carregar a página
 document.addEventListener('DOMContentLoaded', () => {
-    const formCadastro = document.getElementById('form-cadastro');
-    const formCarrinho = document.getElementById('form-carrinho');
-    const btnJaTenhoCadastro = document.getElementById('already-registered');
-    const btnNaoTenhoCadastro = document.querySelector('button[name="não-tenho-cadastro"]');
-
-    // Esconde o formulário de cadastro inicialmente
-    formCadastro.style.display = 'none';
-
-    // Exibe o formulário de carrinho ao clicar em "Já tenho cadastro"
-    btnJaTenhoCadastro.addEventListener('click', () => {
-        formCadastro.style.display = 'none';
-        formCarrinho.style.display = 'block';
-    });
-
-    // Exibe o formulário de cadastro ao clicar em "Não tenho cadastro"
-    btnNaoTenhoCadastro.addEventListener('click', () => {
-        formCadastro.style.display = 'block';
-        formCarrinho.style.display = 'none';
-    });
+    formCadastro.style.display = 'none'; // Esconde o formulário de cadastro inicialmente
+    formCarrinho.style.display = 'none'; // Esconde o formulário do carrinho inicialmente
 });
-
-
 
 </script>
 </body>

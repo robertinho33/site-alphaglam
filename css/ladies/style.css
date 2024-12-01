@@ -101,15 +101,13 @@ header .menu ul li a:hover {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-.cart {
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    margin: 20px;
-    width: 90%;
-    max-width: 500px;
+.cart img {
+    width: 50px;
+    height: auto;
+    margin-right: 10px;
+    border-radius: 5px;
 }
+
 
 .cart h2 {
     text-align: center;
