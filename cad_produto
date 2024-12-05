@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Produtos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Cadastro de Produtos</h2>
+<form id="product-form">
+    <label for="nome">Nome do Produto:</label>
+    <input type="text" id="nome" name="nome" placeholder="Digite o nome do produto" required>
+
+    <label for="categoria">Categoria:</label>
+    <input type="text" id="categoria" name="categoria" placeholder="Digite a categoria" required>
+
+    <label for="preco_compra">Preço de Compra:</label>
+    <input type="number" id="preco_compra" name="preco_compra" placeholder="Digite o preço" step="0.01" required>
+
+    <label for="quant_estoq">Quantidade em Estoque:</label>
+    <input type="number" id="quant_estoq" name="quant_estoq" placeholder="Digite a quantidade" required>
+
+    <label for="descricao">Descrição:</label>
+    <input type="text" id="descricao" name="descricao" placeholder="Digite uma descrição" required>
+
+    <label for="data_compra">Data de Compra:</label>
+    <input type="date" id="data_compra" name="data_compra" required>
+
+    <button type="button" id="save-btn">Salvar Produto</button>
+</form>
+
+<h3>Produtos Cadastrados</h3>
+<ul id="product-list"></ul>
+<button id="download-pdf" style="display: none;">Baixar PDF</button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+<script>
+    const productList = [];
+    const productListElement = document.getElementById('product-list');
+    const saveButton = document.getElementById('save-btn');
+    const downloadPdfButton = document.getElementById('download-pdf');
+
+    // Adiciona produto à lista
+    saveButton.addEventListener('click', () => {
+        const nome = document.getElementById('nome').value;
+        const categoria = document.getElementById('categoria').value;
+        const preco_compra = document.getElementById('preco_compra').value;
+        const quant_estoq = document.getElementById('quant_estoq').value;
+        const descricao = document.getElementById('descricao').value;
+        const data_compra = document.getElementById('data_compra').value;
+
+        const product = {
+            nome,
+            categoria,
+            preco_compra,
+            quant_estoq,
+            descricao,
+            data_compra
+        };
+
+        productList.push(product);
+
+        // Atualiza a lista exibida
+        const listItem = document.createElement('li');
+        listItem.textContent = `${nome} - ${categoria} - R$${preco_compra}`;
+        productListElement.appendChild(listItem);
+
+        // Mostra botão de download
+        downloadPdfButton.style.display = 'block';
+
+        // Limpa os campos do formulário
+        document.getElementById('product-form').reset();
+    });
+
+    // Gera o PDF com os dados
+    downloadPdfButton.addEventListener('click', () => {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+
+        doc.setFontSize(16);
+        doc.text('Lista de Produtos Cadastrados', 10, 10);
+
+        productList.forEach((product, index) => {
+            doc.setFontSize(12);
+            doc.text(
+                `${index + 1}. Nome: ${product.nome}, Categoria: ${product.categoria}, Preço: R$${product.preco_compra}, Quantidade: ${product.quant_estoq}, Descrição: ${product.descricao}, Data: ${product.data_compra}`,
+                10,
+                20 + index * 10
+            );
+        });
+
+        doc.save('produtos_cadastrados.pdf');
+    });
+</script>
+
+</body>
+</html>
