@@ -60,26 +60,26 @@
         <h2 class="text-center mb-4">Cadastro de Ladies</h2>
         <form id="form-ladies">
             <div class="form-group">
-                <label for="nomeLady">Nome:</label>
-                <input type="text" id="nomeLady" class="form-control" placeholder="Digite o nome" required>
+                <label for="nomeLady">Nome da Lady:</label>
+                <input type="text" id="nomeLady" class="form-control" placeholder="Digite o nome da lady" required>
+            </div>
+            <div class="form-group">
+                <label for="idadeLady">Idade:</label>
+                <input type="number" id="idadeLady" class="form-control" placeholder="Digite a idade" required>
+            </div>
+            <div class="form-group">
+                <label for="contatoLady">Contato:</label>
+                <input type="text" id="contatoLady" class="form-control" placeholder="Digite o contato" required>
             </div>
             <div class="form-group">
                 <label for="emailLady">E-mail:</label>
                 <input type="email" id="emailLady" class="form-control" placeholder="Digite o e-mail" required>
             </div>
             <div class="form-group">
-                <label for="telefoneLady">Telefone:</label>
-                <input type="tel" id="telefoneLady" class="form-control" placeholder="Digite o telefone" required>
-            </div>
-            <div class="form-group">
-                <label for="interesseLady">Interesse Principal:</label>
-                <input type="text" id="interesseLady" class="form-control" placeholder="Digite o interesse principal" required>
-            </div>
-            <div class="form-group">
-                <label for="dataCadastro">Data de Cadastro:</label>
+                <label for="dataCadastro">Data do Cadastro:</label>
                 <input type="date" id="dataCadastro" class="form-control" value="<?php echo date('Y-m-d'); ?>" readonly>
             </div>
-            <button type="button" class="btn btn-block" onclick="adicionarLady()">Salvar Lady</button>
+            <button type="button" class="btn btn-block" onclick="adicionarLady()">Salvar Cadastro</button>
         </form>
 
         <h3 class="text-center mt-5">Lista de Ladies</h3>
@@ -95,17 +95,17 @@
 
         function adicionarLady() {
             const nomeLady = document.getElementById('nomeLady').value;
+            const idadeLady = document.getElementById('idadeLady').value;
+            const contatoLady = document.getElementById('contatoLady').value;
             const emailLady = document.getElementById('emailLady').value;
-            const telefoneLady = document.getElementById('telefoneLady').value;
-            const interesseLady = document.getElementById('interesseLady').value;
             const dataCadastro = document.getElementById('dataCadastro').value;
 
-            ladies.push({ nomeLady, emailLady, telefoneLady, interesseLady, dataCadastro });
+            ladies.push({ nomeLady, idadeLady, contatoLady, emailLady, dataCadastro });
 
             const lista = document.getElementById('ladiesList');
             const li = document.createElement('li');
             li.className = 'list-group-item';
-            li.textContent = `${dataCadastro} - ${nomeLady} - ${emailLady} - ${telefoneLady} - ${interesseLady}`;
+            li.textContent = `${dataCadastro} - ${nomeLady} - ${idadeLady} anos - Contato: ${contatoLady} - E-mail: ${emailLady}`;
             lista.appendChild(li);
 
             document.getElementById('form-ladies').reset();
@@ -121,7 +121,7 @@
             let y = 30;
             ladies.forEach((lady, index) => {
                 doc.text(
-                    `${index + 1}. ${lady.dataCadastro} - ${lady.nomeLady} - ${lady.emailLady} - ${lady.telefoneLady} - ${lady.interesseLady}`,
+                    `${index + 1}. ${lady.dataCadastro} - ${lady.nomeLady} - ${lady.idadeLady} anos - Contato: ${lady.contatoLady} - E-mail: ${lady.emailLady}`,
                     20,
                     y
                 );

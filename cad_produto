@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Produtos</title>
-    <!-- Inclusão do Bootstrap 4 -->
+    <!-- Inclusão do Bootstrap -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Inclusão do jsPDF para geração do PDF -->
+    <!-- Inclusão do jsPDF -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
     <style>
@@ -50,6 +50,13 @@
             background-color: #fef7f0;
             border-color: #f3d9c4;
         }
+        .btn-home {
+            background-color: #d19a66;
+            color: white;
+        }
+        .btn-home:hover {
+            background-color: #c38752;
+        }
     </style>
 </head>
 <body>
@@ -91,6 +98,11 @@
     <button type="button" class="btn" onclick="salvarProduto()">Salvar Produto</button>
 </form>
 
+<!-- Botão para voltar à Home -->
+<div class="text-center mt-4">
+    <a href="index.html" class="btn btn-home">Voltar para Home</a>
+</div>
+
 <!-- Lista de Produtos -->
 <h3 class="text-center mt-5">Lista de Produtos</h3>
 <ul id="produto-list" class="list-group mt-3"></ul>
@@ -102,7 +114,6 @@
 </div>
 
 <script>
-// Lista para armazenar os dados dos produtos
 let produtos = [];
 
 function salvarProduto() {
@@ -112,17 +123,14 @@ function salvarProduto() {
     const estoque = document.getElementById('estoque').value;
     const descricao = document.getElementById('descricao').value;
 
-    // Armazenando os dados na lista de produtos
     produtos.push({ nome, categoria, preco, estoque, descricao });
 
-    // Exibindo os produtos na lista
     const lista = document.getElementById('produto-list');
     const li = document.createElement('li');
     li.classList.add('list-group-item');
     li.textContent = `${nome} - ${categoria} - R$ ${preco} - ${estoque} em estoque`;
     lista.appendChild(li);
 
-    // Limpando o formulário
     document.getElementById('form-produto').reset();
 }
 
@@ -142,14 +150,10 @@ function gerarPDF() {
         y += 10;
     });
 
-    // Salvando o PDF e criando um link temporário
     const pdfBlob = doc.output('blob');
     const pdfUrl = URL.createObjectURL(pdfBlob);
 
-    // Exibir o botão para enviar para WhatsApp
     document.getElementById('whatsapp-button').style.display = 'inline';
-
-    // Armazenar o link do PDF gerado
     window.pdfUrl = pdfUrl;
 }
 
@@ -159,7 +163,6 @@ function enviarParaWhatsApp() {
 }
 </script>
 
-<!-- Inclusão do jQuery e Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
