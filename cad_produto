@@ -28,7 +28,7 @@
             width: 100%;
             padding: 10px;
             margin-bottom: 15px;
-            border: 1px solid #ccc;
+            border: 1px solid #b88f8f;
             border-radius: 5px;
         }
     </style>
@@ -37,6 +37,9 @@
 
 <header>
     <!-- Botão de navegação para a home -->
+    <header>
+        <button id="home-button" onclick="window.location.href='/home'">Home</button>
+    </header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">AlphaGlam</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

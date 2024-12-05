@@ -3,163 +3,175 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Atendimento</title>
-    <!-- Link para o Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <title>Cadastro de Atendimentos</title>
+    <!-- Inclusão do Bootstrap 4 -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Inclusão do jsPDF para geração do PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #fdf7e1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: #6b4f32;
-        }
-
-        header {
-            width: 100%;
-            background-color: #f7e6c2;
-            padding: 10px 20px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            position: relative;
-        }
-
-        header .menu {
-            position: absolute;
-            top: 10px;
-            right: 20px;
-        }
-
-        header .menu button {
-            background: none;
-            border: none;
-            font-size: 18px;
-            cursor: pointer;
-            color: #6b4f32;
-            position: relative;
-        }
-
-        header .menu button:hover {
-            color: #d4a760;
-        }
-
-        .form-container {
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             margin: 20px;
-            width: 90%;
-            max-width: 600px;
+            background-color: #fff5f7;
+            color: #5a3d31;
         }
-
-        .form-container h1 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #6b4f32;
+        .navbar {
+            background-color: #f8e1d4;
         }
-
-        .form-container label {
-            display: block;
-            margin-bottom: 5px;
+        .navbar-brand {
+            color: #d19a66 !important;
             font-weight: bold;
         }
-
-        .form-container input, .form-container select, .form-container button {
-            width: 100%;
-            padding: 10px;
+        h2, h3 {
+            color: #d19a66;
+        }
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        input, select, button {
             margin-bottom: 15px;
-            border: 1px solid #d4a760;
-            border-radius: 5px;
         }
-
-        .form-container button {
-            background-color: #d4a760;
-            color: white;
-            cursor: pointer;
+        button {
+            background-color: #d19a66;
+            color: #fff;
             border: none;
         }
-
-        .form-container button:hover {
-            background-color: #b08b5b;
+        button:hover {
+            background-color: #c38752;
         }
-
-        #home-button {
-            background-color: #6b4f32;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            border: none;
-        }
-
-        #home-button:hover {
-            background-color: #d4a760;
+        .list-group-item {
+            background-color: #fef7f0;
+            border-color: #f3d9c4;
         }
     </style>
 </head>
 <body>
 
 <header>
-    <button id="home-button" onclick="window.location.href='/home'">Home</button>
+    <!-- Botão de navegação para a home -->
+    <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand" href="#">AlphaGlam</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 </header>
 
-<div class="form-container">
-    <h1>Cadastro de Atendimento</h1>
-    <form id="atendimento-form">
-        <label for="nome_cliente">Nome do Cliente:</label>
-        <input type="text" id="nome_cliente" name="nome_cliente" placeholder="Digite o nome do cliente" required>
+<h2 class="text-center mt-5">Cadastro de Atendimentos</h2>
+<form id="form-atendimento">
+    <label for="nome">Nome do Cliente:</label>
+    <input type="text" id="nome" name="nome" class="form-control" placeholder="Digite o nome do cliente" required>
 
-        <label for="servico">Serviço:</label>
-        <input type="text" id="servico" name="servico" placeholder="Digite o serviço realizado" required>
+    <label for="servico">Serviço:</label>
+    <input type="text" id="servico" name="servico" class="form-control" placeholder="Digite o serviço realizado" required>
 
-        <label for="valor">Valor:</label>
-        <input type="number" id="valor" name="valor" placeholder="Digite o valor do serviço" step="0.01" required>
+    <label for="pagamento">Forma de Pagamento:</label>
+    <select id="pagamento" name="pagamento" class="form-control" required>
+        <option value="Dinheiro">Dinheiro</option>
+        <option value="Cartão de Crédito">Cartão de Crédito</option>
+        <option value="Cartão de Débito">Cartão de Débito</option>
+        <option value="Pix">Pix</option>
+    </select>
 
-        <label for="forma_pagamento">Forma de Pagamento:</label>
-        <select id="forma_pagamento" name="forma_pagamento" required>
-            <option value="">Selecione a forma de pagamento</option>
-            <option value="Cartão de Crédito">Cartão de Crédito</option>
-            <option value="Dinheiro">Dinheiro</option>
-            <option value="Pix">Pix</option>
-        </select>
+    <label for="profissional">Profissional:</label>
+    <input type="text" id="profissional" name="profissional" class="form-control" placeholder="Nome do profissional" required>
 
-        <button type="button" id="salvar-btn">Salvar Atendimento</button>
-    </form>
+    <label for="data">Data do Atendimento:</label>
+    <input type="text" id="data" name="data" class="form-control" value="" readonly>
+    
+    <button type="button" class="btn" onclick="salvarAtendimento()">Salvar Atendimento</button>
+</form>
+
+<!-- Lista de Atendimentos -->
+<h3 class="text-center mt-5">Lista de Atendimentos</h3>
+<ul id="atendimento-list" class="list-group mt-3"></ul>
+
+<!-- Botão para gerar PDF e enviar para o WhatsApp -->
+<div class="text-center mt-5">
+    <button class="btn" onclick="gerarPDF()">Gerar PDF</button>
+    <button id="whatsapp-button" class="btn mt-3" style="display:none;" onclick="enviarParaWhatsApp()">Enviar para WhatsApp</button>
 </div>
 
 <script>
-    const saveButton = document.getElementById('salvar-btn');
+// Lista para armazenar os dados dos atendimentos
+let atendimentos = [];
 
-    // Função para salvar os dados e gerar o PDF
-    saveButton.addEventListener('click', () => {
-        const nomeCliente = document.getElementById('nome_cliente').value;
-        const servico = document.getElementById('servico').value;
-        const valor = document.getElementById('valor').value;
-        const formaPagamento = document.getElementById('forma_pagamento').value;
+// Preencher a data atual automaticamente
+document.getElementById('data').value = new Date().toLocaleDateString('pt-BR');
 
-        const { jsPDF } = window.jspdf;
-        const doc = new jsPDF();
+function salvarAtendimento() {
+    const nome = document.getElementById('nome').value;
+    const servico = document.getElementById('servico').value;
+    const pagamento = document.getElementById('pagamento').value;
+    const profissional = document.getElementById('profissional').value;
+    const data = document.getElementById('data').value;
 
-        doc.setFontSize(16);
-        doc.text('Atendimento - Detalhes', 10, 10);
-        doc.setFontSize(12);
-        doc.text(`Nome do Cliente: ${nomeCliente}`, 10, 20);
-        doc.text(`Serviço: ${servico}`, 10, 30);
-        doc.text(`Valor: R$${valor}`, 10, 40);
-        doc.text(`Forma de Pagamento: ${formaPagamento}`, 10, 50);
+    // Armazenando os dados na lista de atendimentos
+    atendimentos.push({ nome, servico, pagamento, profissional, data });
 
-        doc.save('atendimento.pdf');
+    // Exibindo os atendimentos na lista
+    const lista = document.getElementById('atendimento-list');
+    const li = document.createElement('li');
+    li.classList.add('list-group-item');
+    li.textContent = `${data} - ${nome} - ${servico} - ${pagamento} - ${profissional}`;
+    lista.appendChild(li);
 
-        // Enviar para WhatsApp
-        const whatsappUrl = `https://wa.me/?text=Atendimento%20-%20Cliente:%20${nomeCliente}%2C%20Serviço:%20${servico}%2C%20Valor:%20R$${valor}%2C%20Forma%20de%20Pagamento:%20${formaPagamento}`;
-        window.open(whatsappUrl, '_blank');
+    // Limpando o formulário
+    document.getElementById('form-atendimento').reset();
+    document.getElementById('data').value = new Date().toLocaleDateString('pt-BR');
+}
+
+function gerarPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    doc.text('Lista de Atendimentos', 20, 20);
+
+    let y = 30;
+    atendimentos.forEach((atendimento, index) => {
+        doc.text(
+            `${index + 1}. ${atendimento.data} - ${atendimento.nome} - ${atendimento.servico} - ${atendimento.pagamento} - ${atendimento.profissional}`,
+            20,
+            y
+        );
+        y += 10;
     });
+
+    // Salvando o PDF e criando um link temporário
+    const pdfBlob = doc.output('blob');
+    const pdfUrl = URL.createObjectURL(pdfBlob);
+
+    // Exibir o botão para enviar para WhatsApp
+    document.getElementById('whatsapp-button').style.display = 'inline';
+
+    // Armazenar o link do PDF gerado
+    window.pdfUrl = pdfUrl;
+}
+
+function enviarParaWhatsApp() {
+    const url = `https://api.whatsapp.com/send?phone=11986215473&text=Confira%20o%20PDF%20com%20a%20lista%20de%20atendimentos:%20${encodeURIComponent(window.pdfUrl)}`;
+    window.open(url, '_blank');
+}
 </script>
+
+<!-- Inclusão do jQuery e Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>
 </html>
