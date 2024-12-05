@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Atendimento</title>
+    <title>Cadastro de Ladies</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- jsPDF -->
@@ -57,38 +57,33 @@
     </header>
 
     <main>
-        <h2 class="text-center mb-4">Cadastro de Atendimento</h2>
-        <form id="form-atendimento">
+        <h2 class="text-center mb-4">Cadastro de Ladies</h2>
+        <form id="form-ladies">
             <div class="form-group">
-                <label for="nomeCliente">Nome do Cliente:</label>
-                <input type="text" id="nomeCliente" class="form-control" placeholder="Digite o nome do cliente" required>
+                <label for="nomeLady">Nome:</label>
+                <input type="text" id="nomeLady" class="form-control" placeholder="Digite o nome" required>
             </div>
             <div class="form-group">
-                <label for="servico">Serviço:</label>
-                <input type="text" id="servico" class="form-control" placeholder="Digite o serviço realizado" required>
+                <label for="emailLady">E-mail:</label>
+                <input type="email" id="emailLady" class="form-control" placeholder="Digite o e-mail" required>
             </div>
             <div class="form-group">
-                <label for="formaPagamento">Forma de Pagamento:</label>
-                <select id="formaPagamento" class="form-control" required>
-                    <option value="" disabled selected>Selecione uma opção</option>
-                    <option value="Dinheiro">Dinheiro</option>
-                    <option value="Cartão de Crédito">Cartão de Crédito</option>
-                    <option value="Pix">Pix</option>
-                </select>
+                <label for="telefoneLady">Telefone:</label>
+                <input type="tel" id="telefoneLady" class="form-control" placeholder="Digite o telefone" required>
             </div>
             <div class="form-group">
-                <label for="profissional">Profissional:</label>
-                <input type="text" id="profissional" class="form-control" placeholder="Digite o nome do profissional" required>
+                <label for="interesseLady">Interesse Principal:</label>
+                <input type="text" id="interesseLady" class="form-control" placeholder="Digite o interesse principal" required>
             </div>
             <div class="form-group">
-                <label for="dataAtendimento">Data:</label>
-                <input type="date" id="dataAtendimento" class="form-control" value="<?php echo date('Y-m-d'); ?>" readonly>
+                <label for="dataCadastro">Data de Cadastro:</label>
+                <input type="date" id="dataCadastro" class="form-control" value="<?php echo date('Y-m-d'); ?>" readonly>
             </div>
-            <button type="button" class="btn btn-block" onclick="adicionarAtendimento()">Salvar Atendimento</button>
+            <button type="button" class="btn btn-block" onclick="adicionarLady()">Salvar Lady</button>
         </form>
 
-        <h3 class="text-center mt-5">Lista de Atendimentos</h3>
-        <ul id="atendimentoList" class="list-group mt-3"></ul>
+        <h3 class="text-center mt-5">Lista de Ladies</h3>
+        <ul id="ladiesList" class="list-group mt-3"></ul>
 
         <div class="text-center mt-5">
             <button class="btn btn-primary" onclick="gerarPDF()">Baixar PDF</button>
@@ -96,24 +91,24 @@
     </main>
 
     <script>
-        const atendimentos = [];
+        const ladies = [];
 
-        function adicionarAtendimento() {
-            const nomeCliente = document.getElementById('nomeCliente').value;
-            const servico = document.getElementById('servico').value;
-            const formaPagamento = document.getElementById('formaPagamento').value;
-            const profissional = document.getElementById('profissional').value;
-            const dataAtendimento = document.getElementById('dataAtendimento').value;
+        function adicionarLady() {
+            const nomeLady = document.getElementById('nomeLady').value;
+            const emailLady = document.getElementById('emailLady').value;
+            const telefoneLady = document.getElementById('telefoneLady').value;
+            const interesseLady = document.getElementById('interesseLady').value;
+            const dataCadastro = document.getElementById('dataCadastro').value;
 
-            atendimentos.push({ nomeCliente, servico, formaPagamento, profissional, dataAtendimento });
+            ladies.push({ nomeLady, emailLady, telefoneLady, interesseLady, dataCadastro });
 
-            const lista = document.getElementById('atendimentoList');
+            const lista = document.getElementById('ladiesList');
             const li = document.createElement('li');
             li.className = 'list-group-item';
-            li.textContent = `${dataAtendimento} - ${nomeCliente} - ${servico} - ${formaPagamento} - ${profissional}`;
+            li.textContent = `${dataCadastro} - ${nomeLady} - ${emailLady} - ${telefoneLady} - ${interesseLady}`;
             lista.appendChild(li);
 
-            document.getElementById('form-atendimento').reset();
+            document.getElementById('form-ladies').reset();
         }
 
         function gerarPDF() {
@@ -121,12 +116,12 @@
             const doc = new jsPDF();
 
             doc.setFontSize(16);
-            doc.text('Lista de Atendimentos', 20, 20);
+            doc.text('Lista de Ladies', 20, 20);
 
             let y = 30;
-            atendimentos.forEach((atendimento, index) => {
+            ladies.forEach((lady, index) => {
                 doc.text(
-                    `${index + 1}. ${atendimento.dataAtendimento} - ${atendimento.nomeCliente} - ${atendimento.servico} - ${atendimento.formaPagamento} - ${atendimento.profissional}`,
+                    `${index + 1}. ${lady.dataCadastro} - ${lady.nomeLady} - ${lady.emailLady} - ${lady.telefoneLady} - ${lady.interesseLady}`,
                     20,
                     y
                 );
@@ -134,7 +129,7 @@
             });
 
             // Gerar o arquivo PDF
-            doc.save('lista-atendimentos.pdf');
+            doc.save('lista-ladies.pdf');
         }
     </script>
 

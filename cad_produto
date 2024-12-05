@@ -14,22 +14,41 @@
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
+            background-color: #fff5f7;
+            color: #5a3d31;
         }
-        form {
-            max-width: 500px;
-            margin: 0 auto;
+        .navbar {
+            background-color: #f8e1d4;
         }
-        label {
-            display: block;
-            margin-bottom: 8px;
+        .navbar-brand {
+            color: #d19a66 !important;
             font-weight: bold;
         }
-        input, button {
-            width: 100%;
-            padding: 10px;
+        h2, h3 {
+            color: #d19a66;
+        }
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        input, select, button {
             margin-bottom: 15px;
-            border: 1px solid #b88f8f;
-            border-radius: 5px;
+        }
+        button {
+            background-color: #d19a66;
+            color: #fff;
+            border: none;
+        }
+        button:hover {
+            background-color: #c38752;
+        }
+        .list-group-item {
+            background-color: #fef7f0;
+            border-color: #f3d9c4;
         }
     </style>
 </head>
@@ -37,10 +56,7 @@
 
 <header>
     <!-- Botão de navegação para a home -->
-    <header>
-        <button id="home-button" onclick="window.location.href='/home'">Home</button>
-    </header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg">
         <a class="navbar-brand" href="#">AlphaGlam</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -63,29 +79,26 @@
     <label for="categoria">Categoria:</label>
     <input type="text" id="categoria" name="categoria" class="form-control" placeholder="Digite a categoria" required>
 
-    <label for="preco_compra">Preço de Compra:</label>
-    <input type="number" id="preco_compra" name="preco_compra" class="form-control" placeholder="Digite o preço" step="0.01" required>
+    <label for="preco">Preço:</label>
+    <input type="number" id="preco" name="preco" class="form-control" placeholder="Digite o preço" step="0.01" required>
 
-    <label for="quant_estoq">Quantidade em Estoque:</label>
-    <input type="number" id="quant_estoq" name="quant_estoq" class="form-control" placeholder="Digite a quantidade" required>
+    <label for="estoque">Quantidade em Estoque:</label>
+    <input type="number" id="estoque" name="estoque" class="form-control" placeholder="Digite a quantidade em estoque" required>
 
     <label for="descricao">Descrição:</label>
     <input type="text" id="descricao" name="descricao" class="form-control" placeholder="Digite uma descrição" required>
-
-    <label for="data_compra">Data de Compra:</label>
-    <input type="date" id="data_compra" name="data_compra" class="form-control" required>
-
-    <button type="button" class="btn btn-success" onclick="salvarProduto()">Salvar Produto</button>
+    
+    <button type="button" class="btn" onclick="salvarProduto()">Salvar Produto</button>
 </form>
 
 <!-- Lista de Produtos -->
-<h3 class="text-center mt-5">Lista de Produtos Cadastrados</h3>
+<h3 class="text-center mt-5">Lista de Produtos</h3>
 <ul id="produto-list" class="list-group mt-3"></ul>
 
 <!-- Botão para gerar PDF e enviar para o WhatsApp -->
 <div class="text-center mt-5">
-    <button class="btn btn-primary" onclick="gerarPDF()">Gerar PDF</button>
-    <button id="whatsapp-button" class="btn btn-success mt-3" style="display:none;" onclick="enviarParaWhatsApp()">Enviar para WhatsApp</button>
+    <button class="btn" onclick="gerarPDF()">Gerar PDF</button>
+    <button id="whatsapp-button" class="btn mt-3" style="display:none;" onclick="enviarParaWhatsApp()">Enviar para WhatsApp</button>
 </div>
 
 <script>
@@ -95,19 +108,18 @@ let produtos = [];
 function salvarProduto() {
     const nome = document.getElementById('nome').value;
     const categoria = document.getElementById('categoria').value;
-    const precoCompra = document.getElementById('preco_compra').value;
-    const quantEstoq = document.getElementById('quant_estoq').value;
+    const preco = document.getElementById('preco').value;
+    const estoque = document.getElementById('estoque').value;
     const descricao = document.getElementById('descricao').value;
-    const dataCompra = document.getElementById('data_compra').value;
 
     // Armazenando os dados na lista de produtos
-    produtos.push({ nome, categoria, precoCompra, quantEstoq, descricao, dataCompra });
+    produtos.push({ nome, categoria, preco, estoque, descricao });
 
     // Exibindo os produtos na lista
     const lista = document.getElementById('produto-list');
     const li = document.createElement('li');
     li.classList.add('list-group-item');
-    li.textContent = `${nome} - ${categoria} - R$ ${precoCompra} - ${quantEstoq} em estoque`;
+    li.textContent = `${nome} - ${categoria} - R$ ${preco} - ${estoque} em estoque`;
     lista.appendChild(li);
 
     // Limpando o formulário
@@ -122,7 +134,11 @@ function gerarPDF() {
 
     let y = 30;
     produtos.forEach((produto, index) => {
-        doc.text(`${index + 1}. ${produto.nome} - ${produto.categoria} - R$ ${produto.precoCompra} - ${produto.quantEstoq} em estoque`, 20, y);
+        doc.text(
+            `${index + 1}. ${produto.nome} - ${produto.categoria} - R$ ${produto.preco} - ${produto.estoque} em estoque`,
+            20,
+            y
+        );
         y += 10;
     });
 
@@ -138,10 +154,7 @@ function gerarPDF() {
 }
 
 function enviarParaWhatsApp() {
-    // Criar um link para o WhatsApp com o PDF
-    const url = `https://api.whatsapp.com/send?text=Confira%20o%20PDF%20com%20a%20lista%20de%20produtos%20aqui:%20${encodeURIComponent(window.pdfUrl)}`;
-    
-    // Abrir o link no WhatsApp
+    const url = `https://api.whatsapp.com/send?phone=11986215473&text=Confira%20o%20PDF%20com%20a%20lista%20de%20produtos:%20${encodeURIComponent(window.pdfUrl)}`;
     window.open(url, '_blank');
 }
 </script>
