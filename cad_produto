@@ -79,9 +79,10 @@
 <h3 class="text-center mt-5">Lista de Produtos Cadastrados</h3>
 <ul id="produto-list" class="list-group mt-3"></ul>
 
-<!-- Botão para gerar PDF -->
+<!-- Botão para gerar PDF e enviar para o WhatsApp -->
 <div class="text-center mt-5">
     <button class="btn btn-primary" onclick="gerarPDF()">Gerar PDF</button>
+    <button id="whatsapp-button" class="btn btn-success mt-3" style="display:none;" onclick="enviarParaWhatsApp()">Enviar para WhatsApp</button>
 </div>
 
 <script>
@@ -122,8 +123,23 @@ function gerarPDF() {
         y += 10;
     });
 
-    // Salvando o PDF
-    doc.save('produtos.pdf');
+    // Salvando o PDF e criando um link temporário
+    const pdfBlob = doc.output('blob');
+    const pdfUrl = URL.createObjectURL(pdfBlob);
+
+    // Exibir o botão para enviar para WhatsApp
+    document.getElementById('whatsapp-button').style.display = 'inline';
+
+    // Armazenar o link do PDF gerado
+    window.pdfUrl = pdfUrl;
+}
+
+function enviarParaWhatsApp() {
+    // Criar um link para o WhatsApp com o PDF
+    const url = `https://api.whatsapp.com/send?text=Confira%20o%20PDF%20com%20a%20lista%20de%20produtos%20aqui:%20${encodeURIComponent(window.pdfUrl)}`;
+    
+    // Abrir o link no WhatsApp
+    window.open(url, '_blank');
 }
 </script>
 
