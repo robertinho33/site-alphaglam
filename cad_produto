@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Produtos</title>
+    <!-- Inclusão do Bootstrap 4 -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Inclusão do jsPDF para geração do PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -25,105 +31,106 @@
             border: 1px solid #ccc;
             border-radius: 5px;
         }
-        button {
-            background-color: #4CAF50;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
     </style>
 </head>
 <body>
 
-<h2>Cadastro de Produtos</h2>
-<form id="product-form">
+<header>
+    <!-- Botão de navegação para a home -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">AlphaGlam</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<h2 class="text-center mt-5">Cadastro de Produtos</h2>
+<form id="form-produto">
     <label for="nome">Nome do Produto:</label>
-    <input type="text" id="nome" name="nome" placeholder="Digite o nome do produto" required>
+    <input type="text" id="nome" name="nome" class="form-control" placeholder="Digite o nome do produto" required>
 
     <label for="categoria">Categoria:</label>
-    <input type="text" id="categoria" name="categoria" placeholder="Digite a categoria" required>
+    <input type="text" id="categoria" name="categoria" class="form-control" placeholder="Digite a categoria" required>
 
     <label for="preco_compra">Preço de Compra:</label>
-    <input type="number" id="preco_compra" name="preco_compra" placeholder="Digite o preço" step="0.01" required>
+    <input type="number" id="preco_compra" name="preco_compra" class="form-control" placeholder="Digite o preço" step="0.01" required>
 
     <label for="quant_estoq">Quantidade em Estoque:</label>
-    <input type="number" id="quant_estoq" name="quant_estoq" placeholder="Digite a quantidade" required>
+    <input type="number" id="quant_estoq" name="quant_estoq" class="form-control" placeholder="Digite a quantidade" required>
 
     <label for="descricao">Descrição:</label>
-    <input type="text" id="descricao" name="descricao" placeholder="Digite uma descrição" required>
+    <input type="text" id="descricao" name="descricao" class="form-control" placeholder="Digite uma descrição" required>
 
     <label for="data_compra">Data de Compra:</label>
-    <input type="date" id="data_compra" name="data_compra" required>
+    <input type="date" id="data_compra" name="data_compra" class="form-control" required>
 
-    <button type="button" id="save-btn">Salvar Produto</button>
+    <button type="button" class="btn btn-success" onclick="salvarProduto()">Salvar Produto</button>
 </form>
 
-<h3>Produtos Cadastrados</h3>
-<ul id="product-list"></ul>
-<button id="download-pdf" style="display: none;">Baixar PDF</button>
+<!-- Lista de Produtos -->
+<h3 class="text-center mt-5">Lista de Produtos Cadastrados</h3>
+<ul id="produto-list" class="list-group mt-3"></ul>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+<!-- Botão para gerar PDF -->
+<div class="text-center mt-5">
+    <button class="btn btn-primary" onclick="gerarPDF()">Gerar PDF</button>
+</div>
+
 <script>
-    const productList = [];
-    const productListElement = document.getElementById('product-list');
-    const saveButton = document.getElementById('save-btn');
-    const downloadPdfButton = document.getElementById('download-pdf');
+// Lista para armazenar os dados dos produtos
+let produtos = [];
 
-    // Adiciona produto à lista
-    saveButton.addEventListener('click', () => {
-        const nome = document.getElementById('nome').value;
-        const categoria = document.getElementById('categoria').value;
-        const preco_compra = document.getElementById('preco_compra').value;
-        const quant_estoq = document.getElementById('quant_estoq').value;
-        const descricao = document.getElementById('descricao').value;
-        const data_compra = document.getElementById('data_compra').value;
+function salvarProduto() {
+    const nome = document.getElementById('nome').value;
+    const categoria = document.getElementById('categoria').value;
+    const precoCompra = document.getElementById('preco_compra').value;
+    const quantEstoq = document.getElementById('quant_estoq').value;
+    const descricao = document.getElementById('descricao').value;
+    const dataCompra = document.getElementById('data_compra').value;
 
-        const product = {
-            nome,
-            categoria,
-            preco_compra,
-            quant_estoq,
-            descricao,
-            data_compra
-        };
+    // Armazenando os dados na lista de produtos
+    produtos.push({ nome, categoria, precoCompra, quantEstoq, descricao, dataCompra });
 
-        productList.push(product);
+    // Exibindo os produtos na lista
+    const lista = document.getElementById('produto-list');
+    const li = document.createElement('li');
+    li.classList.add('list-group-item');
+    li.textContent = `${nome} - ${categoria} - R$ ${precoCompra} - ${quantEstoq} em estoque`;
+    lista.appendChild(li);
 
-        // Atualiza a lista exibida
-        const listItem = document.createElement('li');
-        listItem.textContent = `${nome} - ${categoria} - R$${preco_compra}`;
-        productListElement.appendChild(listItem);
+    // Limpando o formulário
+    document.getElementById('form-produto').reset();
+}
 
-        // Mostra botão de download
-        downloadPdfButton.style.display = 'block';
+function gerarPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
 
-        // Limpa os campos do formulário
-        document.getElementById('product-form').reset();
+    doc.text('Lista de Produtos', 20, 20);
+
+    let y = 30;
+    produtos.forEach((produto, index) => {
+        doc.text(`${index + 1}. ${produto.nome} - ${produto.categoria} - R$ ${produto.precoCompra} - ${produto.quantEstoq} em estoque`, 20, y);
+        y += 10;
     });
 
-    // Gera o PDF com os dados
-    downloadPdfButton.addEventListener('click', () => {
-        const { jsPDF } = window.jspdf;
-        const doc = new jsPDF();
-
-        doc.setFontSize(16);
-        doc.text('Lista de Produtos Cadastrados', 10, 10);
-
-        productList.forEach((product, index) => {
-            doc.setFontSize(12);
-            doc.text(
-                `${index + 1}. Nome: ${product.nome}, Categoria: ${product.categoria}, Preço: R$${product.preco_compra}, Quantidade: ${product.quant_estoq}, Descrição: ${product.descricao}, Data: ${product.data_compra}`,
-                10,
-                20 + index * 10
-            );
-        });
-
-        doc.save('produtos_cadastrados.pdf');
-    });
+    // Salvando o PDF
+    doc.save('produtos.pdf');
+}
 </script>
+
+<!-- Inclusão do jQuery e Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>
 </html>
