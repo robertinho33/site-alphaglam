@@ -1,4 +1,11 @@
 <?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Processa os dados do formulário
+    echo "Dados recebidos!";
+} else {
+    http_response_code(405);
+    die("Método não permitido.");
+}
 // Configuração do banco de dados
 $host = "localhost";
 $user = "root"; // Usuário do banco
@@ -12,6 +19,8 @@ $conn = new mysqli($host, $user, $password, $database);
 if ($conn->connect_error) {
     die("Conexão falhou: " . $conn->connect_error);
 }
+
+
 
 // Captura os dados enviados pelo formulário
 $nome = $_POST['nome'];

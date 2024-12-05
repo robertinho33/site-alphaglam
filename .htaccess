@@ -1,3 +1,19 @@
-# Configuração básica do PHP
+# Habilita o mecanismo de reescrita
 RewriteEngine On
 RewriteBase /
+
+# Permitir acesso ao arquivo salvar_produto.php
+<Files "salvar_produto.php">
+    Require all granted
+</Files>
+
+# Garante que métodos POST e GET sejam aceitos
+<Limit GET POST>
+    Require all granted
+</Limit>
+
+# Impede listagem de diretórios
+Options -Indexes
+
+# Redireciona todas as solicitações inválidas para 404
+ErrorDocument 404 /404.html
