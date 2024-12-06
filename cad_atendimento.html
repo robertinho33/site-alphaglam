@@ -4,39 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Atendimento</title>
-
-    <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Inclusão do jsPDF -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Inclusão do jsPDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
     <style>
         body {
-            background-color: #fff9f6;
-            font-family: 'Arial', sans-serif;
-            color: #5a4a3f;
+            font-family: Arial, sans-serif;
             margin: 20px;
+            background-color: #fff5f7;
+            color: #5a3d31;
         }
-        header {
-            background: linear-gradient(to right, #d4af37, #ffc4c4);
+        .navbar {
+            background-color: #f8e1d4;
+        }
+        .navbar-brand {
+            color: #d19a66 !important;
+            font-weight: bold;
+        }
+        h2, h3 {
+            color: #d19a66;
+        }
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        input, select, button {
+            margin-bottom: 15px;
+        }
+        button {
+            background-color: #d19a66;
+            color: #fff;
+            border: none;
+        }
+        button:hover {
+            background-color: #c38752;
+        }
+        .list-group-item {
+            background-color: #fef7f0;
+            border-color: #f3d9c4;
+        }
+        .btn-home {
+            background-color: #d19a66;
             color: white;
-            padding: 15px 0;
-            text-align: center;
         }
-        button, input, select {
-            border-radius: 5px;
-        }
-        .form-control {
-            border-color: #d4af37;
-        }
-        .btn-primary {
-            background-color: #d4af37;
-            border-color: #d4af37;
-        }
-        .btn-primary:hover {
-            background-color: #b29530;
-        }
-        .btn-danger {
-            background-color: #ff9999;
-            border-color: #ff9999;
+        .btn-home:hover {
+            background-color: #c38752;
         }
     </style>
 </head>
