@@ -15,16 +15,17 @@
         header {
             background-color: #3e8e41;
             color: #fff;
-            padding: 20px;
+            padding: 15px;
             text-align: center;
         }
         nav {
             background-color: #333;
             overflow: hidden;
+            text-align: center;
         }
         nav a {
             color: white;
-            padding: 14px 20px;
+            padding: 10px 15px;
             text-align: center;
             text-decoration: none;
             display: inline-block;
@@ -36,32 +37,57 @@
         .container {
             padding: 20px;
             display: flex;
-            justify-content: space-between;
             flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
         }
         .section {
             background-color: #fff;
             border: 1px solid #ddd;
-            padding: 20px;
-            width: 45%;
-            margin-bottom: 20px;
+            padding: 15px;
+            width: 100%;
+            max-width: 400px;
             box-sizing: border-box;
             border-radius: 8px;
+            margin-bottom: 20px;
         }
         .section h3 {
             margin-top: 0;
         }
         .metrics {
             display: flex;
-            justify-content: space-between;
+            flex-wrap: wrap;
             gap: 20px;
+            justify-content: center;
         }
         .metric-box {
             background-color: #ddd;
-            padding: 10px;
+            padding: 15px;
             text-align: center;
             width: 30%;
             border-radius: 8px;
+            box-sizing: border-box;
+            margin-bottom: 15px;
+        }
+        /* Responsividade para telas menores */
+        @media (max-width: 768px) {
+            .metric-box {
+                width: 45%;
+            }
+            .section {
+                width: 100%;
+                max-width: 90%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .metric-box {
+                width: 100%;
+            }
+            nav a {
+                padding: 8px 12px;
+                font-size: 14px;
+            }
         }
     </style>
 </head>
