@@ -6,7 +6,6 @@
     <title>Lista de Atendimento</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Inclusão do jsPDF -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
     <style>
@@ -66,7 +65,6 @@
 <body>
 
 <header>
-    <!-- Botão de navegação para a home -->
     <nav class="navbar navbar-expand-lg">
         <a class="navbar-brand" href="#">Alpha Glam</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -80,7 +78,7 @@
             </ul>
         </div>
     </nav>
-    <div class="navbar-brand">Lançametos de serviços</div>
+    <div class="navbar-brand">Lançamentos de serviços</div>
 </header>
 
 <div class="container mt-5">
@@ -153,10 +151,21 @@
         const valorServico = parseFloat(document.getElementById('valorServico').value);
         const desconto = parseFloat(document.getElementById('desconto').value) || 0;
         const cortesia = document.getElementById('cortesia').checked;
+        const dataAtendimento = new Date().toLocaleString(); // Horário de registro
 
         const valorFinal = cortesia ? 0 : valorServico - (valorServico * desconto / 100);
 
-        atendimentos.push({ nomeCliente, servico, profissional, formaPagamento, valorFinal });
+        // Armazenando os dados
+        atendimentos.push({ 
+            nomeCliente, 
+            servico, 
+            profissional, 
+            formaPagamento, 
+            valorServico, 
+            desconto, 
+            valorFinal,
+            dataAtendimento
+        });
 
         const lista = document.getElementById('listaAtendimentos');
         const li = document.createElement('li');
@@ -169,7 +178,7 @@
 
     function gerarCSV() {
         // Cabeçalhos das colunas
-        const cabecalho = ['Nome do Cliente', 'Serviço', 'Profissional', 'Forma de Pagamento', 'Valor Final (R$)'];
+        const cabecalho = ['Nome do Cliente', 'Serviço', 'Profissional', 'Forma de Pagamento', 'Valor do Serviço (R$)', 'Desconto (%)', 'Valor Final (R$)', 'Data e Hora do Registro'];
         
         // Gerando o conteúdo das linhas com os dados dos atendimentos
         const linhas = atendimentos.map(atendimento => [
@@ -177,13 +186,32 @@
             atendimento.servico,
             atendimento.profissional,
             atendimento.formaPagamento,
-            atendimento.valorFinal.toFixed(2)
+            atendimento.valorServico.toFixed(2),
+            atendimento.desconto.toFixed(2),
+            atendimento.valorFinal.toFixed(2),
+            atendimento.dataAtendimento
         ]);
+
+        // Calculando a soma do valor com e sem desconto
+        const somaComDesconto = atendimentos.reduce((acc, atendimento) => acc + atendimento.valorFinal, 0);
+        const somaSemDesconto = atendimentos.reduce((acc, atendimento) => acc + atendimento.valorServico, 0);
+
+        // Adicionando as somas ao final do arquivo
+        const rodape = [
+            'Soma com Desconto', '',
+            '',
+            '',
+            somaSemDesconto.toFixed(2),
+            '',
+            somaComDesconto.toFixed(2),
+            ''
+        ];
 
         // Convertendo para formato CSV
         const csvContent = [
             cabecalho.join(','),
-            ...linhas.map(linha => linha.join(','))
+            ...linhas.map(linha => linha.join(',')),
+            rodape.join(',')
         ].join('\n');
 
         // Criando o arquivo CSV e permitindo o download
