@@ -7,9 +7,6 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Inclusão do jsPDF -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Inclusão do jsPDF -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
     <style>
@@ -60,6 +57,11 @@
             background-color: #c38752;
         }
     </style>
+    <script>
+        if (!localStorage.getItem('isAuthenticated')) {
+            window.location.href = 'login.html';
+        }
+    </script>
 </head>
 <body>
 
@@ -79,6 +81,7 @@
         </div>
     </nav>
 </header>
+
 <div class="container mt-5">
     <form id="atendimento-form">
         <div class="form-group">
@@ -122,7 +125,7 @@
 
         <div class="form-group">
             <label for="dataAtendimento">Data do Atendimento:</label>
-            <input type="date" id="dataAtendimento" class="form-control" value="<?= date('Y-m-d') ?>" readonly>
+            <input type="date" id="dataAtendimento" class="form-control" readonly>
         </div>
 
         <button type="button" class="btn btn-primary" onclick="adicionarAtendimento()">Adicionar Atendimento</button>
@@ -134,6 +137,7 @@
     <div class="text-center mt-5">
         <button class="btn btn-primary" onclick="gerarArquivoTexto()">Gerar Arquivo de Texto</button>
         <button id="enviarWhatsApp" class="btn btn-success mt-3" style="display:none;" onclick="enviarParaWhatsApp()">Enviar para WhatsApp</button>
+        <button class="btn btn-danger" onclick="logout()">Deslogar</button>
     </div>
 </div>
 
@@ -148,11 +152,10 @@
         const valorServico = parseFloat(document.getElementById('valorServico').value);
         const desconto = parseFloat(document.getElementById('desconto').value) || 0;
         const cortesia = document.getElementById('cortesia').checked;
-        const dataAtendimento = document.getElementById('dataAtendimento').value;
 
         const valorFinal = cortesia ? 0 : valorServico - (valorServico * desconto / 100);
 
-        atendimentos.push({ nomeCliente, servico, profissional, formaPagamento, valorFinal, dataAtendimento });
+        atendimentos.push({ nomeCliente, servico, profissional, formaPagamento, valorFinal });
 
         const lista = document.getElementById('listaAtendimentos');
         const li = document.createElement('li');
@@ -163,33 +166,9 @@
         document.getElementById('atendimento-form').reset();
     }
 
-    function gerarArquivoTexto() {
-        let total = 0;
-        let conteudo = 'Lista de Atendimentos:\n\n';
-
-        atendimentos.forEach((atendimento, index) => {
-            conteudo += `${index + 1}. Nome: ${atendimento.nomeCliente}, Serviço: ${atendimento.servico}, Profissional: ${atendimento.profissional}, Valor: R$ ${atendimento.valorFinal.toFixed(2)}\n`;
-            total += atendimento.valorFinal;
-        });
-
-        conteudo += `\nTotal dos Serviços: R$ ${total.toFixed(2)}`;
-
-        const blob = new Blob([conteudo], { type: 'text/plain' });
-        const url = URL.createObjectURL(blob);
-
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'lista_atendimentos.txt';
-        a.click();
-        
-        document.getElementById('enviarWhatsApp').style.display = 'inline';
-        window.textFileUrl = url;
-    }
-
-    function enviarParaWhatsApp() {
-        const mensagem = `Confira a lista de atendimentos: ${window.textFileUrl}`;
-        const url = `https://api.whatsapp.com/send?phone=11986275473&text=${encodeURIComponent(mensagem)}`;
-        window.open(url, '_blank');
+    function logout() {
+        localStorage.removeItem('isAuthenticated');
+        window.location.href = 'login.html';
     }
 </script>
 
