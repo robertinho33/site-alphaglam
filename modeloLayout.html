@@ -123,13 +123,36 @@
 	<!-- Agrupa informações e links relacionado ao conteúdo principal. -->
 	<aside>  
 		Aside <hr>
-		<div class="image-grid">
-   			<img src="https://images.yampi.io/unsafe/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/mascara-liquida-liquid-mask-ecobelle-200-ml-66fd5cae45ed1-large.png" alt="Imagem 1" data-name="Máscara Líquida" data-price="50">
-	        <img src="https://images.yampi.io/unsafe/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/finalizador-termico-coco-camomila-by-vitoria-lima-200-ml-667c4d7031e63-large.png" alt="Imagem 2" data-name="Finalizador Térmico" data-price="40">
-	        <img src="https://images.yampi.io/unsafe/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/kit-coco-camomila-by-vitoria-lima-ecobelle-300-ml-66cf3cd879731-large.png" alt="Imagem 3" data-name="Kit Coco e Camomila" data-price="100">
-	        <img src="https://images.yampi.io/inOUrVjOuPjvtnpVYzL9K3-xPCg=/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/kit-pimenta-rosa-eco-belle-64ef8bb1e85f1-large.png" alt="Imagem 4" data-name="Kit Pimenta Rosa" data-price="130">
-	        <img src="https://images.yampi.io/BHaubHu5dG9dtvDfoDfvRrI7LB0=/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/kit-manutencao-home-care-silver-ecobelle-300ml-3-itens-67412ba3969a3-large.png" alt="Imagem 5" data-name="Kit Manutenção Home Care" data-price="130">
-	        </div>
+		<!-- Carrinho de Compras -->
+		<div>
+			<ul id="cart-items"></ul>
+			<div id="total-price">Total: R$ 0.00</div>
+		</div>
+	<!-- Botão para abrir a sacola -->
+	<button id="view-bag-btn">Ver Sacola</button>
+	
+	<!-- Modal da sacola -->
+	<div id="bag-modal" style="display: none;">
+		<div id="bag-content">
+			<h2>Sacola de Compras</h2>
+			<ul id="bag-items"></ul>
+			<div id="bag-total-price">Total: R$ 0.00</div>
+			<button id="clear-bag-btn">Limpar Sacola</button>
+			<button id="close-bag-btn">Fechar</button>
+		</div>
+	</div>
+	
+		<!-- Formulário para capturar nome e telefone -->
+		<div id="user-details">
+			<label for="name">Nome:</label>
+			<input type="text" id="name" placeholder="Digite seu nome" required><br>
+	
+			<label for="phone">Telefone:</label>
+			<input type="text" id="phone" placeholder="Digite seu telefone" required><br>
+	
+			<button id="checkout-btn">Enviar Pedido para WhatsApp</button>
+		</div>
+	
 </aside>
 
 	<!-- Agrupa o conteúdo principal da página ou aplicação. -->
@@ -137,6 +160,11 @@
 		Main <hr>
 		<div class="image-grid">
         <img src="https://images.yampi.io/unsafe/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/mascara-liquida-liquid-mask-ecobelle-200-ml-66fd5cae45ed1-large.png" alt="Imagem 1" data-name="Máscara Líquida" data-price="50">
+	    <img src="https://images.yampi.io/unsafe/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/finalizador-termico-coco-camomila-by-vitoria-lima-200-ml-667c4d7031e63-large.png" alt="Imagem 2" data-name="Finalizador Térmico" data-price="40">
+	    <img src="https://images.yampi.io/unsafe/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/kit-coco-camomila-by-vitoria-lima-ecobelle-300-ml-66cf3cd879731-large.png" alt="Imagem 3" data-name="Kit Coco e Camomila" data-price="100">
+	    <img src="https://images.yampi.io/inOUrVjOuPjvtnpVYzL9K3-xPCg=/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/kit-pimenta-rosa-eco-belle-64ef8bb1e85f1-large.png" alt="Imagem 4" data-name="Kit Pimenta Rosa" data-price="130">
+	    <img src="https://images.yampi.io/BHaubHu5dG9dtvDfoDfvRrI7LB0=/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/kit-manutencao-home-care-silver-ecobelle-300ml-3-itens-67412ba3969a3-large.png" alt="Imagem 5" data-name="Kit Manutenção Home Care" data-price="130">
+	    <img src="https://images.yampi.io/unsafe/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/mascara-liquida-liquid-mask-ecobelle-200-ml-66fd5cae45ed1-large.png" alt="Imagem 1" data-name="Máscara Líquida" data-price="50">
         <img src="https://images.yampi.io/unsafe/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/finalizador-termico-coco-camomila-by-vitoria-lima-200-ml-667c4d7031e63-large.png" alt="Imagem 2" data-name="Finalizador Térmico" data-price="40">
         <img src="https://images.yampi.io/unsafe/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/kit-coco-camomila-by-vitoria-lima-ecobelle-300-ml-66cf3cd879731-large.png" alt="Imagem 3" data-name="Kit Coco e Camomila" data-price="100">
         <img src="https://images.yampi.io/inOUrVjOuPjvtnpVYzL9K3-xPCg=/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/kit-pimenta-rosa-eco-belle-64ef8bb1e85f1-large.png" alt="Imagem 4" data-name="Kit Pimenta Rosa" data-price="130">
@@ -152,3 +180,129 @@
 	<!-- Importação do arquivo JavaScript. -->
 	<script type="text/javascript" src="assets/js/script.js"></script>
 </body>
+<script src="js/cart.js"></script>
+ 
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+const cartItems = document.getElementById("cart-items");
+const totalPrice = document.getElementById("total-price");
+const viewBagBtn = document.getElementById("view-bag-btn");
+const bagModal = document.getElementById("bag-modal");
+const bagItems = document.getElementById("bag-items");
+const bagTotalPrice = document.getElementById("bag-total-price");
+const closeBagBtn = document.getElementById("close-bag-btn");
+const clearBagBtn = document.getElementById("clear-bag-btn");
+
+let cart = [];
+
+// Função para adicionar itens ao carrinho
+document.querySelectorAll(".image-grid img").forEach((img) => {
+  img.addEventListener("click", function () {
+	  const name = img.getAttribute("data-name");
+	  const price = parseFloat(img.getAttribute("data-price"));
+	  const src = img.getAttribute("src");
+
+	  cart.push({ name, price, src });
+
+	  // Atualiza tanto o carrinho quanto a sacola
+	  updateCart();
+	  updateBag();
+  });
+});
+
+// Função para atualizar o carrinho
+function updateCart() {
+  cartItems.innerHTML = ""; // Limpa o carrinho
+  let total = 0;
+
+  cart.forEach((item) => {
+	  const listItem = document.createElement("li");
+	  listItem.textContent = `${item.name} - R$ ${item.price.toFixed(2)}`;
+	  cartItems.appendChild(listItem);
+
+	  total += item.price;
+  });
+
+  totalPrice.textContent = `Total: R$ ${total.toFixed(2)}`;
+}
+
+// Função para atualizar a sacola
+function updateBag() {
+  bagItems.innerHTML = ""; // Limpa a sacola
+  let total = 0;
+
+  cart.forEach((item, index) => {
+	  const listItem = document.createElement("li");
+	  listItem.style.display = "flex";
+	  listItem.style.alignItems = "center";
+	  listItem.style.marginBottom = "10px";
+
+	  // Imagem do item
+	  const img = document.createElement("img");
+	  img.src = item.src;
+	  img.style.width = "50px";
+	  img.style.height = "50px";
+	  img.style.marginRight = "10px";
+
+	  // Detalhes do item
+	  const details = document.createElement("span");
+	  details.textContent = `${item.name} - R$ ${item.price.toFixed(2)}`;
+	  details.style.flexGrow = "1";
+
+	  // Botão para remover item
+	  const removeBtn = document.createElement("button");
+	  removeBtn.textContent = "Excluir";
+	  removeBtn.style.backgroundColor = "red";
+	  removeBtn.style.color = "white";
+	  removeBtn.style.border = "none";
+	  removeBtn.style.borderRadius = "5px";
+	  removeBtn.style.padding = "2px 8px";
+	  removeBtn.style.fontSize = "12px";
+	  removeBtn.style.marginLeft = "10px";
+	  removeBtn.style.cursor = "pointer";
+
+	  // Função para remover o item
+	  removeBtn.addEventListener("click", function () {
+		  removeItem(index);
+	  });
+
+	  listItem.appendChild(img);
+	  listItem.appendChild(details);
+	  listItem.appendChild(removeBtn);
+	  bagItems.appendChild(listItem);
+
+	  total += item.price;
+  });
+
+  bagTotalPrice.textContent = `Total: R$ ${total.toFixed(2)}`;
+}
+
+// Função para remover um item do carrinho
+function removeItem(index) {
+  cart.splice(index, 1); // Remove o item pelo índice
+  updateCart();
+  updateBag();
+}
+
+// Mostrar sacola
+viewBagBtn.addEventListener("click", function () {
+  updateBag();
+  bagModal.style.display = "flex";
+});
+
+// Fechar sacola
+closeBagBtn.addEventListener("click", function () {
+  bagModal.style.display = "none";
+});
+
+// Limpar sacola
+clearBagBtn.addEventListener("click", function () {
+  cart = [];
+  updateCart();
+  updateBag();
+});
+});
+
+</script>
+</body>
+</html>
