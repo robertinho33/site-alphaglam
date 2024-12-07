@@ -72,10 +72,10 @@
             type="text" 
             id="whatsappLady" 
             class="form-control" 
-            placeholder="11 XXXXX-XXXX" 
+            placeholder="XX XXXXX-XXXX" 
             required 
             oninput="aplicarMascaraTelefone(this)" 
-            maxlength="20">
+            maxlength="13">
           </div>
         <div class="form-group">
             <label for="emailLady">E-mail:</label>
@@ -104,11 +104,11 @@
     let value = input.value.replace(/\D/g, '');
 
     // Limita a quantidade de dígitos a 13 (2 do DDD + 9 do telefone)
-    value = value.substring(0, 18);
+    value = value.substring(0, 13);
 
     // Adiciona máscara
     value = value.replace(/^(\d{2})(\d)/, '+55 $1 $2'); // +55 XX
-    //value = value.replace(/(\d{5})(\d)/, '$1-$2');       // XXXXX-XXXX
+    value = value.replace(/(\d{5})(\d)/, '$1-$2');       // XXXXX-XXXX
 
     input.value = value; // Aplica o valor formatado no campo
 }
