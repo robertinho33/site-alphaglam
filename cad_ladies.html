@@ -96,6 +96,29 @@
         <button class="btn btn-secondary" onclick="voltarParaHome()">Voltar para Home</button>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<div class="uk-margin">
+    <label> <strong>Telefone ou Celular</strong>
+      <input class="uk-input sp_celphones" type="text" name="telefone" placeholder="Ex: (11) 90000-9999">
+    </label>
+</div>
+
+<script>
+$(document).ready(function(){
+    var SPMaskBehavior = function (val) {
+      return val.replace(/\D/g, '').length === 13 ? '+55 (00) 00000-0000' : '+55 (00) 0000-00009';
+    },
+    spOptions = {
+      onKeyPress: function(val, e, field, options) {
+          field.mask(SPMaskBehavior.apply({}, arguments), options);
+        }
+    };
+
+    $('.sp_celphones').mask(SPMaskBehavior, spOptions);
+});
+</script>
 
 <script>
     const ladies = [];
