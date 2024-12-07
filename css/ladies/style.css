@@ -283,7 +283,9 @@ aside {
 main {
     margin-left: 270px;  /* Dá um espaçamento do lado esquerdo para o conteúdo */
     padding: 20px;
+    padding-top: 80px;  /* Garante que o conteúdo principal não sobreponha o header */
     width: calc(100% - 270px); /* Ajusta a largura do main para não sobrepor o aside */
+    box-sizing: border-box; /* Para garantir que o padding não quebre o layout */
 }
 
 /* Responsividade: Ajuste do aside para telas menores */
@@ -294,6 +296,7 @@ main {
 
     main {
         margin-left: 220px;  /* Ajusta o espaço para o conteúdo */
+        padding-top: 80px; /* Garante o espaçamento do header */
     }
 }
 
@@ -305,5 +308,6 @@ main {
 
     main {
         margin-left: 0;
+        padding-top: 80px; /* Garante o espaçamento do header */
     }
 }
