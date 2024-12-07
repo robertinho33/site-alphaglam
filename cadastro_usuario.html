@@ -3,44 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro - Alpha Glam</title>
+    <title>Cadastrar Usuário - Alpha Glam</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="d-flex justify-content-center align-items-center" style="height: 100vh; background-color: #fff5f7;">
     <form id="userForm" class="p-4 border rounded shadow" style="background-color: #fff; max-width: 400px;">
-        <h3 class="text-center mb-4" style="color: #d19a66;">Cadastrar Usuário - Alpha Glam</h3>
+        <h3 class="text-center mb-4" style="color: #d19a66;">Cadastro de Usuário - Alpha Glam</h3>
         <div class="form-group">
-            <label for="newUsername">Nome de Usuário</label>
-            <input type="text" id="newUsername" class="form-control" placeholder="Digite o nome de usuário" required>
+            <label for="username">Usuário</label>
+            <input type="text" id="username" class="form-control" placeholder="Digite seu usuário" required>
         </div>
         <div class="form-group">
-            <label for="newPassword">Senha</label>
-            <input type="password" id="newPassword" class="form-control" placeholder="Digite a senha" required>
+            <label for="password">Senha</label>
+            <input type="password" id="password" class="form-control" placeholder="Digite sua senha" required>
         </div>
         <button type="submit" class="btn btn-primary btn-block" style="background-color: #d19a66; border: none;">Cadastrar</button>
     </form>
 
     <script>
+        // Quando o formulário de cadastro for enviado
         document.getElementById('userForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+            e.preventDefault(); // Impede o comportamento padrão do formulário
 
-            const username = document.getElementById('newUsername').value;
-            const password = document.getElementById('newPassword').value;
+            // Obter os dados inseridos no formulário
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
 
-            if (username && password) {
-                // Verificar se o usuário já existe
-                const users = JSON.parse(localStorage.getItem('users')) || [];
-                const userExists = users.some(user => user.username === username);
+            // Carregar usuários cadastrados no localStorage
+            const users = JSON.parse(localStorage.getItem('users')) || [];
 
-                if (userExists) {
-                    alert('Usuário já existe!');
-                } else {
-                    // Salvar novo usuário no localStorage
-                    users.push({ username, password });
-                    localStorage.setItem('users', JSON.stringify(users));
-                    alert('Usuário cadastrado com sucesso!');
-                    window.location.href = 'login.html'; // Redireciona para a tela de login
-                }
+            // Verificar se o usuário já está cadastrado
+            const userExists = users.some(u => u.username === username);
+
+            if (userExists) {
+                alert('Usuário já cadastrado! Escolha outro nome.');
+            } else {
+                // Adicionar novo usuário ao array de usuários
+                users.push({ username, password });
+
+                // Salvar o novo usuário no localStorage
+                localStorage.setItem('users', JSON.stringify(users));
+
+                alert('Usuário cadastrado com sucesso!');
+                window.location.href = 'login.html';  // Redirecionar para a página de login
             }
         });
     </script>
