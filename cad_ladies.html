@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Ladies</title>
-    <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- jsPDF -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
         body {
@@ -58,7 +56,7 @@
         </div>
         <div class="form-group">
             <label for="whatsappLady">WhatsApp:</label>
-            <input type="text" id="whatsappLady" class="form-control" placeholder="+55 XX XXXXX-XXXX" required>
+            <input type="text" id="whatsappLady" class="form-control" placeholder="+55 XX XXXXX-XXXX" maxlength="20" required>
         </div>
         <div class="form-group">
             <label for="emailLady">E-mail:</label>
@@ -66,7 +64,7 @@
         </div>
         <div class="form-group">
             <label for="dataCadastro">Data do Cadastro:</label>
-            <input type="date" id="dataCadastro" class="form-control" value="<?php echo date('Y-m-d'); ?>" readonly>
+            <input type="date" id="dataCadastro" class="form-control" readonly>
         </div>
         <button type="button" class="btn btn-block" onclick="adicionarLady()">Salvar Cadastro</button>
     </form>
@@ -80,18 +78,20 @@
 </main>
 
 <script>
-    const ladies = [];
+    document.getElementById('dataCadastro').value = new Date().toISOString().split('T')[0];
 
-    function aplicarMascaraTelefone(value) {
-        return value
-            .replace(/\D/g, '')
-            .replace(/^(\d{2})(\d)/g, '+55 $1 $2')
-            .replace(/(\d{4,5})(\d{4})$/, '$1-$2');
-    }
+    const ladies = [];
 
     document.getElementById('whatsappLady').addEventListener('input', (e) => {
         e.target.value = aplicarMascaraTelefone(e.target.value);
     });
+
+    function aplicarMascaraTelefone(value) {
+        return value
+            .replace(/\D/g, '') // Remove caracteres não numéricos
+            .replace(/^(\d{2})(\d)/g, '+55 $1 $2') // Adiciona código do país e DDD
+            .replace(/(\d{5})(\d{4}).*/, '$1-$2'); // Formata o número corretamente
+    }
 
     function adicionarLady() {
         const nomeLady = document.getElementById('nomeLady').value;
@@ -131,10 +131,5 @@
         doc.save('lista-ladies.pdf');
     }
 </script>
-
-<!-- Inclusão do Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
