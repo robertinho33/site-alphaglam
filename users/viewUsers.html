@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuários Cadastrados - Alpha Glam</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container mt-5" style="background-color: #fff5f7; color: #5a3d31;">
+
+    <h3 class="text-center mb-4" style="color: #d19a66;">Usuários Cadastrados</h3>
+    
+    <div id="userList" class="list-group">
+        <!-- A lista de usuários será carregada aqui -->
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="index.html" class="btn btn-primary">Voltar para a Home</a>
+    </div>
+
+    <script>
+        // Carregar usuários salvos no localStorage
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+
+        const userList = document.getElementById('userList');
+
+        if (users.length > 0) {
+            users.forEach(user => {
+                const listItem = document.createElement('li');
+                listItem.classList.add('list-group-item');
+                listItem.textContent = `Usuário: ${user.username}`;
+                userList.appendChild(listItem);
+            });
+        } else {
+            userList.innerHTML = '<li class="list-group-item">Nenhum usuário cadastrado.</li>';
+        }
+    </script>
+
+</body>
+</html>
