@@ -72,7 +72,7 @@
             type="text" 
             id="whatsappLady" 
             class="form-control" 
-            placeholder="XX XXXXX-XXXX" 
+            placeholder="11 XXXXX-XXXX" 
             required 
             oninput="aplicarMascaraTelefone(this)" 
             maxlength="13">
@@ -119,7 +119,7 @@
 
     function aplicarMascaraTelefone(input) {
         let value = input.value.replace(/\D/g, ''); // Remove caracteres não numéricos
-        value = value.replace(/^(\d{2})(\d)/, '+55 $1 $2'); // Adiciona código do país e DDD
+        //value = value.replace(/^(\d{2})(\d)/, '+55 $1 $2'); // Adiciona código do país e DDD
         value = value.replace(/(\d{5})(\d)/, '$1-$2'); // Adiciona o hífen no número
         input.value = value;
     }
