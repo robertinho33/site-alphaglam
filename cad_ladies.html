@@ -107,8 +107,8 @@
     value = value.substring(0, 13);
 
     // Adiciona máscara
-    //value = value.replace(/^(\d{2})(\d)/, '+55 $1 $2'); // +55 XX
-    value = value.replace(/(\d{5})(\d)/, '$1-$2');       // XXXXX-XXXX
+    value = value.replace(/^(\d{2})(\d)/, '+55 $1 $2'); // +55 XX
+    //value = value.replace(/(\d{5})(\d)/, '$1-$2');       // XXXXX-XXXX
 
     input.value = value; // Aplica o valor formatado no campo
 }
