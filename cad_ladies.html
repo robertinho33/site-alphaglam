@@ -8,44 +8,58 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(to bottom, #f7e3d3, #fde3c9);
-            color: #5a3a29;
+            font-family: Arial, sans-serif;
             margin: 20px;
-        }
-        header {
-            margin-bottom: 30px;
+            background-color: #fff5f7;
+            color: #5a3d31;
         }
         .navbar {
-            background-color: #d4a373;
+            background-color: #f8e1d4;
         }
         .navbar-brand {
-            color: white !important;
+            color: #d19a66 !important;
             font-weight: bold;
         }
-        label {
-            font-weight: bold;
+        h2, h3 {
+            color: #d19a66;
+        }
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        input, select, button {
+            margin-bottom: 15px;
         }
         button {
-            background-color: #d4a373;
-            color: white;
+            background-color: #d19a66;
+            color: #fff;
             border: none;
-            border-radius: 5px;
         }
         button:hover {
-            background-color: #bc8b62;
+            background-color: #c38752;
+        }
+        .list-group-item {
+            background-color: #fef7f0;
+            border-color: #f3d9c4;
         }
     </style>
 </head>
 <body>
 <header>
     <nav class="navbar navbar-expand-lg">
-        <a class="navbar-brand" href="index.html">Alpha Glam</a>
+        <a class="navbar-brand" href="index.html">AlphaGlam</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
     </nav>
 </header>
 
-<main>
-    <h2 class="text-center mb-4">Cadastro de Ladies</h2>
+<div class="container mt-5">
+    <h2 class="text-center">Cadastro de Ladies</h2>
     <form id="form-ladies">
         <div class="form-group">
             <label for="nomeLady">Nome da Lady:</label>
@@ -65,24 +79,24 @@
         </div>
         <div class="form-group">
             <label for="dataCadastro">Data do Cadastro:</label>
-            <input type="date" id="dataCadastro" class="form-control" value="" readonly>
+            <input type="date" id="dataCadastro" class="form-control" readonly>
         </div>
-        <button type="button" class="btn btn-block" onclick="adicionarLady()">Salvar Cadastro</button>
-        <button type="button" class="btn btn-secondary mt-3" onclick="voltarParaHome()">Voltar para Home</button>
+        <button type="button" class="btn btn-primary btn-block" onclick="adicionarLady()">Salvar Cadastro</button>
     </form>
 
-    <h3 class="text-center mt-5">Lista de Ladies</h3>
+    <h3 class="mt-5">Lista de Ladies</h3>
     <ul id="ladiesList" class="list-group mt-3"></ul>
 
     <div class="text-center mt-5">
         <button class="btn btn-primary" onclick="gerarPDF()">Baixar PDF</button>
+        <button class="btn btn-secondary" onclick="voltarParaHome()">Voltar para Home</button>
     </div>
-</main>
+</div>
 
 <script>
     const ladies = [];
 
-    // Preenche automaticamente a data de cadastro com o dia atual
+    // Configura a data atual no campo de data
     document.getElementById('dataCadastro').value = new Date().toISOString().split('T')[0];
 
     function aplicarMascaraTelefone(input) {
@@ -98,6 +112,11 @@
         const whatsappLady = document.getElementById('whatsappLady').value;
         const emailLady = document.getElementById('emailLady').value;
         const dataCadastro = document.getElementById('dataCadastro').value;
+
+        if (!nomeLady || !instagramLady || !whatsappLady || !emailLady) {
+            alert('Por favor, preencha todos os campos obrigatórios.');
+            return;
+        }
 
         ladies.push({ nomeLady, instagramLady, whatsappLady, emailLady, dataCadastro });
 
