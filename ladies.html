@@ -52,6 +52,36 @@
         .btn-home:hover {
             background-color: #c38752;
         }
+        #bag-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+#bag-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    max-width: 90%;
+    text-align: center;
+}
+
+#bag-items img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
     </style>
 </head>
 <body>
@@ -95,6 +125,19 @@
         <ul id="cart-items"></ul>
         <div id="total-price">Total: R$ 0.00</div>
     </div>
+<!-- Botão para abrir a sacola -->
+<button id="view-bag-btn">Ver Sacola</button>
+
+<!-- Modal da sacola -->
+<div id="bag-modal" style="display: none;">
+    <div id="bag-content">
+        <h2>Sacola de Compras</h2>
+        <ul id="bag-items"></ul>
+        <div id="bag-total-price">Total: R$ 0.00</div>
+        <button id="clear-bag-btn">Limpar Sacola</button>
+        <button id="close-bag-btn">Fechar</button>
+    </div>
+</div>
 
     <!-- Formulário para capturar nome e telefone -->
     <div id="user-details">
@@ -156,12 +199,12 @@
                 const listItem = document.createElement('li');
                 listItem.textContent = `${item.name} - R$ ${item.price.toFixed(2)}`;
 
-                // Criando o botão "Remover"
+                /* Criando o botão "Remover"
                 const removeBtn = document.createElement('button');
                 removeBtn.textContent = "Remover";
                 removeBtn.addEventListener('click', function() {
                     removeItemFromCart(index);
-                });
+                });*/
 
                 listItem.appendChild(removeBtn);
                 cartItems.appendChild(listItem);
@@ -172,11 +215,11 @@
             totalPrice.textContent = `Total: R$ ${total.toFixed(2)}`;
         }
 
-        // Função para remover um item do carrinho
+        /* Função para remover um item do carrinho
         function removeItemFromCart(index) {
             cart.splice(index, 1); // Remove o item do array
             updateCart(); // Atualiza o carrinho após remoção
-        }
+        }*/
 
         // Função para finalizar a compra e enviar para WhatsApp
         checkoutBtn.addEventListener("click", function() {
@@ -205,6 +248,90 @@
             updateCart();
             alert("Compra finalizada com sucesso!");
         });
+        document.addEventListener("DOMContentLoaded", function() {
+    const viewBagBtn = document.getElementById("view-bag-btn");
+    const bagModal = document.getElementById("bag-modal");
+    const bagItems = document.getElementById("bag-items");
+    const bagTotalPrice = document.getElementById("bag-total-price");
+    const closeBagBtn = document.getElementById("close-bag-btn");
+    const clearBagBtn = document.getElementById("clear-bag-btn");
+
+    let cart = [];
+
+    // Exibir modal da sacola
+    viewBagBtn.addEventListener("click", function() {
+        updateBag();
+        bagModal.style.display = "flex";
+    });
+
+    // Fechar modal
+    closeBagBtn.addEventListener("click", function() {
+        bagModal.style.display = "none";
+    });
+
+    // Limpar sacola
+    clearBagBtn.addEventListener("click", function() {
+        cart = [];
+        updateBag();
+    });
+
+    // Adicionar evento de clique nas imagens
+    document.querySelectorAll('.image-grid img').forEach(img => {
+        img.addEventListener('click', function() {
+            const name = img.getAttribute('data-name');
+            const price = parseFloat(img.getAttribute('data-price'));
+            const src = img.getAttribute('src');
+
+            // Adicionando o item ao carrinho
+            cart.push({ name, price, src });
+            alert(`${name} adicionado à sacola.`);
+        });
+    });
+
+    // Atualizar sacola
+    function updateBag() {
+        bagItems.innerHTML = ''; // Limpa os itens
+        let total = 0;
+
+        cart.forEach((item, index) => {
+            const listItem = document.createElement('li');
+            listItem.style.display = "flex";
+            listItem.style.alignItems = "center";
+
+            // Adicionar imagem
+            const img = document.createElement('img');
+            img.src = item.src;
+
+            // Adicionar detalhes do item
+            const details = document.createElement('span');
+            details.textContent = `${item.name} - R$ ${item.price.toFixed(2)}`;
+
+            // Botão para remover item
+            const removeBtn = document.createElement('button');
+            removeBtn.textContent = "Remover";
+            removeBtn.style.marginLeft = "10px";
+            removeBtn.addEventListener('click', function() {
+                removeItemFromBag(index);
+            });
+
+            listItem.appendChild(img);
+            listItem.appendChild(details);
+            listItem.appendChild(removeBtn);
+            bagItems.appendChild(listItem);
+
+            total += item.price;
+        });
+
+        bagTotalPrice.textContent = `Total: R$ ${total.toFixed(2)}`;
+    }
+
+    // Remover item da sacola
+    function removeItemFromBag(index) {
+        cart.splice(index, 1); // Remove o item
+        updateBag(); // Atualiza a sacola
+    }
+});
+
     });
 </script>
 </body>
