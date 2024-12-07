@@ -6,9 +6,6 @@
     <title>Lista de Atendimento</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Inclusão do jsPDF -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -57,11 +54,6 @@
             background-color: #c38752;
         }
     </style>
-    <script>
-        if (!localStorage.getItem('isAuthenticated')) {
-            window.location.href = 'login.html';
-        }
-    </script>
 </head>
 <body>
 
@@ -80,7 +72,6 @@
             </ul>
         </div>
     </nav>
-    <div class="navbar-brand">Lançametos de serviços</div>
 </header>
 
 <div class="container mt-5">
@@ -136,9 +127,7 @@
     <ul id="listaAtendimentos" class="list-group"></ul>
 
     <div class="text-center mt-5">
-        <button class="btn btn-primary" onclick="gerarArquivoTexto()">Gerar Arquivo de Texto</button>
-        <button id="enviarWhatsApp" class="btn btn-success mt-3" style="display:none;" onclick="enviarParaWhatsApp()">Enviar para WhatsApp</button>
-        <button class="btn btn-danger" onclick="logout()">Deslogar</button>
+        <button class="btn btn-primary" onclick="gerarCSV()">Baixar CSV</button>
     </div>
 </div>
 
@@ -167,9 +156,19 @@
         document.getElementById('atendimento-form').reset();
     }
 
-    function logout() {
-        localStorage.removeItem('isAuthenticated');
-        window.location.href = 'login.html';
+    function gerarCSV() {
+        const headers = "Nome do Cliente,Serviço,Profissional,Forma de Pagamento,Valor Final\n";
+        const rows = atendimentos.map(atendimento => 
+            `${atendimento.nomeCliente},${atendimento.servico},${atendimento.profissional},${atendimento.formaPagamento},${atendimento.valorFinal.toFixed(2)}`
+        ).join("\n");
+
+        const csvContent = headers + rows;
+
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'lista_atendimentos.csv';
+        link.click();
     }
 </script>
 
