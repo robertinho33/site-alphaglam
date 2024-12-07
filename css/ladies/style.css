@@ -266,3 +266,42 @@ button:hover {
 #product-card button:hover {
     color: red;
 }
+/* Estilo para o aside fixo à esquerda da tela */
+aside {
+    position: fixed;  /* Fixa o aside */
+    top: 0;
+    left: 0;
+    width: 250px;  /* Define a largura do aside */
+    height: 100vh;  /* Define a altura como 100% da tela */
+    background-color: #f8f9fa;  /* Cor de fundo do aside */
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);  /* Sombras para dar destaque */
+}
+
+/* Espaço do conteúdo principal para não ficar escondido atrás do aside */
+main {
+    margin-left: 270px; /* Dá um espaçamento do lado esquerdo para o conteúdo */
+    padding: 20px;
+}
+
+/* Responsividade: Ajuste do aside para telas menores */
+@media (max-width: 768px) {
+    aside {
+        width: 200px;
+    }
+
+    main {
+        margin-left: 220px;
+    }
+}
+
+@media (max-width: 480px) {
+    aside {
+        width: 100%;
+        height: auto;
+    }
+
+    main {
+        margin-left: 0;
+    }
+}
