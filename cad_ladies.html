@@ -40,102 +40,101 @@
     </style>
 </head>
 <body>
-  <header>
-    <!-- Botão de navegação para a home -->
+<header>
     <nav class="navbar navbar-expand-lg">
         <a class="navbar-brand" href="#">Alpha Glam</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="index.html">Home</a>
-                </li>
-            </ul>
-        </div>
     </nav>
 </header>
-    <main>
-        <h2 class="text-center mb-4">Cadastro de Ladies</h2>
-        <form id="form-ladies">
-            <div class="form-group">
-                <label for="nomeLady">Nome da Lady:</label>
-                <input type="text" id="nomeLady" class="form-control" placeholder="Digite o nome da lady" required>
-            </div>
-            <div class="form-group">
-                <label for="idadeLady">Idade:</label>
-                <input type="number" id="idadeLady" class="form-control" placeholder="Digite a idade" required>
-            </div>
-            <div class="form-group">
-                <label for="contatoLady">Contato:</label>
-                <input type="text" id="contatoLady" class="form-control" placeholder="Digite o contato" required>
-            </div>
-            <div class="form-group">
-                <label for="emailLady">E-mail:</label>
-                <input type="email" id="emailLady" class="form-control" placeholder="Digite o e-mail" required>
-            </div>
-            <div class="form-group">
-                <label for="dataCadastro">Data do Cadastro:</label>
-                <input type="date" id="dataCadastro" class="form-control" value="<?php echo date('Y-m-d'); ?>" readonly>
-            </div>
-            <button type="button" class="btn btn-block" onclick="adicionarLady()">Salvar Cadastro</button>
-        </form>
-
-        <h3 class="text-center mt-5">Lista de Ladies</h3>
-        <ul id="ladiesList" class="list-group mt-3"></ul>
-
-        <div class="text-center mt-5">
-            <button class="btn btn-primary" onclick="gerarPDF()">Baixar PDF</button>
+<main>
+    <h2 class="text-center mb-4">Cadastro de Ladies</h2>
+    <form id="form-ladies">
+        <div class="form-group">
+            <label for="nomeLady">Nome da Lady:</label>
+            <input type="text" id="nomeLady" class="form-control" placeholder="Digite o nome da lady" required>
         </div>
-    </main>
+        <div class="form-group">
+            <label for="instagramLady">Instagram:</label>
+            <input type="text" id="instagramLady" class="form-control" placeholder="@usuario" required>
+        </div>
+        <div class="form-group">
+            <label for="whatsappLady">WhatsApp:</label>
+            <input type="text" id="whatsappLady" class="form-control" placeholder="+55 XX XXXXX-XXXX" required>
+        </div>
+        <div class="form-group">
+            <label for="emailLady">E-mail:</label>
+            <input type="email" id="emailLady" class="form-control" placeholder="Digite o e-mail" required>
+        </div>
+        <div class="form-group">
+            <label for="dataCadastro">Data do Cadastro:</label>
+            <input type="date" id="dataCadastro" class="form-control" value="<?php echo date('Y-m-d'); ?>" readonly>
+        </div>
+        <button type="button" class="btn btn-block" onclick="adicionarLady()">Salvar Cadastro</button>
+    </form>
 
-    <script>
-        const ladies = [];
+    <h3 class="text-center mt-5">Lista de Ladies</h3>
+    <ul id="ladiesList" class="list-group mt-3"></ul>
 
-        function adicionarLady() {
-            const nomeLady = document.getElementById('nomeLady').value;
-            const idadeLady = document.getElementById('idadeLady').value;
-            const contatoLady = document.getElementById('contatoLady').value;
-            const emailLady = document.getElementById('emailLady').value;
-            const dataCadastro = document.getElementById('dataCadastro').value;
+    <div class="text-center mt-5">
+        <button class="btn btn-primary" onclick="gerarPDF()">Baixar PDF</button>
+    </div>
+</main>
 
-            ladies.push({ nomeLady, idadeLady, contatoLady, emailLady, dataCadastro });
+<script>
+    const ladies = [];
 
-            const lista = document.getElementById('ladiesList');
-            const li = document.createElement('li');
-            li.className = 'list-group-item';
-            li.textContent = `${dataCadastro} - ${nomeLady} - ${idadeLady} anos - Contato: ${contatoLady} - E-mail: ${emailLady}`;
-            lista.appendChild(li);
+    function aplicarMascaraTelefone(value) {
+        return value
+            .replace(/\D/g, '')
+            .replace(/^(\d{2})(\d)/g, '+55 $1 $2')
+            .replace(/(\d{4,5})(\d{4})$/, '$1-$2');
+    }
 
-            document.getElementById('form-ladies').reset();
-        }
+    document.getElementById('whatsappLady').addEventListener('input', (e) => {
+        e.target.value = aplicarMascaraTelefone(e.target.value);
+    });
 
-        function gerarPDF() {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
+    function adicionarLady() {
+        const nomeLady = document.getElementById('nomeLady').value;
+        const instagramLady = document.getElementById('instagramLady').value;
+        const whatsappLady = document.getElementById('whatsappLady').value;
+        const emailLady = document.getElementById('emailLady').value;
+        const dataCadastro = document.getElementById('dataCadastro').value;
 
-            doc.setFontSize(16);
-            doc.text('Lista de Ladies', 20, 20);
+        ladies.push({ nomeLady, instagramLady, whatsappLady, emailLady, dataCadastro });
 
-            let y = 30;
-            ladies.forEach((lady, index) => {
-                doc.text(
-                    `${index + 1}. ${lady.dataCadastro} - ${lady.nomeLady} - ${lady.idadeLady} anos - Contato: ${lady.contatoLady} - E-mail: ${lady.emailLady}`,
-                    20,
-                    y
-                );
-                y += 10;
-            });
+        const lista = document.getElementById('ladiesList');
+        const li = document.createElement('li');
+        li.className = 'list-group-item';
+        li.textContent = `${dataCadastro} - ${nomeLady} - Instagram: ${instagramLady} - WhatsApp: ${whatsappLady} - E-mail: ${emailLady}`;
+        lista.appendChild(li);
 
-            // Gerar o arquivo PDF
-            doc.save('lista-ladies.pdf');
-        }
-    </script>
+        document.getElementById('form-ladies').reset();
+    }
 
-    <!-- Inclusão do Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    function gerarPDF() {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+
+        doc.setFontSize(16);
+        doc.text('Lista de Ladies', 20, 20);
+
+        let y = 30;
+        ladies.forEach((lady, index) => {
+            doc.text(
+                `${index + 1}. ${lady.dataCadastro} - ${lady.nomeLady} - Instagram: ${lady.instagramLady} - WhatsApp: ${lady.whatsappLady} - E-mail: ${lady.emailLady}`,
+                20,
+                y
+            );
+            y += 10;
+        });
+
+        doc.save('lista-ladies.pdf');
+    }
+</script>
+
+<!-- Inclusão do Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
