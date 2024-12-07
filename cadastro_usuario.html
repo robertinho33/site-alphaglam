@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - Alpha Glam</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="d-flex justify-content-center align-items-center" style="height: 100vh; background-color: #fff5f7;">
+    <form id="userForm" class="p-4 border rounded shadow" style="background-color: #fff; max-width: 400px;">
+        <h3 class="text-center mb-4" style="color: #d19a66;">Cadastrar Usuário - Alpha Glam</h3>
+        <div class="form-group">
+            <label for="newUsername">Nome de Usuário</label>
+            <input type="text" id="newUsername" class="form-control" placeholder="Digite o nome de usuário" required>
+        </div>
+        <div class="form-group">
+            <label for="newPassword">Senha</label>
+            <input type="password" id="newPassword" class="form-control" placeholder="Digite a senha" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block" style="background-color: #d19a66; border: none;">Cadastrar</button>
+    </form>
+
+    <script>
+        document.getElementById('userForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const username = document.getElementById('newUsername').value;
+            const password = document.getElementById('newPassword').value;
+
+            if (username && password) {
+                // Verificar se o usuário já existe
+                const users = JSON.parse(localStorage.getItem('users')) || [];
+                const userExists = users.some(user => user.username === username);
+
+                if (userExists) {
+                    alert('Usuário já existe!');
+                } else {
+                    // Salvar novo usuário no localStorage
+                    users.push({ username, password });
+                    localStorage.setItem('users', JSON.stringify(users));
+                    alert('Usuário cadastrado com sucesso!');
+                    window.location.href = 'login.html'; // Redireciona para a tela de login
+                }
+            }
+        });
+    </script>
+</body>
+</html>
