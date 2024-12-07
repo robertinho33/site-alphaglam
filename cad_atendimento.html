@@ -122,6 +122,13 @@
     }
 
     function gerarExcel() {
+        const now = new Date();
+        const dia = String(now.getDate()).padStart(2, '0');
+        const mes = String(now.getMonth() + 1).padStart(2, '0');
+        const hora = now.toTimeString().split(" ")[0];
+        const dataHora = `${dia}/${mes}/${now.getFullYear()} ${hora}`;
+        const nomeArquivo = `Atendimento${dia}${mes}.xlsx`;
+
         const headers = ["Nome do Cliente", "Serviço", "Profissional", "Forma de Pagamento", "Valor Serviço (R$)", "Desconto (%)", "Valor com Desconto (R$)"];
         const data = atendimentos.map(atendimento => [
             atendimento.nomeCliente,
@@ -137,13 +144,14 @@
         const totalComDesconto = atendimentos.reduce((acc, cur) => acc + cur.valorComDesconto, 0).toFixed(2);
 
         data.push([]);
-        data.push(["", "", "", "", "Totais:", totalSemDesconto, totalComDesconto]);
+        data.push(["", "", "", "Data de Geração:", dataHora]);
+        data.push(["", "", "", "Totais:", totalSemDesconto, totalComDesconto]);
 
         const worksheet = XLSX.utils.aoa_to_sheet([headers, ...data]);
         const workbook = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(workbook, worksheet, "Atendimentos");
 
-        XLSX.writeFile(workbook, "lista_atendimentos.xlsx");
+        XLSX.writeFile(workbook, nomeArquivo);
     }
 
     function compartilharWhatsApp() {
