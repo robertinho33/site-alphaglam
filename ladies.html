@@ -201,7 +201,7 @@
         bagItems.innerHTML = ""; // Limpa a sacola
         let total = 0;
 
-        cart.forEach((item) => {
+        cart.forEach((item, index) => {
             const listItem = document.createElement("li");
             listItem.style.display = "flex";
             listItem.style.alignItems = "center";
@@ -217,15 +217,41 @@
             // Detalhes do item
             const details = document.createElement("span");
             details.textContent = `${item.name} - R$ ${item.price.toFixed(2)}`;
+            details.style.flexGrow = "1";
+
+            // Botão para remover item
+            const removeBtn = document.createElement("button");
+            removeBtn.textContent = "Excluir";
+            removeBtn.style.backgroundColor = "red";
+            removeBtn.style.color = "white";
+            removeBtn.style.border = "none";
+            removeBtn.style.borderRadius = "5px";
+            removeBtn.style.padding = "2px 8px";
+            removeBtn.style.fontSize = "12px";
+            removeBtn.style.marginLeft = "10px";
+            removeBtn.style.cursor = "pointer";
+
+            // Função para remover o item
+            removeBtn.addEventListener("click", function () {
+                removeItem(index);
+            });
 
             listItem.appendChild(img);
             listItem.appendChild(details);
+            listItem.appendChild(removeBtn);
             bagItems.appendChild(listItem);
 
             total += item.price;
         });
 
         bagTotalPrice.textContent = `Total: R$ ${total.toFixed(2)}`;
+    }
+
+    // Função para remover um item do carrinho
+    function removeItem(index) {
+        cart.splice(index, 1); // Remove o item pelo índice
+        updateCart();
+        updateBag();
     }
 
     // Mostrar sacola
@@ -246,7 +272,6 @@
         updateBag();
     });
 });
-
 
 </script>
 </body>
