@@ -52,9 +52,6 @@
 <header>
     <nav class="navbar navbar-expand-lg">
         <a class="navbar-brand" href="index.html">AlphaGlam</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
     </nav>
 </header>
 
@@ -88,7 +85,7 @@
     <ul id="ladiesList" class="list-group mt-3"></ul>
 
     <div class="text-center mt-5">
-        <button class="btn btn-primary" onclick="gerarPDF()">Baixar PDF</button>
+        <button class="btn btn-primary" onclick="visualizarPDF()">Visualizar PDF</button>
         <button class="btn btn-secondary" onclick="voltarParaHome()">Voltar para Home</button>
     </div>
 </div>
@@ -100,10 +97,10 @@
     document.getElementById('dataCadastro').value = new Date().toISOString().split('T')[0];
 
     function aplicarMascaraTelefone(input) {
-        const value = input.value.replace(/\D/g, '');
-        input.value = value
-            .replace(/^(\d{2})(\d)/, '+55 $1 $2')
-            .replace(/(\d{5})(\d{4})$/, '$1-$2');
+        let value = input.value.replace(/\D/g, ''); // Remove caracteres não numéricos
+        value = value.replace(/^(\d{2})(\d)/, '+55 $1 $2'); // Adiciona código do país e DDD
+        value = value.replace(/(\d{5})(\d)/, '$1-$2'); // Adiciona o hífen no número
+        input.value = value;
     }
 
     function adicionarLady() {
@@ -147,12 +144,14 @@
             y += 10;
         });
 
-        const hoje = new Date();
-        const dia = String(hoje.getDate()).padStart(2, '0');
-        const mes = String(hoje.getMonth() + 1).padStart(2, '0');
-        const nomeArquivo = `cadastro_ladies${dia}${mes}.pdf`;
+        return doc;
+    }
 
-        doc.save(nomeArquivo);
+    function visualizarPDF() {
+        const doc = gerarPDF();
+        const pdfBlob = doc.output('blob');
+        const pdfURL = URL.createObjectURL(pdfBlob);
+        window.open(pdfURL, '_blank');
     }
 
     function voltarParaHome() {
