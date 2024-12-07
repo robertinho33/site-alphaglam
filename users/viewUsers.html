@@ -25,14 +25,61 @@
         const userList = document.getElementById('userList');
 
         if (users.length > 0) {
-            users.forEach(user => {
+            users.forEach((user, index) => {
                 const listItem = document.createElement('li');
                 listItem.classList.add('list-group-item');
-                listItem.textContent = `Usuário: ${user.username}`;
+                listItem.innerHTML = `
+                    <strong>Usuário:</strong> ${user.username} 
+                    <button class="btn btn-info btn-sm ml-2" onclick="togglePasswordVisibility(${index})">Mostrar Senha</button>
+                    <div class="mt-2" id="password-${index}" style="display:none;">
+                        <strong>Senha:</strong> ${user.password}
+                    </div>
+                    <button class="btn btn-warning btn-sm ml-2" onclick="editUser(${index})">Editar</button>
+                    <button class="btn btn-danger btn-sm ml-2" onclick="deleteUser(${index})">Excluir</button>
+                `;
                 userList.appendChild(listItem);
             });
         } else {
             userList.innerHTML = '<li class="list-group-item">Nenhum usuário cadastrado.</li>';
+        }
+
+        // Função para alternar a visibilidade da senha
+        function togglePasswordVisibility(index) {
+            const passwordField = document.getElementById(`password-${index}`);
+            const passwordButton = event.target;
+            if (passwordField.style.display === 'none') {
+                passwordField.style.display = 'block';
+                passwordButton.textContent = 'Ocultar Senha';
+            } else {
+                passwordField.style.display = 'none';
+                passwordButton.textContent = 'Mostrar Senha';
+            }
+        }
+
+        // Função para excluir um usuário
+        function deleteUser(index) {
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            users.splice(index, 1); // Remove o usuário selecionado
+            localStorage.setItem('users', JSON.stringify(users)); // Atualiza o localStorage
+            window.location.reload(); // Recarrega a página para refletir as alterações
+        }
+
+        // Função para editar um usuário
+        function editUser(index) {
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const user = users[index];
+
+            const newUsername = prompt('Digite o novo nome de usuário:', user.username);
+            const newPassword = prompt('Digite a nova senha:', user.password);
+
+            if (newUsername && newPassword) {
+                // Atualiza o usuário com os novos valores
+                users[index] = { username: newUsername, password: newPassword };
+                localStorage.setItem('users', JSON.stringify(users)); // Atualiza o localStorage
+                window.location.reload(); // Recarrega a página para refletir as alterações
+            } else {
+                alert('Nome de usuário ou senha não podem ser vazios!');
+            }
         }
     </script>
 
