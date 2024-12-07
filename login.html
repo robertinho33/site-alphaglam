@@ -18,24 +18,23 @@
             <input type="password" id="password" class="form-control" placeholder="Digite sua senha" required>
         </div>
         <button type="submit" class="btn btn-primary btn-block" style="background-color: #d19a66; border: none;">Entrar</button>
-  <a href="cadastro_usuario.html">Ainda não sou cadastrado</a>
     </form>
 
     <script>
-        const validCredentials = {
-            username: 'alpha',
-            password: '2024'
-        };
+        // Usuário fixo para login
+        const validUsername = "alpha";
+        const validPassword = "1234";
 
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
 
-            if (username === validCredentials.username && password === validCredentials.password) {
-                localStorage.setItem('isAuthenticated', true);
-                window.location.href = 'index.html';
+            // Verifica se as credenciais são válidas
+            if (username === validUsername && password === validPassword) {
+                localStorage.setItem('isAuthenticated', true); // Marca como autenticado
+                window.location.href = 'index.html'; // Redireciona para a página inicial
             } else {
                 alert('Usuário ou senha inválidos!');
             }
