@@ -75,7 +75,7 @@
             placeholder="XX XXXXX-XXXX" 
             required 
             oninput="aplicarMascaraTelefone(this)" 
-            maxlength="13">
+            maxlength="15">
           </div>
         <div class="form-group">
             <label for="emailLady">E-mail:</label>
@@ -104,7 +104,7 @@
     let value = input.value.replace(/\D/g, '');
 
     // Limita a quantidade de dígitos a 13 (2 do DDD + 9 do telefone)
-    value = value.substring(0, 13);
+    value = value.substring(0, 15);
 
     // Adiciona máscara
     value = value.replace(/^(\d{2})(\d)/, '+55 $1 $2'); // +55 XX

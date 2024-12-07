@@ -3,209 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro e Agendamento Ladies</title>
-    <link rel="stylesheet" href="css/ladies/style.css">
+    <title>Sacola de Compras</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
             margin: 20px;
-            background-color: #fff5f7;
-            color: #5a3d31;
         }
-        .navbar {
-            background-color: #f8e1d4;
-        }
-        .navbar-brand {
-            color: #d19a66 !important;
-            font-weight: bold;
-        }
-        h2, h3 {
-            color: #d19a66;
-        }
-        form {
-            max-width: 600px;
+        .sacola-container {
+            max-width: 800px;
             margin: 0 auto;
-            background-color: #fff;
+            background: #fff;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-        input, select, button {
+        .item {
+            display: flex;
+            align-items: center;
             margin-bottom: 15px;
         }
-        button {
-            background-color: #946c48;
+        .item img {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            margin-right: 15px;
+        }
+        .item-details {
+            flex-grow: 1;
+        }
+        .btn-remove {
+            background-color: #dc3545;
             color: #fff;
             border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
         }
-        button:hover {
-            background-color: #c38752;
+        .btn-remove:hover {
+            background-color: #c82333;
         }
-        .list-group-item {
-            background-color: #fef7f0;
-            border-color: #f3d9c4;
+        .btn-clear {
+            background-color: #ffc107;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
         }
-        .btn-home {
-            background-color: #946c48;
-            color: white;
-        }
-        .btn-home:hover {
-            background-color: #c38752;
+        .btn-clear:hover {
+            background-color: #e0a800;
         }
     </style>
 </head>
 <body>
-    <header>
-        <!-- Botão de navegação para a home -->
-        <nav class="navbar navbar-expand-lg">
-            <a class="navbar-brand" href="#">Alpha Glam</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="index.html">Home</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
-
-    <div class="image-grid">
-        <img src="https://images.yampi.io/unsafe/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/mascara-liquida-liquid-mask-ecobelle-200-ml-66fd5cae45ed1-large.png" alt="Imagem 1" data-name="Máscara Líquida" data-price="50">
-        <img src="https://images.yampi.io/unsafe/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/finalizador-termico-coco-camomila-by-vitoria-lima-200-ml-667c4d7031e63-large.png" alt="Imagem 2" data-name="Finalizador Térmico" data-price="40">
-        <img src="https://images.yampi.io/unsafe/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/kit-coco-camomila-by-vitoria-lima-ecobelle-300-ml-66cf3cd879731-large.png" alt="Imagem 3" data-name="Kit Coco e Camomila" data-price="100">
-        <img src="https://images.yampi.io/inOUrVjOuPjvtnpVYzL9K3-xPCg=/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/kit-pimenta-rosa-eco-belle-64ef8bb1e85f1-large.png" alt="Imagem 4" data-name="Kit Pimenta Rosa" data-price="130">
-        <img src="https://images.yampi.io/BHaubHu5dG9dtvDfoDfvRrI7LB0=/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/kit-manutencao-home-care-silver-ecobelle-300ml-3-itens-67412ba3969a3-large.png" alt="Imagem 5" data-name="Kit Manutenção Home Care" data-price="130">
-        <img src="https://images.yampi.io/7rhO9gyuipnSCstiL7EtGLEiFaY=/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/kit-doeden-capim-limao-alecrim-6479e42ea3cfc-large.png" alt="Imagem 6" data-name="Kit Capim Limão Alecrim" data-price="100">
-    
-        <img src="https://images.yampi.io/unsafe/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/mascara-liquida-liquid-mask-ecobelle-200-ml-66fd5cae45ed1-large.png" alt="Imagem 1" data-name="Máscara Líquida" data-price="50">
-        <img src="https://images.yampi.io/unsafe/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/finalizador-termico-coco-camomila-by-vitoria-lima-200-ml-667c4d7031e63-large.png" alt="Imagem 2" data-name="Finalizador Térmico" data-price="40">
-        <img src="https://images.yampi.io/unsafe/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/kit-coco-camomila-by-vitoria-lima-ecobelle-300-ml-66cf3cd879731-large.png" alt="Imagem 3" data-name="Kit Coco e Camomila" data-price="100">
-        <img src="https://images.yampi.io/inOUrVjOuPjvtnpVYzL9K3-xPCg=/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/kit-pimenta-rosa-eco-belle-64ef8bb1e85f1-large.png" alt="Imagem 4" data-name="Kit Pimenta Rosa" data-price="130">
-        <img src="https://images.yampi.io/BHaubHu5dG9dtvDfoDfvRrI7LB0=/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/kit-manutencao-home-care-silver-ecobelle-300ml-3-itens-67412ba3969a3-large.png" alt="Imagem 5" data-name="Kit Manutenção Home Care" data-price="130">
-        <img src="https://images.yampi.io/7rhO9gyuipnSCstiL7EtGLEiFaY=/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/kit-doeden-capim-limao-alecrim-6479e42ea3cfc-large.png" alt="Imagem 6" data-name="Kit Capim Limão Alecrim" data-price="100">
-  
-
-    </div>
-   
-    <!-- Carrinho de Compras -->
-    <div>
-        <ul id="cart-items"></ul>
-        <div id="total-price">Total: R$ 0.00</div>
+    <div class="sacola-container">
+        <h2 class="text-center">Sacola de Compras</h2>
+        <div id="sacolaItens"></div>
+        <div class="text-center mt-4">
+            <button class="btn-clear" onclick="limparSacola()">Limpar Sacola</button>
+        </div>
     </div>
 
-    <!-- Formulário para capturar nome e telefone -->
-    <div id="user-details">
-        <label for="name">Nome:</label>
-        <input type="text" id="name" placeholder="Digite seu nome" required><br>
+    <script>
+        // Array de exemplo de itens na sacola
+        const sacola = [
+            { id: 1, nome: 'Produto 1', preco: 49.90, imagem: 'https://via.placeholder.com/80' },
+            { id: 2, nome: 'Produto 2', preco: 79.90, imagem: 'https://via.placeholder.com/80' },
+            { id: 3, nome: 'Produto 3', preco: 99.90, imagem: 'https://via.placeholder.com/80' }
+        ];
 
-        <label for="phone">Telefone:</label>
-        <input type="text" id="phone" placeholder="Digite seu telefone" required><br>
+        function exibirSacola() {
+            const sacolaItens = document.getElementById('sacolaItens');
+            sacolaItens.innerHTML = ''; // Limpa o conteúdo anterior
 
-        <button id="checkout-btn">Finalizar Pedido</button>
-    </div>
-
-    <script src="js/cart.js"></script>
- 
-      <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const cartItems = document.getElementById("cart-items");
-        const totalPrice = document.getElementById("total-price");
-        const checkoutBtn = document.getElementById("checkout-btn");
-        const nameInput = document.getElementById("name");
-        const phoneInput = document.getElementById("phone");
-
-        let cart = [];
-
-        // Função para verificar se os campos estão preenchidos
-        function validateForm() {
-            const name = nameInput.value.trim();
-            const phone = phoneInput.value.trim();
-
-            // Habilita o botão somente se ambos os campos estiverem preenchidos
-            checkoutBtn.disabled = !name || !phone;
-        }
-
-        // Adicionando eventos de input para validar os campos em tempo real
-        nameInput.addEventListener("input", validateForm);
-        phoneInput.addEventListener("input", validateForm);
-
-        // Inicializa o botão como desabilitado
-        validateForm();
-
-        // Adicionando eventos de clique nas imagens dos produtos
-        document.querySelectorAll('.image-grid img').forEach(img => {
-            img.addEventListener('click', function() {
-                const name = img.getAttribute('data-name');
-                const price = parseFloat(img.getAttribute('data-price'));
-
-                // Adicionando o item ao carrinho
-                cart.push({ name, price });
-                updateCart();
-            });
-        });
-
-        // Função para atualizar o carrinho e o preço total
-        function updateCart() {
-            cartItems.innerHTML = ''; // Limpa a lista de itens no carrinho
-            let total = 0;
-
-            cart.forEach((item, index) => {
-                const listItem = document.createElement('li');
-                listItem.textContent = `${item.name} - R$ ${item.price.toFixed(2)}`;
-
-                // Criando o botão "Remover"
-                const removeBtn = document.createElement('button');
-                removeBtn.textContent = "Remover";
-                removeBtn.addEventListener('click', function() {
-                    removeItemFromCart(index);
-                });
-
-                listItem.appendChild(removeBtn);
-                cartItems.appendChild(listItem);
-
-                total += item.price;
-            });
-
-            totalPrice.textContent = `Total: R$ ${total.toFixed(2)}`;
-        }
-
-        // Função para remover um item do carrinho
-        function removeItemFromCart(index) {
-            cart.splice(index, 1); // Remove o item do array
-            updateCart(); // Atualiza o carrinho após remoção
-        }
-
-        // Função para finalizar a compra e enviar para WhatsApp
-        checkoutBtn.addEventListener("click", function() {
-            const name = nameInput.value;
-            const phone = phoneInput.value;
-
-            // Verificando se os campos de nome, telefone e o carrinho estão preenchidos
-            if (!name || !phone || cart.length === 0) {
-                alert("Por favor, preencha seu nome, telefone e adicione itens ao carrinho.");
-                return; // Impede a execução do código abaixo se algum campo estiver vazio
+            if (sacola.length === 0) {
+                sacolaItens.innerHTML = '<p class="text-center">Sua sacola está vazia.</p>';
+                return;
             }
 
-            let cartMessage = `Pedido de ${name} (${phone}):\n`;
+            sacola.forEach(item => {
+                const itemDiv = document.createElement('div');
+                itemDiv.classList.add('item');
 
-            // Adiciona os itens do carrinho à mensagem
-            cart.forEach(item => {
-                cartMessage += `${item.name} - R$ ${item.price.toFixed(2)}\n`;
+                itemDiv.innerHTML = `
+                    <img src="${item.imagem}" alt="${item.nome}">
+                    <div class="item-details">
+                        <h5>${item.nome}</h5>
+                        <p>R$ ${item.preco.toFixed(2)}</p>
+                    </div>
+                    <button class="btn-remove" onclick="removerItem(${item.id})">Excluir</button>
+                `;
+
+                sacolaItens.appendChild(itemDiv);
             });
+        }
 
-            // Envia a mensagem para o WhatsApp
-            const whatsappUrl = `https://wa.me/11986215473?text=${encodeURIComponent(cartMessage)}`;
-            window.open(whatsappUrl, "_blank");
+        function removerItem(id) {
+            const index = sacola.findIndex(item => item.id === id);
+            if (index !== -1) {
+                sacola.splice(index, 1);
+                exibirSacola();
+            }
+        }
 
-            // Limpar carrinho após envio
-            cart = [];
-            updateCart();
-            alert("Compra finalizada com sucesso!");
-        });
-    });
-</script>
+        function limparSacola() {
+            sacola.length = 0; // Remove todos os itens
+            exibirSacola();
+        }
+
+        // Exibe a sacola ao carregar a página
+        exibirSacola();
+    </script>
 </body>
 </html>
