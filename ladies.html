@@ -147,7 +147,7 @@
         <label for="phone">Telefone:</label>
         <input type="text" id="phone" placeholder="Digite seu telefone" required><br>
 
-        <button id="checkout-btn">Eviar Pedido para WhatsApp</button>
+        <button id="checkout-btn">viar Pedido para WhatsApp</button>
     </div>
 
     <script src="js/cart.js"></script>
@@ -173,7 +173,6 @@
             const src = img.getAttribute("src");
 
             cart.push({ name, price, src });
-            alert(`${name} adicionado ao carrinho.`);
 
             // Atualiza tanto o carrinho quanto a sacola
             updateCart();
@@ -186,18 +185,9 @@
         cartItems.innerHTML = ""; // Limpa o carrinho
         let total = 0;
 
-        cart.forEach((item, index) => {
+        cart.forEach((item) => {
             const listItem = document.createElement("li");
             listItem.textContent = `${item.name} - R$ ${item.price.toFixed(2)}`;
-
-            // Botão de remover
-            const removeBtn = document.createElement("button");
-            removeBtn.textContent = "Remover";
-            removeBtn.addEventListener("click", function () {
-                removeItem(index);
-            });
-
-            listItem.appendChild(removeBtn);
             cartItems.appendChild(listItem);
 
             total += item.price;
@@ -211,43 +201,31 @@
         bagItems.innerHTML = ""; // Limpa a sacola
         let total = 0;
 
-        cart.forEach((item, index) => {
+        cart.forEach((item) => {
             const listItem = document.createElement("li");
             listItem.style.display = "flex";
             listItem.style.alignItems = "center";
+            listItem.style.marginBottom = "10px";
 
             // Imagem do item
             const img = document.createElement("img");
             img.src = item.src;
+            img.style.width = "50px";
+            img.style.height = "50px";
+            img.style.marginRight = "10px";
 
             // Detalhes do item
             const details = document.createElement("span");
             details.textContent = `${item.name} - R$ ${item.price.toFixed(2)}`;
 
-            // Botão de remover
-            const removeBtn = document.createElement("button");
-            removeBtn.textContent = "Remover";
-            removeBtn.style.marginLeft = "10px";
-            removeBtn.addEventListener("click", function () {
-                removeItem(index);
-            });
-
             listItem.appendChild(img);
             listItem.appendChild(details);
-            listItem.appendChild(removeBtn);
             bagItems.appendChild(listItem);
 
             total += item.price;
         });
 
         bagTotalPrice.textContent = `Total: R$ ${total.toFixed(2)}`;
-    }
-
-    // Função para remover um item do carrinho
-    function removeItem(index) {
-        cart.splice(index, 1);
-        updateCart();
-        updateBag();
     }
 
     // Mostrar sacola
@@ -268,6 +246,7 @@
         updateBag();
     });
 });
+
 
 </script>
 </body>
