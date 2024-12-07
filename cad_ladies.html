@@ -56,7 +56,13 @@
         </div>
         <div class="form-group">
             <label for="whatsappLady">WhatsApp:</label>
-            <input type="text" id="whatsappLady" class="form-control" placeholder="+55 XX XXXXX-XXXX" maxlength="20" required>
+            <input 
+            type="text" 
+            id="whatsappLady" 
+            class="form-control" 
+            placeholder="+55 XX XXXXX-XXXX" 
+            maxlength="20" 
+            required>
         </div>
         <div class="form-group">
             <label for="emailLady">E-mail:</label>
@@ -86,12 +92,23 @@
         e.target.value = aplicarMascaraTelefone(e.target.value);
     });
 
-    function aplicarMascaraTelefone(value) {
-        return value
-            .replace(/\D/g, '') // Remove caracteres não numéricos
-            .replace(/^(\d{2})(\d)/g, '+55 $1 $2') // Adiciona código do país e DDD
-            .replace(/(\d{5})(\d{4}).*/, '$1-$2'); // Formata o número corretamente
-    }
+   // Aplica a máscara apenas ao sair do campo
+document.getElementById('whatsappLady').addEventListener('blur', (e) => {
+    e.target.value = aplicarMascaraTelefone(e.target.value);
+});
+
+// Remove a máscara ao focar no campo, permitindo correções
+document.getElementById('whatsappLady').addEventListener('focus', (e) => {
+    e.target.value = e.target.value.replace(/\D/g, ''); // Deixa apenas os números
+});
+
+function aplicarMascaraTelefone(value) {
+    return value
+        .replace(/\D/g, '') // Remove caracteres não numéricos
+        .replace(/^(\d{2})(\d)/g, '+55 $1 $2') // Adiciona código do país e DDD
+        .replace(/(\d{4,5})(\d{4})$/, '$1-$2'); // Formata o número corretamente
+}
+
 
     function adicionarLady() {
         const nomeLady = document.getElementById('nomeLady').value;
