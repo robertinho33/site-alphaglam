@@ -39,9 +39,21 @@
 </head>
 <body>
 <header>
-    <nav class="navbar navbar-expand-lg">
-        <a class="navbar-brand" href="#">Alpha Glam</a>
+       <!-- Botão de navegação para a home -->
+       <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand" href="#">AlphaGlam</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+            </ul>
+        </div>
     </nav>
+</header>
 </header>
 <main>
     <h2 class="text-center mb-4">Cadastro de Ladies</h2>
@@ -129,24 +141,34 @@ function aplicarMascaraTelefone(value) {
     }
 
     function gerarPDF() {
-        const { jsPDF } = window.jspdf;
-        const doc = new jsPDF();
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
 
-        doc.setFontSize(16);
-        doc.text('Lista de Ladies', 20, 20);
+    // Define o título do documento
+    doc.setFontSize(16);
+    doc.text('Lista de Ladies', 20, 20);
 
-        let y = 30;
-        ladies.forEach((lady, index) => {
-            doc.text(
-                `${index + 1}. ${lady.dataCadastro} - ${lady.nomeLady} - Instagram: ${lady.instagramLady} - WhatsApp: ${lady.whatsappLady} - E-mail: ${lady.emailLady}`,
-                20,
-                y
-            );
-            y += 10;
-        });
+    // Adiciona os dados das ladies ao PDF
+    let y = 30;
+    ladies.forEach((lady, index) => {
+        doc.text(
+            `${index + 1}. ${lady.dataCadastro} - ${lady.nomeLady} - Instagram: ${lady.instagramLady} - WhatsApp: ${lady.whatsappLady} - E-mail: ${lady.emailLady}`,
+            20,
+            y
+        );
+        y += 10;
+    });
 
-        doc.save('lista-ladies.pdf');
-    }
+    // Gera a data no formato ddMM
+    const hoje = new Date();
+    const dia = String(hoje.getDate()).padStart(2, '0');
+    const mes = String(hoje.getMonth() + 1).padStart(2, '0');
+    const nomeArquivo = `cadastro_ladies${dia}${mes}.pdf`;
+
+    // Salva o arquivo PDF
+    doc.save(nomeArquivo);
+}
+
 </script>
 </body>
 </html>
