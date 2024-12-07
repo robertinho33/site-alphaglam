@@ -68,8 +68,15 @@
         </div>
         <div class="form-group">
             <label for="whatsappLady">WhatsApp:</label>
-            <input type="text" id="whatsappLady" class="form-control" placeholder="+55 XX XXXXX-XXXX" required oninput="aplicarMascaraTelefone(this)">
-        </div>
+            <input 
+            type="text" 
+            id="whatsappLady" 
+            class="form-control" 
+            placeholder="+55 XX XXXXX-XXXX" 
+            required 
+            oninput="aplicarMascaraTelefone(this)" 
+            maxlength="20">
+          </div>
         <div class="form-group">
             <label for="emailLady">E-mail:</label>
             <input type="email" id="emailLady" class="form-control" placeholder="Digite o e-mail" required>
@@ -92,6 +99,20 @@
 
 <script>
     const ladies = [];
+    function aplicarMascaraTelefone(input) {
+    // Remove caracteres não numéricos
+    let value = input.value.replace(/\D/g, '');
+
+    // Limita a quantidade de dígitos a 13 (2 do DDD + 9 do telefone)
+    value = value.substring(0, 13);
+
+    // Adiciona máscara
+    value = value.replace(/^(\d{2})(\d)/, '+55 $1 $2'); // +55 XX
+    value = value.replace(/(\d{5})(\d)/, '$1-$2');       // XXXXX-XXXX
+
+    input.value = value; // Aplica o valor formatado no campo
+}
+
 
     // Configura a data atual no campo de data
     document.getElementById('dataCadastro').value = new Date().toISOString().split('T')[0];
