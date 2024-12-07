@@ -34,6 +34,55 @@
             background-color: #ddd;
             color: black;
         }
+
+        /* Botão de menu oculto por padrão */
+        .menu-toggle {
+            display: none;
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            border: none;
+            width: 100%;
+            text-align: left;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .menu-toggle:focus {
+            outline: none;
+        }
+
+        /* Menu oculto quando o botão é exibido */
+        .nav-links {
+            display: block;
+        }
+
+        /* Responsividade */
+        @media (max-width: 921px) {
+            nav a {
+                display: none;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                background-color: #333;
+                text-align: left;
+            }
+            .nav-links a {
+                padding: 10px;
+                border-bottom: 1px solid #444;
+                display: block;
+            }
+            .nav-links a:hover {
+                background-color: #444;
+            }
+            .nav-links.show {
+                display: flex;
+            }
+        }
+
         .container {
             padding: 20px;
             display: flex;
@@ -69,7 +118,6 @@
             box-sizing: border-box;
             margin-bottom: 15px;
         }
-        /* Responsividade para telas menores */
         @media (max-width: 768px) {
             .metric-box {
                 width: 45%;
@@ -79,7 +127,6 @@
                 max-width: 90%;
             }
         }
-
         @media (max-width: 480px) {
             .metric-box {
                 width: 100%;
@@ -98,12 +145,15 @@
     </header>
 
     <nav>
-        <a href="#">Página Inicial</a>
-        <a href="#">Cadastro de Clientes</a>
-        <a href="#">Cadastro de Produtos</a>
-        <a href="#">Cadastro de Serviços</a>
-        <a href="#">Atendimentos</a>
-        <a href="#">Métricas</a>
+        <button class="menu-toggle">☰ Menu</button>
+        <div class="nav-links">
+            <a href="#">Página Inicial</a>
+            <a href="#">Cadastro de Clientes</a>
+            <a href="#">Cadastro de Produtos</a>
+            <a href="#">Cadastro de Serviços</a>
+            <a href="#">Atendimentos</a>
+            <a href="#">Métricas</a>
+        </div>
     </nav>
 
     <div class="container">
@@ -145,5 +195,14 @@
         </div>
     </div>
 
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        // Alterna o menu ao clicar no botão
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('show');
+        });
+    </script>
 </body>
 </html>
