@@ -284,59 +284,59 @@ aside {
     z-index: 10; /* Garantir que o aside fique acima de outros elementos */
 }
 
-/* Aside ajustado para considerar o header fixo */
+/* Aside fixo à esquerda, ajustado para o header */
 aside {
-    position: fixed; /* Fixa o aside na lateral esquerda */
-    top: 60px; /* Espaço suficiente para não sobrepor o header */
+    position: fixed; /* Fixa o aside */
+    top: 50px; /* Altura do header */
     left: 0;
     width: 250px; /* Largura do aside */
-    height: calc(100vh - 60px); /* Altura ajustada para não cobrir o header */
+    height: calc(100vh - 50px); /* Altura ajustada para não cobrir o header */
     background-color: #f8f9fa;
     padding: 20px;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    z-index: 10; /* Prioridade menor que o header */
+    z-index: 90; /* Menor prioridade que o header */
 }
 
-/* Espaço do conteúdo principal */
+/* Área principal */
 main {
     margin-left: 270px; /* Espaço para o aside */
     padding: 20px;
-    padding-top: 80px; /* Espaço suficiente para o header */
+    padding-top: 70px; /* Espaço suficiente para o header */
     box-sizing: border-box;
-    min-height: calc(100vh - 100px); /* Altura mínima respeitando o footer */
+    min-height: calc(100vh - 100px); /* Altura mínima considerando header e footer */
 }
 
-/* Footer fixo */
+/* Footer fixo no final */
 footer {
     width: 100%;
     background-color: #f7e6c2;
     padding: 10px 20px;
     text-align: center;
-    position: fixed;
+    position: fixed; /* Fixa o footer */
     bottom: 0;
     left: 0;
-    z-index: 10; /* Fica acima do aside */
+    z-index: 100; /* Fica acima do aside */
 }
 
-/* Responsividade para telas menores */
+/* Responsividade */
 @media (max-width: 768px) {
     aside {
-        width: 200px; /* Ajusta a largura em telas menores */
+        width: 200px; /* Ajusta largura para telas menores */
     }
     main {
-        margin-left: 220px; /* Espaço proporcional ao aside */
+        margin-left: 220px; /* Ajusta margem principal */
     }
 }
 
 @media (max-width: 480px) {
     aside {
-        width: 100%;       /* O aside ocupa a largura total */
-        height: auto;      /* Altura ajustada automaticamente */
-        position: relative; /* Não fica fixo em telas pequenas */
-        top: 0;            /* Remove o offset para o header */
+        width: 100%; /* O aside ocupa a largura total */
+        height: auto; /* Altura ajustada automaticamente */
+        position: relative; /* Torna-se estático */
+        top: 0; /* Remove o offset */
     }
     main {
         margin-left: 0;
-        padding-top: 80px; /* Espaço para o header */
+        padding-top: 70px; /* Espaço suficiente para o header */
     }
 }
