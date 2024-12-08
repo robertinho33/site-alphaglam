@@ -283,129 +283,41 @@ aside {
     z-index: 10; /* Garantir que o aside fique acima de outros elementos */
 }
 
-/* Espaço do conteúdo principal para não ficar escondido atrás do aside */
-main {
-    margin-left: 270px;  /* Dá um espaçamento do lado esquerdo para o conteúdo */
-    padding: 20px;
-    padding-top: 80px;  /* Garante que o conteúdo principal não sobreponha o header */
-    width: calc(100% - 270px); /* Ajusta a largura do main para não sobrepor o aside */
-    box-sizing: border-box; /* Para garantir que o padding não quebre o layout */
-}
-
-/* Responsividade: Ajuste do aside para telas menores */
-@media (max-width: 768px) {
-    aside {
-        width: 200px;  /* Ajusta a largura para telas menores */
-    }
-
-    main {
-        margin-left: 220px;  /* Ajusta o espaço para o conteúdo */
-        padding-top: 80px; /* Garante o espaçamento do header */
-    }
-}
-
-@media (max-width: 480px) {
-    aside {
-        width: 100%;
-        height: auto; /* Deixa o aside com altura automática em telas pequenas */
-    }
-
-    main {
-        margin-left: 0;
-        padding-top: 80px; /* Garante o espaçamento do header */
-    }
-}
-
-        .navbar {
-            background-color: #f8e1d4;
-        }
-        .navbar-brand {
-            color: #d19a66 !important;
-            font-weight: bold;
-        }
-        h2, h3 {
-            color: #d19a66;
-        }
-        input, select, button {
-            margin-bottom: 15px;
-        }
-        .list-group-item {
-            background-color: #fef7f0;
-            border-color: #f3d9c4;
-        }
-        .btn-home {
-            background-color: #946c48;
-            color: white;
-        }
-        .btn-home:hover {
-            background-color: #c38752;
-        }
-        #bag-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-#bag-content {
-    background: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    width: 400px;
-    max-width: 90%;
-    text-align: center;
-}
-
-#bag-items img {
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
-    margin-right: 10px;
-    border-radius: 5px;
-}
-
-/* Header e footer sempre acima do aside */
-header, footer {
-    z-index: 10; /* Eles ficam acima do aside */
-    position: relative;
-}
+/* Header fixo no topo */
 header {
     width: 100%;
     background-color: #f7e6c2;
     padding: 10px 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    position: fixed; /* Torna o header fixo no topo */
+    position: fixed; /* Fixa o header no topo */
     top: 0;
     left: 0;
     z-index: 100; /* Garante que o header fique acima do aside */
 }
 
+/* Aside ajustado para considerar o header fixo */
 aside {
-    position: fixed; /* Fixa o aside na lateral */
+    position: fixed; /* Fixa o aside na lateral esquerda */
     top: 60px; /* Espaço suficiente para não sobrepor o header */
     left: 0;
-    width: 250px;
-    height: calc(100vh - 60px); /* Ajusta para não cobrir o header */
+    width: 250px; /* Largura do aside */
+    height: calc(100vh - 60px); /* Altura ajustada para não cobrir o header */
     background-color: #f8f9fa;
     padding: 20px;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
     z-index: 10; /* Prioridade menor que o header */
 }
 
+/* Espaço do conteúdo principal */
 main {
-    margin-left: 270px; /* Espaço à esquerda para o aside */
+    margin-left: 270px; /* Espaço para o aside */
     padding: 20px;
     padding-top: 80px; /* Espaço suficiente para o header */
     box-sizing: border-box;
     min-height: calc(100vh - 100px); /* Altura mínima respeitando o footer */
 }
 
+/* Footer fixo */
 footer {
     width: 100%;
     background-color: #f7e6c2;
@@ -417,13 +329,13 @@ footer {
     z-index: 10; /* Fica acima do aside */
 }
 
-/* Responsividade: ajustes para telas menores */
+/* Responsividade para telas menores */
 @media (max-width: 768px) {
     aside {
-        width: 200px; /* Largura reduzida em telas menores */
+        width: 200px; /* Ajusta a largura em telas menores */
     }
     main {
-        margin-left: 220px; /* Ajuste proporcional ao aside */
+        margin-left: 220px; /* Espaço proporcional ao aside */
     }
 }
 
@@ -432,9 +344,10 @@ footer {
         width: 100%;       /* O aside ocupa a largura total */
         height: auto;      /* Altura ajustada automaticamente */
         position: relative; /* Não fica fixo em telas pequenas */
+        top: 0;            /* Remove o offset para o header */
     }
     main {
         margin-left: 0;
-        padding-top: 80px; /* Espaço suficiente para o header */
+        padding-top: 80px; /* Espaço para o header */
     }
 }
