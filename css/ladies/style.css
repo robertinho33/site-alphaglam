@@ -369,3 +369,64 @@ main {
     margin-right: 10px;
     border-radius: 5px;
 }
+/* Corrigir a sobreposição do aside no header e footer */
+aside {
+    position: fixed; /* Mantém o aside fixo na lateral */
+    top: 0;          /* Alinha no topo da tela */
+    left: 0;         /* Alinha à esquerda */
+    width: 250px;    /* Define largura do aside */
+    height: 100vh;   /* Define a altura como 100% da viewport */
+    background-color: #f8f9fa;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    z-index: 5; /* Certifique-se de que o aside esteja abaixo do header e footer */
+}
+
+/* Espaço no conteúdo principal para não sobrepor o aside */
+main {
+    margin-left: 270px; /* Espaçamento igual à largura do aside */
+    padding: 20px;
+    padding-top: calc(80px); /* Espaçamento ajustado para o header */
+    box-sizing: border-box;
+    min-height: calc(100vh - 150px); /* Garante que o conteúdo respeite o footer */
+}
+
+/* Header e footer sempre acima do aside */
+header, footer {
+    z-index: 10; /* Garantir que eles fiquem acima do aside */
+    position: relative;
+}
+
+/* Footer estilo básico */
+footer {
+    width: 100%;
+    background-color: #f7e6c2;
+    padding: 10px 20px;
+    text-align: center;
+    position: relative;
+    bottom: 0;
+    left: 0;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    aside {
+        width: 200px;
+    }
+    main {
+        margin-left: 220px;
+    }
+}
+
+@media (max-width: 480px) {
+    aside {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+    main {
+        margin-left: 0;
+        padding-top: 80px;
+    }
+}
+
