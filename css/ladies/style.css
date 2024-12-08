@@ -284,18 +284,6 @@ aside {
     z-index: 10; /* Garantir que o aside fique acima de outros elementos */
 }
 
-/* Header fixo no topo */
-header {
-    width: 100%;
-    background-color: #f7e6c2;
-    padding: 10px 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    position: fixed; /* Fixa o header no topo */
-    top: 0;
-    left: 0;
-    z-index: 100; /* Garante que o header fique acima do aside */
-}
-
 /* Aside ajustado para considerar o header fixo */
 aside {
     position: fixed; /* Fixa o aside na lateral esquerda */
