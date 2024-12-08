@@ -1,22 +1,23 @@
+/* Reset básico para evitar margens e paddings padrões */
 body {
     font-family: Arial, sans-serif;
-    margin: 20;
+    margin: 0;
     padding: 0;
     background-color: #fff5f7;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     color: #5a3d31;
 }
 
+/* Header fixo no topo */
 header {
     width: 100%;
     background-color: #f7e6c2;
     padding: 10px 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    position: relative;
+    position: fixed; /* Fixa o header no topo */
+    top: 0;
+    left: 0;
+    z-index: 100; /* Fica acima de outros elementos */
 }
-
 header .menu {
     top: 10px;
     right: 20px;
