@@ -307,6 +307,106 @@ a {
 		/* Ordem da visualização dos elementos. */
 		order: 2;
 	}
+	/* Espaço do conteúdo principal */
+main {
+    margin-left: 270px; /* Espaço para o aside */
+    padding: 20px;
+    padding-top: 80px; /* Espaço suficiente para o header */
+    box-sizing: border-box;
+    min-height: calc(100vh - 100px); /* Altura mínima respeitando o footer */
+    z-index: 1; /* Garante que o main não fique sobre o header */
+}
+
+/* Responsividade: Ajustes para o main */
+@media (max-width: 768px) {
+    main {
+        margin-left: 220px; /* Ajuste proporcional ao aside */
+        padding-top: 80px; /* Garante o espaçamento do header */
+    }
+}
+
+@media (max-width: 480px) {
+    main {
+        margin-left: 0;
+        padding-top: 80px; /* Espaço suficiente para o header */
+    }
+}
+
+/* Estilo da galeria de imagens no main */
+.image-grid {
+    display: flex;  /* Usando flexbox para alinhamento de itens em linha */
+    gap: 15px;
+    margin: 20px 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #d4a760;
+    overflow-x: auto;  /* Permite rolagem horizontal */
+    scrollbar-width: thin;
+    scrollbar-color: #d4a760 transparent;
+    max-width: calc(6 * 150px + 5 * 15px); /* Limite de 6 imagens + espaços entre elas */
+}
+
+.image-grid::-webkit-scrollbar {
+    height: 8px;
+}
+
+.image-grid::-webkit-scrollbar-thumb {
+    background: #d4a760;
+    border-radius: 5px;
+}
+
+.image-grid img {
+    width: 150px;  /* Tamanho fixo para as imagens */
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.image-grid img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo do cartão de produto no main */
+#product-card {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    padding: 20px;
+    background: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#product-card img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+#product-card.hidden {
+    display: none;
+}
+
+#product-card button {
+    align-self: flex-end;
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+#product-card button:hover {
+    color: #b08b5b;
+}
+
 
 	aside {
 		/* Ordem da visualização dos elementos. */
