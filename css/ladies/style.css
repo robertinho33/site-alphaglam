@@ -401,7 +401,7 @@ header, footer {
 header {
     width: 100%;
     background-color: #f7e6c2;
-    padding: 10px 20px;
+   
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     position: fixed; /* Fixa o header no topo */
     top: 0;
@@ -444,8 +444,6 @@ footer {
     z-index: 10; /* Fica acima do aside */
 }
 #img {
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    padding: 15px;
+    padding: 5px;
     width: 100px;
   }
