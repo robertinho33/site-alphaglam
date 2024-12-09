@@ -48,9 +48,6 @@ header, nav, main, aside, footer {
 /* Seletores para formatação individual. */
 
 header {
-	/* Altura do elemento. */
-	height: 100px;
-
 	/* Junção de flex-grow, flex-shrink e flex-basis.  */
 	/* flex-grow – Habilidade de um flex item crescer. */
 	/* flex-shrink - Capacidade de redução do item.    */
@@ -127,10 +124,6 @@ nav a {
 }
 
 main {
-	/* Realizar a subtração de 100% da altura vertical menos a soma    */
-	/* da altura dos elementos ( 400px ) com as suas margens ( 36px ). */
-	height: calc(100vh - 224px);
-
 	/* Junção de flex-grow, flex-shrink e flex-basis.  */
 	/* flex-grow – Habilidade de um flex item crescer. */
 	/* flex-shrink - Capacidade de redução do item.    */
@@ -147,9 +140,6 @@ aside {
 }
 
 footer {
-	/* Altura do elemento. */
-	height: 100px;
-
 	/* Junção de flex-grow, flex-shrink e flex-basis.  */
 	/* flex-grow – Habilidade de um flex item crescer. */
 	/* flex-shrink - Capacidade de redução do item.    */
@@ -241,18 +231,11 @@ a {
 	main {
 		/* Ordem da visualização dos elementos. */
 		order: 2;
-
-		/* Realizar a subtração de 100% da altura vertical menos a soma    */
-		/* da altura dos elementos ( 300px ) com as suas margens ( 30px ). */
-		height: calc(100vh - 330px);
 	}
 
 	aside {
 		/* Ordem da visualização dos elementos. */
 		order: 3;
-
-		/* Altura do elemento. */
-		height: 100px;
 	}
 
 	footer {
