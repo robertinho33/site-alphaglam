@@ -47,35 +47,64 @@ header, nav, main, aside, footer {
 
 /* Seletores para formatação individual. */
 
+/* Header e footer sempre acima do aside */
+header, footer {
+    z-index: 10; /* Eles ficam acima do aside */
+    position: relative;
+}
+
+/* Responsividade: ajustes para telas menores */
+@media (max-width: 768px) {
+    aside {
+        width: 200px; /* Largura reduzida em telas menores */
+    }
+    main {
+        margin-left: 220px; /* Ajuste proporcional ao aside */
+    }
+}
+
+@media (max-width: 480px) {
+    aside {
+        width: 100%;       /* O aside ocupa a largura total */
+        height: auto;      /* Altura ajustada automaticamente */
+        position: relative; /* Não fica fixo em telas pequenas */
+    }
+    main {
+        margin-left: 0;
+        padding-top: 80px; /* Espaço suficiente para o header */
+    }
+}
+/* Header fixo 
 header {
-	/* Junção de flex-grow, flex-shrink e flex-basis.  */
-	/* flex-grow – Habilidade de um flex item crescer. */
-	/* flex-shrink - Capacidade de redução do item.    */
-	/* flex-basis – Tamanho inicial do item.           */
-	flex: 1 1 100vw;
+    width: 100%;
+    background-color: #f7e6c2;
+    padding: 0px 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center; /* Alinha verticalmente */
+    /*justify-content: center; /* Centraliza horizontalmente */
+/*}*/
+header img {
+    max-width: 100%; /* Limita a largura da imagem ao tamanho do header */
+    height: auto; /* Mantém a proporção da imagem */
+    max-height: 60px; /* Limita a altura da imagem para não ultrapassar o header */
+    object-fit: contain; /* Ajusta a imagem para se ajustar ao contêiner */
+}
+/* Espaço do conteúdo principal */
+main {
+    margin-left: 270px; /* Espaço para o aside */
+    padding: 20px;
+    padding-top: 80px; /* Espaço suficiente para o header */
+    box-sizing: border-box;
+    min-height: calc(100vh - 100px); /* Altura mínima respeitando o footer */
+    z-index: 1; /* Garante que o main não fique sobre o header */
 }
 
-header #logo {
-	/* Exibição flexível.                          */
-	/* Torna o elemento um flex container          */
-	/* e os seus elementos internos em flex-itens. */
-	display: flex;
 
-	/* Junção de flex-grow, flex-shrink e flex-basis.  */
-	/* flex-grow – Habilidade de um flex item crescer. */
-	/* flex-shrink - Capacidade de redução do item.    */
-	/* flex-basis – Tamanho inicial do item.           */
-	flex: 0 1 200px;
-
-	/* Cor do fundo. */
-	background: #c9c9c9;
-
-	/* Alinha os itens na vertical. */
-	justify-content: center;
-
-	/* Alinha os itens na horizontal. */
-	align-items: center;
-}
 
 #openMenu, #closeMenu {
 	/* Remove a borda. */
