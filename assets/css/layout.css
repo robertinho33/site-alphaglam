@@ -261,3 +261,27 @@ a {
 		order: 4;
 	}
 }
+/* Estilo do menu */
+#menu {
+    display: flex; /* Alinha os itens lado a lado */
+    justify-content: center; /* Centraliza os links horizontalmente */
+    gap: 15px; /* Espaçamento entre os links */
+    background-color: #f7e6c2; /* Fundo do menu */
+    padding: 10px; /* Espaçamento interno */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombras para destaque */
+}
+
+/* Estilo dos links */
+#menu a {
+    text-decoration: none; /* Remove o sublinhado dos links */
+    color: #6b4f32; /* Cor dos links */
+    font-weight: bold; /* Negrito nos textos */
+    font-size: 16px; /* Tamanho da fonte */
+    transition: color 0.3s ease; /* Transição suave ao passar o mouse */
+}
+
+/* Efeito ao passar o mouse */
+#menu a:hover {
+    color: #d4a760; /* Altera a cor ao passar o mouse */
+}
+
