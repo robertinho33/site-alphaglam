@@ -74,9 +74,9 @@ header #logo {
 	background: #c9c9c9;
 
 	/* Alinha os itens na vertical. */
-	
+	justify-content: center;
 
-	/*justify-content: center; Alinha os itens na horizontal. */
+	/* Alinha os itens na horizontal. */
 	
 	align-items: center;
 }
