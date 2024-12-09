@@ -398,17 +398,25 @@ header, footer {
     }
 }
 /* Header fixo */
-header {
+hheader {
     width: 100%;
     background-color: #f7e6c2;
-   
+    padding: 10px 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    position: fixed; /* Fixa o header no topo */
+    position: fixed;
     top: 0;
     left: 0;
-    z-index: 100; /* Garante que o header fique acima do conteúdo */
+    z-index: 100;
+    display: flex;
+    align-items: center; /* Alinha verticalmente */
+    justify-content: center; /* Centraliza horizontalmente */
 }
-
+header img {
+    max-width: 100%; /* Limita a largura da imagem ao tamanho do header */
+    height: auto; /* Mantém a proporção da imagem */
+    max-height: 60px; /* Limita a altura da imagem para não ultrapassar o header */
+    object-fit: contain; /* Ajusta a imagem para se ajustar ao contêiner */
+}
 /* Espaço do conteúdo principal */
 main {
     margin-left: 270px; /* Espaço para o aside */
