@@ -9,9 +9,29 @@ body {
     color: #5a3d31;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    min-height: 100vh; /* Garante que o conteúdo ocupe a altura total da janela */
 }
 
+main {
+    margin-left: 270px;
+    padding: 20px;
+    padding-top: 100px;
+    box-sizing: border-box;
+    flex: 1; /* Permite que o main se expanda para preencher o espaço disponível */
+}
+
+@media (max-width: 768px) {
+    main {
+        margin-left: 220px;
+    }
+}
+
+@media (max-width: 480px) {
+    main {
+        margin-left: 0;
+        width: 100%;
+    }
+}
 /* ========================
    Estilo Padrão de Inputs, Botões e Selects
 ======================== */
@@ -143,31 +163,6 @@ aside {
         box-shadow: none;
     }
 }
-
-/* ========================
-   Main
-======================== */
-main {
-    margin-left: 270px;
-    padding: 20px;
-    padding-top: 100px;
-    box-sizing: border-box;
-    min-height: calc(100vh - 160px);
-}
-
-@media (max-width: 768px) {
-    main {
-        margin-left: 220px;
-    }
-}
-
-@media (max-width: 480px) {
-    main {
-        margin-left: 0;
-        width: 100%;
-    }
-}
-
 /* ========================
    Footer
 ======================== */
@@ -176,16 +171,12 @@ footer {
     background-color: #f7e6c2;
     padding: 10px;
     text-align: center;
-    position: fixed;
+    position: relative; /* Alterado de fixed para relative */
     bottom: 0;
     left: 0;
     z-index: 10;
+    margin-top: auto; /* Garante que o footer fique no final do layout */
 }
-
-main {
-    padding-bottom: 50px;
-}
-
 /* ========================
    Image Grid
 ======================== */
