@@ -72,6 +72,9 @@ header #logo {
 
 	/* Cor do fundo. */
 	background: #c9c9c9;
+	height: 60px; /* Ajusta a altura do logo */
+    object-fit: contain; /* Garante que a imagem não fique distorcida */
+
 
 	/* Alinha os itens na vertical. */
 	justify-content: center;
@@ -265,7 +268,8 @@ a {
 #menu {
     display: flex; /* Alinha os itens lado a lado */
     justify-content: center; /* Centraliza os links horizontalmente */
-    gap: 15px; /* Espaçamento entre os links */
+    flex: 1;
+	gap: 20px; /* Espaçamento entre os links */
     background-color: #f7e6c2; /* Fundo do menu */
     padding: 10px; /* Espaçamento interno */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombras para destaque */
@@ -284,4 +288,3 @@ a {
 #menu a:hover {
     color: #d4a760; /* Altera a cor ao passar o mouse */
 }
-
