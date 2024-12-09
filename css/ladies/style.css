@@ -1,257 +1,262 @@
-/* ========================
-   Configurações Gerais
-======================== */
+@charset "UTF-8";
+
+/* Propriedades que se aplicam a todos os elementos da página. */
+* {
+	/* Remove a margem externa de todos os lados do elemento. */
+	margin: 0;
+
+	/* Remove o espaçamento interno de todos os lados do elemento. */
+	padding: 0;
+
+	/* Inclui o preenchimento e a borda na largura e altura. */
+	box-sizing: border-box;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #fff5f7;
-    color: #5a3d31;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; /* Garante que o conteúdo ocupe a altura total da janela */
+	/* Exibição flexível.                          */
+	/* Torna o elemento um flex container          */
+	/* e os seus elementos internos em flex-itens. */
+	display: flex;
+
+	/* Quebra de linha quando os itens não couberem na largura da tela. */
+	flex-wrap: wrap;
+
+	/* Junção de flex-grow, flex-shrink e flex-basis.  */
+	/* flex-grow – Habilidade de um flex item crescer. */
+	/* flex-shrink - Capacidade de redução do item.    */
+	/* flex-basis – Tamanho inicial do item.           */
+	flex: 1 1 100vw;
+
+	/* Margem de todos os lados. */
+	margin: 3px;
+}
+
+/* Formatação comum entre os elementos. */
+header, nav, main, aside, footer {
+	/* Cor do fundo. */
+	background: #a1a1a1;
+
+	/* Exibição flexível.                          */
+	/* Torna o elemento um flex container          */
+	/* e os seus elementos internos em flex-itens. */
+	display: flex;
+
+	/* Margem externa de todos os lados. */
+	margin: 3px;
+}
+
+/* Seletores para formatação individual. */
+
+header {
+	/* Altura do elemento. */
+	height: 100px;
+
+	/* Junção de flex-grow, flex-shrink e flex-basis.  */
+	/* flex-grow – Habilidade de um flex item crescer. */
+	/* flex-shrink - Capacidade de redução do item.    */
+	/* flex-basis – Tamanho inicial do item.           */
+	flex: 1 1 100vw;
+}
+
+header #logo {
+	/* Exibição flexível.                          */
+	/* Torna o elemento um flex container          */
+	/* e os seus elementos internos em flex-itens. */
+	display: flex;
+
+	/* Junção de flex-grow, flex-shrink e flex-basis.  */
+	/* flex-grow – Habilidade de um flex item crescer. */
+	/* flex-shrink - Capacidade de redução do item.    */
+	/* flex-basis – Tamanho inicial do item.           */
+	flex: 0 1 200px;
+
+	/* Cor do fundo. */
+	background: #c9c9c9;
+
+	/* Alinha os itens na vertical. */
+	justify-content: center;
+
+	/* Alinha os itens na horizontal. */
+	align-items: center;
+}
+
+#openMenu, #closeMenu {
+	/* Remove a borda. */
+	border: none;
+
+	/* Remove a cor de fundo. */
+	background: none;
+
+	/* Tamanho da fonte. */
+	font-size: 30px;
+
+	/* Espessura da forte. */
+	font-weight: bold;
+
+	/* Margem ao redor do elemento              */
+	/* (superior, direito, inferior e esquerdo) */
+	padding: 0px 5px 0px 5px;
+
+	/* Muda o cursor do mouse para ponteiro.*/
+	cursor: pointer;
+
+	/* Oculta o elemento. */
+	display: none;
+}
+
+nav {
+	/* Alinha os itens na vertical. */
+	justify-content: flex-end;
+
+	/* Alinha os itens na horizontal. */
+	align-items: center;
+
+	/* Junção de flex-grow, flex-shrink e flex-basis.  */
+	/* flex-grow – Habilidade de um flex item crescer. */
+	/* flex-shrink - Capacidade de redução do item.    */
+	/* flex-basis – Tamanho inicial do item.           */
+	flex: 1 1 200px;
+}
+
+nav a {
+	/* Margem de todos os lados. */
+	margin: 0 3%;
+
+	/* Tamanho da fonte. */
+	font-size: 15pt;
 }
 
 main {
-    margin-left: 270px;
-    padding: 20px;
-    padding-top: 100px;
-    box-sizing: border-box;
-    flex: 1; /* Permite que o main se expanda para preencher o espaço disponível */
+	/* Realizar a subtração de 100% da altura vertical menos a soma    */
+	/* da altura dos elementos ( 400px ) com as suas margens ( 36px ). */
+	height: calc(100vh - 224px);
+
+	/* Junção de flex-grow, flex-shrink e flex-basis.  */
+	/* flex-grow – Habilidade de um flex item crescer. */
+	/* flex-shrink - Capacidade de redução do item.    */
+	/* flex-basis – Tamanho inicial do item.           */
+	flex: 20 1 500px;
 }
 
-@media (max-width: 768px) {
-    main {
-        margin-left: 220px;
-    }
-}
-
-@media (max-width: 480px) {
-    main {
-        margin-left: 0;
-        width: 100%;
-    }
-}
-/* ========================
-   Estilo Padrão de Inputs, Botões e Selects
-======================== */
-input, select, button {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #d4a760;
-    border-radius: 5px;
-}
-
-button {
-    background-color: #d4a760;
-    color: white;
-    cursor: pointer;
-    border: none;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #b08b5b;
-}
-
-/* ========================
-   Header
-======================== */
-header {
-    height: 100px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 20px;
-    background: linear-gradient(90deg, #f7e6c2, #d4a760);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-bottom: 2px solid #6b4f32;
-    position: relative;
-    z-index: 10;
-    transition: background 0.3s ease, box-shadow 0.3s ease;
-}
-
-header:hover {
-    background: linear-gradient(90deg, #d4a760, #f7e6c2);
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-}
-
-header img {
-    max-height: 60px;
-    object-fit: contain;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-header img:hover {
-    transform: scale(1.1);
-}
-
-header .menu {
-    position: relative;
-}
-
-header .menu button {
-    background: none;
-    border: none;
-    font-size: 18px;
-    cursor: pointer;
-    color: #6b4f32;
-}
-
-header .menu button:hover {
-    color: #b08b5b;
-}
-
-header .menu ul {
-    list-style: none;
-    position: absolute;
-    top: 40px;
-    background: #f7e6c2;
-    border-radius: 5px;
-    padding: 10px 0;
-    display: none;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-header .menu button:focus + ul, header .menu ul:hover {
-    display: block;
-}
-
-header .menu ul li {
-    padding: 5px 15px;
-}
-
-header .menu ul li a {
-    text-decoration: none;
-    color: #6b4f32;
-}
-
-header .menu ul li a:hover {
-    color: #d4a760;
-}
-
-/* ========================
-   Aside
-======================== */
 aside {
-    position: fixed;
-    top: 100px;
-    left: 0;
-    width: 250px;
-    height: calc(100vh - 100px);
-    background-color: #f8f9fa;
-    padding: 20px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    z-index: 10;
-    overflow-y: auto;
+	/* Junção de flex-grow, flex-shrink e flex-basis.  */
+	/* flex-grow – Habilidade de um flex item crescer. */
+	/* flex-shrink - Capacidade de redução do item.    */
+	/* flex-basis – Tamanho inicial do item.           */
+	flex: 1 1 200px;
 }
 
-@media (max-width: 768px) {
-    aside {
-        width: 200px;
-    }
-}
-
-@media (max-width: 480px) {
-    aside {
-        width: 100%;
-        position: relative;
-        height: auto;
-        box-shadow: none;
-    }
-}
-/* ========================
-   Footer
-======================== */
 footer {
-    width: 100%;
-    background-color: #f7e6c2;
-    padding: 10px;
-    text-align: center;
-    position: relative; /* Alterado de fixed para relative */
-    bottom: 0;
-    left: 0;
-    z-index: 10;
-    margin-top: auto; /* Garante que o footer fique no final do layout */
-}
-/* ========================
-   Image Grid
-======================== */
-.image-grid {
-    display: flex;
-    gap: 15px;
-    margin: 20px 10px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #d4a760;
-    overflow-x: auto;
-    scrollbar-width: thin;
-    scrollbar-color: #d4a760 transparent;
-    max-width: calc(6 * 150px + 5 * 15px);
+	/* Altura do elemento. */
+	height: 100px;
+
+	/* Junção de flex-grow, flex-shrink e flex-basis.  */
+	/* flex-grow – Habilidade de um flex item crescer. */
+	/* flex-shrink - Capacidade de redução do item.    */
+	/* flex-basis – Tamanho inicial do item.           */
+	flex: 1 1 100vw;
 }
 
-.image-grid::-webkit-scrollbar {
-    height: 8px;
+a {
+	/* Remove a decoração padrão do elemento. */
+	text-decoration: none;
+
+	/* Definir a cor da fonte para o padrão do elemento pai. */
+	color: inherit;
 }
 
-.image-grid::-webkit-scrollbar-thumb {
-    background: #d4a760;
-    border-radius: 5px;
-}
+/* Altera o estilo dos elementos para serem apresentados */ 
+/* em telas menores que 717px. */
+@media only screen and (max-width: 717px) {
+	#openMenu, #closeMenu {
+		/* Retorna a visibilidade padrão. */
+		display: block;
+	}
 
-.image-grid img {
-    width: 150px;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
-}
+	#openMenu {
+		/* Espaço a esquerda será preenchido automaticamente
+		   colocando os itens a direita. */
+		margin-left: auto;
+	}
 
-.image-grid img:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
+	#closeMenu {
+		/* Torna a posição do elemento fixa. */
+		position: fixed;
 
-/* ========================
-   Modal
-======================== */
-#bag-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-}
+		/* Dispõe o elemento a 15px da esquerda. */
+		right: 15px;
 
-#bag-modal.active {
-    opacity: 1;
-    visibility: visible;
-}
+		/* Dispõe o elemento a 15px do topo. */
+		top: 15px;
+	}
 
-#bag-content {
-    background: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    width: 400px;
-    max-width: 90%;
-    text-align: center;
-}
+	header {
+		/* Ordem da visualização dos elementos. */
+		order: 0;
+	}
 
-#bag-items img {
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
-    margin-right: 10px;
-    border-radius: 5px;
+	nav {
+		/* Ordem da visualização dos elementos. */
+		order: 1;
+
+		/* Torna a posição do elemento fixa. */
+		position: fixed;
+
+		/* Ocupa 100% da largura da tela de exibição. */
+		width: 100vw;
+
+		/* Ocupa 100% da altura da tela de exibição. */
+		height: 100vh;
+
+		/* Cor em RGB, mais transparência. */
+		background: rgba(255, 255, 255, 0.8);
+
+		/* Dispõe os itens em coluna. */
+		flex-direction: column;
+
+		/* Alinha os itens na horizontal. */
+		align-items: center;
+
+		/* Alinha os itens na vertical. */
+		justify-content: center;
+
+		/* Remove a margem externa de todos os lados do elemento. */
+		margin: 0;
+
+		/* Oculta o elemento. */
+		display: none;
+
+		/* Invisivel */
+		opacity: 0;
+
+		/* Velocidade de transição de um estado para outro. */
+		transition: 0.3s;
+	}
+
+	nav a {
+		/* Margem de todos os lados. */
+		margin: 3%;
+	}
+
+	main {
+		/* Ordem da visualização dos elementos. */
+		order: 2;
+
+		/* Realizar a subtração de 100% da altura vertical menos a soma    */
+		/* da altura dos elementos ( 300px ) com as suas margens ( 30px ). */
+		height: calc(100vh - 330px);
+	}
+
+	aside {
+		/* Ordem da visualização dos elementos. */
+		order: 3;
+
+		/* Altura do elemento. */
+		height: 100px;
+	}
+
+	footer {
+		/* Ordem da visualização dos elementos. */
+		order: 4;
+	}
 }
