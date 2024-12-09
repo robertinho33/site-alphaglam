@@ -33,13 +33,13 @@ body {
 
 /* Formatação comum entre os elementos. */
 header, nav, main, aside, footer {
-	/* Cor do fundo. 
-	background: #a1a1a1;*/
+	/* Cor do fundo. */
+	background: #a1a1a1;
 
 	/* Exibição flexível.                          */
 	/* Torna o elemento um flex container          */
-	/* e os seus elementos internos em flex-itens. 
-	display: flex;*/
+	/* e os seus elementos internos em flex-itens. */
+	display: flex;
 
 	/* Margem externa de todos os lados. */
 	margin: 3px;
@@ -49,7 +49,7 @@ header, nav, main, aside, footer {
 
 header {
 	/* Altura do elemento. */
-	height: 50px;
+	height: 100px;
 
 	/* Junção de flex-grow, flex-shrink e flex-basis.  */
 	/* flex-grow – Habilidade de um flex item crescer. */
@@ -57,6 +57,29 @@ header {
 	/* flex-basis – Tamanho inicial do item.           */
 	flex: 1 1 100vw;
 }
+
+header #logo {
+	/* Exibição flexível.                          */
+	/* Torna o elemento um flex container          */
+	/* e os seus elementos internos em flex-itens. */
+	display: flex;
+
+	/* Junção de flex-grow, flex-shrink e flex-basis.  */
+	/* flex-grow – Habilidade de um flex item crescer. */
+	/* flex-shrink - Capacidade de redução do item.    */
+	/* flex-basis – Tamanho inicial do item.           */
+	flex: 0 1 200px;
+
+	/* Cor do fundo. */
+	background: #c9c9c9;
+
+	/* Alinha os itens na vertical. */
+	justify-content: center;
+
+	/* Alinha os itens na horizontal. */
+	align-items: center;
+}
+
 #openMenu, #closeMenu {
 	/* Remove a borda. */
 	border: none;
@@ -236,63 +259,4 @@ a {
 		/* Ordem da visualização dos elementos. */
 		order: 4;
 	}
-}
-/* Estilo do menu */
-#menu {
-    display: flex; /* Alinha os itens lado a lado */
-    justify-content: center; /* Centraliza os links horizontalmente */
-    flex: 1;
-	gap: 20px; /* Espaçamento entre os links */
-    background-color: #f7e6c2; /* Fundo do menu */
-    padding: 10px; /* Espaçamento interno */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombras para destaque */
-}
-
-/* Estilo dos links */
-#menu a {
-    text-decoration: none; /* Remove o sublinhado dos links */
-    color: #6b4f32; /* Cor dos links */
-    font-weight: bold; /* Negrito nos textos */
-    font-size: 16px; /* Tamanho da fonte */
-    transition: color 0.3s ease; /* Transição suave ao passar o mouse */
-}
-
-/* Efeito ao passar o mouse */
-#menu a:hover {
-    color: #d4a760; /* Altera a cor ao passar o mouse */
-}
-header {
-    display: flex; /* Usar Flexbox para dividir as partes */
-    align-items: center; /* Alinhar verticalmente ao centro */
-    padding: 0 20px; /* Espaçamento interno horizontal */
-    background: #a1a1a1; /* Cor de fundo do header */
-    height: 100px; /* Altura do header */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Adiciona sombra */
-}
-
-header #logo {
-    flex: 0 0 auto; /* Fixa o tamanho do logo */
-    height: 60px; /* Altura do logo */
-    object-fit: contain; /* Mantém a proporção do logo */
-    margin-right: 20px; /* Espaçamento entre o logo e o menu */
-}
-
-#menu {
-    display: flex; /* Alinha os links lado a lado */
-    justify-content: center; /* Centraliza os links no espaço restante */
-    align-items: center; /* Alinha os links verticalmente ao centro */
-    flex: 1; /* O menu ocupa o restante do espaço disponível */
-    gap: 20px; /* Espaçamento entre os links */
-}
-
-#menu a {
-    text-decoration: none; /* Remove o sublinhado */
-    color: #6b4f32; /* Cor dos links */
-    font-weight: bold; /* Fonte em negrito */
-    font-size: 16px; /* Tamanho da fonte */
-    transition: color 0.3s ease; /* Efeito suave ao passar o mouse */
-}
-
-#menu a:hover {
-    color: #d4a760; /* Cor ao passar o mouse */
 }
