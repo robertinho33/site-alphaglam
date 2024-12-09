@@ -1,13 +1,104 @@
+/* Body - Configurações gerais */
 body {
     font-family: Arial, sans-serif;
-    margin: 20;
+    margin: 20px; /* Corrigido o valor de margin */
     padding: 0;
     background-color: #fff5f7;
+    color: #5a3d31;
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: #5a3d31;
 }
+
+/* Header */
+header {
+    height: 100px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    background: linear-gradient(90deg, #f7e6c2, #d4a760);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-bottom: 2px solid #6b4f32;
+    position: relative;
+    z-index: 10;
+}
+
+header:hover {
+    background: linear-gradient(90deg, #d4a760, #f7e6c2);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Aside */
+aside {
+    position: fixed;
+    top: 100px; /* Ajustado para não sobrepor o header */
+    left: 0;
+    width: 250px;
+    height: calc(100vh - 100px); /* Garante altura dinâmica */
+    background-color: #f8f9fa;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    overflow-y: auto;
+}
+
+@media (max-width: 768px) {
+    aside {
+        width: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    aside {
+        width: 100%;
+        position: relative;
+        height: auto;
+        box-shadow: none;
+    }
+}
+
+/* Main */
+main {
+    margin-left: 270px;
+    padding: 20px;
+    padding-top: 100px; /* Espaço para header */
+    width: calc(100% - 270px);
+    box-sizing: border-box;
+    min-height: calc(100vh - 160px); /* Espaço para footer */
+}
+
+@media (max-width: 768px) {
+    main {
+        margin-left: 220px;
+    }
+}
+
+@media (max-width: 480px) {
+    main {
+        margin-left: 0;
+        width: 100%;
+    }
+}
+
+/* Footer */
+footer {
+    width: 100%;
+    background-color: #f7e6c2;
+    padding: 10px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+}
+
+/* Ajusta o conteúdo principal para evitar sobreposição do footer */
+main {
+    padding-bottom: 50px; /* Altura equivalente ao footer */
+}
+
 
 header .menu {
     top: 10px;
@@ -262,52 +353,6 @@ button:hover {
 #product-card button:hover {
     color: #b08b5b;
 }
-/* Estilo para o aside fixo à esquerda da tela */
-aside {
-    position: fixed;  /* Fixa o aside */
-    top: 0;
-    left: 0;
-    width: 250px;  /* Define a largura do aside */
-    height: 100vh;  /* Define a altura como 100% da tela */
-    background-color: #f8f9fa;  /* Cor de fundo do aside */
-    padding: 20px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);  /* Sombras para dar destaque */
-    z-index: 10; /* Garantir que o aside fique acima de outros elementos */
-}
-
-/* Espaço do conteúdo principal para não ficar escondido atrás do aside */
-main {
-    margin-left: 270px;  /* Dá um espaçamento do lado esquerdo para o conteúdo */
-    padding: 20px;
-    padding-top: 80px;  /* Garante que o conteúdo principal não sobreponha o header */
-    width: calc(100% - 270px); /* Ajusta a largura do main para não sobrepor o aside */
-    box-sizing: border-box; /* Para garantir que o padding não quebre o layout */
-}
-
-/* Responsividade: Ajuste do aside para telas menores */
-@media (max-width: 768px) {
-    aside {
-        width: 200px;  /* Ajusta a largura para telas menores */
-    }
-
-    main {
-        margin-left: 220px;  /* Ajusta o espaço para o conteúdo */
-        padding-top: 80px; /* Garante o espaçamento do header */
-    }
-}
-
-@media (max-width: 480px) {
-    aside {
-        width: 100%;
-        height: auto; /* Deixa o aside com altura automática em telas pequenas */
-    }
-
-    main {
-        margin-left: 0;
-        padding-top: 80px; /* Garante o espaçamento do header */
-    }
-}
-
         .navbar {
             background-color: #f8e1d4;
         }
@@ -389,20 +434,6 @@ header, footer {
         padding-top: 80px; /* Espaço suficiente para o header */
     }
 }
-/* Header fixo 
-header {
-    width: 100%;
-    background-color: #f7e6c2;
-    padding: 0px 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center; /* Alinha verticalmente */
-    /*justify-content: center; /* Centraliza horizontalmente */
-/*}*/
 header img {
     max-width: 100%; /* Limita a largura da imagem ao tamanho do header */
     height: auto; /* Mantém a proporção da imagem */
@@ -420,53 +451,14 @@ main {
 }
 
 /* Estilo para o aside fixo */
-aside {
-    position: fixed; /* Fixa o aside à esquerda */
-    top: 60px; /* Espaço suficiente para não sobrepor o header */
-    left: 0;
-    width: 250px; /* Largura do aside */
-    height: calc(100vh - 60px); /* Altura ajustada para não cobrir o header */
-    background-color: #f8f9fa;
-    padding: 20px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    z-index: 10; /* Prioridade menor que o header */
-}
 
-/* Footer fixo */
-footer {
-    width: 100%;
-    background-color: #f7e6c2;
-    padding: 0px 5px;
-    text-align: center;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    z-index: 10; /* Fica acima do aside */
-}
 #img {
     width: 100%;
   }
-  
-header {
-    height: 100px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 20px;
-    background: linear-gradient(90deg, #f7e6c2, #d4a760);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-bottom: 2px solid #6b4f32;
-    position: relative;
-    z-index: 10;
-    transition: background 0.3s ease, box-shadow 0.3s ease;
-}
-
 header:hover {
     background: linear-gradient(90deg, #d4a760, #f7e6c2);
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
 }
-
 #logo {
     height: 60px;
     width: auto;
