@@ -243,3 +243,7 @@ a {
 		order: 4;
 	}
 }
+#logo {
+    max-width: 120px;
+    height: auto; /* Mantém a proporção original da imagem */
+}
