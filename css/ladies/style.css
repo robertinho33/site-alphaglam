@@ -398,7 +398,7 @@ header, footer {
     }
 }
 /* Header fixo */
-hheader {
+header {
     width: 100%;
     background-color: #f7e6c2;
     padding: 10px 20px;
