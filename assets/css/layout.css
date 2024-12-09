@@ -74,10 +74,10 @@ header #logo {
 	background: #c9c9c9;
 
 	/* Alinha os itens na vertical. */
-	justify-content: center;
+	justify-content: left;
 
 	/* Alinha os itens na horizontal. */
-	align-items: center;
+	align-items: left;
 }
 
 #openMenu, #closeMenu {
