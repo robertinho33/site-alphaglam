@@ -173,17 +173,55 @@ footer {
 	flex: 1 1 100vw;
 }
 /* Estilo para o aside fixo */
+/* Estilo para o aside fixo à esquerda da tela */
 aside {
-    position: fixed; /* Fixa o aside à esquerda */
-    top: 60px; /* Espaço suficiente para não sobrepor o header */
+    position: fixed;  /* Fixa o aside */
+    top: 0;
     left: 0;
-    width: 250px; /* Largura do aside */
-    height: calc(100vh - 60px); /* Altura ajustada para não cobrir o header */
-    background-color: #f8f9fa;
+    width: 250px;  /* Define a largura do aside */
+    height: 100vh;  /* Define a altura como 100% da tela */
+    background-color: #f8f9fa;  /* Cor de fundo do aside */
     padding: 20px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    z-index: 10; /* Prioridade menor que o header */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);  /* Sombras para dar destaque */
+    z-index: 10; /* Garantir que o aside fique acima de outros elementos */
 }
+
+/* Responsividade: Ajuste do aside para telas menores */
+@media (max-width: 768px) {
+    aside {
+        width: 200px;  /* Ajusta a largura para telas menores */
+    }
+}
+
+@media (max-width: 480px) {
+    aside {
+        width: 100%;
+        height: auto; /* Deixa o aside com altura automática em telas pequenas */
+        position: relative; /* Não fica fixo em telas pequenas */
+    }
+}
+
+/* Espaço do conteúdo principal para não ficar escondido atrás do aside */
+main {
+    margin-left: 270px;  /* Dá um espaçamento do lado esquerdo para o conteúdo */
+    padding: 20px;
+    padding-top: 80px;  /* Garante que o conteúdo principal não sobreponha o header */
+    width: calc(100% - 270px); /* Ajusta a largura do main para não sobrepor o aside */
+    box-sizing: border-box; /* Para garantir que o padding não quebre o layout */
+}
+
+/* Footer fixo */
+footer {
+    width: 100%;
+    background-color: #f7e6c2;
+    padding: 0px 5px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 10; /* Fica acima do aside */
+}
+
 a {
 	/* Remove a decoração padrão do elemento. */
 	text-decoration: none;
