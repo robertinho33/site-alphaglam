@@ -33,13 +33,13 @@ body {
 
 /* Formatação comum entre os elementos. */
 header, nav, main, aside, footer {
-	/* Cor do fundo. */
-	background: #a1a1a1;
+	/* Cor do fundo. 
+	background: #a1a1a1;*/
 
 	/* Exibição flexível.                          */
 	/* Torna o elemento um flex container          */
-	/* e os seus elementos internos em flex-itens. */
-	display: flex;
+	/* e os seus elementos internos em flex-itens. 
+	display: flex;*/
 
 	/* Margem externa de todos os lados. */
 	margin: 3px;
@@ -49,7 +49,7 @@ header, nav, main, aside, footer {
 
 header {
 	/* Altura do elemento. */
-	height: 100px;
+	height: 50px;
 
 	/* Junção de flex-grow, flex-shrink e flex-basis.  */
 	/* flex-grow – Habilidade de um flex item crescer. */
