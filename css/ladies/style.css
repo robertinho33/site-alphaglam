@@ -1,58 +1,31 @@
-/* Body - Configurações gerais */
 body {
     font-family: Arial, sans-serif;
-    margin: 0;
+    margin: 20;
     padding: 0;
     background-color: #fff5f7;
-    color: #5a3d31;
-    overflow-x: hidden; /* Evita rolagem lateral indesejada */
-}
-
-/* Header */
-header {
-    width: 100%;
-    height: 100px;
-    background: linear-gradient(90deg, #f7e6c2, #d4a760);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-bottom: 2px solid #6b4f32;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    padding: 0 20px;
-    position: relative;
-    z-index: 10;
-    transition: background 0.3s, box-shadow 0.3s;
+    color: #5a3d31;
 }
 
-header:hover {
-    background: linear-gradient(90deg, #d4a760, #f7e6c2);
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-}
-
-/* Logo */
-#logo {
-    height: 60px;
-    cursor: pointer;
-    transition: transform 0.3s;
-}
-
-#logo:hover {
-    transform: scale(1.1);
-}
-
-/* Menu */
 header .menu {
-    position: relative;
+    top: 10px;
+    right: 20px;
     color: #6b4f32;
+    position: relative;
 }
 
 header .menu button {
     background: none;
     border: none;
     font-size: 18px;
-    cursor: pointer;
-    color: inherit;
-    transition: color 0.3s;
+    cursor: pointer; 
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: #6b4f32;
+    position: relative;
 }
 
 header .menu button:hover {
@@ -62,7 +35,7 @@ header .menu button:hover {
 header .menu ul {
     list-style: none;
     position: absolute;
-    top: 100%;
+    top: 30px;
     right: 0;
     background: #f7e6c2;
     border-radius: 5px;
@@ -71,8 +44,7 @@ header .menu ul {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-header .menu button:focus + ul,
-header .menu ul:hover {
+header .menu button:focus + ul, header .menu ul:hover {
     display: block;
 }
 
@@ -83,54 +55,476 @@ header .menu ul li {
 header .menu ul li a {
     text-decoration: none;
     color: #6b4f32;
-    transition: color 0.3s;
 }
 
 header .menu ul li a:hover {
     color: #d4a760;
 }
 
-/* Aside fixo */
+/* Grid com rolagem horizontal para as imagens, com limite de 6 itens */
+.image-grid {
+    display: flex;  /* Usando flexbox para alinhamento de itens em linha */
+    gap: 15px;
+    margin: 20px 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #d4a760;
+    overflow-x: auto;  /* Permite rolagem horizontal */
+    scrollbar-width: thin;
+    scrollbar-color: #d4a760 transparent;
+    max-width: calc(6 * 150px + 5 * 15px); /* Limite de 6 imagens + espaços entre elas */
+}
+
+.image-grid::-webkit-scrollbar {
+    height: 8px;
+}
+
+.image-grid::-webkit-scrollbar-thumb {
+    background: #d4a760;
+    border-radius: 5px;
+}
+
+.image-grid img {
+    width: 150px;  /* Tamanho fixo para as imagens */
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.image-grid img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.cart img {
+    width: 50px;
+    height: auto;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+
+.cart h2 {
+    text-align: center;
+    color: #6b4f32;
+}
+
+.cart ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+}
+
+.cart ul li {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.cart ul li img {
+    width: 50px;
+    height: auto;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+.total {
+    text-align: center;
+    font-weight: bold;
+    margin: 10px 0;
+    color: #6b4f32;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.buttons button {
+    text-decoration: none;
+    background-color: #d4a760;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+}
+
+.buttons button:hover {
+    background-color: #b08b5b;
+}
+
+form {
+    max-width: 500px;
+    margin: 0px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 90%;
+}
+
+form h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #6b4f32;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input, select, button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #d4a760;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #d4a760;
+    color: white;
+    cursor: pointer;
+    border: none;
+}
+
+button:hover {
+    background-color: #b08b5b;
+}
+#form-cadastro, #form-carrinho {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    display: none; /* Ambos começam escondidos */
+}
+
+#form-cadastro {
+    display: none; /* Inicia escondido */
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+.image-gallery img {
+    width: 150px;
+    height: auto;
+    margin: 10px;
+    cursor: pointer;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    transition: transform 0.2s;
+}
+
+.image-gallery img:hover {
+    transform: scale(1.1);
+}
+
+#product-card {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    padding: 20px;
+    background: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#product-card img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+#product-card.hidden {
+    display: none;
+}
+
+#product-card button {
+    align-self: flex-end;
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+#product-card button:hover {
+    color: #b08b5b;
+}
+/* Estilo para o aside fixo à esquerda da tela */
 aside {
-    position: fixed; /* Fixa o aside */
-    top: 0; /* Alinha ao topo */
-    left: 0; /* Alinha à esquerda */
-    width: 250px; /* Largura fixa */
-    height: 100vh; /* Altura de 100% da tela */
-    background-color: #f8f9fa; /* Cor de fundo */
+    position: fixed;  /* Fixa o aside */
+    top: 0;
+    left: 0;
+    width: 250px;  /* Define a largura do aside */
+    height: 100vh;  /* Define a altura como 100% da tela */
+    background-color: #f8f9fa;  /* Cor de fundo do aside */
     padding: 20px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Sombra para destaque */
-    z-index: 10;
-    overflow-y: auto; /* Permite rolagem vertical */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);  /* Sombras para dar destaque */
+    z-index: 10; /* Garantir que o aside fique acima de outros elementos */
 }
 
-/* Espaço para o conteúdo principal */
+/* Espaço do conteúdo principal para não ficar escondido atrás do aside */
 main {
-    margin-left: 250px; /* Espaço reservado para o aside */
+    margin-left: 270px;  /* Dá um espaçamento do lado esquerdo para o conteúdo */
     padding: 20px;
-    padding-top: 100px; /* Espaço para o header */
-    box-sizing: border-box;
-    min-height: calc(100vh - 100px); /* Altura mínima respeitando o header */
+    padding-top: 80px;  /* Garante que o conteúdo principal não sobreponha o header */
+    width: calc(100% - 270px); /* Ajusta a largura do main para não sobrepor o aside */
+    box-sizing: border-box; /* Para garantir que o padding não quebre o layout */
 }
 
-/* Responsividade */
+/* Responsividade: Ajuste do aside para telas menores */
 @media (max-width: 768px) {
     aside {
-        width: 200px; /* Ajuste a largura para telas médias */
+        width: 200px;  /* Ajusta a largura para telas menores */
     }
+
     main {
-        margin-left: 200px; /* Ajuste conforme a largura do aside */
+        margin-left: 220px;  /* Ajusta o espaço para o conteúdo */
+        padding-top: 80px; /* Garante o espaçamento do header */
     }
 }
 
 @media (max-width: 480px) {
     aside {
-        width: 100%; /* O aside ocupa a largura total */
-        height: auto; /* Altura ajustada automaticamente */
-        position: relative; /* O aside deixa de ser fixo */
-        box-shadow: none; /* Remove sombra em telas pequenas */
+        width: 100%;
+        height: auto; /* Deixa o aside com altura automática em telas pequenas */
+    }
+
+    main {
+        margin-left: 0;
+        padding-top: 80px; /* Garante o espaçamento do header */
+    }
+}
+
+        .navbar {
+            background-color: #f8e1d4;
+        }
+        .navbar-brand {
+            color: #d19a66 !important;
+            font-weight: bold;
+        }
+        h2, h3 {
+            color: #d19a66;
+        }
+        input, select, button {
+            margin-bottom: 15px;
+        }
+        .list-group-item {
+            background-color: #fef7f0;
+            border-color: #f3d9c4;
+        }
+        .btn-home {
+            background-color: #946c48;
+            color: white;
+        }
+        .btn-home:hover {
+            background-color: #c38752;
+        }
+        #bag-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+#bag-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    max-width: 90%;
+    text-align: center;
+}
+
+#bag-items img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+/* Header e footer sempre acima do aside */
+header, footer {
+    z-index: 10; /* Eles ficam acima do aside */
+    position: relative;
+}
+
+/* Responsividade: ajustes para telas menores */
+@media (max-width: 768px) {
+    aside {
+        width: 200px; /* Largura reduzida em telas menores */
     }
     main {
-        margin-left: 0; /* Remove margem para o aside */
+        margin-left: 220px; /* Ajuste proporcional ao aside */
+    }
+}
+
+@media (max-width: 480px) {
+    aside {
+        width: 100%;       /* O aside ocupa a largura total */
+        height: auto;      /* Altura ajustada automaticamente */
+        position: relative; /* Não fica fixo em telas pequenas */
+    }
+    main {
+        margin-left: 0;
+        padding-top: 80px; /* Espaço suficiente para o header */
+    }
+}
+/* Header fixo 
+header {
+    width: 100%;
+    background-color: #f7e6c2;
+    padding: 0px 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center; /* Alinha verticalmente */
+    /*justify-content: center; /* Centraliza horizontalmente */
+/*}*/
+header img {
+    max-width: 100%; /* Limita a largura da imagem ao tamanho do header */
+    height: auto; /* Mantém a proporção da imagem */
+    max-height: 60px; /* Limita a altura da imagem para não ultrapassar o header */
+    object-fit: contain; /* Ajusta a imagem para se ajustar ao contêiner */
+}
+/* Espaço do conteúdo principal */
+main {
+    margin-left: 270px; /* Espaço para o aside */
+    padding: 20px;
+    padding-top: 80px; /* Espaço suficiente para o header */
+    box-sizing: border-box;
+    min-height: calc(100vh - 100px); /* Altura mínima respeitando o footer */
+    z-index: 1; /* Garante que o main não fique sobre o header */
+}
+
+/* Estilo para o aside fixo */
+aside {
+    position: fixed; /* Fixa o aside à esquerda */
+    top: 60px; /* Espaço suficiente para não sobrepor o header */
+    left: 0;
+    width: 250px; /* Largura do aside */
+    height: calc(100vh - 60px); /* Altura ajustada para não cobrir o header */
+    background-color: #f8f9fa;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    z-index: 10; /* Prioridade menor que o header */
+}
+
+/* Footer fixo */
+footer {
+    width: 100%;
+    background-color: #f7e6c2;
+    padding: 0px 5px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 10; /* Fica acima do aside */
+}
+#img {
+    width: 100%;
+  }
+  
+header {
+    height: 100px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    background: linear-gradient(90deg, #f7e6c2, #d4a760);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-bottom: 2px solid #6b4f32;
+    position: relative;
+    z-index: 10;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+header:hover {
+    background: linear-gradient(90deg, #d4a760, #f7e6c2);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+#logo {
+    height: 60px;
+    width: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+#logo:hover {
+    transform: scale(1.1);
+}
+
+nav a:hover {
+    color: #f7e6c2;
+    background: #6b4f32;
+    border-color: #f7e6c2;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+@media (max-width: 717px) {
+    header {
+        padding: 0 15px;
+        height: auto;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #openMenu, #closeMenu {
+        display: block;
+        font-size: 24px;
+        color: #6b4f32;
+        margin-left: auto;
+        cursor: pointer;
+    }
+
+    nav {
+        flex-direction: column;
+        display: none;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.95);
+        position: absolute;
+        top: 100%;
+        left: 0;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-top: 2px solid #d4a760;
+        z-index: 5;
+        padding: 10px 0;
+    }
+
+    nav.active {
+        display: flex;
+    }
+
+    nav a {
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+        font-size: 16px;
     }
 }
