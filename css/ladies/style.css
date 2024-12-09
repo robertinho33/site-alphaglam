@@ -375,47 +375,6 @@ header, footer {
     z-index: 10; /* Eles ficam acima do aside */
     position: relative;
 }
-header {
-    width: 100%;
-    background-color: #f7e6c2;
-    padding: 10px 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    position: fixed; /* Torna o header fixo no topo */
-    top: 0;
-    left: 0;
-    z-index: 100; /* Garante que o header fique acima do aside */
-}
-
-aside {
-    position: fixed; /* Fixa o aside na lateral */
-    top: 60px; /* Espaço suficiente para não sobrepor o header */
-    left: 0;
-    width: 250px;
-    height: calc(100vh - 60px); /* Ajusta para não cobrir o header */
-    background-color: #f8f9fa;
-    padding: 20px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    z-index: 10; /* Prioridade menor que o header */
-}
-
-main {
-    margin-left: 270px; /* Espaço à esquerda para o aside */
-    padding: 20px;
-    padding-top: 80px; /* Espaço suficiente para o header */
-    box-sizing: border-box;
-    min-height: calc(100vh - 100px); /* Altura mínima respeitando o footer */
-}
-
-footer {
-    width: 100%;
-    background-color: #f7e6c2;
-    padding: 10px 20px;
-    text-align: center;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    z-index: 10; /* Fica acima do aside */
-}
 
 /* Responsividade: ajustes para telas menores */
 @media (max-width: 768px) {
@@ -437,4 +396,50 @@ footer {
         margin-left: 0;
         padding-top: 80px; /* Espaço suficiente para o header */
     }
+}
+/* Header fixo */
+header {
+    width: 100%;
+    background-color: #f7e6c2;
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: fixed; /* Fixa o header no topo */
+    top: 0;
+    left: 0;
+    z-index: 100; /* Garante que o header fique acima do conteúdo */
+}
+
+/* Espaço do conteúdo principal */
+main {
+    margin-left: 270px; /* Espaço para o aside */
+    padding: 20px;
+    padding-top: 80px; /* Espaço suficiente para o header */
+    box-sizing: border-box;
+    min-height: calc(100vh - 100px); /* Altura mínima respeitando o footer */
+    z-index: 1; /* Garante que o main não fique sobre o header */
+}
+
+/* Estilo para o aside fixo */
+aside {
+    position: fixed; /* Fixa o aside à esquerda */
+    top: 60px; /* Espaço suficiente para não sobrepor o header */
+    left: 0;
+    width: 250px; /* Largura do aside */
+    height: calc(100vh - 60px); /* Altura ajustada para não cobrir o header */
+    background-color: #f8f9fa;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    z-index: 10; /* Prioridade menor que o header */
+}
+
+/* Footer fixo */
+footer {
+    width: 100%;
+    background-color: #f7e6c2;
+    padding: 10px 20px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 10; /* Fica acima do aside */
 }
