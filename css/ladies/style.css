@@ -128,7 +128,8 @@ footer {
 a {
     text-decoration: none;
     color: inherit;
-}.image-gallery img {
+}
+.image-gallery img {
     width: 150px;
     height: auto;
     margin: 10px;
@@ -182,27 +183,28 @@ a {
 
 /* Galeria de imagens */
 .image-grid {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* 6 colunas fixas */
     gap: 15px;
     margin: 20px 10px;
     padding-bottom: 10px;
     border-bottom: 1px solid #d4a760;
-    overflow-x: auto;
-    scrollbar-width: thin;
-    scrollbar-color: #d4a760 transparent;
+    overflow-x: auto; /* Permite rolagem horizontal */
+    scrollbar-width: thin; /* Personaliza a largura da barra de rolagem */
+    scrollbar-color: #d4a760 transparent; /* Cores da barra de rolagem */
 }
 
 .image-grid::-webkit-scrollbar {
-    height: 8px;
+    height: 8px; /* Altura da barra de rolagem */
 }
 
 .image-grid::-webkit-scrollbar-thumb {
-    background: #d4a760;
-    border-radius: 5px;
+    background: #d4a760; /* Cor do "polegar" */
+    border-radius: 5px; /* Arredondamento da barra de rolagem */
 }
 
 .image-grid img {
-    width: 150px;
+    width: 150px; /* Tamanho fixo das imagens */
     height: auto;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -211,9 +213,10 @@ a {
 }
 
 .image-grid img:hover {
-    transform: scale(1.05);
+    transform: scale(1.05); /* Efeito de zoom ao passar o mouse */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
+
 
 /* Responsividade */
 @media (max-width: 768px) {
