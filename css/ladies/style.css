@@ -401,7 +401,7 @@ header, footer {
 header {
     width: 100%;
     background-color: #f7e6c2;
-    padding: 10px 20px;
+    padding: 0px 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     position: fixed;
     top: 0;
