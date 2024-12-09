@@ -452,5 +452,5 @@ footer {
     z-index: 10; /* Fica acima do aside */
 }
 #img {
-    width: 100px;
+    width: 100%;
   }
