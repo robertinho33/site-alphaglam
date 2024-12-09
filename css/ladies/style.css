@@ -1,7 +1,9 @@
-/* Body - Configurações gerais */
+/* ========================
+   Configurações Gerais
+======================== */
 body {
     font-family: Arial, sans-serif;
-    margin: 20px; /* Corrigido o valor de margin */
+    margin: 0;
     padding: 0;
     background-color: #fff5f7;
     color: #5a3d31;
@@ -10,7 +12,32 @@ body {
     align-items: center;
 }
 
-/* Header */
+/* ========================
+   Estilo Padrão de Inputs, Botões e Selects
+======================== */
+input, select, button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #d4a760;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #d4a760;
+    color: white;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #b08b5b;
+}
+
+/* ========================
+   Header
+======================== */
 header {
     height: 100px;
     width: 100%;
@@ -23,6 +50,7 @@ header {
     border-bottom: 2px solid #6b4f32;
     position: relative;
     z-index: 10;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
 header:hover {
@@ -30,80 +58,18 @@ header:hover {
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
 }
 
-/* Aside */
-aside {
-    position: fixed;
-    top: 100px; /* Ajustado para não sobrepor o header */
-    left: 0;
-    width: 250px;
-    height: calc(100vh - 100px); /* Garante altura dinâmica */
-    background-color: #f8f9fa;
-    padding: 20px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    z-index: 10;
-    overflow-y: auto;
+header img {
+    max-height: 60px;
+    object-fit: contain;
+    cursor: pointer;
+    transition: transform 0.3s ease;
 }
 
-@media (max-width: 768px) {
-    aside {
-        width: 200px;
-    }
+header img:hover {
+    transform: scale(1.1);
 }
-
-@media (max-width: 480px) {
-    aside {
-        width: 100%;
-        position: relative;
-        height: auto;
-        box-shadow: none;
-    }
-}
-
-/* Main */
-main {
-    margin-left: 270px;
-    padding: 20px;
-    padding-top: 100px; /* Espaço para header */
-    width: calc(100% - 270px);
-    box-sizing: border-box;
-    min-height: calc(100vh - 160px); /* Espaço para footer */
-}
-
-@media (max-width: 768px) {
-    main {
-        margin-left: 220px;
-    }
-}
-
-@media (max-width: 480px) {
-    main {
-        margin-left: 0;
-        width: 100%;
-    }
-}
-
-/* Footer */
-footer {
-    width: 100%;
-    background-color: #f7e6c2;
-    padding: 10px;
-    text-align: center;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    z-index: 10;
-}
-
-/* Ajusta o conteúdo principal para evitar sobreposição do footer */
-main {
-    padding-bottom: 50px; /* Altura equivalente ao footer */
-}
-
 
 header .menu {
-    top: 10px;
-    right: 20px;
-    color: #6b4f32;
     position: relative;
 }
 
@@ -111,12 +77,8 @@ header .menu button {
     background: none;
     border: none;
     font-size: 18px;
-    cursor: pointer; 
-    position: absolute;
-    top: 10px;
-    right: 20px;
+    cursor: pointer;
     color: #6b4f32;
-    position: relative;
 }
 
 header .menu button:hover {
@@ -126,7 +88,7 @@ header .menu button:hover {
 header .menu ul {
     list-style: none;
     position: absolute;
-    top: 30px;
+    top: 40px;
     right: 0;
     background: #f7e6c2;
     border-radius: 5px;
@@ -152,17 +114,92 @@ header .menu ul li a:hover {
     color: #d4a760;
 }
 
-/* Grid com rolagem horizontal para as imagens, com limite de 6 itens */
+/* ========================
+   Aside
+======================== */
+aside {
+    position: fixed;
+    top: 100px;
+    left: 0;
+    width: 250px;
+    height: calc(100vh - 100px);
+    background-color: #f8f9fa;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    overflow-y: auto;
+}
+
+@media (max-width: 768px) {
+    aside {
+        width: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    aside {
+        width: 100%;
+        position: relative;
+        height: auto;
+        box-shadow: none;
+    }
+}
+
+/* ========================
+   Main
+======================== */
+main {
+    margin-left: 270px;
+    padding: 20px;
+    padding-top: 100px;
+    box-sizing: border-box;
+    min-height: calc(100vh - 160px);
+}
+
+@media (max-width: 768px) {
+    main {
+        margin-left: 220px;
+    }
+}
+
+@media (max-width: 480px) {
+    main {
+        margin-left: 0;
+        width: 100%;
+    }
+}
+
+/* ========================
+   Footer
+======================== */
+footer {
+    width: 100%;
+    background-color: #f7e6c2;
+    padding: 10px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+}
+
+main {
+    padding-bottom: 50px;
+}
+
+/* ========================
+   Image Grid
+======================== */
 .image-grid {
-    display: flex;  /* Usando flexbox para alinhamento de itens em linha */
+    display: flex;
     gap: 15px;
     margin: 20px 10px;
     padding-bottom: 10px;
     border-bottom: 1px solid #d4a760;
-    overflow-x: auto;  /* Permite rolagem horizontal */
+    overflow-x: auto;
     scrollbar-width: thin;
     scrollbar-color: #d4a760 transparent;
-    max-width: calc(6 * 150px + 5 * 15px); /* Limite de 6 imagens + espaços entre elas */
+    max-width: calc(6 * 150px + 5 * 15px);
 }
 
 .image-grid::-webkit-scrollbar {
@@ -175,7 +212,7 @@ header .menu ul li a:hover {
 }
 
 .image-grid img {
-    width: 150px;  /* Tamanho fixo para as imagens */
+    width: 150px;
     height: auto;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -188,196 +225,10 @@ header .menu ul li a:hover {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-.cart img {
-    width: 50px;
-    height: auto;
-    margin-right: 10px;
-    border-radius: 5px;
-}
-
-
-.cart h2 {
-    text-align: center;
-    color: #6b4f32;
-}
-
-.cart ul {
-    list-style: none;
-    padding: 0;
-    margin: 10px 0;
-}
-
-.cart ul li {
-    display: flex;
-    align-items: center;
-    margin: 10px 0;
-}
-
-.cart ul li img {
-    width: 50px;
-    height: auto;
-    margin-right: 10px;
-    border-radius: 5px;
-}
-
-.total {
-    text-align: center;
-    font-weight: bold;
-    margin: 10px 0;
-    color: #6b4f32;
-}
-
-.buttons {
-    display: flex;
-    justify-content: space-between;
-}
-
-.buttons button {
-    text-decoration: none;
-    background-color: #d4a760;
-    color: white;
-    padding: 10px;
-    border-radius: 5px;
-    text-align: center;
-    cursor: pointer;
-    border: none;
-}
-
-.buttons button:hover {
-    background-color: #b08b5b;
-}
-
-form {
-    max-width: 500px;
-    margin: 0px;
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    width: 90%;
-}
-
-form h1 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #6b4f32;
-}
-
-label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-input, select, button {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #d4a760;
-    border-radius: 5px;
-}
-
-button {
-    background-color: #d4a760;
-    color: white;
-    cursor: pointer;
-    border: none;
-}
-
-button:hover {
-    background-color: #b08b5b;
-}
-#form-cadastro, #form-carrinho {
-    margin-top: 20px;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    display: none; /* Ambos começam escondidos */
-}
-
-#form-cadastro {
-    display: none; /* Inicia escondido */
-    margin-top: 20px;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-.image-gallery img {
-    width: 150px;
-    height: auto;
-    margin: 10px;
-    cursor: pointer;
-    border: 2px solid #ccc;
-    border-radius: 8px;
-    transition: transform 0.2s;
-}
-
-.image-gallery img:hover {
-    transform: scale(1.1);
-}
-
-#product-card {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 300px;
-    padding: 20px;
-    background: white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    z-index: 1000;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-#product-card img {
-    width: 100%;
-    border-radius: 8px;
-    margin-bottom: 10px;
-}
-
-#product-card.hidden {
-    display: none;
-}
-
-#product-card button {
-    align-self: flex-end;
-    background: transparent;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-}
-
-#product-card button:hover {
-    color: #b08b5b;
-}
-        .navbar {
-            background-color: #f8e1d4;
-        }
-        .navbar-brand {
-            color: #d19a66 !important;
-            font-weight: bold;
-        }
-        h2, h3 {
-            color: #d19a66;
-        }
-        input, select, button {
-            margin-bottom: 15px;
-        }
-        .list-group-item {
-            background-color: #fef7f0;
-            border-color: #f3d9c4;
-        }
-        .btn-home {
-            background-color: #946c48;
-            color: white;
-        }
-        .btn-home:hover {
-            background-color: #c38752;
-        }
-        #bag-modal {
+/* ========================
+   Modal
+======================== */
+#bag-modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -388,6 +239,14 @@ button:hover {
     justify-content: center;
     align-items: center;
     z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+#bag-modal.active {
+    opacity: 1;
+    visibility: visible;
 }
 
 #bag-content {
@@ -405,118 +264,4 @@ button:hover {
     object-fit: cover;
     margin-right: 10px;
     border-radius: 5px;
-}
-
-/* Header e footer sempre acima do aside */
-header, footer {
-    z-index: 10; /* Eles ficam acima do aside */
-    position: relative;
-}
-
-/* Responsividade: ajustes para telas menores */
-@media (max-width: 768px) {
-    aside {
-        width: 200px; /* Largura reduzida em telas menores */
-    }
-    main {
-        margin-left: 220px; /* Ajuste proporcional ao aside */
-    }
-}
-
-@media (max-width: 480px) {
-    aside {
-        width: 100%;       /* O aside ocupa a largura total */
-        height: auto;      /* Altura ajustada automaticamente */
-        position: relative; /* Não fica fixo em telas pequenas */
-    }
-    main {
-        margin-left: 0;
-        padding-top: 80px; /* Espaço suficiente para o header */
-    }
-}
-header img {
-    max-width: 100%; /* Limita a largura da imagem ao tamanho do header */
-    height: auto; /* Mantém a proporção da imagem */
-    max-height: 60px; /* Limita a altura da imagem para não ultrapassar o header */
-    object-fit: contain; /* Ajusta a imagem para se ajustar ao contêiner */
-}
-/* Espaço do conteúdo principal */
-main {
-    margin-left: 270px; /* Espaço para o aside */
-    padding: 20px;
-    padding-top: 80px; /* Espaço suficiente para o header */
-    box-sizing: border-box;
-    min-height: calc(100vh - 100px); /* Altura mínima respeitando o footer */
-    z-index: 1; /* Garante que o main não fique sobre o header */
-}
-
-/* Estilo para o aside fixo */
-
-#img {
-    width: 100%;
-  }
-header:hover {
-    background: linear-gradient(90deg, #d4a760, #f7e6c2);
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-}
-#logo {
-    height: 60px;
-    width: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-#logo:hover {
-    transform: scale(1.1);
-}
-
-nav a:hover {
-    color: #f7e6c2;
-    background: #6b4f32;
-    border-color: #f7e6c2;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-@media (max-width: 717px) {
-    header {
-        padding: 0 15px;
-        height: auto;
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    #openMenu, #closeMenu {
-        display: block;
-        font-size: 24px;
-        color: #6b4f32;
-        margin-left: auto;
-        cursor: pointer;
-    }
-
-    nav {
-        flex-direction: column;
-        display: none;
-        width: 100%;
-        background: rgba(255, 255, 255, 0.95);
-        position: absolute;
-        top: 100%;
-        left: 0;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        border-top: 2px solid #d4a760;
-        z-index: 5;
-        padding: 10px 0;
-    }
-
-    nav.active {
-        display: flex;
-    }
-
-    nav a {
-        width: 100%;
-        text-align: center;
-        padding: 10px;
-        font-size: 16px;
-    }
 }
