@@ -32,7 +32,7 @@ body {
 }
 
 /* Formatação comum entre os elementos. */
-header, nav, main, aside, footer {
+nav, main, aside, footer {
 	/* Cor do fundo. */
 	background: #a1a1a1;
 
@@ -103,9 +103,6 @@ main {
     min-height: calc(100vh - 100px); /* Altura mínima respeitando o footer */
     z-index: 1; /* Garante que o main não fique sobre o header */
 }
-
-
-
 #openMenu, #closeMenu {
 	/* Remove a borda. */
 	border: none;
