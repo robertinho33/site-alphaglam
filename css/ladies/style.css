@@ -188,3 +188,9 @@ a {
     }
 }
 
+#elemento {
+    width: 100%; /* Preenche a largura do contêiner */
+    max-width: 275px; /* Define o tamanho máximo */
+    aspect-ratio: 1 / 1; /* Garante que seja quadrado */
+    background-color: #ddd; /* Apenas para visualização */
+}
