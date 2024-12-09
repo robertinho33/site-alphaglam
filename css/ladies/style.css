@@ -172,7 +172,18 @@ footer {
 	/* flex-basis – Tamanho inicial do item.           */
 	flex: 1 1 100vw;
 }
-
+/* Estilo para o aside fixo */
+aside {
+    position: fixed; /* Fixa o aside à esquerda */
+    top: 60px; /* Espaço suficiente para não sobrepor o header */
+    left: 0;
+    width: 250px; /* Largura do aside */
+    height: calc(100vh - 60px); /* Altura ajustada para não cobrir o header */
+    background-color: #f8f9fa;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    z-index: 10; /* Prioridade menor que o header */
+}
 a {
 	/* Remove a decoração padrão do elemento. */
 	text-decoration: none;
