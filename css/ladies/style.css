@@ -185,6 +185,12 @@ button:hover {
         flex-direction: column;
         padding: 10px;
     }
+    aside {
+        width: 200px; /* Largura menor para telas médias */
+    }
+    main {
+        margin-left: 220px; /* Ajuste proporcional */
+    }
 
     nav {
         display: none;
@@ -200,3 +206,36 @@ button:hover {
         text-align: center;
     }
 }
+@media (max-width: 480px) {
+    aside {
+        width: 100%; /* O aside ocupa a largura total */
+        height: auto; /* Altura ajustada automaticamente */
+        position: relative; /* Aside não será fixo */
+    }
+    main {
+        margin-left: 0; /* Remove margem */
+    }
+}
+/* Estilo para o aside fixo à esquerda da tela */
+aside {
+    position: fixed; /* Fixa o aside */
+    top: 0; /* Alinha o aside no topo */
+    left: 0; /* Alinha o aside à esquerda */
+    width: 250px; /* Largura fixa do aside */
+    height: 100vh; /* Altura de 100% da tela */
+    background-color: #f8f9fa; /* Cor de fundo */
+    padding: 20px; /* Espaçamento interno */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Sombra para destaque */
+    z-index: 10; /* Garantir que o aside fique acima de outros elementos */
+    overflow-y: auto; /* Permite rolagem vertical se o conteúdo for maior que a tela */
+}
+
+/* Espaço para o conteúdo principal */
+main {
+    margin-left: 270px; /* Espaço para o aside */
+    padding: 20px;
+    padding-top: 80px; /* Espaço para o header */
+    box-sizing: border-box;
+    min-height: calc(100vh - 100px); /* Altura mínima respeitando o footer */
+}
+
