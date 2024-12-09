@@ -61,8 +61,8 @@ header {
 header #logo {
 	/* Exibição flexível.                          */
 	/* Torna o elemento um flex container          */
-	/* e os seus elementos internos em flex-itens. */
-	display: flex;
+	/* e os seus elementos internos em flex-itens
+	display: flex;. */
 
 	/* Junção de flex-grow, flex-shrink e flex-basis.  */
 	/* flex-grow – Habilidade de um flex item crescer. */
@@ -74,10 +74,10 @@ header #logo {
 	background: #c9c9c9;
 
 	/* Alinha os itens na vertical. */
-	justify-content: left;
+	justify-content: center;
 
 	/* Alinha os itens na horizontal. */
-	align-items: left;
+	align-items: center;
 }
 
 #openMenu, #closeMenu {
