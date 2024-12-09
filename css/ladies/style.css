@@ -244,6 +244,8 @@ a {
 	}
 }
 #logo {
-    max-width: 120px;
-    height: auto; /* Mantém a proporção original da imagem */
+    max-width: 120px; /* Limita a largura da imagem a 120px */
+    height: auto; /* Mantém a proporção da imagem */
+    display: inline-block; /* Garante que a imagem se comporte como um bloco de linha */
+    margin-right: 15px; /* Espaçamento entre a imagem e o menu */
 }
