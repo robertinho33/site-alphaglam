@@ -38,8 +38,8 @@ header, nav, main, aside, footer {
 
 	/* Exibição flexível.                          */
 	/* Torna o elemento um flex container          */
-	/* e os seus elementos internos em flex-itens. */
-	display: flex;
+	/* e os seus elementos internos em flex-itens. 
+	display: flex;*/
 
 	/* Margem externa de todos os lados. */
 	margin: 3px;
@@ -104,19 +104,19 @@ header #logo {
 	display: none;
 }
 
-nav {
-	/* Alinha os itens na vertical. */
+/*nav {
+	 Alinha os itens na vertical. 
 	justify-content: flex-end;
 
-	/* Alinha os itens na horizontal. */
+	/* Alinha os itens na horizontal. 
 	align-items: center;
 
 	/* Junção de flex-grow, flex-shrink e flex-basis.  */
 	/* flex-grow – Habilidade de um flex item crescer. */
 	/* flex-shrink - Capacidade de redução do item.    */
-	/* flex-basis – Tamanho inicial do item.           */
+	/* flex-basis – Tamanho inicial do item.           
 	flex: 1 1 200px;
-}
+}*/
 
 nav a {
 	/* Margem de todos os lados. */
