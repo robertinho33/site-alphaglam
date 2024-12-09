@@ -1,70 +1,58 @@
+
+<!-- Indica que o documento é um arquivo HTML. -->
 <!DOCTYPE html>
-<html lang="pt-BR">
+
+<!-- Define a linguagem do conteúdo da página. -->
+<html lang="pt-br">
+
+<!-- Armazena informações sobre a página. -->
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Atendimento</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #fff5f7;
-            color: #5a3d31;
-        }
-        .navbar {
-            background-color: #f8e1d4;
-        }
-        .navbar-brand {
-            color: #d19a66 !important;
-            font-weight: bold;
-        }
-        h2, h3 {
-            color: #d19a66;
-        }
-        form {
-            max-width: 600px;
-            margin: 0 auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        input, select, button {
-            margin-bottom: 15px;
-        }
-        button {
-            background-color: #d19a66;
-            color: #fff;
-            border: none;
-        }
-        button:hover {
-            background-color: #c38752;
-        }
-        .list-group-item {
-            background-color: #fef7f0;
-            border-color: #f3d9c4;
-        }
-    </style>
+
+	<!-- Conjunto de caracteres que contém acentuação e ç. -->
+	<meta charset="utf-8">
+
+	<!-- Configuração da janela de visualização ( responsividade ). -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="css/ladies/style.css">
+
+	<!-- Título da aba do navegador -->
+	<title>Lt</title>
 </head>
+<!-- Conteúdo apresentado na tela. -->
 <body>
-    <header>
-        <!-- Botão de navegação para a home -->
-        <nav class="navbar navbar-expand-lg">
-            <a class="navbar-brand" href="#">AlphaGlam</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="index.html">Home</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
+
+	<!-- Agrupa os elementos que compõe o cabeçalho.	<button id="openMenu">&#9776;</button> -->
+	<header>
+		<div>
+				<a href="./home.html" ><img src="images/imgEcoBelle/logoAlphaGlamBeautyExpress.jpg"id="logo"></a>
+		</div>
+	<!--<button id="closeMenu">X</button>
+	 Agrupa links de navegação no site.-->
+		<nav id="menu">
+			<a href="#">Home</a>
+			<a href="#">about</a>
+			<a href="#">Products</a>
+			<a href="">Contact</a>
+		</nav>
+
+	</header>
+
+	<!-- Agrupa informações e links relacionado ao conteúdo principal. -->
+	<aside>
+		Aside <hr>
+    <h3 class="mt-5">Lista de Atendimentos</h3>
+    <ul id="listaAtendimentos" class="list-group"></ul>
+
+    <div class="text-center mt-5">
+        <button class="btn btn-primary" onclick="gerarExcel()">Baixar Excel</button>
+        <button class="btn btn-success" onclick="compartilharWhatsApp()">Compartilhar no WhatsApp</button>
+    </div>
+</div>
+
+</aside>
+<main>
+
 <div class="container mt-5">
     <form id="atendimento-form">
         <div class="form-group">
@@ -98,14 +86,7 @@
         <button type="button" class="btn btn-primary" onclick="adicionarAtendimento()">Adicionar Atendimento</button>
     </form>
 
-    <h3 class="mt-5">Lista de Atendimentos</h3>
-    <ul id="listaAtendimentos" class="list-group"></ul>
-
-    <div class="text-center mt-5">
-        <button class="btn btn-primary" onclick="gerarExcel()">Baixar Excel</button>
-        <button class="btn btn-success" onclick="compartilharWhatsApp()">Compartilhar no WhatsApp</button>
-    </div>
-</div>
+</main>
 
 <script>
     let atendimentos = [];
@@ -170,5 +151,8 @@
         window.open(url, '_blank');
     }
 </script>
+<!-- Agrupa informações de autoria, direitos autorais, contato,
+		   mapa do site, links e documento relacionados. -->
+	<footer>Footer</footer>
 </body>
 </html>
