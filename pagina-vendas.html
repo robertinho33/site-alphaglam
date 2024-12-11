@@ -12,7 +12,7 @@
 
     <title>Layout</title>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
     <header class="bg-light shadow-sm">
         <div class="container d-flex justify-content-between align-items-center py-3">
             <a href="./layout.html" id="logo" class="text-decoration-none text-dark h3">Logo</a>
@@ -31,17 +31,17 @@
         </div>
     </header>
 
-    <aside class="bg-light p-3 border rounded shadow-sm mt-3">Aside
-    <h3 class="mt-5">Lista de Atendimentos</h3>
-    <ul id="listaAtendimentos" class="list-group"></ul>
+    <aside class="bg-light p-3 border rounded shadow-sm mt-3 container">Aside
+        <h3 class="mt-5">Lista de Atendimentos</h3>
+        <ul id="listaAtendimentos" class="list-group"></ul>
 
-    <div class="text-center mt-5">
-        <button class="btn btn-primary" onclick="gerarExcel()">Baixar Excel</button>
-        <button class="btn btn-success" onclick="compartilharWhatsApp()">Compartilhar no WhatsApp</button>
-    </div>
-</div>
+        <div class="text-center mt-5">
+            <button class="btn btn-primary" onclick="gerarExcel()">Baixar Excel</button>
+            <button class="btn btn-success" onclick="compartilharWhatsApp()">Compartilhar no WhatsApp</button>
+        </div>
     </aside>
-    <main class="container mt-5">
+
+    <main class="flex-grow-1 container mt-5">
         <h1 class="mb-4">Cadastro de Atendimento</h1>
         <form id="atendimento-form" class="row g-3">
             <div class="col-md-6">
@@ -78,7 +78,7 @@
         </form>
     </main>
 
-    <footer class="bg-dark text-light text-center py-3 mt-5">
+    <footer class="bg-dark text-light text-center py-3 mt-3">
         <p class="mb-0">&copy; 2024 Seu Negócio. Todos os direitos reservados.</p>
     </footer>
 
