@@ -16,9 +16,11 @@
     <header class="bg-light shadow-sm">
         <div class="container d-flex justify-content-between align-items-center py-3">
             <a href="./layout.html" id="logo" class="text-decoration-none text-dark h3">Logo</a>
+
             <button class="btn btn-outline-secondary d-md-none" id="openMenu">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
             <nav id="menu" class="d-none d-md-flex gap-3">
                 <button id="closeMenu" class="btn btn-outline-danger d-md-none">X</button>
                 <a href="#" class="nav-link">Home</a>
@@ -29,15 +31,51 @@
         </div>
     </header>
 
+    <aside class="bg-light p-3 border rounded shadow-sm mt-3 container">Aside
+        <h3 class="mt-5">Lista de Atendimentos</h3>
+        <ul id="listaAtendimentos" class="list-group"></ul>
+
+        <div class="text-center mt-5">
+            <button class="btn btn-primary" onclick="gerarExcel()">Baixar Excel</button>
+            <button class="btn btn-success" onclick="compartilharWhatsApp()">Compartilhar no WhatsApp</button>
+        </div>
+    </aside>
+
     <main class="flex-grow-1 container mt-5">
         <h1 class="mb-4">Cadastro de Atendimento</h1>
         <form id="atendimento-form" class="row g-3">
-            <!-- Formulário -->
+            <div class="col-md-6">
+                <label for="nomeCliente" class="form-label">Nome do Cliente:</label>
+                <input type="text" id="nomeCliente" class="form-control" required>
+            </div>
+            <div class="col-md-6">
+                <label for="servico" class="form-label">Serviço:</label>
+                <input type="text" id="servico" class="form-control" required>
+            </div>
+            <div class="col-md-6">
+                <label for="profissional" class="form-label">Profissional:</label>
+                <input type="text" id="profissional" class="form-control" required>
+            </div>
+            <div class="col-md-6">
+                <label for="formaPagamento" class="form-label">Forma de Pagamento:</label>
+                <select id="formaPagamento" class="form-select">
+                    <option>Dinheiro</option>
+                    <option>Cartão</option>
+                    <option>Pix</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label for="valorServico" class="form-label">Valor do Serviço (R$):</label>
+                <input type="number" id="valorServico" class="form-control" step="0.01" required>
+            </div>
+            <div class="col-md-6">
+                <label for="desconto" class="form-label">Desconto (%):</label>
+                <input type="number" id="desconto" class="form-control" placeholder="Digite o desconto (se houver)">
+            </div>
+            <div class="col-12 text-center">
+                <button type="button" class="btn btn-primary" onclick="adicionarAtendimento()">Adicionar Atendimento</button>
+            </div>
         </form>
-        
-        <div class="text-center mt-5">
-            <button class="btn btn-primary" onclick="visualizarPDF()">Visualizar PDF</button>
-        </div>
     </main>
 
     <footer class="bg-dark text-light text-center py-3 mt-3">
@@ -49,41 +87,5 @@
 
     <!-- Custom JS -->
     <script type="text/javascript" src="assets/js/script.js"></script>
-
-    <script>
-        function visualizarPDF() {
-            // URL do PDF gerado. Ajuste o caminho conforme necessário.
-            const pdfUrl = "assets/pdf/atendimentos.pdf";
-
-            // Abrir o PDF em uma nova aba
-            const pdfWindow = window.open();
-            pdfWindow.document.write(`
-                <!DOCTYPE html>
-                <html lang="pt-br">
-                <head>
-                    <title>Visualizar PDF</title>
-                    <style>
-                        body {
-                            margin: 0;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            height: 100vh;
-                            background-color: #f8f9fa;
-                        }
-                        iframe {
-                            border: none;
-                            width: 80%;
-                            height: 90%;
-                        }
-                    </style>
-                </head>
-                <body>
-                    <iframe src="${pdfUrl}"></iframe>
-                </body>
-                </html>
-            `);
-        }
-    </script>
 </body>
 </html>
