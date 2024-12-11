@@ -14,40 +14,54 @@
         }
 
         header {
-            background-color: #333;
+            background-color: #e91e63;
             color: #fff;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 20px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         header img {
-            max-height: 50px;
+            max-height: 60px;
         }
 
         nav {
             display: flex;
-            gap: 15px;
+            gap: 20px;
         }
 
         nav a {
             color: #fff;
             text-decoration: none;
-            font-size: 14px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: color 0.3s;
         }
 
-        aside {
-            background-color: #f1f1f1;
-            padding: 20px;
-            width: 300px;
+        nav a:hover {
+            color: #ffd54f;
+        }
+
+        .banner {
+            background: url('images/banner.jpg') no-repeat center center/cover;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            font-size: 24px;
+            font-weight: bold;
         }
 
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
-            padding: 20px;
+            padding: 40px;
+            background-color: #fff;
         }
 
         .grid-item {
@@ -56,43 +70,69 @@
             align-items: center;
             background-color: #fff;
             border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 15px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .grid-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
         }
 
         .grid-item img {
             width: 100%;
-            max-width: 150px;
+            max-width: 200px;
             height: auto;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            border-radius: 8px;
         }
 
         .grid-item .name {
-            font-size: 14px;
+            font-size: 16px;
             font-weight: bold;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
             color: #333;
         }
 
         .grid-item .price {
+            font-size: 16px;
+            color: #e91e63;
+            font-weight: bold;
+        }
+
+        .grid-item button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #e91e63;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
             font-size: 14px;
-            color: #666;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .grid-item button:hover {
+            background-color: #d81b60;
         }
 
         footer {
             background-color: #333;
             color: #fff;
             text-align: center;
-            padding: 10px 0;
+            padding: 20px 0;
             margin-top: 20px;
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
     <header>
         <div>
-            <a href="./home.html"><img src="images/imgEcoBelle/logoAlphaGlamBeautyExpress.jpg" id="logo"></a>
+            <a href="./home.html"><img src="images/imgEcoBelle/logoAlphaGlamBeautyExpress.jpg" id="logo" alt="AlphaGlam Beauty"></a>
         </div>
         <nav id="menu">            
             <a href="#">Home</a>
@@ -102,37 +142,45 @@
         </nav>
     </header>
 
+    <div class="banner">Bem-vindos ao AlphaGlam Beauty Express!</div>
+
     <main>
         <div class="grid-container">
             <div class="grid-item">
                 <img src="https://images.yampi.io/unsafe/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/mascara-liquida-liquid-mask-ecobelle-200-ml-66fd5cae45ed1-large.png" alt="Máscara Líquida">
                 <div class="name">Máscara Líquida</div>
                 <div class="price">R$ 50,00</div>
+                <button>Adicionar ao Carrinho</button>
             </div>
             <div class="grid-item">
                 <img src="https://images.yampi.io/unsafe/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/finalizador-termico-coco-camomila-by-vitoria-lima-200-ml-667c4d7031e63-large.png" alt="Finalizador Térmico">
                 <div class="name">Finalizador Térmico</div>
                 <div class="price">R$ 40,00</div>
+                <button>Adicionar ao Carrinho</button>
             </div>
             <div class="grid-item">
                 <img src="https://images.yampi.io/unsafe/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/kit-coco-camomila-by-vitoria-lima-ecobelle-300-ml-66cf3cd879731-large.png" alt="Kit Coco e Camomila">
                 <div class="name">Kit Coco e Camomila</div>
                 <div class="price">R$ 100,00</div>
+                <button>Adicionar ao Carrinho</button>
             </div>
             <div class="grid-item">
                 <img src="https://images.yampi.io/inOUrVjOuPjvtnpVYzL9K3-xPCg=/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/kit-pimenta-rosa-eco-belle-64ef8bb1e85f1-large.png" alt="Kit Pimenta Rosa">
                 <div class="name">Kit Pimenta Rosa</div>
                 <div class="price">R$ 130,00</div>
+                <button>Adicionar ao Carrinho</button>
             </div>
             <div class="grid-item">
                 <img src="https://images.yampi.io/BHaubHu5dG9dtvDfoDfvRrI7LB0=/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/kit-manutencao-home-care-silver-ecobelle-300ml-3-itens-67412ba3969a3-large.png" alt="Kit Manutenção Home Care">
                 <div class="name">Kit Manutenção Home Care</div>
                 <div class="price">R$ 130,00</div>
+                <button>Adicionar ao Carrinho</button>
             </div>
             <div class="grid-item">
                 <img src="https://images.yampi.io/7rhO9gyuipnSCstiL7EtGLEiFaY=/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/kit-doeden-capim-limao-alecrim-6479e42ea3cfc-large.png" alt="Kit Capim Limão Alecrim">
                 <div class="name">Kit Capim Limão Alecrim</div>
                 <div class="price">R$ 100,00</div>
+                <button>Adicionar ao Carrinho</button>
             </div>
         </div>
     </main>
