@@ -166,4 +166,65 @@ document.addEventListener("DOMContentLoaded", function () {
       updateBag();
     });
     });
-    
+
+    let atendimentos = [];
+
+    function adicionarAtendimento() {
+        const nomeCliente = document.getElementById('nomeCliente').value;
+        const servico = document.getElementById('servico').value;
+        const profissional = document.getElementById('profissional').value;
+        const formaPagamento = document.getElementById('formaPagamento').value;
+        const valorServico = parseFloat(document.getElementById('valorServico').value);
+        const desconto = parseFloat(document.getElementById('desconto').value) || 0;
+
+        const valorComDesconto = valorServico - (valorServico * desconto / 100);
+
+        atendimentos.push({ nomeCliente, servico, profissional, formaPagamento, valorServico, desconto, valorComDesconto });
+
+        const lista = document.getElementById('listaAtendimentos');
+        const li = document.createElement('li');
+        li.classList.add('list-group-item');
+        li.textContent = `${nomeCliente} - ${servico} - R$ ${valorComDesconto.toFixed(2)} - ${profissional}`;
+        lista.appendChild(li);
+
+        document.getElementById('atendimento-form').reset();
+    }
+
+    function gerarExcel() {
+        const now = new Date();
+        const dia = String(now.getDate()).padStart(2, '0');
+        const mes = String(now.getMonth() + 1).padStart(2, '0');
+        const hora = now.toTimeString().split(" ")[0];
+        const dataHora = `${dia}/${mes}/${now.getFullYear()} ${hora}`;
+        const nomeArquivo = `Atendimento${dia}${mes}.xlsx`;
+
+        const headers = ["Nome do Cliente", "Serviço", "Profissional", "Forma de Pagamento", "Valor Serviço (R$)", "Desconto (%)", "Valor com Desconto (R$)"];
+        const data = atendimentos.map(atendimento => [
+            atendimento.nomeCliente,
+            atendimento.servico,
+            atendimento.profissional,
+            atendimento.formaPagamento,
+            atendimento.valorServico.toFixed(2),
+            atendimento.desconto.toFixed(2),
+            atendimento.valorComDesconto.toFixed(2)
+        ]);
+
+        const totalSemDesconto = atendimentos.reduce((acc, cur) => acc + cur.valorServico, 0).toFixed(2);
+        const totalComDesconto = atendimentos.reduce((acc, cur) => acc + cur.valorComDesconto, 0).toFixed(2);
+
+        data.push([]);
+        data.push(["", "", "", "Data de Geração:", dataHora]);
+        data.push(["", "", "", "Totais:", totalSemDesconto, totalComDesconto]);
+
+        const worksheet = XLSX.utils.aoa_to_sheet([headers, ...data]);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, "Atendimentos");
+
+        XLSX.writeFile(workbook, nomeArquivo);
+    }
+
+    function compartilharWhatsApp() {
+        const mensagem = encodeURIComponent("Lista de atendimentos disponível. Faça o download para visualizar.");
+        const url = `https://wa.me/?text=${mensagem}`;
+        window.open(url, '_blank');
+    }
