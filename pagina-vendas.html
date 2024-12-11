@@ -19,7 +19,42 @@
 		</nav>
 	</header>
 	<aside>Aside</aside>
-	<main>Main</main>
+	<main>
+        main
+        <div class="container mt-5">
+            <form id="atendimento-form">
+                <div class="form-group">
+                    <label for="nomeCliente">Nome do Cliente:</label>
+                    <input type="text" id="nomeCliente" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="servico">Serviço:</label>
+                    <input type="text" id="servico" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="profissional">Profissional:</label>
+                    <input type="text" id="profissional" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="formaPagamento">Forma de Pagamento:</label>
+                    <select id="formaPagamento" class="form-control">
+                        <option>Dinheiro</option>
+                        <option>Cartão</option>
+                        <option>Pix</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="valorServico">Valor do Serviço (R$):</label>
+                    <input type="number" id="valorServico" class="form-control" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="desconto">Desconto (%):</label>
+                    <input type="number" id="desconto" class="form-control" placeholder="Digite o desconto (se houver)">
+                </div>
+                <button type="button" class="btn btn-primary" onclick="adicionarAtendimento()">Adicionar Atendimento</button>
+            </form>
+        
+        </main>
 	<footer>Footer</footer>
 	<script type="text/javascript" src="assets/js/script.js"></script>
 </body>
