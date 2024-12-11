@@ -1,173 +1,144 @@
-
-<!-- Indica que o documento é um arquivo HTML. -->
 <!DOCTYPE html>
-
-<!-- Define a linguagem do conteúdo da página. -->
 <html lang="pt-br">
-
-<!-- Armazena informações sobre a página. -->
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlphaGlam Beauty Express</title>
+    <link rel="stylesheet" href="css/ladies/style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 0;
+        }
 
-	<!-- Conjunto de caracteres que contém acentuação e ç. -->
-	<meta charset="utf-8">
+        header {
+            background-color: #333;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
 
-	<!-- Configuração da janela de visualização ( responsividade ). -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        header img {
+            max-height: 50px;
+        }
 
-  <link rel="stylesheet" href="css/ladies/style.css">
+        nav {
+            display: flex;
+            gap: 15px;
+        }
 
-	<!-- Título da aba do navegador -->
-	<title>Lt</title>
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        aside {
+            background-color: #f1f1f1;
+            padding: 20px;
+            width: 300px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .grid-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .grid-item img {
+            width: 100%;
+            max-width: 150px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .grid-item .name {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .grid-item .price {
+            font-size: 14px;
+            color: #666;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 20px;
+        }
+    </style>
 </head>
-
-<!-- Conteúdo apresentado na tela. -->
 <body>
+    <header>
+        <div>
+            <a href="./home.html"><img src="images/imgEcoBelle/logoAlphaGlamBeautyExpress.jpg" id="logo"></a>
+        </div>
+        <nav id="menu">            
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Products</a>
+            <a href="#">Contact</a>
+        </nav>
+    </header>
 
-	<!-- Agrupa os elementos que compõe o cabeçalho.	<button id="openMenu">&#9776;</button> -->
-	<header>
-		<div>
-				<a href="./home.html" ><img src="images/imgEcoBelle/logoAlphaGlamBeautyExpress.jpg"id="logo"></a>
-		</div>
-	<!--<button id="closeMenu">X</button>
-	 Agrupa links de navegação no site.-->
-		<nav id="menu">			
-			<a href="#">Home</a>
-			<a href="#">about</a>
-			<a href="#">Products</a>
-			<a href="">Contact</a>
-		</nav>
-		 
-	</header>
+    <main>
+        <div class="grid-container">
+            <div class="grid-item">
+                <img src="https://images.yampi.io/unsafe/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/mascara-liquida-liquid-mask-ecobelle-200-ml-66fd5cae45ed1-large.png" alt="Máscara Líquida">
+                <div class="name">Máscara Líquida</div>
+                <div class="price">R$ 50,00</div>
+            </div>
+            <div class="grid-item">
+                <img src="https://images.yampi.io/unsafe/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/finalizador-termico-coco-camomila-by-vitoria-lima-200-ml-667c4d7031e63-large.png" alt="Finalizador Térmico">
+                <div class="name">Finalizador Térmico</div>
+                <div class="price">R$ 40,00</div>
+            </div>
+            <div class="grid-item">
+                <img src="https://images.yampi.io/unsafe/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/kit-coco-camomila-by-vitoria-lima-ecobelle-300-ml-66cf3cd879731-large.png" alt="Kit Coco e Camomila">
+                <div class="name">Kit Coco e Camomila</div>
+                <div class="price">R$ 100,00</div>
+            </div>
+            <div class="grid-item">
+                <img src="https://images.yampi.io/inOUrVjOuPjvtnpVYzL9K3-xPCg=/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/kit-pimenta-rosa-eco-belle-64ef8bb1e85f1-large.png" alt="Kit Pimenta Rosa">
+                <div class="name">Kit Pimenta Rosa</div>
+                <div class="price">R$ 130,00</div>
+            </div>
+            <div class="grid-item">
+                <img src="https://images.yampi.io/BHaubHu5dG9dtvDfoDfvRrI7LB0=/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/kit-manutencao-home-care-silver-ecobelle-300ml-3-itens-67412ba3969a3-large.png" alt="Kit Manutenção Home Care">
+                <div class="name">Kit Manutenção Home Care</div>
+                <div class="price">R$ 130,00</div>
+            </div>
+            <div class="grid-item">
+                <img src="https://images.yampi.io/7rhO9gyuipnSCstiL7EtGLEiFaY=/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/kit-doeden-capim-limao-alecrim-6479e42ea3cfc-large.png" alt="Kit Capim Limão Alecrim">
+                <div class="name">Kit Capim Limão Alecrim</div>
+                <div class="price">R$ 100,00</div>
+            </div>
+        </div>
+    </main>
 
-	<!-- Agrupa informações e links relacionado ao conteúdo principal. -->
-	<aside>  
-		Aside 
-		<!-- Carrinho de Compras -->
-		<div>
-			<ul id="cart-items"></ul>
-			<div id="total-price">Total: R$ 0.00</div>
-		</div>
-	<!-- Botão para abrir a sacola -->
-	<button id="view-bag-btn">Ver Sacola</button>
-	
-	<!-- Modal da sacola -->
-	<div id="bag-modal" style="display: none;">
-		<div id="bag-content">
-			<h2>Sacola de Compras</h2>
-			<ul id="bag-items"></ul>
-			<div id="bag-total-price">Total: R$ 0.00</div>
-			<button id="clear-bag-btn">Limpar Sacola</button>
-			<button id="close-bag-btn">Fechar</button>
-		</div>
-	</div>
-	
-		<!-- Formulário para capturar nome e telefone -->
-		<div id="user-details">
-			<label for="name">Nome:</label>
-			<input type="text" id="name" placeholder="Digite seu nome" required><br>
-	
-			<label for="phone">Telefone:</label>
-			<input type="text" id="phone" placeholder="Digite seu telefone" required><br>
-	
-			<button id="checkout-btn">Enviar Pedido para WhatsApp</button>
-		</div>
-	
-</aside>
-
-	<!-- Agrupa o conteúdo principal da página ou aplicação. -->
-	<main>
-		Main 
-		<div class="image-grid">
-			<style>
-				body {
-					font-family: Arial, sans-serif;
-					background-color: #f8f8f8;
-					margin: 0;
-					padding: 20px;
-				}
-		
-				.grid-container {
-					display: grid;
-					grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-					gap: 20px;
-					padding: 10px;
-				}
-		
-				.grid-item {
-					display: flex;
-					flex-direction: column;
-					align-items: center;
-					background-color: #fff;
-					border: 1px solid #ddd;
-					border-radius: 5px;
-					padding: 15px;
-					box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-				}
-		
-				.grid-item img {
-					width: 100%;
-					max-width: 150px;
-					height: auto;
-					margin-bottom: 10px;
-				}
-		
-				.grid-item .name {
-					font-size: 14px;
-					font-weight: bold;
-					margin-bottom: 5px;
-					color: #333;
-				}
-		
-				.grid-item .price {
-					font-size: 14px;
-					color: #666;
-				}
-			</style>
-		</head>
-		<body>
-			<div class="grid-container">
-				<div class="grid-item">
-					<img src="https://images.yampi.io/unsafe/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/mascara-liquida-liquid-mask-ecobelle-200-ml-66fd5cae45ed1-large.png" alt="Máscara Líquida">
-					<div class="name">Máscara Líquida</div>
-					<div class="price">R$ 50,00</div>
-				</div>
-				<div class="grid-item">
-					<img src="https://images.yampi.io/unsafe/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/finalizador-termico-coco-camomila-by-vitoria-lima-200-ml-667c4d7031e63-large.png" alt="Finalizador Térmico">
-					<div class="name">Finalizador Térmico</div>
-					<div class="price">R$ 40,00</div>
-				</div>
-				<div class="grid-item">
-					<img src="https://images.yampi.io/unsafe/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/kit-coco-camomila-by-vitoria-lima-ecobelle-300-ml-66cf3cd879731-large.png" alt="Kit Coco e Camomila">
-					<div class="name">Kit Coco e Camomila</div>
-					<div class="price">R$ 100,00</div>
-				</div>
-				<div class="grid-item">
-					<img src="https://images.yampi.io/inOUrVjOuPjvtnpVYzL9K3-xPCg=/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/kit-pimenta-rosa-eco-belle-64ef8bb1e85f1-large.png" alt="Kit Pimenta Rosa">
-					<div class="name">Kit Pimenta Rosa</div>
-					<div class="price">R$ 130,00</div>
-				</div>
-				<div class="grid-item">
-					<img src="https://images.yampi.io/BHaubHu5dG9dtvDfoDfvRrI7LB0=/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/kit-manutencao-home-care-silver-ecobelle-300ml-3-itens-67412ba3969a3-large.png" alt="Kit Manutenção Home Care">
-					<div class="name">Kit Manutenção Home Care</div>
-					<div class="price">R$ 130,00</div>
-				</div>
-				<div class="grid-item">
-					<img src="https://images.yampi.io/7rhO9gyuipnSCstiL7EtGLEiFaY=/fit-in/275x275/filters:background_color(white):upscale()/https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/kit-doeden-capim-limao-alecrim-6479e42ea3cfc-large.png" alt="Kit Capim Limão Alecrim">
-					<div class="name">Kit Capim Limão Alecrim</div>
-					<div class="price">R$ 100,00</div>
-				</div>
-			</div>
-		</div>
-</main>
-
-	<!-- Agrupa informações de autoria, direitos autorais, contato, 
-		   mapa do site, links e documento relacionados. -->
-	<footer>Footer</footer>
-
-	<!-- Importação do arquivo JavaScript. -->
-	<script type="text/javascript" src="assets/js/script.js"></script>
-</body>
-<script>
-</script>
+    <footer>
+        <p>&copy; 2024 AlphaGlam Beauty. Todos os direitos reservados.</p>
+    </footer>
 </body>
 </html>
