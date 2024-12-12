@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulação de Futebol - Time A vs Time B</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f9f9f9;
+        }
+        .card {
+            margin: 20px;
+        }
+        .scoreboard {
+            font-size: 2rem;
+            margin: 20px 0;
+        }
+        .timer {
+            font-size: 1.5rem;
+            color: #d19a66;
+        }
+    </style>
+</head>
+<body class="text-center">
+    <div class="container">
+        <h1 class="my-4">Simulação de Futebol</h1>
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 id="teamAName">Time A</h2>
+                        <div class="scoreboard">
+                            <span id="teamAScore">0</span> - <span id="teamBScore">0</span>
+                        </div>
+                        <div>
+                            <strong>Artilharia:</strong> <span id="teamAArtilheiro">Jogador A1</span> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 id="teamBName">Time B</h2>
+                        <div class="scoreboard">
+                            <span id="teamBScore">0</span> - <span id="teamAScore">0</span>
+                        </div>
+                        <div>
+                            <strong>Artilharia:</strong> <span id="teamBArtilheiro">Jogador B1</span> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="timer" id="timer">25:00</div>
+        <button id="startButton" class="btn btn-success mt-3">Iniciar Jogo</button>
+        <hr>
+        <h3>Resultado Final</h3>
+        <div id="result" class="mt-3"></div>
+    </div>
+    <script>
+        let seconds = 1500; // 25 minutos em segundos
+        let gameInterval;
+        let teamAScore = 0;
+        let teamBScore = 0;
+        
+        document.getElementById('startButton').addEventListener('click', startGame);
+        function startGame() {
+            document.getElementById('startButton').disabled = true;
+            gameInterval = setInterval(updateTimer, 1000);
+        }
+        function updateTimer() {
+            const minutes = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            document.getElementById('timer').innerText = `${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+            seconds--;
+            if (seconds < 0) {
+                clearInterval(gameInterval);
+                displayFinalResult();
+            }
+            // Simulação de gols a cada 5 segundos
+            if (Math.random() < 0.1) { // 10% de chance de gol a cada segundo (ajuste conforme necessário)
+                if (Math.random() < 0.5) {
+                    teamAScore++;
+                    document.getElementById('teamAScore').innerText = teamAScore;
+                } else {
+                    teamBScore++;
+                    document.getElementById('teamBScore').innerText = teamBScore;
+                }
+            }
+        }
+        function displayFinalResult() {
+            const resultText = teamAScore > teamBScore 
+                ? `Time A (${teamAScore}) venceu Time B (${teamBScore})!` 
+                : teamAScore < teamBScore 
+                ? `Time B (${teamBScore}) venceu Time A (${teamAScore})!` 
+                : `Empate (${teamAScore} a ${teamBScore})!`;
+            document.getElementById('result').innerText = resultText;
+        }
+    </script>
+</body>
+</html>
