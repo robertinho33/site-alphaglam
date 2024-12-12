@@ -51,8 +51,9 @@
                     type="text" 
                     id="whatsappLady" 
                     class="form-control" 
-                    placeholder="(XX) XXXXX-XXXX" 
-                    required>
+                    placeholder="+55 XX XXXXX-XXXX" 
+                    required 
+                    oninput="aplicarMascaraTelefone(this)">
             </div>
             <div class="form-group">
                 <label for="emailLady">E-mail:</label>
@@ -76,7 +77,15 @@
 
     <script>
         const ladies = [];
+        
+        function aplicarMascaraTelefone(input) {
+            let value = input.value.replace(/\D/g, ''); // Remove caracteres não numéricos
+            value = value.replace(/^(\d{2})(\d)/, '+55 ($1) $2'); // Adiciona código do país e DDD
+            value = value.replace(/(\d{5})(\d)/, '$1-$2'); // Adiciona hífen
+            input.value = value;
+        }
 
+        // Configura a data atual no campo de data
         document.getElementById('dataCadastro').value = new Date().toISOString().split('T')[0];
 
         function adicionarLady() {
@@ -103,19 +112,31 @@
             document.getElementById('dataCadastro').value = new Date().toISOString().split('T')[0];
         }
 
-        function visualizarPDF() {
+        function gerarPDF() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
 
-            doc.text('Lista de Ladies', 10, 10);
-            let y = 20;
+            doc.setFontSize(16);
+            doc.text('Lista de Ladies', 20, 20);
 
+            let y = 30;
             ladies.forEach((lady, index) => {
-                doc.text(`${index + 1}. ${lady.nomeLady}, WhatsApp: ${lady.whatsappLady}`, 10, y);
+                doc.text(
+                    `${index + 1}. ${lady.dataCadastro} - ${lady.nomeLady} - Instagram: ${lady.instagramLady} - WhatsApp: ${lady.whatsappLady} - E-mail: ${lady.emailLady}`,
+                    20,
+                    y
+                );
                 y += 10;
             });
 
-            doc.save('ladies-list.pdf');
+            return doc;
+        }
+
+        function visualizarPDF() {
+            const doc = gerarPDF();
+            const today = new Date().toISOString().split('T')[0]; // Data atual
+            const fileName = `lista_de_ladies_${today}.pdf`; // Nome do arquivo
+            doc.save(fileName); // Salva o arquivo com o nome dinâmico
         }
 
         function voltarParaHome() {
