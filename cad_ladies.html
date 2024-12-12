@@ -9,21 +9,13 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
+            margin: 0;
             background-color: #fff5f7;
             color: #5a3d31;
         }
-        form {
-            max-width: 600px;
-            margin: 0 auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        .list-group-item {
-            background-color: #fef7f0;
-            border-color: #f3d9c4;
+        header {
+            background-color: #f8f9fa;
+            padding: 10px 0;
         }
         .navbar-nav {
             list-style-type: none;
@@ -52,23 +44,67 @@
         .navbar-nav a:focus {
             outline: none;
         }
+        aside {
+            background-color: #f8f9fa;
+            padding: 15px;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: 250px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: none;
+        }
+        aside.show {
+            display: block;
+        }
+        aside .navbar-nav li {
+            margin-bottom: 15px;
+        }
+        .container {
+            margin-left: 270px;
+        }
+        .btn-toggle {
+            display: none;
+        }
+        @media (max-width: 768px) {
+            aside {
+                width: 200px;
+            }
+            .container {
+                margin-left: 0;
+            }
+            .btn-toggle {
+                display: block;
+                margin: 10px;
+            }
+            .navbar-nav {
+                display: none;
+            }
+            aside.show .navbar-nav {
+                display: block;
+            }
+        }
     </style>
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
             <a class="navbar-brand" href="#">AlphaGlam</a>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li><a href="#" onclick="visualizarPDF()">Visualizar PDF</a></li>
-                    <li><a href="#" onclick="voltarParaHome()">Voltar para Home</a></li>
-                    <li><a href="#" onclick="gerarCSV()">Baixar CSV</a></li>
-                    <li><input type="file" id="fileInput" accept=".csv" class="form-control" /></li>
-                    <li><a href="#" onclick="carregarCSV()">Carregar CSV</a></li>
-                </ul>
-            </div>
+            <button class="btn btn-outline-primary btn-toggle" onclick="toggleAside()">☰</button>
         </nav>
     </header>
+
+    <aside id="asideLinks">
+        <ul class="navbar-nav">
+            <li><a href="#" onclick="visualizarPDF()">Visualizar PDF</a></li>
+            <li><a href="#" onclick="voltarParaHome()">Voltar para Home</a></li>
+            <li><a href="#" onclick="gerarCSV()">Baixar CSV</a></li>
+            <li><input type="file" id="fileInput" accept=".csv" class="form-control" /></li>
+            <li><a href="#" onclick="carregarCSV()">Carregar CSV</a></li>
+        </ul>
+    </aside>
 
     <div class="container mt-5">
         <h2 class="text-center">Cadastro de Ladies</h2>
@@ -225,6 +261,10 @@
 
         function voltarParaHome() {
             window.location.href = "index.html";
+        }
+
+        function toggleAside() {
+            document.getElementById('asideLinks').classList.toggle('show');
         }
     </script>
 
