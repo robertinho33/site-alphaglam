@@ -51,9 +51,8 @@
                     type="text" 
                     id="whatsappLady" 
                     class="form-control" 
-                    placeholder="+55 XX XXXXX-XXXX" 
-                    required 
-                    oninput="aplicarMascaraTelefone(this)">
+                    placeholder="(XX) XXXXX-XXXX" 
+                    required>
             </div>
             <div class="form-group">
                 <label for="emailLady">E-mail:</label>
@@ -77,13 +76,6 @@
 
     <script>
         const ladies = [];
-        
-        function aplicarMascaraTelefone(input) {
-            let value = input.value.replace(/\D/g, ''); // Remove caracteres não numéricos
-            value = value.replace(/^(\d{2})(\d)/, '+55 ($1) $2'); // Adiciona código do país e DDD
-            value = value.replace(/(\d{5})(\d)/, '$1-$2'); // Adiciona hífen
-            input.value = value;
-        }
 
         document.getElementById('dataCadastro').value = new Date().toISOString().split('T')[0];
 
