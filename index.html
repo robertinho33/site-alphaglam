@@ -138,34 +138,33 @@
 
     <script>
         const ladies = [];
-
+    
         document.getElementById('dataCadastro').value = new Date().toISOString().split('T')[0];
-
+    
         function adicionarLady() {
             const nomeLady = document.getElementById('nomeLady').value;
             const instagramLady = document.getElementById('instagramLady').value;
             const whatsappLady = document.getElementById('whatsappLady').value;
             const emailLady = document.getElementById('emailLady').value;
             const dataCadastro = document.getElementById('dataCadastro').value;
-
+    
             if (!nomeLady || !instagramLady || !whatsappLady || !emailLady) {
                 alert('Por favor, preencha todos os campos obrigatórios.');
                 return;
             }
-
+    
             ladies.push({ nomeLady, instagramLady, whatsappLady, emailLady, dataCadastro });
-
+    
             atualizarListaLadies();
-
+    
             document.getElementById('form-ladies').reset();
             document.getElementById('dataCadastro').value = new Date().toISOString().split('T')[0];
-            adicionarLady();
         }
-
+    
         function atualizarListaLadies() {
             const lista = document.getElementById('ladiesList');
             lista.innerHTML = ""; // Limpa a lista existente
-
+    
             if (ladies.length === 0) {
                 const vazio = document.createElement('li');
                 vazio.textContent = "Nenhuma Lady cadastrada.";
@@ -173,7 +172,7 @@
                 lista.appendChild(vazio);
                 return;
             }
-
+    
             ladies.forEach(lady => {
                 const li = document.createElement('li');
                 li.classList.add('list-group-item');
@@ -181,120 +180,67 @@
                 lista.appendChild(li);
             });
         }
-
+    
         function visualizarPDF() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
-
-            doc.setFontSize(16);
-            doc.text('Lista de Ladies', 20, 20);
-
-            let y = 30;
+    
+            doc.setFontSize(14);
+            doc.text('Lista de Ladies', 105, 10, null, null, 'center');
+    
+            let y = 20;
+            const pageHeight = doc.internal.pageSize.height;
+    
             ladies.forEach((lady, index) => {
-                doc.text(
-                    `${index + 1}. ${lady.dataCadastro} - ${lady.nomeLady} - Instagram: ${lady.instagramLady} - WhatsApp: ${lady.whatsappLady} - E-mail: ${lady.emailLady}`,
-                    20,
-                    y
-                );
-                y += 10;
+                const text = `${index + 1}. ${lady.dataCadastro} - ${lady.nomeLady}\nInstagram: ${lady.instagramLady} - WhatsApp: ${lady.whatsappLady}\nE-mail: ${lady.emailLady}`;
+    
+                doc.text(text, 10, y);
+                y += 20;
+    
+                // Adiciona nova página se ultrapassar o limite
+                if (y > pageHeight - 20) {
+                    doc.addPage();
+                    y = 20;
+                }
             });
-
+    
             const today = new Date().toISOString().split('T')[0];
-            doc.save(`lista_de_ladies_${today}.pdf`);
+            const pdfFileName = `lista_de_ladies_${today}.pdf`;
+    
+            // Salva localmente o PDF
+            doc.save(pdfFileName);
+    
+            alert('PDF salvo no dispositivo. Envie-o manualmente pelo WhatsApp, se necessário.');
         }
-
+    
         function gerarCSV() {
             const headers = "Nome da Lady,Instagram,WhatsApp,E-mail,Data do Cadastro\n";
             const rows = ladies.map(lady => 
                 `${lady.nomeLady},${lady.instagramLady},${lady.whatsappLady},${lady.emailLady},${lady.dataCadastro}`
             );
             const csvContent = headers + rows.join("\n");
-
+    
             const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
             const url = URL.createObjectURL(blob);
-
+    
             const link = document.createElement("a");
             link.href = url;
             link.download = "ladies.csv";
             link.style.display = "none";
-
+    
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
+    
+            alert('Arquivo CSV salvo no dispositivo. Agora, você pode enviá-lo pelo WhatsApp.');
         }
-
-        function carregarCSV() {
-            const fileInput = document.getElementById('fileInput');
-            const file = fileInput.files[0];
-
-            if (!file) {
-                alert("Por favor, selecione um arquivo CSV.");
-                return;
-            }
-
-            const reader = new FileReader();
-
-            reader.onload = function (e) {
-                const csvContent = e.target.result;
-                const linhas = csvContent.split("\n").map(linha => linha.trim());
-
-                ladies.length = 0; // Reseta o array de ladies
-
-                linhas.forEach((linha, index) => {
-                    if (index === 0 || linha === "") return;
-
-                    const [nomeLady, instagramLady, whatsappLady, emailLady, dataCadastro] = linha.split(",");
-                    ladies.push({
-                        nomeLady: nomeLady.trim(),
-                        instagramLady: instagramLady.trim(),
-                        whatsappLady: whatsappLady.trim(),
-                        emailLady: emailLady.trim(),
-                        dataCadastro: dataCadastro.trim(),
-                    });
-                });
-
-                atualizarListaLadies();
-                alert("Dados carregados com sucesso!");
-            };
-
-            reader.readAsText(file);
+    
+        function criarLinkWhatsApp() {
+            const numero = '5511986215473'; // Número do destinatário
+            const mensagem = encodeURIComponent('Segue em anexo o arquivo PDF da lista de Ladies.');
+            window.open(`https://wa.me/${numero}?text=${mensagem}`, '_blank');
         }
-
-        function voltarParaHome() {
-            window.location.href = "index.html";
-        }
-
-        function toggleAside() {
-            document.getElementById('asideLinks').classList.toggle('show');
-        }
-        function gerarCSV() {
-    const headers = "Nome da Lady,Instagram,WhatsApp,E-mail,Data do Cadastro\n";
-    const rows = ladies.map(lady => 
-        `${lady.nomeLady},${lady.instagramLady},${lady.whatsappLady},${lady.emailLady},${lady.dataCadastro}`
-    );
-    const csvContent = headers + rows.join("\n");
-
-    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-    const url = URL.createObjectURL(blob);
-
-    // Salva o arquivo no dispositivo
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = "ladies.csv"; // Nome do arquivo ao salvar
-    link.style.display = "none";
-
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-
-    alert('Arquivo CSV salvo no dispositivo. Agora, você pode enviá-lo pelo WhatsApp.');
-}
-function criarLinkWhatsApp() {
-    const numero = '5511986215473'; // Número do destinatário
-    const mensagem = encodeURIComponent('Segue em anexo o arquivo CSV.');
-    window.open(`https://wa.me/${numero}?text=${mensagem}`, '_blank');
-}
     </script>
-
+    
 </body>
 </html>
