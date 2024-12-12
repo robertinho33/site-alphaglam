@@ -181,33 +181,42 @@ function carregarCSV() {
         const csvContent = e.target.result;
         const linhas = csvContent.split("\n");
 
-        atendimentos = []; // Limpa os dados atuais
+        ladies = []; // Limpa os dados atuais
 
         linhas.forEach((linha, index) => {
             if (index === 0 || linha.trim() === "") return; // Ignora cabeçalhos e linhas vazias
 
-            const [nomeCliente, servico, profissional, formaPagamento, valorServico, desconto, valorComDesconto] = linha.split(",");
+            const [nomeLady, instagramLady, whatsappLady, emailLady, dataCadastro] = linha.split(",");
 
-            // Adiciona cada linha como um objeto no array de atendimentos
-            atendimentos.push({
-                nomeCliente: nomeCliente.trim(),
-                servico: servico.trim(),
-                profissional: profissional.trim(),
-                formaPagamento: formaPagamento.trim(),
-                valorServico: parseFloat(valorServico),
-                desconto: parseFloat(desconto),
-                valorComDesconto: parseFloat(valorComDesconto),
+            // Adiciona cada linha como um objeto no array de ladies
+            ladies.push({
+                nomeLady: nomeLady.trim(),
+                instagramLady: instagramLady.trim(),
+                whatsappLady: whatsappLady.trim(),
+                emailLady: emailLady.trim(),
+                dataCadastro: dataCadastro.trim(),
             });
         });
 
-        atualizarListaAtendimentos();
+        atualizarListaLadies();
         alert("Dados carregados com sucesso!");
     };
 
     reader.readAsText(file);
 }
 
-function atualizarListaAtendimentos() {
+function atualizarListaLadies() {
+    const lista = document.getElementById('ladiesList');
+    lista.innerHTML = ""; // Limpa a lista atual
+
+    ladies.forEach(lady => {
+        const li = document.createElement('li');
+        li.classList.add('list-group-item');
+        li.textContent = `${lady.dataCadastro} - ${lady.nomeLady} - Instagram: ${lady.instagramLady} - WhatsApp: ${lady.whatsappLady} - E-mail: ${lady.emailLady}`;
+        lista.appendChild(li);
+    });
+}
+
     const lista = document.getElementById('listaAtendimentos');
     lista.innerHTML = ""; // Limpa a lista atual
 
@@ -217,7 +226,6 @@ function atualizarListaAtendimentos() {
         li.textContent = `${atendimento.nomeCliente} - ${atendimento.servico} - R$ ${atendimento.valorComDesconto.toFixed(2)} - ${atendimento.profissional}`;
         lista.appendChild(li);
     });
-}
 
     </script>
 </body>
