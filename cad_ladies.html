@@ -13,16 +13,6 @@
             background-color: #fff5f7;
             color: #5a3d31;
         }
-        .navbar {
-            background-color: #f8e1d4;
-        }
-        .navbar-brand {
-            color: #d19a66 !important;
-            font-weight: bold;
-        }
-        h2, h3 {
-            color: #d19a66;
-        }
         form {
             max-width: 600px;
             margin: 0 auto;
@@ -31,17 +21,6 @@
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-        input, select, button {
-            margin-bottom: 15px;
-        }
-        button {
-            background-color: #d19a66;
-            color: #fff;
-            border: none;
-        }
-        button:hover {
-            background-color: #c38752;
-        }
         .list-group-item {
             background-color: #fef7f0;
             border-color: #f3d9c4;
@@ -49,139 +28,107 @@
     </style>
 </head>
 <body>
-<header>
-    <nav class="navbar navbar-expand-lg">
-        <a class="navbar-brand" href="index.html">AlphaGlam</a>
-    </nav>
-</header>
+    <header>
+        <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand" href="#">AlphaGlam</a>
+        </nav>
+    </header>
 
-<div class="container mt-5">
-    <h2 class="text-center">Cadastro de Ladies</h2>
-    <form id="form-ladies">
-        <div class="form-group">
-            <label for="nomeLady">Nome da Lady:</label>
-            <input type="text" id="nomeLady" class="form-control" placeholder="Digite o nome da lady" required>
-        </div>
-        <div class="form-group">
-            <label for="instagramLady">Instagram:</label>
-            <input type="text" id="instagramLady" class="form-control" placeholder="@seu_instagram" required>
-        </div>
-        <div class="form-group">
-            <label for="whatsappLady">WhatsApp:</label>
-            <input 
-            type="text" 
-            id="whatsappLady" 
-            class="form-control" 
-            placeholder="XX XXXXX-XXXX" 
-            required 
-            oninput="aplicarMascaraTelefone(this)" 
-            maxlength="15">
-          </div>
-        <div class="form-group">
-            <label for="emailLady">E-mail:</label>
-            <input type="email" id="emailLady" class="form-control" placeholder="Digite o e-mail" required>
-        </div>
-        <div class="form-group">
-            <label for="dataCadastro">Data do Cadastro:</label>
-            <input type="date" id="dataCadastro" class="form-control" readonly>
-        </div>
-        <button type="button" class="btn btn-primary btn-block" onclick="adicionarLady()">Salvar Cadastro</button>
-    </form>
+    <div class="container mt-5">
+        <h2 class="text-center">Cadastro de Ladies</h2>
+        <form id="form-ladies">
+            <div class="form-group">
+                <label for="nomeLady">Nome da Lady:</label>
+                <input type="text" id="nomeLady" class="form-control" placeholder="Digite o nome da lady" required>
+            </div>
+            <div class="form-group">
+                <label for="instagramLady">Instagram:</label>
+                <input type="text" id="instagramLady" class="form-control" placeholder="@seu_instagram" required>
+            </div>
+            <div class="form-group">
+                <label for="whatsappLady">WhatsApp:</label>
+                <input 
+                    type="text" 
+                    id="whatsappLady" 
+                    class="form-control" 
+                    placeholder="+55 XX XXXXX-XXXX" 
+                    required 
+                    oninput="aplicarMascaraTelefone(this)">
+            </div>
+            <div class="form-group">
+                <label for="emailLady">E-mail:</label>
+                <input type="email" id="emailLady" class="form-control" placeholder="Digite o e-mail" required>
+            </div>
+            <div class="form-group">
+                <label for="dataCadastro">Data do Cadastro:</label>
+                <input type="date" id="dataCadastro" class="form-control" readonly>
+            </div>
+            <button type="button" class="btn btn-primary btn-block" onclick="adicionarLady()">Salvar Cadastro</button>
+        </form>
 
-    <h3 class="mt-5">Lista de Ladies</h3>
-    <ul id="ladiesList" class="list-group mt-3"></ul>
+        <h3 class="mt-5">Lista de Ladies</h3>
+        <ul id="ladiesList" class="list-group mt-3"></ul>
 
-    <div class="text-center mt-5">
-        <button class="btn btn-primary" onclick="visualizarPDF()">Visualizar PDF</button>
-        <button class="btn btn-secondary" onclick="voltarParaHome()">Voltar para Home</button>
+        <div class="text-center mt-5">
+            <button class="btn btn-primary" onclick="visualizarPDF()">Visualizar PDF</button>
+            <button class="btn btn-secondary" onclick="voltarParaHome()">Voltar para Home</button>
+        </div>
     </div>
-</div>
 
-<script>
-    const ladies = [];
-    function aplicarMascaraTelefone(input) {
-    // Remove caracteres não numéricos
-    let value = input.value.replace(/\D/g, '');
-
-    // Limita a quantidade de dígitos a 13 (2 do DDD + 9 do telefone)
-    value = value.substring(0, 15);
-
-    // Adiciona máscara
-    value = value.replace(/^(\d{2})(\d)/, '+55 $1 $2'); // +55 XX
-    value = value.replace(/(\d{5})(\d)/, '$1-$2');       // XXXXX-XXXX
-
-    input.value = value; // Aplica o valor formatado no campo
-}
-
-
-    // Configura a data atual no campo de data
-    document.getElementById('dataCadastro').value = new Date().toISOString().split('T')[0];
-
-    function aplicarMascaraTelefone(input) {
-        let value = input.value.replace(/\D/g, ''); // Remove caracteres não numéricos
-        //value = value.replace(/^(\d{2})(\d)/, '+55 $1 $2'); // Adiciona código do país e DDD
-        value = value.replace(/(\d{5})(\d)/, '$1-$2'); // Adiciona o hífen no número
-        input.value = value;
-    }
-
-    function adicionarLady() {
-        const nomeLady = document.getElementById('nomeLady').value;
-        const instagramLady = document.getElementById('instagramLady').value;
-        const whatsappLady = document.getElementById('whatsappLady').value;
-        const emailLady = document.getElementById('emailLady').value;
-        const dataCadastro = document.getElementById('dataCadastro').value;
-
-        if (!nomeLady || !instagramLady || !whatsappLady || !emailLady) {
-            alert('Por favor, preencha todos os campos obrigatórios.');
-            return;
+    <script>
+        const ladies = [];
+        
+        function aplicarMascaraTelefone(input) {
+            let value = input.value.replace(/\D/g, ''); // Remove caracteres não numéricos
+            value = value.replace(/^(\d{2})(\d)/, '+55 ($1) $2'); // Adiciona código do país e DDD
+            value = value.replace(/(\d{5})(\d)/, '$1-$2'); // Adiciona hífen
+            input.value = value;
         }
 
-        ladies.push({ nomeLady, instagramLady, whatsappLady, emailLady, dataCadastro });
-
-        const lista = document.getElementById('ladiesList');
-        const li = document.createElement('li');
-        li.className = 'list-group-item';
-        li.textContent = `${dataCadastro} - ${nomeLady} - Instagram: ${instagramLady} - WhatsApp: ${whatsappLady} - E-mail: ${emailLady}`;
-        lista.appendChild(li);
-
-        document.getElementById('form-ladies').reset();
         document.getElementById('dataCadastro').value = new Date().toISOString().split('T')[0];
-    }
 
-    function gerarPDF() {
-        const { jsPDF } = window.jspdf;
-        const doc = new jsPDF();
+        function adicionarLady() {
+            const nomeLady = document.getElementById('nomeLady').value;
+            const instagramLady = document.getElementById('instagramLady').value;
+            const whatsappLady = document.getElementById('whatsappLady').value;
+            const emailLady = document.getElementById('emailLady').value;
+            const dataCadastro = document.getElementById('dataCadastro').value;
 
-        doc.setFontSize(16);
-        doc.text('Lista de Ladies', 20, 20);
+            if (!nomeLady || !instagramLady || !whatsappLady || !emailLady) {
+                alert('Por favor, preencha todos os campos obrigatórios.');
+                return;
+            }
 
-        let y = 30;
-        ladies.forEach((lady, index) => {
-            doc.text(
-                `${index + 1}. ${lady.dataCadastro} - ${lady.nomeLady} - Instagram: ${lady.instagramLady} - WhatsApp: ${lady.whatsappLady} - E-mail: ${lady.emailLady}`,
-                20,
-                y
-            );
-            y += 10;
-        });
+            ladies.push({ nomeLady, instagramLady, whatsappLady, emailLady, dataCadastro });
 
-        return doc;
-    }
+            const lista = document.getElementById('ladiesList');
+            const li = document.createElement('li');
+            li.className = 'list-group-item';
+            li.textContent = `${dataCadastro} - ${nomeLady} - Instagram: ${instagramLady} - WhatsApp: ${whatsappLady} - E-mail: ${emailLady}`;
+            lista.appendChild(li);
 
-    function visualizarPDF() {
-        const doc = gerarPDF();
-        const pdfBlob = doc.output('blob');
-        const pdfURL = URL.createObjectURL(pdfBlob);
-        window.open(pdfURL, '_blank');
-    }
+            document.getElementById('form-ladies').reset();
+            document.getElementById('dataCadastro').value = new Date().toISOString().split('T')[0];
+        }
 
-    function voltarParaHome() {
-        window.location.href = "index.html";
-    }
-</script>
+        function visualizarPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+            doc.text('Lista de Ladies', 10, 10);
+            let y = 20;
+
+            ladies.forEach((lady, index) => {
+                doc.text(`${index + 1}. ${lady.nomeLady}, WhatsApp: ${lady.whatsappLady}`, 10, y);
+                y += 10;
+            });
+
+            doc.save('ladies-list.pdf');
+        }
+
+        function voltarParaHome() {
+            window.location.href = "index.html";
+        }
+    </script>
 </body>
 </html>
