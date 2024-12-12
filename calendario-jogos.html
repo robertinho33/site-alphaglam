@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulação de Futebol - Time A vs Time B</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f9f9f9;
+        }
+        .card {
+            margin: 20px;
+        }
+        .scoreboard {
+            font-size: 2rem;
+            margin: 20px 0;
+        }
+        .timer {
+            font-size: 1.5rem;
+            color: #d19a66;
+        }
+        .navbar {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body class="text-center">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Simulação de Futebol</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="financeiro.html">Financeiro</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="calendario.html">Calendário de Jogos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="ranking.html">Ranking</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 class="my-4">Simulação de Futebol</h1>
+        <!-- Conteúdo principal -->
+        <!-- O restante do seu conteúdo permanece o mesmo -->
+        <!-- Início do conteúdo já implementado -->
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h2 id="teamAName">Time A</h2>
+                    <div class="scoreboard">
+                        <span id="teamAScore">0</span>
+                    </div>
+                    <div>
+                        <strong>Artilharia:</strong> 
+                        <ul id="teamAScorers"></ul>
+                    </div>
+                    <input type="text" id="playerA" placeholder="Nome do jogador" class="form-control mb-2">
+                    <button onclick="incrementScore('A')" class="btn btn-success">Adicionar Gol Time A</button>
+                    <button onclick="decrementScore('A')" class="btn btn-danger">Remover Gol Time A</button>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h2 id="teamBName">Time B</h2>
+                    <div class="scoreboard">
+                        <span id="teamBScore">0</span>
+                    </div>
+                    <div>
+                        <strong>Artilharia:</strong> 
+                        <ul id="teamBScorers"></ul>
+                    </div>
+                    <input type="text" id="playerB" placeholder="Nome do jogador" class="form-control mb-2">
+                    <button onclick="incrementScore('B')" class="btn btn-success">Adicionar Gol Time B</button>
+                    <button onclick="decrementScore('B')" class="btn btn-danger">Remover Gol Time B</button>
+                </div>
+            </div>
+        </div>
+        <!-- Fim do conteúdo já implementado -->
+        <div class="timer" id="timer">25:00</div>
+        <button id="startButton" class="btn btn-success mt-3" onclick="startGame()">Iniciar Jogo</button>
+        <button id="pauseButton" class="btn btn-warning mt-3" onclick="pauseGame()" disabled>Pausar Jogo</button>
+        <button id="resetButton" class="btn btn-danger mt-3" onclick="resetGame()">Reiniciar Jogo</button>
+        <button onclick="increaseTime()" class="btn btn-primary mt-3">Adicionar Tempo (+1min)</button>
+        <button onclick="decreaseTime()" class="btn btn-secondary mt-3">Remover Tempo (-1min)</button>
+
+        <hr>
+        <h3>Resultado Final</h3>
+        <div id="result" class="mt-3"></div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Seu script JavaScript permanece inalterado -->
+</body>
+</html>
