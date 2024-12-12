@@ -25,37 +25,40 @@
 <body class="text-center">
     <div class="container">
         <h1 class="my-4">Simulação de Futebol</h1>
-        <div class="row">
-            <div class="col">
-                <div class="card">
-                    <div class="card-body">
-                        <h2 id="teamAName">Time A</h2>
-                        <div class="scoreboard">
-                            <span id="teamAScore">0</span>
-                        </div>
-                        <div>
-                            <strong>Artilharia:</strong> <span id="teamAArtilheiro">Jogador A1</span> 
-                        </div>
-                        <button onclick="incrementScore('A')" class="btn btn-success">Adicionar Gol Time A</button>
-                        <button onclick="decrementScore('A')" class="btn btn-danger">Remover Gol Time A</button>
-                    </div>
-                </div>
+        <div class="col">
+    <div class="card">
+        <div class="card-body">
+            <h2 id="teamAName">Time A</h2>
+            <div class="scoreboard">
+                <span id="teamAScore">0</span>
             </div>
-            <div class="col">
-                <div class="card">
-                    <div class="card-body">
-                        <h2 id="teamBName">Time B</h2>
-                        <div class="scoreboard">
-                            <span id="teamBScore">0</span>
-                        </div>
-                        <div>
-                            <strong>Artilharia:</strong> <span id="teamBArtilheiro">Jogador B1</span> 
-                        </div>
-                        <button onclick="incrementScore('B')" class="btn btn-success">Adicionar Gol Time B</button>
-                        <button onclick="decrementScore('B')" class="btn btn-danger">Remover Gol Time B</button>
-                    </div>
-                </div>
+            <div>
+                <strong>Artilharia:</strong> 
+                <ul id="teamAScorers"></ul>
             </div>
+            <input type="text" id="playerA" placeholder="Nome do jogador" class="form-control mb-2">
+            <button onclick="incrementScore('A')" class="btn btn-success">Adicionar Gol Time A</button>
+            <button onclick="decrementScore('A')" class="btn btn-danger">Remover Gol Time A</button>
+        </div>
+    </div>
+</div>
+<div class="col">
+    <div class="card">
+        <div class="card-body">
+            <h2 id="teamBName">Time B</h2>
+            <div class="scoreboard">
+                <span id="teamBScore">0</span>
+            </div>
+            <div>
+                <strong>Artilharia:</strong> 
+                <ul id="teamBScorers"></ul>
+            </div>
+            <input type="text" id="playerB" placeholder="Nome do jogador" class="form-control mb-2">
+            <button onclick="incrementScore('B')" class="btn btn-success">Adicionar Gol Time B</button>
+            <button onclick="decrementScore('B')" class="btn btn-danger">Remover Gol Time B</button>
+        </div>
+    </div>
+</div>
         </div>
         <div class="timer" id="timer">25:00</div>
         <button id="startButton" class="btn btn-success mt-3" onclick="startGame()">Iniciar Jogo</button>
@@ -155,6 +158,59 @@ function updateTimerDisplay() {
                 : `Empate (${teamAScore} a ${teamBScore})!`;
             document.getElementById('result').innerText = resultText;
         }
+let teamAScorers = [];
+let teamBScorers = [];
+
+function incrementScore(team) {
+    if (team === 'A') {
+        const player = document.getElementById('playerA').value.trim();
+        if (player) {
+            teamAScorers.push(player);
+            updateScorersList('A', teamAScorers);
+            teamAScore++;
+            document.getElementById('teamAScore').innerText = teamAScore;
+            document.getElementById('playerA').value = ''; // Limpa o campo de entrada
+        } else {
+            alert('Por favor, insira o nome do jogador!');
+        }
+    } else if (team === 'B') {
+        const player = document.getElementById('playerB').value.trim();
+        if (player) {
+            teamBScorers.push(player);
+            updateScorersList('B', teamBScorers);
+            teamBScore++;
+            document.getElementById('teamBScore').innerText = teamBScore;
+            document.getElementById('playerB').value = ''; // Limpa o campo de entrada
+        } else {
+            alert('Por favor, insira o nome do jogador!');
+        }
+    }
+}
+
+function decrementScore(team) {
+    if (team === 'A' && teamAScore > 0) {
+        teamAScore--;
+        teamAScorers.pop(); // Remove o último jogador da lista
+        updateScorersList('A', teamAScorers);
+        document.getElementById('teamAScore').innerText = teamAScore;
+    } else if (team === 'B' && teamBScore > 0) {
+        teamBScore--;
+        teamBScorers.pop(); // Remove o último jogador da lista
+        updateScorersList('B', teamBScorers);
+        document.getElementById('teamBScore').innerText = teamBScore;
+    }
+}
+
+function updateScorersList(team, scorers) {
+    const listId = team === 'A' ? 'teamAScorers' : 'teamBScorers';
+    const listElement = document.getElementById(listId);
+    listElement.innerHTML = '';
+    scorers.forEach(scorer => {
+        const li = document.createElement('li');
+        li.innerText = scorer;
+        listElement.appendChild(li);
+    });
+}
     </script>
 </body>
 </html>
