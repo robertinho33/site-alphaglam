@@ -101,7 +101,9 @@
             <button class="btn btn-primary" onclick="gerarExcel()">Baixar Excel</button>
             <button class="btn btn-success" onclick="compartilharWhatsApp()">Compartilhar no WhatsApp</button>
             <button class="btn btn-primary" onclick="gerarCSV()">Baixar CSV</button>
-        </div>
+            <input type="file" id="fileInput" accept=".csv" class="btn btn-secondary mt-3">
+            <button class="btn btn-warning mt-3" onclick="carregarCSV()">Carregar CSV</button>
+                    </div>
     </aside>
 
     <main>
@@ -202,6 +204,58 @@
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+}
+function carregarCSV() {
+    const fileInput = document.getElementById('fileInput');
+    const file = fileInput.files[0];
+
+    if (!file) {
+        alert("Por favor, selecione um arquivo CSV.");
+        return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+        const csvContent = e.target.result;
+        const linhas = csvContent.split("\n");
+
+        atendimentos = []; // Limpa os dados atuais
+
+        linhas.forEach((linha, index) => {
+            if (index === 0 || linha.trim() === "") return; // Ignora cabeçalhos e linhas vazias
+
+            const [nomeCliente, servico, profissional, formaPagamento, valorServico, desconto, valorComDesconto] = linha.split(",");
+
+            // Adiciona cada linha como um objeto no array de atendimentos
+            atendimentos.push({
+                nomeCliente: nomeCliente.trim(),
+                servico: servico.trim(),
+                profissional: profissional.trim(),
+                formaPagamento: formaPagamento.trim(),
+                valorServico: parseFloat(valorServico),
+                desconto: parseFloat(desconto),
+                valorComDesconto: parseFloat(valorComDesconto),
+            });
+        });
+
+        atualizarListaAtendimentos();
+        alert("Dados carregados com sucesso!");
+    };
+
+    reader.readAsText(file);
+}
+
+function atualizarListaAtendimentos() {
+    const lista = document.getElementById('listaAtendimentos');
+    lista.innerHTML = ""; // Limpa a lista atual
+
+    atendimentos.forEach(atendimento => {
+        const li = document.createElement('li');
+        li.classList.add('list-group-item');
+        li.textContent = `${atendimento.nomeCliente} - ${atendimento.servico} - R$ ${atendimento.valorComDesconto.toFixed(2)} - ${atendimento.profissional}`;
+        lista.appendChild(li);
+    });
 }
 
 </script>
