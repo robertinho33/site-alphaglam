@@ -159,7 +159,7 @@
 
             document.getElementById('form-ladies').reset();
             document.getElementById('dataCadastro').value = new Date().toISOString().split('T')[0];
-            adicionarLady();
+            adicionarLady()
         }
 
         function atualizarListaLadies() {
@@ -267,33 +267,6 @@
         function toggleAside() {
             document.getElementById('asideLinks').classList.toggle('show');
         }
-        function gerarCSV() {
-    const headers = "Nome da Lady,Instagram,WhatsApp,E-mail,Data do Cadastro\n";
-    const rows = ladies.map(lady => 
-        `${lady.nomeLady},${lady.instagramLady},${lady.whatsappLady},${lady.emailLady},${lady.dataCadastro}`
-    );
-    const csvContent = headers + rows.join("\n");
-
-    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-    const url = URL.createObjectURL(blob);
-
-    // Salva o arquivo no dispositivo
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = "ladies.csv"; // Nome do arquivo ao salvar
-    link.style.display = "none";
-
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-
-    alert('Arquivo CSV salvo no dispositivo. Agora, você pode enviá-lo pelo WhatsApp.');
-}
-function criarLinkWhatsApp() {
-    const numero = '5511986215473'; // Número do destinatário
-    const mensagem = encodeURIComponent('Segue em anexo o arquivo CSV.');
-    window.open(`https://wa.me/${numero}?text=${mensagem}`, '_blank');
-}
     </script>
 
 </body>
