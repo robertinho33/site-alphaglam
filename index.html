@@ -136,138 +136,60 @@
         <ul id="ladiesList" class="list-group mt-3"></ul>
     </div>
 
-    <script>
-        const ladies = [];
-
-        document.getElementById('dataCadastro').value = new Date().toISOString().split('T')[0];
-
-        function adicionarLady() {
-            const nomeLady = document.getElementById('nomeLady').value;
-            const instagramLady = document.getElementById('instagramLady').value;
-            const whatsappLady = document.getElementById('whatsappLady').value;
-            const emailLady = document.getElementById('emailLady').value;
-            const dataCadastro = document.getElementById('dataCadastro').value;
-
-            if (!nomeLady || !instagramLady || !whatsappLady || !emailLady) {
-                alert('Por favor, preencha todos os campos obrigatórios.');
-                return;
-            }
-
-            ladies.push({ nomeLady, instagramLady, whatsappLady, emailLady, dataCadastro });
-
-            atualizarListaLadies();
-
-            document.getElementById('form-ladies').reset();
-            document.getElementById('dataCadastro').value = new Date().toISOString().split('T')[0];
-            adicionarLady()
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Ladies</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #fff5f7;
+            color: #5a3d31;
         }
-
-        function atualizarListaLadies() {
-            const lista = document.getElementById('ladiesList');
-            lista.innerHTML = ""; // Limpa a lista existente
-
-            if (ladies.length === 0) {
-                const vazio = document.createElement('li');
-                vazio.textContent = "Nenhuma Lady cadastrada.";
-                vazio.classList.add('list-group-item', 'text-center');
-                lista.appendChild(vazio);
-                return;
-            }
-
-            ladies.forEach(lady => {
-                const li = document.createElement('li');
-                li.classList.add('list-group-item');
-                li.textContent = `${lady.dataCadastro} - ${lady.nomeLady} - Instagram: ${lady.instagramLady} - WhatsApp: ${lady.whatsappLady} - E-mail: ${lady.emailLady}`;
-                lista.appendChild(li);
-            });
+        header {
+            background-color: #f8f9fa;
+            padding: 10px 0;
         }
-
-        function visualizarPDF() {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-
-            doc.setFontSize(16);
-            doc.text('Lista de Ladies', 20, 20);
-
-            let y = 30;
-            ladies.forEach((lady, index) => {
-                doc.text(
-                    `${index + 1}. ${lady.dataCadastro} - ${lady.nomeLady} - Instagram: ${lady.instagramLady} - WhatsApp: ${lady.whatsappLady} - E-mail: ${lady.emailLady}`,
-                    20,
-                    y
-                );
-                y += 10;
-            });
-
-            const today = new Date().toISOString().split('T')[0];
-            doc.save(`lista_de_ladies_${today}.pdf`);
+        .navbar-nav {
+            list-style-type: none;
+            padding-left: 0;
         }
-
-        function gerarCSV() {
-            const headers = "Nome da Lady,Instagram,WhatsApp,E-mail,Data do Cadastro\n";
-            const rows = ladies.map(lady => 
-                `${lady.nomeLady},${lady.instagramLady},${lady.whatsappLady},${lady.emailLady},${lady.dataCadastro}`
-            );
-            const csvContent = headers + rows.join("\n");
-
-            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-            const url = URL.createObjectURL(blob);
-
-            const link = document.createElement("a");
-            link.href = url;
-            link.download = "ladies.csv";
-            link.style.display = "none";
-
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+        .navbar-nav li {
+            margin: 10px 0;
         }
-
-        function carregarCSV() {
-            const fileInput = document.getElementById('fileInput');
-            const file = fileInput.files[0];
-
-            if (!file) {
-                alert("Por favor, selecione um arquivo CSV.");
-                return;
-            }
-
-            const reader = new FileReader();
-
-            reader.onload = function (e) {
-                const csvContent = e.target.result;
-                const linhas = csvContent.split("\n").map(linha => linha.trim());
-
-                ladies.length = 0; // Reseta o array de ladies
-
-                linhas.forEach((linha, index) => {
-                    if (index === 0 || linha === "") return;
-
-                    const [nomeLady, instagramLady, whatsappLady, emailLady, dataCadastro] = linha.split(",");
-                    ladies.push({
-                        nomeLady: nomeLady.trim(),
-                        instagramLady: instagramLady.trim(),
-                        whatsappLady: whatsappLady.trim(),
-                        emailLady: emailLady.trim(),
-                        dataCadastro: dataCadastro.trim(),
-                    });
-                });
-
-                atualizarListaLadies();
-                alert("Dados carregados com sucesso!");
-            };
-
-            reader.readAsText(file);
+        .navbar-nav a {
+            text-decoration: none;
+            padding: 10px 15px;
+            color: #5a3d31;
+            border: 1px solid #f3d9c4;
+            border-radius: 4px;
+            display: block;
+            background-color: #fff;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
-
-        function voltarParaHome() {
-            window.location.href = "index.html";
+        .navbar-nav a:hover {
+            background-color: #f3d9c4;
+            color: #fff;
         }
-
-        function toggleAside() {
-            document.getElementById('asideLinks').classList.toggle('show');
+        .container {
+            margin-top: 20px;
+            padding: 20px;
         }
-    </script>
+        .list-group-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class
 
 </body>
 </html>
