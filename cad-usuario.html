@@ -59,6 +59,11 @@
                     body: JSON.stringify({ nome, email, senha })
                 });
 
+                if (response.status === 400) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.message || 'Erro ao cadastrar usuário.');
+                }
+
                 if (!response.ok) {
                     throw new Error('Erro ao cadastrar usuário.');
                 }
@@ -66,7 +71,7 @@
                 alert('Usuário cadastrado com sucesso!');
                 document.getElementById('cadastroForm').reset();
             } catch (error) {
-                alert('Erro ao cadastrar. Tente novamente.');
+                alert(`Erro ao cadastrar: ${error.message}`);
                 console.error(error);
             }
         });
@@ -87,7 +92,8 @@
                 });
 
                 if (!response.ok) {
-                    throw new Error('Erro ao fazer login.');
+                    const errorData = await response.json();
+                    throw new Error(errorData.message || 'Erro ao fazer login.');
                 }
 
                 const dados = await response.json();
@@ -95,7 +101,7 @@
                 alert('Login realizado com sucesso!');
                 window.location.href = 'index.html';
             } catch (error) {
-                alert('Erro no login. Verifique suas credenciais.');
+                alert(`Erro no login: ${error.message}`);
                 console.error(error);
             }
         });
