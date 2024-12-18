@@ -39,6 +39,32 @@
                 alert('Usuário ou senha inválidos!');
             }
         });
+        async function hashPassword(password) {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(password);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+document.getElementById('loginForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value.trim();
+    const hashedPassword = await hashPassword(password);
+
+    const validUsername = "alpha";
+    const validPasswordHash = "03ac674216f3e15c761ee1a5e255f067e2f9c2b8b16ee0e01b81a2156a45dd87"; // SHA-256 hash de "1234"
+
+    if (username === validUsername && hashedPassword === validPasswordHash) {
+        localStorage.setItem('isAuthenticated', true);
+        window.location.href = 'index.html';
+    } else {
+        alert('Usuário ou senha inválidos!');
+    }
+});
+
+
     </script>
 </body>
 </html>
