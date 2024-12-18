@@ -13,6 +13,7 @@
         <nav>
             <ul>
                 <li><a href="index.html">Início</a></li>
+                <li><a href="cadastro.html">Cadastro</a></li>
                 <li><a href="login.html">Login</a></li>
                 <li><a href="logout.html">Logout</a></li>
                 <li><a href="perfil.html">Perfil</a></li>
@@ -28,5 +29,95 @@
     <footer>
         <p>&copy; 2024 Projeto Seguro. Todos os direitos reservados.</p>
     </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Exemplo de conexão com um banco de dados usando APIs REST
+
+        async function cadastrarUsuario(nome, email, senha) {
+            try {
+                const response = await fetch('https://api-seguro.com/cadastro', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ nome, email, senha })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Erro ao cadastrar usuário.');
+                }
+
+                const dados = await response.json();
+                alert('Usuário cadastrado com sucesso!');
+                console.log('Dados do usuário:', dados);
+            } catch (erro) {
+                console.error('Erro:', erro);
+                alert('Falha no cadastro. Tente novamente.');
+            }
+        }
+
+        async function loginUsuario(email, senha) {
+            try {
+                const response = await fetch('https://api-seguro.com/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, senha })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Erro ao autenticar usuário.');
+                }
+
+                const dados = await response.json();
+                console.log('Usuário autenticado:', dados);
+                // Armazenar token de sessão
+                sessionStorage.setItem('authToken', dados.token);
+            } catch (erro) {
+                console.error('Erro:', erro);
+                alert('Falha no login. Verifique suas credenciais.');
+            }
+        }
+
+        function logoutUsuario() {
+            sessionStorage.removeItem('authToken');
+            alert('Logout realizado com sucesso.');
+        }
+
+        function verificarAutenticacao() {
+            const token = sessionStorage.getItem('authToken');
+            if (!token) {
+                alert('Usuário não autenticado. Redirecionando para a página de login.');
+                window.location.href = 'login.html';
+            }
+        }
+
+        async function buscarPerfilUsuario() {
+            try {
+                const token = sessionStorage.getItem('authToken');
+                if (!token) throw new Error('Usuário não autenticado.');
+
+                const response = await fetch('https://api-seguro.com/perfil', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Erro ao buscar informações do perfil.');
+                }
+
+                const perfil = await response.json();
+                console.log('Dados do perfil:', perfil);
+                return perfil;
+            } catch (erro) {
+                console.error('Erro:', erro);
+                alert('Falha ao carregar perfil do usuário.');
+            }
+        }
+    </script>
 </body>
 </html>
