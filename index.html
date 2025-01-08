@@ -42,6 +42,17 @@
         .phase h2 {
             margin-bottom: 10px;
         }
+        @media (max-width: 600px) {
+            table {
+                font-size: 12px;
+            }
+            th, td {
+                padding: 5px;
+            }
+            .container {
+                padding: 10px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -51,104 +62,36 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Time A</th>
-                        <th>número</th>                    
-                        <th>nome</th>
-                        <th>Time B</th>
-                        <th>número</th>                    
-                        <th>nome</th>
-                        <th>Time C</th>
-                        <th>número</th>                    
-                        <th>nome</th>
-                        <th>Time D</th>
-                        <th>número</th>                    
-                        <th>nome</th>
+                        <th scope="col">Time A</th>
+                        <th scope="col">Número</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Time B</th>
+                        <th scope="col">Número</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Time C</th>
+                        <th scope="col">Número</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Time D</th>
+                        <th scope="col">Número</th>
+                        <th scope="col">Nome</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
+                        <td>A</td>
                         <td>1</td>
-                        <td>0</td>
-                        <td>nome</td>
-                            <td>1</td>
-                            <td>0</td>
-                            <td>nome</td>
-                            <td>1</td>
-                            <td>0</td>
-                            <td>nome</td>
-                                <td>1</td>
-                                <td>0</td>
-                                <td>nome</td>
-                        </tr>
-                    <tr>
+                        <td>nome A</td>
+                        <td>B</td>
                         <td>2</td>
-                        <td>0</td>
-                        <td>nome</td>
-                            <td>2</td>
-                            <td>0</td>
-                            <td>nome</td>
-                            <td>2</td>
-                            <td>0</td>
-                            <td>nome</td>
-                                <td>2</td>
-                                <td>0</td>
-                                <td>nome</td>
-                        </tr>
-                    <tr>
+                        <td>nome B</td>
+                        <td>C</td>
                         <td>3</td>
-                        <td>0</td>
-                        <td>nome</td>
-                            <td>3</td>
-                            <td>0</td>
-                            <td>nome</td>
-                            <td>3</td>
-                            <td>0</td>
-                            <td>nome</td>
-                                <td>3</td>
-                                <td>0</td>
-                                <td>nome</td></tr>
-                    <tr>
+                        <td>nome C</td>
+                        <td>D</td>
                         <td>4</td>
-                        <td>0</td>
-                        <td>nome</td>
-                            <td>4</td>
-                            <td>0</td>
-                            <td>nome</td>
-                            <td>4</td>
-                            <td>0</td>
-                            <td>nome</td>
-                                <td>4</td>
-                                <td>0</td>
-                                <td>nome</td></tr>
-                    <tr>
-                        <td>5</td>
-                        <td>0</td>
-                        <td>nome</td>
-                            <td>5</td>
-                            <td>0</td>
-                            <td>nome</td>
-                            <td>5</td>
-                            <td>0</td>
-                            <td>nome</td>
-                                <td>5</td>
-                                <td>0</td>
-                                <td>nome</td>
+                        <td>nome D</td>
                     </tr>
-                    <tr>
-                        <td>6</td>
-                        <td>0</td>
-                        <td>nome</td>
-                            <td>6</td>
-                            <td>0</td>
-                            <td>nome</td>
-                            <td>6</td>
-                            <td>0</td>
-                            <td>nome</td>
-                                <td>6</td>
-                                <td>0</td>
-                                <td>nome</td>
-                    </tr>
-                  </tbody>
+                </tbody>
             </table>
         </div>
         <div class="phase">
@@ -156,10 +99,10 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Jogo</th>
-                        <th>Time 1</th>
-                        <th>Time 2</th>                    
-                        <th>Data</th>
+                        <th scope="col">Jogo</th>
+                        <th scope="col">Time 1</th>
+                        <th scope="col">Time 2</th>
+                        <th scope="col">Data</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -167,46 +110,50 @@
                         <td>1</td>
                         <td>A</td>
                         <td>B</td>
+                        <td>TBD</td>
                     </tr>
                     <tr>
                         <td>2</td>
                         <td>C</td>
                         <td>D</td>
+                        <td>TBD</td>
                     </tr>
                     <tr>
-                        <td>1</td>
+                        <td>3</td>
                         <td>A</td>
                         <td>C</td>
+                        <td>TBD</td>
                     </tr>
                     <tr>
-                        <td>2</td>
+                        <td>4</td>
                         <td>B</td>
                         <td>D</td>
+                        <td>TBD</td>
                     </tr>
                     <tr>
-                        <td>1</td>
+                        <td>5</td>
                         <td>A</td>
                         <td>D</td>
+                        <td>TBD</td>
                     </tr>
                     <tr>
-                        <td>2</td>
+                        <td>6</td>
                         <td>B</td>
                         <td>C</td>
+                        <td>TBD</td>
                     </tr>
-                  </tbody>
+                </tbody>
             </table>
         </div>
-
         <div class="phase">
             <h2>Segunda Fase</h2>
             <table>
                 <thead>
                     <tr>
-                        <th>Jogo</th>
-                        <th>Time 1</th>
-                        <th>Time 2</th>
-                        <th>Data</th>
-
+                        <th scope="col">Jogo</th>
+                        <th scope="col">Time 1</th>
+                        <th scope="col">Time 2</th>
+                        <th scope="col">Data</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -214,31 +161,37 @@
                         <td>1</td>
                         <td>B</td>
                         <td>A</td>
+                        <td>TBD</td>
                     </tr>
                     <tr>
                         <td>2</td>
                         <td>D</td>
                         <td>C</td>
+                        <td>TBD</td>
                     </tr>
                     <tr>
-                        <td>1</td>
+                        <td>3</td>
                         <td>C</td>
                         <td>A</td>
+                        <td>TBD</td>
                     </tr>
                     <tr>
-                        <td>2</td>
+                        <td>4</td>
                         <td>D</td>
                         <td>B</td>
+                        <td>TBD</td>
                     </tr>
                     <tr>
-                        <td>1</td>
+                        <td>5</td>
                         <td>D</td>
                         <td>A</td>
+                        <td>TBD</td>
                     </tr>
                     <tr>
-                        <td>2</td>
+                        <td>6</td>
                         <td>C</td>
                         <td>B</td>
+                        <td>TBD</td>
                     </tr>
                 </tbody>
             </table>
