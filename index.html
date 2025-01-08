@@ -1,123 +1,134 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="description" content="Site seguro com login, logout e autenticação de usuário">
-    <link rel="stylesheet" href="styles.css">
-    <title>Projeto Seguro</title>
+    <title>E-commerce Theme</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #444;
+            padding: 0.5rem;
+            text-align: center;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 1rem;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            padding: 1rem;
+        }
+
+        .product {
+            border: 1px solid #ddd;
+            padding: 1rem;
+            margin: 1rem 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .product img {
+            max-width: 100px;
+            margin-right: 1rem;
+        }
+
+        .product h3 {
+            margin: 0;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #ddd;
+            padding: 0.5rem 0;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1rem;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="index.html">Início</a></li>
-                <li><a href="cadastro.html">Cadastro</a></li>
-                <li><a href="login.html">Login</a></li>
-                <li><a href="logout.html">Logout</a></li>
-                <li><a href="perfil.html">Perfil</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <section id="home">
-            <h1>Bem-vindo ao Projeto Seguro</h1>
-            <p>Esta é a página inicial do site.</p>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2024 Projeto Seguro. Todos os direitos reservados.</p>
-    </footer>
 
-    <!-- Scripts -->
-    <script>
-        // Exemplo de conexão com um banco de dados usando APIs REST
+<header>
+    <h1>My E-commerce</h1>
+</header>
 
-        async function cadastrarUsuario(nome, email, senha) {
-            try {
-                const response = await fetch('https://api-seguro.com/cadastro', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ nome, email, senha })
-                });
+<nav>
+    <a href="#">Home</a>
+    <a href="#shop">Shop</a>
+    <a href="#cart">Cart</a>
+</nav>
 
-                if (!response.ok) {
-                    throw new Error('Erro ao cadastrar usuário.');
-                }
+<section id="home" class="container">
+    <h2>Welcome to My E-commerce</h2>
+    <p>Discover the best products at unbeatable prices.</p>
+</section>
 
-                const dados = await response.json();
-                alert('Usuário cadastrado com sucesso!');
-                console.log('Dados do usuário:', dados);
-            } catch (erro) {
-                console.error('Erro:', erro);
-                alert('Falha no cadastro. Tente novamente.');
-            }
-        }
+<section id="shop" class="container">
+    <h2>Shop</h2>
+    <div class="product">
+        <img src="https://via.placeholder.com/100" alt="Product Image">
+        <div>
+            <h3>Product 1</h3>
+            <p>Price: $10.00</p>
+            <button>Add to Cart</button>
+        </div>
+    </div>
+    <div class="product">
+        <img src="https://via.placeholder.com/100" alt="Product Image">
+        <div>
+            <h3>Product 2</h3>
+            <p>Price: $15.00</p>
+            <button>Add to Cart</button>
+        </div>
+    </div>
+</section>
 
-        async function loginUsuario(email, senha) {
-            try {
-                const response = await fetch('https://api-seguro.com/login', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ email, senha })
-                });
+<section id="cart" class="container">
+    <h2>Cart</h2>
+    <div class="cart-item">
+        <span>Product 1</span>
+        <span>$10.00</span>
+        <button>Remove</button>
+    </div>
+    <div class="cart-item">
+        <span>Product 2</span>
+        <span>$15.00</span>
+        <button>Remove</button>
+    </div>
+    <h3>Total: $25.00</h3>
+    <button>Checkout</button>
+</section>
 
-                if (!response.ok) {
-                    throw new Error('Erro ao autenticar usuário.');
-                }
+<footer>
+    <p>&copy; 2025 My E-commerce</p>
+</footer>
 
-                const dados = await response.json();
-                console.log('Usuário autenticado:', dados);
-                // Armazenar token de sessão
-                sessionStorage.setItem('authToken', dados.token);
-            } catch (erro) {
-                console.error('Erro:', erro);
-                alert('Falha no login. Verifique suas credenciais.');
-            }
-        }
-
-        function logoutUsuario() {
-            sessionStorage.removeItem('authToken');
-            alert('Logout realizado com sucesso.');
-        }
-
-        function verificarAutenticacao() {
-            const token = sessionStorage.getItem('authToken');
-            if (!token) {
-                alert('Usuário não autenticado. Redirecionando para a página de login.');
-                window.location.href = 'login.html';
-            }
-        }
-
-        async function buscarPerfilUsuario() {
-            try {
-                const token = sessionStorage.getItem('authToken');
-                if (!token) throw new Error('Usuário não autenticado.');
-
-                const response = await fetch('https://api-seguro.com/perfil', {
-                    method: 'GET',
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                });
-
-                if (!response.ok) {
-                    throw new Error('Erro ao buscar informações do perfil.');
-                }
-
-                const perfil = await response.json();
-                console.log('Dados do perfil:', perfil);
-                return perfil;
-            } catch (erro) {
-                console.error('Erro:', erro);
-                alert('Falha ao carregar perfil do usuário.');
-            }
-        }
-    </script>
 </body>
 </html>
