@@ -51,6 +51,7 @@ nav ul {
     margin: 0;
     padding: 0;
     display: flex;
+    background-color: #fc7474;
 }
 
 nav ul li {
@@ -60,7 +61,7 @@ nav ul li {
 
 nav ul li a {
     text-decoration: none;
-    color: #4CAF50;
+    color: white;
     font-weight: bold;
     padding: 10px 15px;
     background-color: #4CAF50;
