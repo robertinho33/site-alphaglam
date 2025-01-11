@@ -1,44 +1,35 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seja Bem-Vindo</title>
+    <title>Background Image Example</title>
     <style>
         body {
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-image: url('IMG_7234.jpg');
-            background-size: cover; /* Para cobrir toda a tela */
-            background-position: center; /* Centralizar a imagem */
-            background-repeat: no-repeat; /* Evitar repetição */
-            height: 100vh; /* Altura total da janela */
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            background-image: url('IMG_724.JPG'); /* Caminho da imagem */
+            background-size: cover; /* Faz a imagem cobrir toda a tela */
+            background-position: center; /* Centraliza a imagem */
+            background-repeat: no-repeat; /* Evita repetição */
+            background-attachment: fixed; /* Fixa a imagem enquanto o conteúdo rola */
+            color: white; /* Torna o texto visível sobre a imagem */
         }
-        th, td {
-            border: 1px solid #ccc;
-            padding: 8px;
+        .content {
             text-align: center;
-        }
-        th {
-            background-color: #f4f4f4;
-        }
-        .container {
-            background-color: rgba(255, 255, 255, 0.8); /* Fundo branco translúcido */
-            padding: 20px;
+            padding: 50px;
+            background: rgba(0, 0, 0, 0.6); /* Fundo semitransparente para destacar o texto */
             border-radius: 10px;
+            display: inline-block;
+            margin: 50px auto;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Bem-Vindo</h1>
-        <p>Este é um exemplo de página com uma imagem de fundo.</p>
+    <div class="content">
+        <h1>Bem-vindo ao Meu Site</h1>
+        <p>Aqui está um exemplo de uma imagem de fundo aplicada ao corpo da página.</p>
     </div>
-</body>
-</html>
-
 </body>
 </html>
