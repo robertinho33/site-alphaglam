@@ -3,258 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Campeonato - Kupula </title>
+    <title>Background Image Example</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 20px;
-            background-color: #f4f4f4;
-        }
-        .container {
-            max-width: 800px;
-            margin: auto;
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        th, td {
-            padding: 10px;
-            text-align: center;
-            border: 1px solid #ddd;
-        }
-        th {
-            background-color: #f8f8f8;
-        } .thTimeAzul {
-            background-color: #74adfc;
-        } .thTimeVermelho {
-            background-color: #fc7474;
-        }
-        .phase {
-            margin-top: 30px;
-        }
-        .phase h2 {
-            margin-bottom: 10px;
-        } nav {
-            background-color: #4CAF50;
-            padding: 10px 15px;
-        }
-        nav ul {
-            list-style-type: none;
-            margin: 0;
             padding: 0;
-            display: flex;
+            background-image: url('IMG_7234.JPG'); /* Caminho da imagem */
+            background-size: cover; /* Faz a imagem cobrir toda a tela */
+            background-position: center; /* Centraliza a imagem */
+            background-repeat: no-repeat; /* Evita repetição */
+            background-attachment: fixed; /* Fixa a imagem enquanto o conteúdo rola */
+            color: white; /* Torna o texto visível sobre a imagem */
         }
-        nav ul li {
-            margin-right: 15px;
-        }
-        nav ul li a {
-            text-decoration: none;
-            color: white;
-            font-weight: bold;
-            padding: 8px 12px;
-            transition: background-color 0.3s;
-        }
-        nav ul li a:hover {
-            background-color: #45a049;
-            border-radius: 4px;
+        .content {
+            text-align: center;
+            padding: 50px;
+            background: rgba(0, 0, 0, 0.6); /* Fundo semitransparente para destacar o texto */
+            border-radius: 10px;
+            display: inline-block;
+            margin: 50px auto;
         }
     </style>
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="index.html">Início</a></li>
-            <li><a href="kupula_pendencias.html">KUPULA - Pendências</a></li>
-            <li><a href="Kupula_pontuacao.html">Resultados</a></li>
-            <li><a href="sobre.html"></a></li>
-        </ul>
-    </nav>
-    <div class="container">
-        <h1>KUPULA - Campeonato</h1>
-        <div class="phase">
-            <table>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Time A</th>
-                            <th>Time B</th>
-                            <th>Time C</th>
-                            <th>Time D</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Chicão</td>
-                            <td>Edson</td>
-                            <td>Chicão</td>
-                            <td>Edson</td>
-                        </tr>
-                        <tr>
-                            <td>Nícolas</td>
-                            <td>Erik</td>
-                            <td>Lucas</td>
-                            <td>Vinicius</td>
-                        </tr>
-                        <tr>
-                            <td>Eduardo</td>
-                            <td>John</td>
-                            <td>Fabio</td>
-                            <td>Vitor</td>
-                        </tr>
-                        <tr>
-                            <td>João</td>
-                            <td>Gustavo</td>
-                            <td>Duzão</td>
-                            <td>Cadu</td>
-                        </tr>
-                        <tr>
-                            <td>Ricardo</td>
-                            <td>Wagner</td>
-                            <td>Edson</td>
-                            <td>Alexandre</td>
-                        </tr>
-                        <tr>
-                            <td>Roberto</td>
-                            <td>Vanderlan</td>
-                            <td>Rapuzel</td>
-                            <td>Anderson</td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td>Dantas</td>
-                            <td>Mariano</td>
-                        </tr>
-                    </tbody>
-        </div>
-        <div class="phase">
-            <h2>Primeira Fase</h2>
-              <table>
-                <thead>
-                    <tr>
-                        <th>Jogo</th>
-                        <th class="thTimeVermelho">Mandante</th>
-                        <th class="thTimeAzul">Visitante</th>                    
-                        <th>Data</th>
-                        <td>Mesários</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td class="thTimeVermelho">A</td>
-                        <td class="thTimeAzul">B</td>
-                        <td>14/01</td>
-                        <td>Nível 1</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td class="thTimeVermelho">C</td>
-                        <td class="thTimeAzul">D</td>
-                        <td>14/01</td>
-                        <td>Nível 1</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td class="thTimeVermelho">A</td>
-                        <td class="thTimeAzul">C</td>
-                        <td>21/01</td>
-                        <td>Nível 2</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td class="thTimeVermelho">B</td>
-                        <td class="thTimeAzul">D</td>
-                        <td>21/01</td>
-                        <td>Nível 2</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td class="thTimeVermelho">A</td>
-                        <td class="thTimeAzul">D</td>
-                        <td>28/01</td>
-                        <td>Nível 3</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td class="thTimeVermelho">B</td>
-                        <td class="thTimeAzul">C</td>
-                        <td>28/01</td>
-                        <td>Nível 3</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="phase">
-            <h2>Segunda Fase</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Jogo</th>
-                        <th class="thTimeVermelho">Mandante</th>
-                        <th class="thTimeAzul">Visitante</th>
-                        <th>Data</th>
-                        <td>Mesários</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td class="thTimeVermelho">B</td>
-                        <td class="thTimeAzul">A</td>
-                        <td>04/02</td>
-                        <td>Nível 4</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td class="thTimeVermelho">D</td>
-                        <td class="thTimeAzul">C</td>
-                        <td>04/02</td>
-                        <td>Nível 4</td>
-                    </tr>
-                    <tr>
-                        <td >1</td>
-                        <td class="thTimeVermelho">C</td>
-                        <td class="thTimeAzul">A</td>
-                        <td>11/02</td>
-                        <td>Nível 5</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td class="thTimeVermelho">D</td>
-                        <td class="thTimeAzul">B</td>
-                        <td>11/02</td>
-                        <td>Nível 5</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td class="thTimeVermelho">D</td>
-                        <td class="thTimeAzul">A</td>
-                        <td>18/02</td>
-                        <td>Nível 6</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td class="thTimeVermelho">C</td>
-                        <td class="thTimeAzul">B</td>
-                        <td>18/02</td>
-                        <td>Nível 6</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+    <div class="content">
+        <h1>Bem-vindo ao Meu Site</h1>
+        <p>Aqui está um exemplo de uma imagem de fundo aplicada ao corpo da página.</p>
     </div>
 </body>
 </html>
