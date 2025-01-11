@@ -1,0 +1,70 @@
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('IMG_7234.JPG'); /* Caminho da imagem */
+    background-size: cover; /* Faz a imagem cobrir toda a tela */
+    background-position: center; /* Centraliza a imagem */
+    background-repeat: no-repeat; /* Evita repetição */
+    background-attachment: fixed; /* Fixa a imagem enquanto o conteúdo rola */
+    color: white; /* Torna o texto visível sobre a imagem */
+}
+.content {
+    text-align: center;
+    padding: 50px;
+    background: rgba(0, 0, 0, 0.6); /* Fundo semitransparente para destacar o texto */
+    border-radius: 10px;
+    display: inline-block;
+    margin: 50px auto;
+}
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f8f8f8;
+        } .thTimeAzul {
+            background-color: #74adfc;
+        } .thTimeVermelho {
+            background-color: #fc7474;
+        }
+        .phase {
+            margin-top: 30px;
+        }
+        .phase h2 {
+            margin-bottom: 10px;
+        } nav {
+            background-color: #4CAF50;
+            padding: 10px 15px;
+        }
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        nav ul li {
+            margin-right: 15px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            padding: 8px 12px;
+            transition: background-color 0.3s;
+        }
+        nav ul li a:hover {
+            background-color: #45a049;
+            border-radius: 4px;
+        }
