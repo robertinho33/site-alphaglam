@@ -44,27 +44,65 @@ body {
         }
         .phase h2 {
             margin-bottom: 10px;
-        } nav {
-            background-color: #4CAF50;
-            padding: 10px 15px;
-        }
-        nav ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-        }
-        nav ul li {
-            margin-right: 15px;
-        }
-        nav ul li a {
-            text-decoration: none;
-            color: white;
-            font-weight: bold;
-            padding: 8px 12px;
-            transition: background-color 0.3s;
-        }
-        nav ul li a:hover {
-            background-color: #45a049;
-            border-radius: 4px;
-        }
+        } 
+        /* Estilo geral do menu */
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li {
+    position: relative;
+    margin-right: 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    padding: 10px 15px;
+    background-color: #4CAF50;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: #45a049;
+}
+
+/* Submenu estilo dropdown */
+nav ul li ul.dropdown {
+    display: none;
+    position: absolute;
+    top: 100%; /* Posiciona o submenu abaixo do item pai */
+    left: 0;
+    background-color: #4CAF50;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    border-radius: 4px;
+    z-index: 10;
+}
+
+nav ul li ul.dropdown li {
+    margin: 0;
+}
+
+nav ul li ul.dropdown li a {
+    padding: 8px 12px;
+    display: block;
+    background-color: #4CAF50;
+    color: white;
+    text-align: left;
+}
+
+nav ul li ul.dropdown li a:hover {
+    background-color: #45a049;
+}
+
+/* Exibe o submenu ao passar o mouse */
+nav ul li:hover ul.dropdown {
+    display: block;
+}
