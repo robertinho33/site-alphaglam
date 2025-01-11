@@ -61,7 +61,7 @@
 </head>
 <body>
 
-<header>
+<header id="header">
     <!-- Botão de navegação para a home -->
     <nav class="navbar navbar-expand-lg">
         <a class="navbar-brand" href="#">Alpha Glam</a>
@@ -192,6 +192,19 @@
 </script>
  <!-- Script para carregar o menu -->
  <script>
+    fetch('menu.html') // Certifique-se de que o caminho está correto
+        .then(response => {
+            if (!response.ok) throw new Error(`Erro: ${response.status}`);
+            return response.text();
+        })
+        .then(data => {
+            document.getElementById('header').innerHTML = data;
+        })
+        .catch(error => console.error('Erro ao carregar o menu:', error));
+</script>
+
+<!-- Script para carregar o menu -->
+<script>
     fetch('menu.html') // Certifique-se de que o caminho está correto
         .then(response => {
             if (!response.ok) throw new Error(`Erro: ${response.status}`);

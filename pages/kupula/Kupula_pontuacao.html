@@ -54,7 +54,8 @@
     </style>
 </head>
 <body>
-    <nav>
+     <header id="header"></header>
+     <nav>
         <ul>
             <li><a href="index.html">Início</a></li>
             <li><a href="kupula_pendencias.html">KUPULA - Pendências</a></li>
@@ -188,5 +189,22 @@
         </table>
 
     </div>
+   
+    <!-- Script para carregar o menu -->
+    <script>
+        fetch('menu.html') // Certifique-se de que o caminho está correto
+            .then(response => {
+                if (!response.ok) throw new Error(`Erro: ${response.status}`);
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById('header').innerHTML = data;
+            })
+            .catch(error => console.error('Erro ao carregar o menu:', error));
+    </script>
+
+    <!-- Link para o Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
