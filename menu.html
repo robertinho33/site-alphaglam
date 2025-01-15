@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kupula - Navegação</title>
     <!-- Link para o Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUa1zY6bG0PIcDsDA5FqC14hlCkS3h8es2RcpIvKwB8zYCFDXO36vY4p+hZ9" crossorigin="anonymous">
 
@@ -10,64 +11,56 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-   <nav>
-    <ul>
-        <!-- Menu principal "Kupula" -->
-        <li>
-            <a href="#">Kupula</a>
-            <ul class="dropdown">
-                <li><a href="">Início</a></li>
-                <li><a href="">Kupula - </a></li>
-                <li><a href="">Resultados</a></li>
-            </ul>
-        </li>
-        <!-- Menu principal "Ladies" -->
-        <li>
-            <a href="#">Ladies</a>
-            <ul class="dropdown">
-                <li><a href="">Fim do Ciclo</a></li>
-            </ul>
-        </li>
-    </ul>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <!-- Logo ou Nome do Site -->
+            <a class="navbar-brand" href="#">Kupula</a>
 
-    <ul class="nav nav-tabs">
-        <li class="nav-item">
-          <a class="nav-link active" href="#">Ativo</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Kupula</a>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="pages/kupula/kupula.html">Kupula</a>
-            <a class="dropdown-item" href="pages/kupula/Kupula_pontuacao.html">Pontuação</a>
-            <a class="dropdown-item" href="pages/kupula/kupula_pendencias.html">Pendênciasi</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Link isolado</a>
-          </div>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link active" href="#">Ativo</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Kupula</a>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="home.html">Ladies</a>
-            <a class="dropdown-item" href="#">Ação</a>
-            <a class="dropdown-item" href="#">Ação</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Link isolado</a>
-          </div>
-        </li>
-          <a class="dropdown-item" href="home.html">Ladies</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#">Desativado</a>
-        </li>
-      </ul>
+            <!-- Botão de menu responsivo -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Alternar navegação">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-      
-</nav>
+            <!-- Links de Navegação -->
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <!-- Menu Kupula -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="kupulaDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Kupula
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="kupulaDropdown">
+                            <li><a class="dropdown-item" href="pages/kupula/kupula.html">Kupula</a></li>
+                            <li><a class="dropdown-item" href="pages/kupula/Kupula_pontuacao.html">Pontuação</a></li>
+                            <li><a class="dropdown-item" href="pages/kupula/kupula_pendencias.html">Pendências</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Link isolado</a></li>
+                        </ul>
+                    </li>
 
- <!-- Link para o Bootstrap JS -->
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+                    <!-- Menu Ladies -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="ladiesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Ladies
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="ladiesDropdown">
+                            <li><a class="dropdown-item" href="home.html">Fim do Ciclo</a></li>
+                            <li><a class="dropdown-item" href="#">Outra Ação</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Link Isolado</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- Link Desativado -->
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Desativado</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Link para o Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
