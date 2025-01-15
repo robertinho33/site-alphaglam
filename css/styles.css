@@ -8,7 +8,7 @@ body {
     background-position: center; /* Centraliza a imagem */
     background-repeat: no-repeat; /* Evita repetição */
     background-attachment: fixed; /* Fixa a imagem enquanto o conteúdo rola */
-    color: rgb(135, 135, 135); /* Torna o texto visível sobre a imagem */
+    color: rgb(71, 71, 71); /* Torna o texto visível sobre a imagem */
 }
 .content {
     text-align: center;
@@ -47,13 +47,20 @@ body {
             margin-bottom: 10px;
         } 
         /* Estilo geral do menu */
-nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    background-color: #fc7474;
-}
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            background-color: #fc7474;
+        }
+        nav header {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            background-color: #4CAF50;
+        }
 
 nav ul li {
     position: relative;
