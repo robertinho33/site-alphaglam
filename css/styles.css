@@ -8,7 +8,7 @@ body {
     background-position: center; /* Centraliza a imagem */
     background-repeat: no-repeat; /* Evita repetição */
     background-attachment: fixed; /* Fixa a imagem enquanto o conteúdo rola */
-    color: white; /* Torna o texto visível sobre a imagem */
+    color: rgb(135, 135, 135); /* Torna o texto visível sobre a imagem */
 }
 .content {
     text-align: center;
