@@ -3,102 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kupula - Navegação</title>
+    <title>Menu com Dropdowns</title>
 
-    <!-- Link para o Bootstrap CSS -->
-    <link 
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" 
-        rel="stylesheet" 
-        integrity="sha384-9ndCyUa1zY6bG0PIcDsDA5FqC14hlCkS3h8es2RcpIvKwB8zYCFDXO36vY4p+hZ9" 
-        crossorigin="anonymous"
-    >
-
-    <!-- Link para o CSS externo (opcional, verifique o caminho) -->
-    <link rel="stylesheet" href="css/styles.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUa1zY6bG0PIcDsDA5FqC14hlCkS3h8es2RcpIvKwB8zYCFDXO36vY4p+hZ9" crossorigin="anonymous">
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <!-- Nome ou Logo -->
-            <a class="navbar-brand" href="#">Kupula</a>
-            <!-- Botão para responsividade -->
-            <button 
-                class="navbar-toggler" 
-                type="button" 
-                data-bs-toggle="collapse" 
-                data-bs-target="#navbarNavDropdown" 
-                aria-controls="navbarNavDropdown" 
-                aria-expanded="false" 
-                aria-label="Alternar navegação"
-            >
+            <a class="navbar-brand" href="#">Meu Menu</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <!-- Itens do Menu -->
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav">
-                    <!-- Menu Kupula -->
+                    <!-- Dropdown 1 -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="kupulaDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Kupula
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdownMenu1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Dropdown 1
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="kupulaDropdown">
-                            <li><a class="dropdown-item" href="pages/kupula/kupula.html">Kupula</a></li>
-                            <li><a class="dropdown-item" href="pages/kupula/Kupula_pontuacao.html">Pontuação</a></li>
-                            <li><a class="dropdown-item" href="pages/kupula/kupula_pendencias.html">Pendências</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Link isolado</a></li>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li><a class="dropdown-item" href="#">Item 1</a></li>
+                            <li><a class="dropdown-item" href="#">Item 2</a></li>
+                            <li><a class="dropdown-item" href="#">Item 3</a></li>
                         </ul>
                     </li>
 
-                    <!-- Menu Ladies -->
+                    <!-- Dropdown 2 -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="ladiesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Ladies
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdownMenu2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Dropdown 2
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="ladiesDropdown">
-                            <li><a class="dropdown-item" href="home.html">Fim do Ciclo</a></li>
-                            <li><a class="dropdown-item" href="#">Outra Ação</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Link Isolado</a></li>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                            <li><a class="dropdown-item" href="#">Item 1</a></li>
+                            <li><a class="dropdown-item" href="#">Item 2</a></li>
+                            <li><a class="dropdown-item" href="#">Item 3</a></li>
                         </ul>
                     </li>
 
-                    <!-- Link Desativado -->
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Desativado</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <ul class="nav nav-tabs">
-        <li class="nav-item">
-          <a class="nav-link active" href="#">Ativo</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Ação</a>
-            <a class="dropdown-item" href="#">Outra ação</a>
-            <a class="dropdown-item" href="#">Algo mais aqui</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Link isolado</a>
-          </div>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#">Desativado</a>
-        </li>
-      </ul>
-
-    <!-- Link para o Bootstrap JS -->
-    <script 
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" 
-        integrity="sha384-ho+j7jyWK8fNQe+A12h4IMxoOIBb8Cd2Q6FcNVdFumxEkPxh5hDkJho6g0OIX13U" 
-        crossorigin="anonymous"
-    ></script>
-</body>
-</html>
+                    <!-- Dropdown 3 -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdownMenu3" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Dropdown 3
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu3">
+                            <li><a class="dropdown-item" href="#">Item 1</a></li>
+                            <li><a class="dropdown-item" href="#">Item 2</a></li>
+                            <li><a class="dropdown-item" href="#">Item 3</
