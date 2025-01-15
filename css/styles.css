@@ -26,6 +26,7 @@ body {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
+            background-color: #f8f8f8;
         }
         th, td {
             padding: 10px;
