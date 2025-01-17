@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tem de tudo aqui</title>
+  <title>Comparar Sequências de Dezenas</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     body {
@@ -19,7 +19,7 @@
   </style>
 </head>
 <body>
-   <div class="container">
+  <div class="container">
     <h1 class="text-center">Comparar Sequência de Dezenas</h1>
 
     <!-- Formulário para upload e comparação -->
@@ -47,32 +47,11 @@
         <tbody id="tableBody"></tbody>
       </table>
     </div>
-        <!-- Resultado -->
+
+    <!-- Resultado -->
     <div id="result" class="result"></div>
   </div>
-  
-     <!-- Adicionado o elemento <header> para o menu -->
-    <header id="header"></header>
 
-    <!-- Conteúdo central -->
-    <div class="container d-flex justify-content-center align-items-center vh-100">
-       <p>conteúdo central</p>
-       <p>conteúdo central</p>
-       <p>conteúdo central</p>
-    </div>
-
-    <!-- Script para carregar o menu -->
-    <script>
-        fetch('menu.html') // Certifique-se de que o caminho está correto
-            .then(response => {
-                if (!response.ok) throw new Error(`Erro: ${response.status}`);
-                return response.text();
-            })
-            .then(data => {
-                document.getElementById('header').innerHTML = data;
-            })
-            .catch(error => console.error('Erro ao carregar o menu:', error));
-    </script>
   <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
   <script>
     let spreadsheetData = []; // Armazena os dados da planilha
@@ -120,82 +99,26 @@
       const userSequence = document.getElementById("sequenceInput").value.trim();
       const userArray = userSequence.split("-").map(num => num.trim());
 
-      const exists = spreadsheetData.some(row => {
-        return JSON.stringify(row.map(String)) === JSON.stringify(userArray);
-      });
+      const matchingRows = []; // Armazena as linhas correspondentes
 
-      const resultDiv = document.getElementById("result");
-      if (exists) {
-        resultDiv.innerHTML = `<div class="alert alert-success">A sequência existe na planilha!</div>`;
-      } else {
-        resultDiv.innerHTML = `<div class="alert alert-danger">A sequência não foi encontrada na planilha.</div>`;
-      }
-    });
-  </script>
-     
- <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
-  <script>
-    let spreadsheetData = []; // Armazena os dados da planilha
-
-    // Evento de upload do arquivo
-    document.getElementById("fileInput").addEventListener("change", function(event) {
-      const file = event.target.files[0];
-      if (!file) return;
-
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        const data = new Uint8Array(e.target.result);
-        const workbook = XLSX.read(data, { type: "array" });
-        const firstSheetName = workbook.SheetNames[0];
-        const sheet = workbook.Sheets[firstSheetName];
-        const rows = XLSX.utils.sheet_to_json(sheet, { header: 1 });
-
-        // Processar os dados
-        spreadsheetData = rows.filter(row => row.length > 0); // Remove linhas vazias
-        displaySpreadsheetData();
-      };
-      reader.readAsArrayBuffer(file);
-    });
-
-    // Exibir os dados da planilha na tabela
-    function displaySpreadsheetData() {
-      const tableBody = document.getElementById("tableBody");
-      tableBody.innerHTML = ""; // Limpa a tabela
-
-      spreadsheetData.forEach((row, index) => {
-        const rowHTML = `
-          <tr>
-            <td>${index + 1}</td>
-            <td>${row.join("-")}</td>
-          </tr>
-        `;
-        tableBody.innerHTML += rowHTML;
-      });
-    }
-
-    // Comparação da sequência
-    document.getElementById("uploadForm").addEventListener("submit", function(event) {
-      event.preventDefault();
-
-      const userSequence = document.getElementById("sequenceInput").value.trim();
-      const userArray = userSequence.split("-").map(num => num.trim());
-
-      let found = false;
-      let foundRow = -1;
-
-      // Verifica em qual linha está a sequência
+      // Verifica em quais linhas a sequência está presente
       spreadsheetData.forEach((row, index) => {
         if (JSON.stringify(row.map(String)) === JSON.stringify(userArray)) {
-          found = true;
-          foundRow = index + 1; // Adiciona 1 para ajustar o índice (1-based)
+          matchingRows.push(index + 1); // Adiciona a linha (1-based)
         }
       });
 
       const resultDiv = document.getElementById("result");
-      if (found) {
-        resultDiv.innerHTML = `<div class="alert alert-success">A sequência foi encontrada na linha <strong>${foundRow}</strong>.</div>`;
+      if (matchingRows.length > 0) {
+        resultDiv.innerHTML = `
+          <div class="alert alert-success">
+            A sequência foi encontrada nas seguintes linhas: <strong>${matchingRows.join(", ")}</strong>.
+          </div>`;
       } else {
-        resultDiv.innerHTML = `<div class="alert alert-danger">A sequência não foi encontrada na planilha.</div>`;
+        resultDiv.innerHTML = `
+          <div class="alert alert-danger">
+            A sequência não foi encontrada na planilha.
+          </div>`;
       }
     });
   </script>
