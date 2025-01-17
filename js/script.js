@@ -1,4 +1,3 @@
-
 let spreadsheetData = []; // Armazena os dados da planilha
 
 // Evento de upload do arquivo
@@ -67,17 +66,13 @@ document.getElementById("uploadForm").addEventListener("submit", function(event)
   }
 });
 
-//<!-- Script para carregar o menu -->
-
-fetch('menu.html') // Certifique-se de que o caminho está correto
-    .then(response => {
-        if (!response.ok) throw new Error(`Erro: ${response.status}`);
-        return response.text();
-    })
-    .then(data => {
-        document.getElementById('header').innerHTML = data;
-    })
-    .catch(error => console.error('Erro ao carregar o menu:', error));
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
+// Carregar o menu
+fetch('menu.html')
+  .then(response => {
+    if (!response.ok) throw new Error(`Erro: ${response.status}`);
+    return response.text();
+  })
+  .then(data => {
+    document.getElementById('header').innerHTML = data;
+  })
+  .catch(error => console.error('Erro ao carregar o menu:', error));
