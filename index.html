@@ -10,28 +10,20 @@
     <div class="container my-5">
         <h1 class="text-center mb-4">Lotofácil Checker</h1>
 
-        <!-- Formulário para verificar jogos únicos -->
-        <form id="lotofacilForm" class="mb-5">
-            <div class="mb-3">
-                <label for="userNumbers" class="form-label">Digite 15 números (separados por vírgula):</label>
-                <input type="text" class="form-control" id="userNumbers" placeholder="Ex: 1, 2, 3, ..., 25" required>
-            </div>
-            <button type="submit" class="btn btn-primary w-100">Verificar Números</button>
-        </form>
-
-        <!-- Formulário para gerenciar múltiplos jogos -->
+        <!-- Formulário para adicionar jogos -->
         <form id="addGameForm" class="mb-4">
             <label for="gameNumbers" class="form-label">Adicione um jogo (15 números separados por vírgula):</label>
             <input type="text" id="gameNumbers" class="form-control mb-2" placeholder="Ex: 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15" required>
             <button type="submit" class="btn btn-success w-100">Adicionar Jogo</button>
         </form>
 
+        <!-- Botões para salvar e carregar jogos -->
         <div class="d-flex justify-content-between mb-3">
             <button id="saveGames" class="btn btn-primary">Salvar Jogos</button>
             <button id="loadGames" class="btn btn-secondary">Carregar Jogos</button>
         </div>
 
-        <!-- Tabela para exibir jogos -->
+        <!-- Tabela de jogos -->
         <h3 class="mb-3">Jogos Adicionados:</h3>
         <table class="table table-striped" id="gamesTable">
             <thead>
@@ -43,10 +35,10 @@
             <tbody></tbody>
         </table>
 
-        <!-- Botão para verificar todos os jogos -->
-        <button id="checkResults" class="btn btn-warning w-100">Verificar Todos os Jogos</button>
+        <!-- Botão para verificar jogos -->
+        <button id="checkResults" class="btn btn-warning w-100">Verificar Último Resultado</button>
 
-        <!-- Div para exibir resultados -->
+        <!-- Resultados -->
         <div id="results" class="mt-5"></div>
     </div>
 
