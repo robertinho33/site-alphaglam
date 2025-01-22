@@ -21,7 +21,41 @@
                     </div>
                     <button type="submit" class="btn btn-primary w-100">Verificar</button>
                 </form>
-
+                <div class="container my-5">
+                    <h1 class="text-center mb-4">Verificar Resultados da Lotofácil</h1>
+                    
+                    <!-- Formulário para adicionar jogos -->
+                    <form id="addGameForm" class="mb-4">
+                        <label for="gameNumbers" class="form-label">Digite 15 números separados por vírgula:</label>
+                        <input type="text" id="gameNumbers" class="form-control mb-2" placeholder="Ex: 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15" required>
+                        <button type="submit" class="btn btn-success">Adicionar Jogo</button>
+                    </form>
+                    
+                    <!-- Botão para salvar e baixar os jogos -->
+                    <div class="d-flex justify-content-between mb-3">
+                        <button id="saveGames" class="btn btn-primary">Salvar Jogos no Computador</button>
+                        <button id="loadGames" class="btn btn-secondary">Carregar Jogos Salvos</button>
+                    </div>
+                
+                    <!-- Tabela para exibir os jogos -->
+                    <h3 class="mb-3">Jogos Adicionados:</h3>
+                    <table class="table table-striped" id="gamesTable">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Números</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                
+                    <!-- Botão para verificar os resultados -->
+                    <button id="checkResults" class="btn btn-warning">Verificar Último Resultado</button>
+                    
+                    <!-- Resultados -->
+                    <div id="results" class="mt-4"></div>
+                </div>
+                
                 <div id="results" class="mt-4">
                     <!-- Resultados aparecerão aqui -->
                 </div>
