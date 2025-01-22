@@ -2,8 +2,30 @@ let games = []; // Armazena todos os jogos adicionados pelo usuário
 
 // Mock para buscar os últimos números sorteados
 async function fetchLastResult() {
-    return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]; // Substitua por uma API real se disponível
+    try {
+        const response = await fetch('https://api.example.com/lotofacil/latest'); // Substitua pela API real
+        const data = await response.json();
+
+        // Exemplo de estrutura retornada pela API
+        // {
+        //   "concurso": 2750,
+        //   "data": "2025-01-20",
+        //   "numeros": [10, 3, 5, 8, 7, 12, 15, 13, 22, 20, 19, 2, 25, 6, 1]
+        // }
+
+        const sortedNumbers = data.numeros.sort((a, b) => a - b); // Ordena em ordem crescente
+        return {
+            concurso: data.concurso,
+            data: data.data,
+            numeros: sortedNumbers,
+        };
+    } catch (error) {
+        console.error("Erro ao buscar o último resultado:", error);
+        alert("Não foi possível buscar o último resultado.");
+        return null;
+    }
 }
+
 
 // Atualiza a tabela de jogos
 function updateGamesTable() {
@@ -76,15 +98,25 @@ document.getElementById('loadGames').addEventListener('click', function () {
 // Verificar jogos
 document.getElementById('checkResults').addEventListener('click', async function () {
     const lastDraw = await fetchLastResult();
+    if (!lastDraw) return;
 
+    const { concurso, data, numeros } = lastDraw;
+
+    // Exibe os detalhes do último sorteio
     const resultsDiv = document.getElementById('results');
-    resultsDiv.innerHTML = `<p>Números Sorteados: <strong>${lastDraw.join(', ')}</strong></p>`;
+    resultsDiv.innerHTML = `
+        <p>Concurso: <strong>${concurso}</strong></p>
+        <p>Data: <strong>${data}</strong></p>
+        <p>Números Sorteados (em ordem crescente): <strong>${numeros.join(', ')}</strong></p>
+    `;
 
+    // Verifica os jogos contra o resultado sorteado
     games.forEach((game, index) => {
-        const matchedNumbers = game.filter(num => lastDraw.includes(num));
+        const matchedNumbers = game.filter(num => numeros.includes(num));
         resultsDiv.innerHTML += `
             <p>Jogo ${index + 1}: ${game.join(', ')} - 
             Acertos: <strong>${matchedNumbers.length}</strong> (${matchedNumbers.join(', ')})</p>
         `;
     });
 });
+
