@@ -119,4 +119,16 @@ document.getElementById('checkResults').addEventListener('click', async function
         `;
     });
 });
-
+const rowClass = matchedNumbers.length >= 11 ? 'text-success' : 'text-muted';
+resultsDiv.innerHTML += `
+    <p class="${rowClass}">Jogo ${index + 1}: ${game.join(', ')} - 
+    Acertos: <strong>${matchedNumbers.length}</strong> (${matchedNumbers.join(', ')})</p>
+`;
+resultsDiv.innerHTML = `
+    <h3>Resultados do Último Sorteio</h3>
+    <p>Concurso: <strong>${concurso}</strong></p>
+    <p>Data: <strong>${data}</strong></p>
+    <p>Números Sorteados: <strong>${numeros.join(', ')}</strong></p>
+    <h3>Verificação dos Jogos</h3>
+`;
+const game = input.split(',').map(num => parseInt(num.trim())).filter(num => num >= 1 && num <= 25 && !isNaN(num));
