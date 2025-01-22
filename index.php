@@ -9,7 +9,7 @@
 </head>
 <body>
   <div class="container">
-    <h1 class="text-center">Comparar Sequência de Dezenas</h1>
+    <h1 class="text-center">PHP Sequência de Dezenas</h1>
     <!-- Adicionado o elemento <header> para o menu -->
     <header id="header"></header>
     <!-- Formulário para upload e comparação -->
