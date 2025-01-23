@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlphaGlam - Cosméticos</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="../index.html">AlphaGlam</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="beauty-salon.html">Salão de Beleza</a></li>
+                        <li class="nav-item"><a class="nav-link active" href=",,/cosmetics.html">Cosméticos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="gym.html">Academia</a></li>
+                        <li class="nav-item"><a class="nav-link" href="fitness-clothing.html">Roupas Fitness</a></li>
+                        <li class="nav-item"><a class="nav-link" href="snack-bar.html">Lanchonete</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mt-5">
+        <h1 class="text-center mb-4">Cosméticos - AlphaGlam</h1>
+        <p class="text-center">Explore nossa linha de cosméticos exclusivos da "ECO ELLE". Produtos sustentáveis e de alta qualidade para realçar sua beleza natural.</p>
+
+        <div class="row">
+            <script>
+                const ecoElleProducts = [
+                    { title: "Batom Natural", description: "Batom orgânico com pigmentos naturais.", price: "R$ 39,90" },
+                    { title: "Base Vegana", description: "Base líquida com ingredientes naturais.", price: "R$ 89,90" },
+                    { title: "Paleta Mineral", description: "Sombras minerais em tons naturais.", price: "R$ 120,00" },
+                    { title: "Delineador Orgânico", description: "Fórmula suave e sustentável.", price: "R$ 49,90" },
+                    { title: "Máscara Vegana", description: "Máscara de cílios com ingredientes naturais.", price: "R$ 65,00" },
+                    { title: "Pó Translúcido Natural", description: "Controle de brilho com fórmula leve.", price: "R$ 75,00" },
+                    { title: "Iluminador Ecológico", description: "Realce sustentável para sua pele.", price: "R$ 85,00" },
+                    { title: "Blush Vegano", description: "Tons suaves e naturais.", price: "R$ 55,00" },
+                    { title: "Hidratante Labial", description: "Com manteiga de karité orgânica.", price: "R$ 29,90" },
+                    { title: "Primer Natural", description: "Prepara a pele com suavidade.", price: "R$ 99,90" },
+                    { title: "Fixador Orgânico", description: "Mantém sua maquiagem de forma natural.", price: "R$ 69,90" },
+                    { title: "Sombras Brilhantes", description: "Efeito luminoso com sustentabilidade.", price: "R$ 75,00" },
+                    { title: "Kit de Pincéis Ecológicos", description: "Feitos com materiais sustentáveis.", price: "R$ 150,00" },
+                    { title: "Demaquilante Natural", description: "Remove maquiagem sem agredir.", price: "R$ 45,00" },
+                    { title: "Soro Facial Natural", description: "Hidratação com extratos botânicos.", price: "R$ 250,00" },
+                    { title: "Protetor Solar Vegano", description: "FPS 50 com fórmula leve.", price: "R$ 85,00" },
+                    { title: "Tônico Facial", description: "Refresca e equilibra a pele.", price: "R$ 60,00" },
+                    { title: "Esfoliante Ecológico", description: "Renova sua pele de forma natural.", price: "R$ 80,00" },
+                    { title: "Creme para Olhos Vegano", description: "Reduz olheiras com suavidade.", price: "R$ 120,00" },
+                    { title: "Sérum de Vitamina C", description: "Com ingredientes orgânicos.", price: "R$ 200,00" },
+                    { title: "Máscara Facial Hidratante", description: "Hidratação com ativos naturais.", price: "R$ 90,00" },
+                    { title: "Esmalte Vegano", description: "Fórmula livre de toxinas.", price: "R$ 25,00" },
+                    { title: "Loção Corporal", description: "Hidratação profunda com óleos vegetais.", price: "R$ 75,00" },
+                    { title: "Óleo Corporal", description: "Aroma delicado e hidratação intensa.", price: "R$ 120,00" },
+                    { title: "Shampoo Natural", description: "Limpeza suave para cabelos saudáveis.", price: "R$ 55,00" },
+                    { title: "Condicionador Vegano", description: "Nutrição com ingredientes naturais.", price: "R$ 60,00" },
+                    { title: "Creme Modelador", description: "Define cachos com ativos botânicos.", price: "R$ 50,00" },
+                    { title: "Protetor Térmico Natural", description: "Protege do calor sem químicas.", price: "R$ 70,00" },
+                    { title: "Soro Capilar", description: "Fortalece com nutrientes naturais.", price: "R$ 90,00" },
+                    { title: "Kit Capilar Vegano", description: "Completo para cuidados sustentáveis.", price: "R$ 180,00" },
+                    { title: "Spray de Brilho", description: "Efeito luminoso com fórmula natural.", price: "R$ 75,00" },
+                    { title: "Creme Noturno", description: "Hidrata sua pele enquanto você dorme.", price: "R$ 130,00" },
+                    { title: "Lenços Demaquilantes", description: "Práticos e biodegradáveis.", price: "R$ 30,00" },
+                    { title: "Escova Facial", description: "Para uma limpeza natural e eficaz.", price: "R$ 150,00" }
+                ];
+
+                const container = document.querySelector('.row');
+                ecoElleProducts.forEach(product => {
+                    const card = document.createElement('div');
+                    card.className = 'col-md-4 mb-4';
+                    card.innerHTML = `
+                        <div class="card h-100">
+                            <img src="../assets/images/default-product.jpg" class="card-img-top" alt="${product.title}">
+                            <div class="card-body">
+                                <h5 class="card-title">${product.title}</h5>
+                                <p class="card-text">${product.description}</p>
+                                <p class="card-text fw-bold">${product.price}</p>
+                                <a href="#" class="btn btn-primary">Comprar Agora</a>
+                            </div>
+                        </div>
+                    `;
+                    container.appendChild(card);
+                });
+            </script>
+        </div>
+    </main>
+
+    <footer class="footer mt-5 bg-light text-center py-3">
+        <p>&copy; 2025 AlphaGlam. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
