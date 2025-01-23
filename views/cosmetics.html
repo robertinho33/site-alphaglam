@@ -31,64 +31,43 @@
 
     <main class="container mt-5">
         <h1 class="text-center mb-4">Cosméticos - AlphaGlam</h1>
-        <p class="text-center">Explore nossa linha de cosméticos exclusivos da "ECO ELLE". Produtos sustentáveis e de alta qualidade para realçar sua beleza natural.</p>
-
+        <p class="text-center">Explore nossa linha de cosméticos exclusivos. Produtos de alta qualidade para realçar sua beleza natural.</p>
+    
         <div class="row">
             <script>
-                const ecoElleProducts = [
-                    { title: "Coco & Camomila.jpeg", description: "Condicionador Coco & Camomila", price: "R$ 39,90", },
-                    { title: "Base Vegana", description: "Base líquida com ingredientes naturais.", price: "R$ 89,90" },
-                    { title: "Paleta Mineral", description: "Sombras minerais em tons naturais.", price: "R$ 120,00" },
-                    { title: "Delineador Orgânico", description: "Fórmula suave e sustentável.", price: "R$ 49,90" },
-                    { title: "Máscara Vegana", description: "Máscara de cílios com ingredientes naturais.", price: "R$ 65,00" },
-                    { title: "Pó Translúcido Natural", description: "Controle de brilho com fórmula leve.", price: "R$ 75,00" },
-                    { title: "Iluminador Ecológico", description: "Realce sustentável para sua pele.", price: "R$ 85,00" },
-                    { title: "Blush Vegano", description: "Tons suaves e naturais.", price: "R$ 55,00" },
-                    { title: "Hidratante Labial", description: "Com manteiga de karité orgânica.", price: "R$ 29,90" },
-                    { title: "Primer Natural", description: "Prepara a pele com suavidade.", price: "R$ 99,90" },
-                    { title: "Fixador Orgânico", description: "Mantém sua maquiagem de forma natural.", price: "R$ 69,90" },
-                    { title: "Sombras Brilhantes", description: "Efeito luminoso com sustentabilidade.", price: "R$ 75,00" },
-                    { title: "Kit de Pincéis Ecológicos", description: "Feitos com materiais sustentáveis.", price: "R$ 150,00" },
-                    { title: "Demaquilante Natural", description: "Remove maquiagem sem agredir.", price: "R$ 45,00" },
-                    { title: "Soro Facial Natural", description: "Hidratação com extratos botânicos.", price: "R$ 250,00" },
-                    { title: "Protetor Solar Vegano", description: "FPS 50 com fórmula leve.", price: "R$ 85,00" },
-                    { title: "Tônico Facial", description: "Refresca e equilibra a pele.", price: "R$ 60,00" },
-                    { title: "Esfoliante Ecológico", description: "Renova sua pele de forma natural.", price: "R$ 80,00" },
-                    { title: "Creme para Olhos Vegano", description: "Reduz olheiras com suavidade.", price: "R$ 120,00" },
-                    { title: "Sérum de Vitamina C", description: "Com ingredientes orgânicos.", price: "R$ 200,00" },
-                    { title: "Máscara Facial Hidratante", description: "Hidratação com ativos naturais.", price: "R$ 90,00" },
-                    { title: "Esmalte Vegano", description: "Fórmula livre de toxinas.", price: "R$ 25,00" },
-                    { title: "Loção Corporal", description: "Hidratação profunda com óleos vegetais.", price: "R$ 75,00" },
-                    { title: "Óleo Corporal", description: "Aroma delicado e hidratação intensa.", price: "R$ 120,00" },
-                    { title: "Shampoo Natural", description: "Limpeza suave para cabelos saudáveis.", price: "R$ 55,00" },
-                    { title: "Condicionador Vegano", description: "Nutrição com ingredientes naturais.", price: "R$ 60,00" },
-                    { title: "Creme Modelador", description: "Define cachos com ativos botânicos.", price: "R$ 50,00" },
-                    { title: "Protetor Térmico Natural", description: "Protege do calor sem químicas.", price: "R$ 70,00" },
-                    { title: "Soro Capilar", description: "Fortalece com nutrientes naturais.", price: "R$ 90,00" },
-                    { title: "Kit Capilar Vegano", description: "Completo para cuidados sustentáveis.", price: "R$ 180,00" },
-                    { title: "Spray de Brilho", description: "Efeito luminoso com fórmula natural.", price: "R$ 75,00" },
-                    { title: "Creme Noturno", description: "Hidrata sua pele enquanto você dorme.", price: "R$ 130,00" },
-                    { title: "Lenços Demaquilantes", description: "Práticos e biodegradáveis.", price: "R$ 30,00" },
-                    { title: "Escova Facial", description: "Para uma limpeza natural e eficaz.", price: "R$ 150,00" }
+                const products = [
+                    { title: "Kit Lama Vulcânica La Boue 1,2 KG", price: "R$ 176,00", image: "Kit Lama Vulcânica La Boue 1,2 KG.jpg" },
+                    { title: "Shampoo Quartzo Liquide - 500 ml", price: "R$ 24,00", image: "Shampoo Quartzo Liquide - 500 ml.jpg" },
+                    { title: "Máscara Dossier Noir - 1,2 Kg", price: "R$ 102,00", image: "Máscara Dossier Noir - 1,2 Kg.jpg" },
+                    { title: "Selante Mastic Noir - 500 ml", price: "R$ 50,00", image: "Selante Mastic Noir - 500 ml.jpg" },
+                    { title: "Kit Lama Vulcânica La Boue 300 G", price: "R$ 88,00", image: "Kit Lama Vulcânica La Boue 300 G.jpg" },
+                    { title: "Shampoo Quartzo Liquide - 300 ml", price: "R$ 12,00", image: "Shampoo Quartzo Liquide - 300 ml.jpg" },
+                    { title: "Máscara Dossier Noir - 300 g", price: "R$ 51,00", image: "Máscara Dossier Noir - 300 g.jpg" },
+                    { title: "Selante Mastic Noir - 300 ml", price: "R$ 25,00", image: "Selante Mastic Noir - 300 ml.jpg" },
+                    { title: "Máscara Dossier Noir 50 G - Miniatura", price: "R$ 11,00", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
+                    { title: "Trio Manutenção Lama Vulcânica La Boue 300 G", price: "R$ 45,00", image: "Trio Manutenção Lama Vulcânica La Boue 300 G.jpg" }
+                    // Continue adicionando os outros produtos aqui...
                 ];
-
+    
                 const container = document.querySelector('.row');
-                ecoElleProducts.forEach(product => {
+                products.forEach(product => {
                     const card = document.createElement('div');
                     card.className = 'col-md-4 mb-4';
                     card.innerHTML = `
                         <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" src=".../100px180/?text=Image cap" alt="Imagem de capa do card">
-                        <div class="card-body">
-                            <p class="card-text">Um exemplo de texto rápido para construir o título do card e fazer preencher o conteúdo do card.</p>
+                            <img class="card-img-top" src="images/${product.image}" alt="${product.title}">
+                            <div class="card-body">
+                                <h5 class="card-title">${product.title}</h5>
+                                <p class="card-text">Preço: ${product.price}</p>
+                            </div>
                         </div>
-                        </div>
-                                            `;
+                    `;
                     container.appendChild(card);
                 });
             </script>
         </div>
     </main>
+    
 
     <footer class="footer mt-5 bg-light text-center py-3">
         <p>&copy; 2025 AlphaGlam. Todos os direitos reservados.</p>
