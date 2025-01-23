@@ -36,7 +36,7 @@
         <div class="row">
             <script>
                 const ecoElleProducts = [
-                    { title: "Coco & Camomila.jpeg", description: "Condicionador Coco & Camomila", price: "R$ 39,90",img: "../assets/images/Condicionador Coco & Camomila.jpeg" },
+                    { title: "Coco & Camomila.jpeg", description: "Condicionador Coco & Camomila", price: "R$ 39,90", },
                     { title: "Base Vegana", description: "Base líquida com ingredientes naturais.", price: "R$ 89,90" },
                     { title: "Paleta Mineral", description: "Sombras minerais em tons naturais.", price: "R$ 120,00" },
                     { title: "Delineador Orgânico", description: "Fórmula suave e sustentável.", price: "R$ 49,90" },
@@ -77,17 +77,13 @@
                     const card = document.createElement('div');
                     card.className = 'col-md-4 mb-4';
                     card.innerHTML = `
-                        <div class="card h-100">
-                            <img src="../assets/images/default-product.jpg" class="card-img-top" alt="${product.title}">
-                            <div class="card-body">
-                                <h5 class="card-title">${product.title}</h5>
-                                <p class="card-text">${product.description}</p>
-                                <p class="card-text fw-bold">${product.price}</p>
-                                <p class="card-text fw-bold">${product.img}</p>
-                                <a href="#" class="btn btn-primary">Comprar Agora</a>
-                            </div>
+                        <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src=".../100px180/?text=Image cap" alt="Imagem de capa do card">
+                        <div class="card-body">
+                            <p class="card-text">Um exemplo de texto rápido para construir o título do card e fazer preencher o conteúdo do card.</p>
                         </div>
-                    `;
+                        </div>
+                                            `;
                     container.appendChild(card);
                 });
             </script>
