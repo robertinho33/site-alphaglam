@@ -32,7 +32,63 @@
     <main class="container mt-5">
         <h1 class="text-center mb-4">Cosméticos - AlphaGlam</h1>
         <p class="text-center">Explore nossa linha de cosméticos exclusivos. Produtos de alta qualidade para realçar sua beleza natural.</p>
+    <div>
+        <div class="menu" id="cosmetics">
+            <div class="menu-item" onclick="showCards('descolorante')">Descolorante</div>
+            <div class="menu-item" onclick="showCards('shampoo')">Shampoo</div>
+            <div class="menu-item" onclick="showCards('hidratacao')">Hidratação</div>
+            <div class="menu-item" onclick="showCards('condicionador')">Condicionador</div>
+            <div class="menu-item" onclick="showCards('serum')">Sérum</div>
+            <div class="menu-item" onclick="showCards('finalizador')">Finalizador</div>
+            <div class="menu-item" onclick="showCards('máscara')">Máscara</div>
+            <div class="menu-item" onclick="showCards('oleo')">Óleo</div>
+            <div class="menu-item" onclick="showCards('tonico')">Tônico</div>
+        </div>
     
+        <div class="cards-container" id="cards-container">
+            <!-- Cards serão exibidos aqui -->
+        </div>
+    
+        <script>
+            function showCards(categoria) {
+                const cardsContainer = document.getElementById('cards-container');
+                cardsContainer.innerHTML = ''; // Limpar cards existentes
+    
+                let cards = [];
+                if (categoria === 'descolorante') {
+                    cards = [
+                        {name: 'Pó Descolorante', description: 'Produto para descoloração de cabelos.'},
+                        {name: 'Ox', description: 'Oxidante para clareamento.'},
+                        {name: 'Matizador', description: 'Produto para neutralização de tons indesejados.'}
+                    ];
+                } else if (categoria === 'shampoo') {
+                    cards = [
+                        {name: 'Coco', description: 'Shampoo hidratante com extrato de coco.'},
+                        {name: 'Algas', description: 'Shampoo nutritivo com algas marinhas.'},
+                        {name: 'Neutro', description: 'Shampoo neutro para todos os tipos de cabelo.'}
+                    ];
+                } else if (categoria === 'hidratacao') {
+                    cards = [
+                        {name: 'Pistache', description: 'Hidratação profunda com óleo de pistache.'},
+                        {name: 'Líquida', description: 'Hidratação líquida para cabelos secos.'},
+                        {name: 'Profunda', description: 'Máscara de hidratação profunda para cabelos danificados.'}
+                    ];
+                }
+                // Adicione mais categorias conforme necessário
+    
+                // Exibir os cards
+                cards.forEach(card => {
+                    const cardElement = document.createElement('div');
+                    cardElement.classList.add('card');
+                    cardElement.innerHTML = `
+                        <h3>${card.name}</h3>
+                        <p>${card.description}</p>
+                    `;
+                    cardsContainer.appendChild(cardElement);
+                });
+            }
+        </script>
+    </div>
         <div class="row">
             <script>
                 const products = [
@@ -44,27 +100,28 @@
     { "title": "Shampoo Quartzo Liquide - 300 ml", "price": "R$ 12,00", "image": "shampoo-quartzo-liquide-300ml.jpg" },
     { "title": "Máscara Dossier Noir - 300 g", "price": "R$ 51,00", "image": "mascara-dossier-noir-300g.jpg" },
     { "title": "Selante Mastic Noir - 300 ml", "price": "R$ 25,00", "image": "selante-mastic-noir-300ml.jpg" },
-    { "title": "Máscara Dossier Noir 50 G - Miniatura", "price": "R$ 11,00", "image": "mascara-dossier-noir-50g-miniatura.jpg" },
-    { "title": "Trio Manutenção Lama Vulcânica La Boue 300 G", "price": "R$ 45,00", "image": "trio-manutencao-lama-vulcanica-la-boue-300g.jpg" },
-    { "title": "Shampoo Remineralizante La Boue 300 ml", "price": "R$ 38,00", "image": "shampoo-remineralizante-la-boue-300ml.jpg" },
-    { "title": "Recondicionador La Boue 300 ml", "price": "R$ 40,00", "image": "recondicionador-la-boue-300ml.jpg" },
-    { "title": "Loção Noturna La Boue 300 ml", "price": "R$ 45,00", "image": "locao-noturna-la-boue-300ml.jpg" },
-    { "title": "Shampoo Matizador Silver Lama Eco Belle - 300 ml", "price": "R$ 17,40", "image": "shampoo-matizador-silver-lama-eco-belle-300ml.jpg" },
-    { "title": "Condicionador Matizador Silver Lama Eco Belle - 300 ml", "price": "R$ 14,20", "image": "condicionador-matizador-silver-lama-eco-belle-300ml.jpg" },
-    { "title": "Máscara Matizadora Silver Lama 300 G - Eco Belle", "price": "R$ 17,40", "image": "mascara-matizadora-silver-lama-eco-belle-300g.jpg" },
-    { "title": "Kit Lama Verde 500 G Verte", "price": "R$ 132,00", "image": "kit-lama-verde-500g-verte.jpg" },
-    { "title": "Shampoo Verte 500 ml", "price": "R$ 24,00", "image": "shampoo-verte-500ml.jpg" },
-    { "title": "Máscara Verte 500 g", "price": "R$ 58,00", "image": "mascara-verte-500g.jpg" },
-    { "title": "Selante Verte 500 ml", "price": "R$ 50,00", "image": "selante-verte-500ml.jpg" },
-    { "title": "Trio Manutenção Lama Verde 300 G Verte", "price": "R$ 45,00", "image": "trio-manutencao-lama-verde-300g-verte.jpg" },
-    { "title": "Shampoo Manutenção Verte 300 ml", "price": "R$ 13,60", "image": "shampoo-manutencao-verte-300ml.jpg" },
-    { "title": "Condicionador Manutenção Verte 300 ml", "price": "R$ 14,20", "image": "condicionador-manutencao-verte-300ml.jpg" },
-    { "title": "Gloss Manutenção Verte 300 ml", "price": "R$ 17,20", "image": "gloss-manutencao-verte-300ml.jpg" },
-    { "title": "Kit Lama Branca 500 G Blanc", "price": "R$ 132,00", "image": "kit-lama-branca-500g-blanc.jpg" },
-    { "title": "Shampoo Blanc 500 ml", "price": "R$ 24,00", "image": "shampoo-blanc-500ml.jpg" },
-    { "title": "Máscara Blanc 500 g", "price": "R$ 58,00", "image": "mascara-blanc-500g.jpg" },
-    { "title": "Selante Blanc 500 ml", "price": "R$ 50,00", "image": "selante-blanc-500ml.jpg" },
-    { "title": "Trio Manutenção Lama Branca 300 G Blanc", "price": "R$ 45,00", "image": "trio-manutencao-lama-branca-300g-blanc.jpg" },
+    { title: "Máscara Dossier Noir 50 G - Miniatura", "price": "R$ 11,00", "image": "mascara-dossier-noir-50g-miniatura.jpg" },
+    { title: "Trio Manutenção Lama Vulcânica La Boue 300 G", "price": "R$ 45,00", "image": "trio-manutencao-lama-vulcanica-la-boue-300g.jpg" },
+    { title: "Shampoo Remineralizante La Boue 300 ml", "price": "R$ 38,00", "image": "shampoo-remineralizante-la-boue-300ml.jpg" },
+    { title: "Recondicionador La Boue 300 ml", "price": "R$ 40,00", "image": "recondicionador-la-boue-300ml.jpg" },
+    { title: "Loção Noturna La Boue 300 ml", "price": "R$ 45,00", "image": "locao-noturna-la-boue-300ml.jpg" },
+    { title: "Shampoo Matizador Silver Lama Eco Belle - 300 ml", "price": "R$ 17,40", "image": "shampoo-matizador-silver-lama-eco-belle-300ml.jpg" },
+    { title: "Condicionador Matizador Silver Lama Eco Belle - 300 ml", "price": "R$ 14,20", "image": "condicionador-matizador-silver-lama-eco-belle-300ml.jpg" },
+    { title: "Máscara Matizadora Silver Lama 300 G - Eco Belle", "price": "R$ 17,40", "image": "mascara-matizadora-silver-lama-eco-belle-300g.jpg" },
+    { title: "Kit Lama Verde 500 G Verte", "price": "R$ 132,00", "image": "kit-lama-verde-500g-verte.jpg" },
+    { title: "Shampoo Verte 500 ml", "price": "R$ 24,00", "image": "shampoo-verte-500ml.jpg" },
+    { title: "Máscara Verte 500 g", "price": "R$ 58,00", "image": "mascara-verte-500g.jpg" },
+    { title: "Selante Verte 500 ml", "price": "R$ 50,00", "image": "selante-verte-500ml.jpg" },
+    { title: "Trio Manutenção Lama Verde 300 G Verte", "price": "R$ 45,00", "image": "trio-manutencao-lama-verde-300g-verte.jpg" },
+    { title: "Shampoo Manutenção Verte 300 ml", "price": "R$ 13,60", "image": "shampoo-manutencao-verte-300ml.jpg" },
+    { title: "Condicionador Manutenção Verte 300 ml", "price": "R$ 14,20", "image": "condicionador-manutencao-verte-300ml.jpg" },
+    { title: "Gloss Manutenção Verte 300 ml", "price": "R$ 17,20", "image": "gloss-manutencao-verte-300ml.jpg" },
+    { title: "Kit Lama Branca 500 G Blanc", "price": "R$ 132,00", "image": "kit-lama-branca-500g-blanc.jpg" },
+    { title: "Shampoo Blanc 500 ml", "price": "R$ 24,00", "image": "shampoo-blanc-500ml.jpg" },
+    { title: "Máscara Blanc 500 g", "price": "R$ 58,00", "image": "mascara-blanc-500g.jpg" },
+    { title: "Selante Blanc 500 ml", "price": "R$ 50,00", "image": "selante-blanc-500ml.jpg" },
+    { title: "Trio Manutenção Lama Branca 300 G Blanc", "price": "R$ 45,00", "image": "trio-manutencao-lama-branca-300g-blanc.jpg" },
+    { title: "Trio Manutenção Lama Branca 300 G Blanc", "price": "R$ 45,00", "image": "trio-manutencao-lama-branca-300g-blanc.jpg" },
 
   { title: "Shampoo Manutenção Blanc 300 ml", price: "R$ 13,60", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
   { title: "Condicionador Manutenção Blanc 300 ml", price: "R$ 14,20", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
