@@ -45,8 +45,13 @@
             </div>
           </div>
           
-          <div>
-          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+        <div class="menu" id="cosmetics">
+            <div class="menu-item" onclick="showCategory('descolorante')">Descolorante</div>
+            <div class="menu-item" onclick="showCategory('shampoo')">Shampoo</div>
+            <div class="menu-item" onclick="showCategory('hidratacao')">Hidratação</div>
+        </div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="#">Navbar</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Alterna navegação">
               <span class="navbar-toggler-icon"></span>
@@ -75,15 +80,6 @@
               </ul>
             </div>
           </nav>
-
-          </div>
-
-        <div class="menu" id="cosmetics">
-            <div class="menu-item" onclick="showCategory('descolorante')">Descolorante</div>
-            <div class="menu-item" onclick="showCategory('shampoo')">Shampoo</div>
-            <div class="menu-item" onclick="showCategory('hidratacao')">Hidratação</div>
-        </div>
-
         <!-- Área onde os cards serão exibidos -->
         <div class="row" id="cards-container">
             <!-- Os cards de produtos serão inseridos aqui pelo JavaScript -->
