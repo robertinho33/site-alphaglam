@@ -1,33 +1,5 @@
-let games = []; // Armazena todos os jogos adicionados pelo usuário
-
-// Função para buscar o último resultado oficial da Lotofácil
-async function fetchLastResult() {
-    try {
-        const response = await fetch('https://github.com/guto-alves/loterias-api.git'); // Substitua pela API real
-        const data = await response.json();
-
-        // Exemplo de retorno esperado da API:
-        // {
-        //   "concurso": 2750,
-        //   "data": "2025-01-20",
-        //   "numeros": [10, 3, 5, 8, 7, 12, 15, 13, 22, 20, 19, 2, 25, 6, 1]
-        // }
-
-        if (!data || !data.numeros || !data.concurso || !data.data) {
-            throw new Error('Resposta inválida da API');
-        }
-
-        return {
-            concurso: data.concurso,
-            data: data.data,
-            numeros: data.numeros.sort((a, b) => a - b), // Ordena os números em ordem crescente
-        };
-    } catch (error) {
-        console.error("Erro ao buscar o último resultado:", error);
-        alert("Não foi possível buscar o último resultado.");
-        return null;
-    }
-}
+let games = []; // Armazena os jogos do usuário
+let lastResult = null; // Armazena o último resultado inserido manualmente
 
 // Atualiza a tabela de jogos
 function updateGamesTable() {
@@ -56,17 +28,41 @@ document.getElementById('addGameForm').addEventListener('submit', function (even
     document.getElementById('gameNumbers').value = '';
 });
 
-// Verificar jogos com o último sorteio
-document.getElementById('checkResults').addEventListener('click', async function () {
-    const lastDraw = await fetchLastResult();
-    if (!lastDraw) return;
+// Inserir o resultado manualmente
+document.getElementById('resultForm').addEventListener('submit', function (event) {
+    event.preventDefault();
+    const input = document.getElementById('resultNumbers').value;
+    const result = input.split(',').map(num => parseInt(num.trim())).filter(num => num >= 1 && num <= 25 && !isNaN(num));
 
-    const { concurso, data, numeros } = lastDraw;
+    if (result.length !== 15) {
+        alert('O resultado deve conter exatamente 15 números entre 1 e 25!');
+        return;
+    }
+
+    lastResult = {
+        concurso: "Manual",
+        data: new Date().toISOString().split('T')[0], // Data atual
+        numeros: result.sort((a, b) => a - b), // Ordena em ordem crescente
+    };
+
+    alert('Resultado salvo com sucesso!');
+    document.getElementById('resultNumbers').value = '';
+    checkResults();
+});
+
+// Verificar jogos com o resultado salvo
+function checkResults() {
+    if (!lastResult) {
+        alert("Nenhum resultado foi inserido ainda!");
+        return;
+    }
+
+    const { concurso, data, numeros } = lastResult;
 
     // Exibe os detalhes do último sorteio
     const resultsDiv = document.getElementById('results');
     resultsDiv.innerHTML = `
-        <h3>Último Sorteio</h3>
+        <h3>Último Resultado</h3>
         <p>Concurso: <strong>${concurso}</strong></p>
         <p>Data: <strong>${data}</strong></p>
         <p>Números Sorteados (em ordem crescente): <strong>${numeros.join(', ')}</strong></p>
@@ -85,4 +81,4 @@ document.getElementById('checkResults').addEventListener('click', async function
             </p>
         `;
     });
-});
+}

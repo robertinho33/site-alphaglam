@@ -34,15 +34,36 @@
             </thead>
             <tbody></tbody>
         </table>
-        <div class="container my-5">
-            <h1 class="text-center mb-4">Verificar Resultados da Lotofácil</h1>
-        
-            <!-- Formulário para adicionar jogos -->
-            <form id="addGameForm" class="mb-4">
-                <label for="gameNumbers" class="form-label">Digite 15 números separados por vírgula:</label>
-                <input type="text" id="gameNumbers" class="form-control mb-2" placeholder="Ex: 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15" required>
-                <button type="submit" class="btn btn-success">Adicionar Jogo</button>
-            </form>
+        <h3>Adicionar Jogos</h3>
+    <form id="addGameForm">
+        <label for="gameNumbers">Digite os números do jogo (separados por vírgula):</label><br>
+        <input type="text" id="gameNumbers" required>
+        <button type="submit">Adicionar Jogo</button>
+    </form>
+
+    <h3>Jogos Adicionados</h3>
+    <table id="gamesTable">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Números do Jogo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Jogos serão adicionados aqui -->
+        </tbody>
+    </table>
+
+    <h3>Inserir Resultado Manualmente</h3>
+    <form id="resultForm">
+        <label for="resultNumbers">Digite os números sorteados (separados por vírgula):</label><br>
+        <input type="text" id="resultNumbers" required>
+        <button type="submit">Salvar Resultado</button>
+    </form>
+
+    <div id="results">
+        <!-- Resultado e verificações aparecerão aqui -->
+    </div>
         
             <!-- Botão para verificar os resultados -->
             <button id="checkResults" class="btn btn-warning mb-3">Verificar Último Resultado</button>
