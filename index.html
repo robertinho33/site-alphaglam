@@ -1,96 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lotofácil Checker</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+    <title>Alpha Glam - Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(120deg, #fbe5d6, #fddcc3);
+            color: #5a4632;
+        }
+
+        header {
+            background-color: #d4af37;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            color: #fff;
+            margin: 0;
+        }
+
+        nav {
+            display: flex;
+            gap: 15px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #fddcc3;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .container h2 {
+            color: #d4af37;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .container p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #d4af37;
+            color: #fff;
+            margin-top: 20px;
+        }
+    </style>
 </head>
+
 <body>
-    <div class="container my-5">
-        <h1 class="text-center mb-4">Lotofácil Chec</h1>
+    <header>
+        <h1>Alpha Glam</h1>
+        <nav>
+            <a href="salon.html">Salão de Beleza</a>
+            <a href="cosmetics.html">Cosméticos</a>
+            <a href="gym.html">Academia</a>
+            <a href="fitness-clothing.html">Roupas Fitness</a>
+            <a href="snack-bar.html">Lanchonete</a>
+        </nav>
+    </header>
 
-        <!-- Formulário para adicionar jogos -->
-        <form id="addGameForm" class="mb-4">
-            <label for="gameNumbers" class="form-label">Adicione um jogo (15 números separados por vírgula):</label>
-            <input type="text" id="gameNumbers" class="form-control mb-2" placeholder="Ex: 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15" required>
-            <button type="submit" class="btn btn-success w-100">Adicionar Jogo</button>
-        </form>
-
-        <!-- Botões para salvar e carregar jogos -->
-        <div class="d-flex justify-content-between mb-3">
-            <button id="saveGames" class="btn btn-primary">Salvar Jogos</button>
-            <button id="loadGames" class="btn btn-secondary">Carregar Jogos</button>
-        </div>
-
-        <!-- Tabela de jogos -->
-        <h3 class="mb-3">Jogos Adicionados:</h3>
-        <table class="table table-striped" id="gamesTable">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Números</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-        <h3>Adicionar Jogos</h3>
-    <form id="addGameForm">
-        <label for="gameNumbers">Digite os números do jogo (separados por vírgula):</label><br>
-        <input type="text" id="gameNumbers" required>
-        <button type="submit">Adicionar Jogo</button>
-    </form>
-
-    <h3>Jogos Adicionados</h3>
-    <table id="gamesTable">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Números do Jogo</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Jogos serão adicionados aqui -->
-        </tbody>
-    </table>
-
-    <h3>Inserir Resultado Manualmente</h3>
-    <form id="resultForm">
-        <label for="resultNumbers">Digite os números sorteados (separados por vírgula):</label><br>
-        <input type="text" id="resultNumbers" required>
-        <button type="submit">Salvar Resultado</button>
-    </form>
-
-    <div id="results">
-        <!-- Resultado e verificações aparecerão aqui -->
-    </div>
-        
-            <!-- Botão para verificar os resultados -->
-            <button id="checkResults" class="btn btn-warning mb-3">Verificar Último Resultado</button>
-        
-            <!-- Tabela para exibir os jogos -->
-            <table class="table table-striped" id="gamesTable">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Números</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
-        
-            <!-- Resultados -->
-            <div id="results" class="mt-4"></div>
-        </div>
-        
-        <!-- Botão para verificar jogos -->
-        <button id="checkResults" class="btn btn-warning w-100">Verificar Último Resultado</button>
-
-        <!-- Resultados -->
-        <div id="results" class="mt-5"></div>
+    <div class="container">
+        <h2>Bem-vindo ao Alpha Glam</h2>
+        <p>
+            Descubra um mundo de sofisticação e cuidado dedicado a você. O Alpha Glam reúne cinco experiências
+            exclusivas: salão de beleza, cosméticos, academia, roupas fitness e lanchonete. Tudo projetado para atender
+            ao público mais exigente com um toque de elegância e qualidade.
+        </p>
+        <p>
+            Clique no menu acima para explorar cada uma das nossas lojas e serviços.
+        </p>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/controller.js"></script>
+    <footer>
+        &copy; 2025 Alpha Glam. Todos os direitos reservados.
+    </footer>
 </body>
+
 </html>
