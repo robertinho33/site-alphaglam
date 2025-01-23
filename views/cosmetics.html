@@ -32,168 +32,100 @@
     <main class="container mt-5">
         <h1 class="text-center mb-4">Cosméticos - AlphaGlam</h1>
         <p class="text-center">Explore nossa linha de cosméticos exclusivos. Produtos de alta qualidade para realçar sua beleza natural.</p>
-    <div>
+
+
+        <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlphaGlam - Cosméticos</title>
+    <!-- Link para o arquivo CSS externo -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css"> <!-- CSS Externo -->
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="../index.html">AlphaGlam</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="beauty-salon.html">Salão de Beleza</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="cosmetics.html">Cosméticos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="gym.html">Academia</a></li>
+                        <li class="nav-item"><a class="nav-link" href="fitness-clothing.html">Roupas Fitness</a></li>
+                        <li class="nav-item"><a class="nav-link" href="snack-bar.html">Lanchonete</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mt-5">
+        <h1 class="text-center mb-4">Cosméticos - AlphaGlam</h1>
+        <p class="text-center">Explore nossa linha de cosméticos exclusivos. Produtos de alta qualidade para realçar sua beleza natural.</p>
+
+        <!-- Menu de categorias -->
         <div class="menu" id="cosmetics">
-            <div class="menu-item" onclick="showCards('descolorante')">Descolorante</div>
-            <div class="menu-item" onclick="showCards('shampoo')">Shampoo</div>
-            <div class="menu-item" onclick="showCards('hidratacao')">Hidratação</div>
-            <div class="menu-item" onclick="showCards('condicionador')">Condicionador</div>
-            <div class="menu-item" onclick="showCards('serum')">Sérum</div>
-            <div class="menu-item" onclick="showCards('finalizador')">Finalizador</div>
-            <div class="menu-item" onclick="showCards('máscara')">Máscara</div>
-            <div class="menu-item" onclick="showCards('oleo')">Óleo</div>
-            <div class="menu-item" onclick="showCards('tonico')">Tônico</div>
+            <div class="menu-item" onclick="showCategory('descolorante')">Descolorante</div>
+            <div class="menu-item" onclick="showCategory('shampoo')">Shampoo</div>
+            <div class="menu-item" onclick="showCategory('hidratacao')">Hidratação</div>
         </div>
-    
-        <div class="cards-container" id="cards-container">
-            <!-- Cards serão exibidos aqui -->
+
+        <!-- Área onde os cards serão exibidos -->
+        <div class="row" id="cards-container">
+            <!-- Os cards de produtos serão inseridos aqui pelo JavaScript -->
         </div>
-    
-        <script>
-            function showCards(categoria) {
-                const cardsContainer = document.getElementById('cards-container');
-                cardsContainer.innerHTML = ''; // Limpar cards existentes
-    
-                let cards = [];
-                if (categoria === 'descolorante') {
-                    cards = [
-                        {name: 'Pó Descolorante', description: 'Produto para descoloração de cabelos.'},
-                        {name: 'Ox', description: 'Oxidante para clareamento.'},
-                        {name: 'Matizador', description: 'Produto para neutralização de tons indesejados.'}
-                    ];
-                } else if (categoria === 'shampoo') {
-                    cards = [
-                        {name: 'Coco', description: 'Shampoo hidratante com extrato de coco.'},
-                        {name: 'Algas', description: 'Shampoo nutritivo com algas marinhas.'},
-                        {name: 'Neutro', description: 'Shampoo neutro para todos os tipos de cabelo.'}
-                    ];
-                } else if (categoria === 'hidratacao') {
-                    cards = [
-                        {name: 'Pistache', description: 'Hidratação profunda com óleo de pistache.'},
-                        {name: 'Líquida', description: 'Hidratação líquida para cabelos secos.'},
-                        {name: 'Profunda', description: 'Máscara de hidratação profunda para cabelos danificados.'}
-                    ];
-                }
-                // Adicione mais categorias conforme necessário
-    
-                // Exibir os cards
-                cards.forEach(card => {
-                    const cardElement = document.createElement('div');
-                    cardElement.classList.add('card');
-                    cardElement.innerHTML = `
-                        <h3>${card.name}</h3>
-                        <p>${card.description}</p>
-                    `;
-                    cardsContainer.appendChild(cardElement);
-                });
-            }
-        </script>
-    </div>
+   
+
+
         <div class="row">
             <script>
                 const products = [
-    { "title": "Kit Lama Vulcânica La Boue 1,2 KG", "price": "R$ 250,00", "image": "kit-lama-vulcanica-la-boue1200.jpeg" },
-    { "title": "Shampoo Quartzo Liquide - 500 ml", "price": "R$ 24,00", "image": "shampoo-quartzo-liquide-500ml.jpg" },
-    { "title": "Máscara Dossier Noir - 1,2 Kg", "price": "R$ 102,00", "image": "mascara-dossier-noir-1200g.jpg" },
-    { "title": "Selante Mastic Noir - 500 ml", "price": "R$ 50,00", "image": "selante-mastic-noir-500ml.jpg" },
-    { "title": "Kit Lama Vulcânica La Boue 300 G", "price": "R$ 88,00", "image": "kit-lama-vulcanica-la-boue-300g.jpg" },
-    { "title": "Shampoo Quartzo Liquide - 300 ml", "price": "R$ 12,00", "image": "shampoo-quartzo-liquide-300ml.jpg" },
-    { "title": "Máscara Dossier Noir - 300 g", "price": "R$ 51,00", "image": "mascara-dossier-noir-300g.jpg" },
-    { "title": "Selante Mastic Noir - 300 ml", "price": "R$ 25,00", "image": "selante-mastic-noir-300ml.jpg" },
-    { title: "Máscara Dossier Noir 50 G - Miniatura", "price": "R$ 11,00", "image": "mascara-dossier-noir-50g-miniatura.jpg" },
-    { title: "Trio Manutenção Lama Vulcânica La Boue 300 G", "price": "R$ 45,00", "image": "trio-manutencao-lama-vulcanica-la-boue-300g.jpg" },
-    { title: "Shampoo Remineralizante La Boue 300 ml", "price": "R$ 38,00", "image": "shampoo-remineralizante-la-boue-300ml.jpg" },
-    { title: "Recondicionador La Boue 300 ml", "price": "R$ 40,00", "image": "recondicionador-la-boue-300ml.jpg" },
-    { title: "Loção Noturna La Boue 300 ml", "price": "R$ 45,00", "image": "locao-noturna-la-boue-300ml.jpg" },
-    { title: "Shampoo Matizador Silver Lama Eco Belle - 300 ml", "price": "R$ 17,40", "image": "shampoo-matizador-silver-lama-eco-belle-300ml.jpg" },
-    { title: "Condicionador Matizador Silver Lama Eco Belle - 300 ml", "price": "R$ 14,20", "image": "condicionador-matizador-silver-lama-eco-belle-300ml.jpg" },
-    { title: "Máscara Matizadora Silver Lama 300 G - Eco Belle", "price": "R$ 17,40", "image": "mascara-matizadora-silver-lama-eco-belle-300g.jpg" },
-    { title: "Kit Lama Verde 500 G Verte", "price": "R$ 132,00", "image": "kit-lama-verde-500g-verte.jpg" },
-    { title: "Shampoo Verte 500 ml", "price": "R$ 24,00", "image": "shampoo-verte-500ml.jpg" },
-    { title: "Máscara Verte 500 g", "price": "R$ 58,00", "image": "mascara-verte-500g.jpg" },
-    { title: "Selante Verte 500 ml", "price": "R$ 50,00", "image": "selante-verte-500ml.jpg" },
-    { title: "Trio Manutenção Lama Verde 300 G Verte", "price": "R$ 45,00", "image": "trio-manutencao-lama-verde-300g-verte.jpg" },
-    { title: "Shampoo Manutenção Verte 300 ml", "price": "R$ 13,60", "image": "shampoo-manutencao-verte-300ml.jpg" },
-    { title: "Condicionador Manutenção Verte 300 ml", "price": "R$ 14,20", "image": "condicionador-manutencao-verte-300ml.jpg" },
-    { title: "Gloss Manutenção Verte 300 ml", "price": "R$ 17,20", "image": "gloss-manutencao-verte-300ml.jpg" },
-    { title: "Kit Lama Branca 500 G Blanc", "price": "R$ 132,00", "image": "kit-lama-branca-500g-blanc.jpg" },
-    { title: "Shampoo Blanc 500 ml", "price": "R$ 24,00", "image": "shampoo-blanc-500ml.jpg" },
-    { title: "Máscara Blanc 500 g", "price": "R$ 58,00", "image": "mascara-blanc-500g.jpg" },
-    { title: "Selante Blanc 500 ml", "price": "R$ 50,00", "image": "selante-blanc-500ml.jpg" },
-    { title: "Trio Manutenção Lama Branca 300 G Blanc", "price": "R$ 45,00", "image": "trio-manutencao-lama-branca-300g-blanc.jpg" },
-    { title: "Trio Manutenção Lama Branca 300 G Blanc", "price": "R$ 45,00", "image": "trio-manutencao-lama-branca-300g-blanc.jpg" },
+    { title: "Pó Descolorante", category: "descolorante", price: "R$ 50,00", image: "po-descolorante.jpg" },
+    { title: "Ox", category: "descolorante", price: "R$ 30,00", image: "ox.jpg" },
+    { title: "Matizador", category: "descolorante", price: "R$ 40,00", image: "matizador.jpg" },
+    { title: "Shampoo Coco", category: "shampoo", price: "R$ 24,00", image: "shampoo-coco.jpg" },
+    { title: "Shampoo Algas", category: "shampoo", price: "R$ 22,00", image: "shampoo-algas.jpg" },
+    { title: "Shampoo Neutro", category: "shampoo", price: "R$ 20,00", image: "shampoo-neutro.jpg" },
+    { title: "Hidratação Pistache", category: "hidratacao", price: "R$ 45,00", image: "hidratacao-pistache.jpg" },
+    { title: "Hidratação Líquida", category: "hidratacao", price: "R$ 38,00", image: "hidratacao-liquida.jpg" },
+    { title: "Hidratação Profunda", category: "hidratacao", price: "R$ 50,00", image: "hidratacao-profunda.jpg" }
+];
 
-  { title: "Shampoo Manutenção Blanc 300 ml", price: "R$ 13,60", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
-  { title: "Condicionador Manutenção Blanc 300 ml", price: "R$ 14,20", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
-  { title: "Gloss Manutenção Blanc 300 ml", price: "R$ 17,20", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
-  { title: "Máscara Efeito Teia 1 kg", price: "R$ 45,00", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
-  { title: "Máscara Efeito Teia 50 G - Miniatura", price: "R$ 8,00", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
-  { title: "Queratina em Gel - Keracap 120ml", price: "R$ 22,50", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
-  { title: "Bye Quebra 250 mL", price: "R$ 55,08", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
-  { title: "Emulsão Cremosa Ox. 05 Volumes 900 ml", price: "R$ 20,61", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
-  { title: "Emulsão Cremosa Ox. 10 Volumes 900 ml", price: "R$ 20,61", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
-  { title: "Emulsão Cremosa Ox. 20 Volumes 900 ml", price: "R$ 20,61", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
-  { title: "Emulsão Cremosa Ox. 30 Volumes 900 ml", price: "R$ 20,61", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
-  { title: "Emulsão Cremosa Ox. 40 Volumes 900 ml", price: "R$ 20,61", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
-  { title: "Kit Protetor de Descoloração Eco Plex 300 ml", price: "R$ 72,00", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
-  { title: "Pó Descolorante Capilar Profissional 500 G", price: "R$ 49,50", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
-  { title: "Pó Descolorante White 500 G", price: "R$ 49,50", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
-  { title: "Shampoo Matizador 1 L", price: "R$ 50,10", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
-  { title: "Condicionador Matizador - 1 L", price: "R$ 50,10", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
-  { title: "Máscara Matizadora 1 KG", price: "R$ 55,00", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
-  { title: "Shampoo Remineralizante Uso Diário 5L", price: "R$ 58,90", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
-  { title: "Recondicionador Uso Diário 5L", price: "R$ 58,90", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
-  { title: "Shampoo Queratina 5L", price: "R$ 55,00", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
-  { title: "Mascara Reestruturadora 2 KG", price: "R$ 49,50", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
-  { title: "Ampola SemiDilino 15 mL", price: "R$ 6,00", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
-  { title: "Máscara Liquida Liquid Mask 200 ml", price: "R$ 43,50", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
-  { title: "Gran Finale 200 mL", price: "R$ 28,00", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
-  { title: "Gran Finale Blond 200 mL", price: "R$ 32,00", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
-  { title: "Reparador Pontas 60 mL", price: "R$ 26,70", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
-  { title: "Óleo de Argan 60 mL", price: "R$ 26,70", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
-  { title: "Óleo Ojon 60 mL", price: "R$ 26,70", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
-  { title: "Óleo de Ojon 7 mL", price: "R$ 6,00", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
-  { title: "Shampoo Barber 1L", price: "R$ 15,00", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
-  { title: "Condicionador Barber 1L", price: "R$ 15,00", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
-  { title: "Ironed Hair 500 G", price: "R$ 24,90", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
-  { title: "Ironed Hair 50 G - Miniatura", price: "R$ 5,00", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
-  { title: "Ironed Hair Matizador 500 G", price: "R$ 32,90", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
-  { title: "Ironed Hair Matizador 50 G - Miniatura", price: "R$ 6,00", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
-  { title: "Shampoo Extrato de Algas Marinhas 1 L", price: "R$ 20,00", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
-  { title: "Condicionador Extratos de Algas Marinhas 1 L", price: "R$ 20,00", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
-  { title: "Shampoo Leite de Coco 2,5L", price: "R$ 35,00", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
-  { title: "Condicionador Leite de Coco 2,5L", price: "R$ 35,00", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
-  { title: "Kit Pimenta Rosa", price: "R$ 39,00", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
-  { title: "Shampoo Pimenta Rosa 300 mL", price: "R$ 12,00", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
-  { title: "Condicionador Pimenta Rosa 300 mL", price: "R$ 12,00", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
-  { title: "Máscara Pimenta Rosa 250 g", price: "R$ 15,00", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
-  { title: "Kit doÈden Capim Limão & Alecrim", price: "R$ 39,00", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
-  { title: "Shampoo Capim Limão & Alecrim 300 mL", price: "R$ 12,00", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
-  { title: "Condicionador Capim Limão & Alecrim 300 mL", price: "R$ 12,00", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
-  { title: "Máscara Capim Limão & Alecrim 250 g", price: "R$ 15,00", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
-  { title: "Kit Coco & Camomila", price: "R$ 93,70", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
-  { title: "Shampoo Coco & Camomila 300 ml", price: "R$ 12,00", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
-  { title: "Condicionador Coco & Camomila 300 ml", price: "R$ 12,00", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
-  { title: "Máscara Coco & Camomila 250 g", price: "R$ 15,00", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" },
-  { title: "Finalizador Coco e Camomila 200 ml", price: "R$ 28,00", image: "Máscara Dossier Noir 50 G - Miniatura.jpg" }
-                  // Continue adicionando os outros produtos aqui...
-                ];
-    
-                const container = document.querySelector('.row');
-                products.forEach(product => {
-                    const card = document.createElement('div');
-                    card.className = 'col-md-4 mb-4';
-                    card.innerHTML = `
-                        <div class="card" style="width: 18rem;">
-                            <img class="card-img-top" src="../assets/images/ecobelle/${product.image}" alt="${product.title}">
-                            <div class="card-body">
-                                <h5 class="card-title">${product.title}</h5>
-                                <p class="card-text">Preço: ${product.price}</p>
-                            </div>
-                        </div>
-                    `;
-                    container.appendChild(card);
-                });
+function showCategory(category) {
+    // Limpar os cards existentes
+    const container = document.getElementById('cards-container');
+    container.innerHTML = '';
+
+    // Filtrar produtos pela categoria selecionada
+    const filteredProducts = products.filter(product => product.category === category);
+
+    // Exibir os cards filtrados
+    filteredProducts.forEach(product => {
+        const card = document.createElement('div');
+        card.className = 'col-md-4 mb-4';
+        card.innerHTML = `
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="../assets/images/${product.image}" alt="${product.title}">
+                <div class="card-body">
+                    <h5 class="card-title">${product.title}</h5>
+                    <p class="card-text">Preço: ${product.price}</p>
+                </div>
+            </div>
+        `;
+        container.appendChild(card);
+    });
+}
+
+// Exibir os produtos da primeira categoria por padrão
+showCategory('descolorante');
+
             </script>
         </div>
     </main>
