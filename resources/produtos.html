@@ -8,95 +8,92 @@
     <link rel="stylesheet" href="../assets/css/style.css"> <!-- CSS Externo -->
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="../index.html">AlphaGlam</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="beauty-salon.html">Salão de Beleza</a></li>
-                        <li class="nav-item"><a class="nav-link active" href="cosmetics.html">Cosméticos</a></li>
-                        <li class="nav-item"><a class="nav-link" href="gym.html">Academia</a></li>
-                        <li class="nav-item"><a class="nav-link" href="fitness-clothing.html">Roupas Fitness</a></li>
-                        <li class="nav-item"><a class="nav-link" href="snack-bar.html">Lanchonete</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-
-    <main class="container mt-4">
-        <div class="row">
-            <!-- Card 1 -->
-            <div class="col-md-4">
-                <div class="card h-100" onclick="loadGroup('group-1')">
-                    <img src="../assets/images/corte-cabelo.jpg" class="card-img-top" alt="Cortes de Cabelo">
-                    <div class="card-body">
-                        <h5 class="card-title">Liha Blond</h5>
-                        <p class="card-text">Descubra Agora o Melhor Tratamento Para Cabelos Loiros Com a Linha Blond.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Card 2 -->
-            <div class="col-md-4">
-                <div class="card h-100" onclick="loadGroup('group-2')">
-                    <img src="../assets/images/coloracao.jpg" class="card-img-top" alt="Coloração">
-                    <div class="card-body">
-                        <h5 class="card-title">Coloração</h5>
-                        <p class="card-text">Descubra colorações completas, ombré hair, mechas e correções de cor.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Card 3 -->
-            <div class="col-md-4">
-                <div class="card h-100" onclick="loadGroup('group-3')">
-                    <img src="../assets/images/tratamentos.jpg" class="card-img-top" alt="Tratamentos Capilares">
-                    <div class="card-body">
-                        <h5 class="card-title">Tratamentos Capilares</h5>
-                        <p class="card-text">Cuide dos seus cabelos com hidratação, botox capilar e muito mais.</p>
-                    </div>
+    <!-- Grupo 1 -->
+    <div class="row" id="group-1">
+        <!-- Card 1 -->
+        <div class="col-md-4">
+            <div class="card h-100">
+                <img src="../assets/images/corte-cabelo.jpg" class="card-img-top" alt="Cortes de Cabelo">
+                <div class="card-body">
+                    <h5 class="card-title">Liha Blond</h5>
+                    <p class="card-text">Descubra Agora o Melhor Tratamento Para Cabelos Loiros Com a Linha Blond.</p>
+                    <a href="services/cortes-de-cabelo.html" class="btn btn-primary">Ver Produtos</a>
                 </div>
             </div>
         </div>
 
-        <!-- Área para carregar os grupos -->
-        <div id="cards-container" class="mt-5"></div>
-    </main>
+        <!-- Card 2 -->
+        <div class="col-md-4">
+            <div class="card h-100">
+                <img src="../assets/images/coloracao.jpg" class="card-img-top" alt="Coloração">
+                <div class="card-body">
+                    <h5 class="card-title">Coloração</h5>
+                    <p class="card-text">Descubra colorações completas, ombré hair, mechas e correções de cor.</p>
+                    <a href="services/coloracao.html" class="btn btn-primary">Ver Produtos</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <footer class="footer mt-5 bg-light text-center py-3">
-        <p>&copy; 2025 AlphaGlam. Todos os direitos reservados.</p>
-    </footer>
+    <!-- Grupo 2 -->
+    <div class="row mt-4" id="group-2">
+        <!-- Card 3 -->
+        <div class="col-md-4">
+            <div class="card h-100">
+                <img src="../assets/images/tratamentos.jpg" class="card-img-top" alt="Tratamentos Capilares">
+                <div class="card-body">
+                    <h5 class="card-title">Tratamentos Capilares</h5>
+                    <p class="card-text">Cuide dos seus cabelos com hidratação, botox capilar e muito mais.</p>
+                    <a href="services/tratamentos-capilares.html" class="btn btn-primary">Ver Produtos</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="col-md-4">
+            <div class="card h-100">
+                <img src="../assets/images/manicure.jpg" class="card-img-top" alt="Manicure e Pedicure">
+                <div class="card-body">
+                    <h5 class="card-title">Linha Progressiva</h5>
+                    <p class="card-text">Redutor de volume para todos os tipos de cabelo. Efeito liso com naturalidade e elimina o frizz.</p>
+                    <a href="services/manicure-pedicure.html" class="btn btn-primary">Ver Produtos</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Grupo 3 -->
+    <div class="row mt-4" id="group-3">
+        <!-- Card 5 -->
+        <div class="col-md-4">
+            <div class="card h-100">
+                <img src="../assets/images/maquiagem.jpg" class="card-img-top" alt="Maquiagem">
+                <div class="card-body">
+                    <h5 class="card-title">Maquiagem</h5>
+                    <p class="card-text">Maquiagem social, para noivas e eventos. Realce sua beleza com estilo.</p>
+                    <a href="services/maquiagem.html" class="btn btn-primary">Ver Produtos</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Grupo 4 -->
+    <div class="row mt-4" id="group-4">
+        <!-- Card 6 -->
+        <div class="col-md-4">
+            <div class="card h-100">
+                <img src="../assets/images/estetica.jpg" class="card-img-top" alt="Estética Facial">
+                <div class="card-body">
+                    <h5 class="card-title">Estética Facial</h5>
+                    <p class="card-text">Limpeza de pele, peeling e tratamentos anti-idade.</p>
+                    <a href="services/estetica-facial.html" class="btn btn-primary">Ver Produtos</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- JS Externo -->
     <script src="../controllers/main.js"></script> <!-- Verifique se o caminho está correto -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Função para carregar um grupo de cards
-        function loadGroup(groupId) {
-            fetch('../ressources/produtos.html')
-                .then(response => response.text())
-                .then(html => {
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(html, 'text/html');
-                    const group = doc.getElementById(groupId);
-
-                    if (group) {
-                        document.getElementById('cards-container').innerHTML = group.outerHTML;
-                    } else {
-                        document.getElementById('cards-container').innerHTML = '<p class="text-danger">Grupo não encontrado!</p>';
-                    }
-                })
-                .catch(error => {
-                    console.error('Erro ao carregar o grupo:', error);
-                    document.getElementById('cards-container').innerHTML = '<p class="text-danger">Erro ao carregar o conteúdo.</p>';
-                });
-        }
-    </script>
 </body>
 </html>
