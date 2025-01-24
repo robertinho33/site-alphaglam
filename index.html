@@ -3,36 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AlphaGlam - Home</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <title>Alpha Glam</title>
+    
+    <!-- Bootstrap CSS -->
+    <link 
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" 
+        rel="stylesheet" 
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRzknRdEB3hlTr+nNCFOdfK2JSfUpF1UtVf7DXdR3" 
+        crossorigin="anonymous"
+    >
+    
+    <!-- Custom Styles -->
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="index.html">AlphaGlam</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item"><a class="nav-link" href="views/beauty-salon.html">Salão de Beleza</a></li>
-                        <li class="nav-item"><a class="nav-link" href="views/cosmetics.html">Cosméticos</a></li>
-                        <li class="nav-item"><a class="nav-link" href="views/gym.html">Academia</a></li>
-                        <li class="nav-item"><a class="nav-link" href="views/fitness-clothing.html">Roupas Fitness</a></li>
-                        <li class="nav-item"><a class="nav-link" href="views/snack-bar.html">Lanchonete</a></li>
-                    </ul>
-                </div>
+    <!-- Menu de Navegação -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">Alpha Glam</a>
+            <button 
+                class="navbar-toggler" 
+                type="button" 
+                data-bs-toggle="collapse" 
+                data-bs-target="#navbarNav" 
+                aria-controls="navbarNav" 
+                aria-expanded="false" 
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="salon.html">Salão de Beleza</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cosmetics.html">Cosméticos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="gym.html">Academia</a></li>
+                    <li class="nav-item"><a class="nav-link" href="fitness.html">Roupas Fitness</a></li>
+                    <li class="nav-item"><a class="nav-link" href="snack.html">Lanchonete</a></li>
+                </ul>
             </div>
-        </nav>
-    </header>
+        </div>
+    </nav>
 
-    <main class="container text-center mt-5">
-        <h1>Bem-vindo ao AlphaGlam</h1>
-        <p>Explore nossas lojas e descubra serviços e produtos incríveis!</p>
-    </main>
+    <!-- Conteúdo Dinâmico -->
+    <div class="container mt-5">
+        {{ content }}
+    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap Bundle JS -->
+    <script 
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" 
+        integrity="sha384-w76Aoh+Pqh2zpTyt+Zv8KA+RpFw1giZ7VNU6p1txHZo5smXKpO5fSYxyD8Dlt7hx" 
+        crossorigin="anonymous">
+    </script>
 </body>
 </html>
