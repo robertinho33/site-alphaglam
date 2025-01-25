@@ -13,7 +13,7 @@
 </head>
 <body>
     <div class="container my-5">
-        <h1 class="text-center mb-4">Products</h1>
+        <h1 class="text-center mb-4">Produtos</h1>
         <div id="products-container" class="row">
             <!-- Os cards serão inseridos aqui dinamicamente -->
         </div>
@@ -22,17 +22,23 @@
     <script>
         // Função para carregar o CSV
         async function loadCSV(filePath) {
-            const response = await fetch(filePath);
-            const data = await response.text();
-            return parseCSV(data);
+            try {
+                const response = await fetch(filePath);
+                if (!response.ok) throw new Error('Erro ao carregar o CSV.');
+                const data = await response.text();
+                return parseCSV(data);
+            } catch (error) {
+                console.error(error.message);
+                return [];
+            }
         }
 
         // Função para processar o CSV em um array de objetos
         function parseCSV(data) {
-            const lines = data.split('\n');
-            const headers = lines[0].split(',');
+            const lines = data.split('\n').filter(line => line.trim() !== ''); // Remove linhas vazias
+            const headers = lines[0].split(',').map(header => header.trim());
             const products = lines.slice(1).map(line => {
-                const values = line.split(',');
+                const values = line.split(',').map(value => value.trim());
                 const product = {};
                 headers.forEach((header, index) => {
                     product[header] = values[index];
@@ -45,19 +51,18 @@
         // Função para renderizar os cards na página
         function renderProducts(products) {
             const container = document.getElementById('products-container');
+            container.innerHTML = ''; // Limpa o container antes de renderizar
             products.forEach(product => {
                 const card = document.createElement('div');
                 card.classList.add('col-md-4');
                 card.innerHTML = `
                     <div class="card h-100">
-                        <img src="${product.img}" class="card-img-top" alt="${product.title}">
+                        <img src="assets/images/ecobelle/${product.image}" class="card-img-top" alt="${product.title}">
                         <div class="card-body">
                             <h5 class="card-title">${product.title}</h5>
-                            <p class="card-text">${product.description}</p>
                             <p class="card-text"><strong>Categoria:</strong> ${product.category}</p>
                             <p class="card-text"><strong>Preço:</strong> R$ ${parseFloat(product.price).toFixed(2)}</p>
                         </div>
-                        
                     </div>
                 `;
                 container.appendChild(card);
@@ -67,7 +72,11 @@
         // Inicializa o carregamento dos produtos
         document.addEventListener('DOMContentLoaded', async () => {
             const products = await loadCSV('products.csv');
-            renderProducts(products);
+            if (products.length === 0) {
+                document.getElementById('products-container').innerHTML = '<p class="text-center">Nenhum produto encontrado.</p>';
+            } else {
+                renderProducts(products);
+            }
         });
     </script>
 </body>
