@@ -1,4 +1,8 @@
- { title: "Máscara Dossier Noir 50 G - Miniatura", "price": "R$ 11,00", "image": "mascara-dossier-noir-50g-miniatura.jpg" },
+title,price,image,category
+Máscara Dossier Noir 50 G - Miniatura,R$ 11,00,mascara-dossier-noir-50g-miniatura.jpg,Tratamento
+Shampoo Blond Care,R$ 35,00,shampoo-blond-care.jpg,Shampoo
+
+    { title: "Máscara Dossier Noir 50 G - Miniatura", "price": "R$ 11,00", "image": "mascara-dossier-noir-50g-miniatura.jpg" },
     { title: "Trio Manutenção Lama Vulcânica La Boue 300 G", "price": "R$ 45,00", "image": "trio-manutencao-lama-vulcanica-la-boue-300g.jpg" },
     { title: "Shampoo Remineralizante La Boue 300 ml", "price": "R$ 38,00", "image": "shampoo-remineralizante-la-boue-300ml.jpg" },
     { title: "Recondicionador La Boue 300 ml", "price": "R$ 40,00", "image": "recondicionador-la-boue-300ml.jpg" },
