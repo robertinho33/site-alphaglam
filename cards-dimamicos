@@ -57,6 +57,7 @@
                             <p class="card-text"><strong>Categoria:</strong> ${product.category}</p>
                             <p class="card-text"><strong>Preço:</strong> R$ ${parseFloat(product.price).toFixed(2)}</p>
                         </div>
+                        
                     </div>
                 `;
                 container.appendChild(card);
