@@ -23,9 +23,11 @@
         }
 
         .card img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px; /* Cantos arredondados na imagem */
+        max-width: 100%;
+        max-height: 200px; /* Limitar a altura da imagem a 200px */
+        height: auto;
+        width: auto; /* Garante que a largura seja proporcional à altura */
+        border-radius: 8px; /* Cantos arredondados na imagem */
         }
 
         .card-title {
@@ -153,7 +155,7 @@
                 <div class="card"> 
                     <img class="card-img-top" src="assets/images/ecobelle/${product.image}" alt="${product.title}">
                     <div class="card-body">
-                    <h5 class="card-title">>${product.title}</h5>
+                    <h5 class="card-title">${product.title}</h5>
                     <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
                      <p class="card-text"><strong>Categoria:</strong> ${product.category}</p>
                      </div>
