@@ -40,7 +40,7 @@
             </ul>
             <div class="text-center mt-4">
                 <p><strong>Total:</strong> R$ <span id="cart-total">0.00</span></p>
-                <a href="https://wa.me/5511986215473" id="whatsapp-button" target="_blank" class="btn btn-success">
+                <a href="#" id="whatsapp-button" target="_blank" class="btn btn-success">
                     Finalizar Pedido no WhatsApp
                 </a>
             </div>
@@ -49,53 +49,54 @@
 
     <script>
         const cart = [];
-    
-        // Adicionar produto ao carrinho
+
+        // Função para adicionar produto ao carrinho
         function addToCart(product) {
             cart.push(product);
             alert(`Produto "${product.title}" adicionado ao carrinho!`);
             updateCartView();
         }
-    
-        // Remover produto do carrinho
+
+        // Função para remover produto do carrinho
         function removeFromCart(index) {
             cart.splice(index, 1);
             alert("Produto removido do carrinho!");
             updateCartView();
         }
-    
+
         // Calcular total do carrinho
         function calculateCartTotal() {
             return cart.reduce((total, product) => total + parseFloat(product.price), 0).toFixed(2);
         }
-    
+
         // Gerar mensagem para WhatsApp
         function generateWhatsAppMessage() {
             if (cart.length === 0) {
                 return "Meu carrinho está vazio.";
             }
-    
+
             let message = "Olá, gostaria de realizar o seguinte pedido:\n\n";
             cart.forEach((product, index) => {
                 message += `${index + 1}. ${product.title} - R$ ${parseFloat(product.price).toFixed(2)}\n`;
             });
             message += `\nTotal: R$ ${calculateCartTotal()}`;
-    
+
             return message;
         }
-    
+
         // Atualizar botão do WhatsApp
         function updateWhatsAppButton() {
             const whatsappButton = document.getElementById("whatsapp-button");
             const message = encodeURIComponent(generateWhatsAppMessage());
             whatsappButton.href = `https://wa.me/5511986215473?text=${message}`;
         }
-    
+
         // Atualizar exibição do carrinho
         function updateCartView() {
             const cartList = document.getElementById("cart-list");
             const cartTotal = document.getElementById("cart-total");
             cartList.innerHTML = ""; // Limpa a lista
+
             if (cart.length === 0) {
                 cartList.innerHTML = '<li class="list-group-item text-center">O carrinho está vazio.</li>';
                 cartTotal.textContent = "0.00";
@@ -111,10 +112,10 @@
                 });
                 cartTotal.textContent = calculateCartTotal();
             }
-    
+
             updateWhatsAppButton();
         }
-    
+
         // Renderizar produtos
         function renderProducts(products) {
             const container = document.getElementById("products-container");
@@ -141,7 +142,30 @@
                 container.appendChild(card);
             });
         }
-    
+
+        // Função para carregar o CSV
+        async function loadCSV(filePath) {
+            try {
+                const response = await fetch(filePath);
+                if (!response.ok) throw new Error('Erro ao carregar o arquivo CSV.');
+                const data = await response.text();
+                return parseCSV(data);
+            } catch (error) {
+                console.error(error.message);
+                return [];
+            }
+        }
+
+        // Função para processar os dados do CSV
+        function parseCSV(data) {
+            const lines = data.split('\n').filter(line => line.trim() !== ''); // Remove linhas vazias
+            const headers = lines[0].split(',').map(header => header.trim());
+            return lines.slice(1).map(line => {
+                const values = line.split(',').map(value => value.trim());
+                return Object.fromEntries(headers.map((header, index) => [header, values[index]]));
+            });
+        }
+
         // Inicializar o carregamento dos produtos
         document.addEventListener("DOMContentLoaded", async () => {
             const products = await loadCSV("products.csv");
@@ -151,47 +175,18 @@
             } else {
                 renderProducts(products);
             }
-    
-            // Adicionar eventos nos botões
+
+            // Alternar entre produtos e carrinho
             document.getElementById("view-products-btn").addEventListener("click", () => {
                 document.getElementById("products-container").style.display = "flex";
                 document.getElementById("cart-container").style.display = "none";
             });
-    
+
             document.getElementById("view-cart-btn").addEventListener("click", () => {
                 document.getElementById("products-container").style.display = "none";
                 document.getElementById("cart-container").style.display = "block";
             });
         });
-        // Função para carregar o CSV
-async function loadCSV(filePath) {
-    try {
-        const response = await fetch(filePath);
-        if (!response.ok) throw new Error('Erro ao carregar o arquivo CSV.');
-        const data = await response.text();
-        return parseCSV(data);
-    } catch (error) {
-        console.error(error.message);
-        return [];
-    }
-}
-
-// Função para processar os dados do CSV
-function parseCSV(data) {
-    const lines = data.split('\n').filter(line => line.trim() !== ''); // Remove linhas vazias
-    const headers = lines[0].split(',').map(header => header.trim());
-    const products = lines.slice(1).map(line => {
-        const values = line.split(',').map(value => value.trim());
-        const product = {};
-        headers.forEach((header, index) => {
-            product[header] = values[index];
-        });
-        return product;
-    });
-    return products;
-}
-
     </script>
-    
 </body>
 </html>
