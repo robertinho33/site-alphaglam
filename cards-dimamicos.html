@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cards Dinâmicos com CSV</title>
+    <title>Produtos com Carrinho</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
     <style>
         .card {
@@ -12,17 +12,44 @@
         .cart-button, .whatsapp-button {
             margin-top: 10px;
         }
+        #cart-container {
+            display: none; /* Escondido inicialmente */
+        }
     </style>
 </head>
 <body>
     <div class="container my-5">
         <h1 class="text-center mb-4">Produtos</h1>
+        
+        <!-- Botões para alternar entre Produtos e Carrinho -->
+        <div class="text-center mb-4">
+            <button id="view-products-btn" class="btn btn-primary">Voltar às Compras</button>
+            <button id="view-cart-btn" class="btn btn-secondary">Ver Carrinho</button>
+        </div>
+
+        <!-- Produtos -->
         <div id="products-container" class="row">
             <!-- Os cards serão inseridos aqui dinamicamente -->
+        </div>
+
+        <!-- Carrinho -->
+        <div id="cart-container">
+            <h2 class="text-center mb-4">Carrinho</h2>
+            <ul id="cart-list" class="list-group">
+                <!-- Os produtos do carrinho serão exibidos aqui -->
+            </ul>
+            <div class="text-center mt-4">
+                <a href="https://wa.me/5511986215473" target="_blank" class="btn btn-success">
+                    Finalizar Pedido no WhatsApp
+                </a>
+            </div>
         </div>
     </div>
 
     <script>
+        // Array para armazenar os produtos do carrinho
+        const cart = [];
+
         // Função para carregar o CSV
         async function loadCSV(filePath) {
             try {
@@ -51,14 +78,40 @@
             return products;
         }
 
-        // Função para adicionar produtos ao carrinho (simulação)
-        const cart = [];
+        // Função para adicionar produtos ao carrinho
         function addToCart(product) {
             cart.push(product);
             alert(`Produto "${product.title}" adicionado ao carrinho!`);
+            updateCartView();
         }
 
-        // Função para renderizar os cards na página
+        // Função para remover produtos do carrinho
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            alert('Produto removido do carrinho!');
+            updateCartView();
+        }
+
+        // Função para atualizar a exibição do carrinho
+        function updateCartView() {
+            const cartList = document.getElementById('cart-list');
+            cartList.innerHTML = ''; // Limpa a lista
+            if (cart.length === 0) {
+                cartList.innerHTML = '<li class="list-group-item text-center">O carrinho está vazio.</li>';
+            } else {
+                cart.forEach((product, index) => {
+                    const listItem = document.createElement('li');
+                    listItem.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-center');
+                    listItem.innerHTML = `
+                        ${product.title} - R$ ${parseFloat(product.price).toFixed(2)}
+                        <button class="btn btn-danger btn-sm" onclick="removeFromCart(${index})">Remover</button>
+                    `;
+                    cartList.appendChild(listItem);
+                });
+            }
+        }
+
+        // Função para renderizar os produtos
         function renderProducts(products) {
             const container = document.getElementById('products-container');
             container.innerHTML = ''; // Limpa o container antes de renderizar
@@ -85,6 +138,17 @@
                 container.appendChild(card);
             });
         }
+
+        // Alternar entre exibição de produtos e carrinho
+        document.getElementById('view-products-btn').addEventListener('click', () => {
+            document.getElementById('products-container').style.display = 'flex';
+            document.getElementById('cart-container').style.display = 'none';
+        });
+
+        document.getElementById('view-cart-btn').addEventListener('click', () => {
+            document.getElementById('products-container').style.display = 'none';
+            document.getElementById('cart-container').style.display = 'block';
+        });
 
         // Inicializa o carregamento dos produtos
         document.addEventListener('DOMContentLoaded', async () => {
