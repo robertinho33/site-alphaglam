@@ -163,6 +163,34 @@
                 document.getElementById("cart-container").style.display = "block";
             });
         });
+        // Função para carregar o CSV
+async function loadCSV(filePath) {
+    try {
+        const response = await fetch(filePath);
+        if (!response.ok) throw new Error('Erro ao carregar o arquivo CSV.');
+        const data = await response.text();
+        return parseCSV(data);
+    } catch (error) {
+        console.error(error.message);
+        return [];
+    }
+}
+
+// Função para processar os dados do CSV
+function parseCSV(data) {
+    const lines = data.split('\n').filter(line => line.trim() !== ''); // Remove linhas vazias
+    const headers = lines[0].split(',').map(header => header.trim());
+    const products = lines.slice(1).map(line => {
+        const values = line.split(',').map(value => value.trim());
+        const product = {};
+        headers.forEach((header, index) => {
+            product[header] = values[index];
+        });
+        return product;
+    });
+    return products;
+}
+
     </script>
     
 </body>
