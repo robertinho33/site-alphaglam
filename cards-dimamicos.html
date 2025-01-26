@@ -7,60 +7,59 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
     <style>
         .card {
-    margin-bottom: 20px;
-    border-radius: 10px; /* Cantos arredondados */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombras para dar profundidade */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Efeito suave ao passar o mouse */
-}
+            margin-bottom: 20px;
+            border-radius: 10px; /* Cantos arredondados */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombras para dar profundidade */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Efeito suave ao passar o mouse */
+        }
 
-.card:hover {
-    transform: translateY(-5px); /* Leve elevação ao passar o mouse */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Sombras mais intensas ao passar o mouse */
-}
+        .card:hover {
+            transform: translateY(-5px); /* Leve elevação ao passar o mouse */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Sombras mais intensas ao passar o mouse */
+        }
 
-.card-body {
-    padding: 15px;
-}
+        .card-body {
+            padding: 15px;
+        }
 
-.card img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px; /* Cantos arredondados na imagem */
-}
+        .card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px; /* Cantos arredondados na imagem */
+        }
 
-.card-title {
-    font-size: 1.25rem;
-    font-weight: bold;
-}
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
 
-.card-text {
-    font-size: 0.9rem;
-    color: #555;
-}
+        .card-text {
+            font-size: 0.9rem;
+            color: #555;
+        }
 
-.cart-button {
-    font-size: 1rem;
-    padding: 8px 12px;
-}
+        .cart-button {
+            font-size: 1rem;
+            padding: 8px 12px;
+        }
 
-.row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px; /* Espaço entre os cards */
-    justify-content: center; /* Alinha os cards no centro */
-}
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px; /* Espaço entre os cards */
+            justify-content: center; /* Alinha os cards no centro */
+        }
 
-.col-md-4 {
-    flex: 0 0 32%; /* Cards ocupando 32% da largura para 3 por linha */
-    box-sizing: border-box;
-}
-
+        .col-md-4 {
+            flex: 0 0 32%; /* Cards ocupando 32% da largura para 3 por linha */
+            box-sizing: border-box;
+        }
     </style>
 </head>
 <body>
     <div class="container my-5">
-        <h1 class="text-center mb-4">Produtos</h1>
-        
+        <h1 class="text-center mb-4">Productos</h1>
+
         <!-- Botões para alternar entre Produtos e Carrinho -->
         <div class="text-center mb-4">
             <button id="view-products-btn" class="btn btn-primary">Voltar às Compras</button>
@@ -131,6 +130,46 @@
             whatsappButton.href = `https://wa.me/5511986215473?text=${message}`;
         }
 
+        // Função para expandir descrição
+        function toggleDescription(productId) {
+            const description = document.getElementById(`description-${productId}`);
+            const fullDescription = description.getAttribute("data-full-description");
+
+            if (description.textContent.length <= 75) {
+                description.textContent = fullDescription;
+            } else {
+                description.textContent = fullDescription.slice(0, 75) + "...";
+            }
+        }
+
+        // Renderizar produtos
+        function renderProducts(products) {
+            const container = document.getElementById("products-container");
+            container.innerHTML = ""; // Limpa o container antes de renderizar
+            products.forEach((product) => {
+                const card = document.createElement("div");
+                card.classList.add("col-md-4");
+                card.innerHTML = `
+                    <div class="card h-100">
+                        <img src="assets/images/ecobelle/${product.image}" class="card-img-top" alt="${product.title}">
+                        <div class="card-body">
+                            <h5 class="card-title">${product.title}</h5>
+                            <p class="card-text"><strong>Categoria:</strong> ${product.category}</p>
+                            <p class="card-text"><strong>Preço:</strong> R$ ${parseFloat(product.price).toFixed(2)}</p>
+                            <p class="card-text" id="description-${product.id}" data-full-description="${product.description}">
+                                ${product.description.slice(0, 75)}...
+                            </p>
+                            <button class="read-more-btn" onclick="toggleDescription('${product.id}')">Ler mais</button>
+                            <button class="btn btn-primary cart-button" onclick='addToCart(${JSON.stringify(product)})'>
+                                Adicionar ao Carrinho
+                            </button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
         // Atualizar exibição do carrinho
         function updateCartView() {
             const cartList = document.getElementById("cart-list");
@@ -155,52 +194,6 @@
 
             updateWhatsAppButton();
         }
-
-        // Renderizar produtos
-        function renderProducts(products) {
-            const container = document.getElementById("products-container");
-            container.innerHTML = ""; // Limpa o container antes de renderizar
-            products.forEach((product) => {
-                const card = document.createElement("div");
-                card.classList.add("col-md-4");
-                card.innerHTML = `
-                    <div class="card h-100">
-                        <img src="assets/images/ecobelle/${product.image}" class="card-img-top" alt="${product.title}">
-                        <div class="card-body">
-                            <h5 class="card-title">${product.title}</h5>
-                            <p class="card-text"><strong>Categoria:</strong> ${product.category}</p>
-                            <p class="card-text"><strong>Descrição:</strong> ${product.descrition}</p>
-                            <p class="card-text"><strong>Preço:</strong> R$ ${parseFloat(product.price).toFixed(2)}</p>
-                            <button class="btn btn-primary cart-button" onclick='addToCart(${JSON.stringify(
-                                product
-                            )})'>
-                                Adicionar ao Carrinho
-                            </button>
-                        </div>
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        // Atualizar botão do WhatsApp
-            function updateWhatsAppButton() {
-                const whatsappButton = document.getElementById("whatsapp-button");
-                whatsappButton.onclick = () => {
-                    if (cart.length > 0) {
-                        const message = encodeURIComponent(generateWhatsAppMessage());
-                        window.open(`https://wa.me/5511986215473?text=${message}`, "_blank");
-
-                        // Limpa o carrinho após enviar o pedido
-                        cart.length = 0;
-                        updateCartView();
-                        alert("Pedido enviado com sucesso! O carrinho foi esvaziado.");
-                    } else {
-                        alert("Seu carrinho está vazio.");
-                    }
-                };
-            }
-
 
         // Função para carregar o CSV
         async function loadCSV(filePath) {
