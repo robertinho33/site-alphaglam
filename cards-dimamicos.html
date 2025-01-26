@@ -196,12 +196,13 @@
                         <div class="card-body">
                             <h5 class="card-title">${product.title}</h5>
                             <p class="card-text"><strong>Categoria:</strong> ${product.category}</p>
-                           <!-- Dentro do card-body -->
+                            <!-- Dentro do card-body -->
 <p class="card-text" id="description-{{product.id}}" data-full-description="{{product.description}}">
     {{product.description.slice(0, 100)}}...
 </p>
 <button class="read-more-btn" onclick="toggleDescription('{{product.id}}')">Ler mais</button>
- <p class="card-text"><strong>Preço:</strong> R$ ${parseFloat(product.price).toFixed(2)}</p>
+
+                            <p class="card-text"><strong>Preço:</strong> R$ ${parseFloat(product.price).toFixed(2)}</p>
                             <button class="btn btn-primary cart-button" onclick='addToCart(${JSON.stringify(
                                 product
                             )})'>
