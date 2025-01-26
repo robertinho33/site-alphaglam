@@ -150,19 +150,21 @@
                 const card = document.createElement("div");
                 card.classList.add("col-md-4");
                 card.innerHTML = `
-                    <div class="card h-100">
-                        <img src="assets/images/ecobelle/${product.image}" class="card-img-top" alt="${product.title}">
-                        <div class="card-body">
-                            <h5 class="card-title">${product.title}</h5>
-                            <p class="card-text"><strong>Categoria:</strong> ${product.category}</p>
-                            <p class="card-text"><strong>Preço:</strong> R$ ${parseFloat(product.price).toFixed(2)}</p>
-                           
-                            <button class="btn btn-primary cart-button" onclick='addToCart(${JSON.stringify(product)})'>
+                <div class="card"> 
+                    <img class="card-img-top" src="assets/images/ecobelle/${product.image}" alt="${product.title}">
+                    <div class="card-body">
+                    <h5 class="card-title">>${product.title}</h5>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                     <p class="card-text"><strong>Categoria:</strong> ${product.category}</p>
+                     </div>
+                    <div class="card-footer">
+                    <small class="text-muted"><strong>Preço:</strong> R$ ${parseFloat(product.price).toFixed(2)}</small>
+                    </div> 
+                    <button class="btn btn-primary cart-button" onclick='addToCart(${JSON.stringify(product)})'>
                                 Adicionar ao Carrinho
-                            </button>
-                        </div>
+                    </button>
                     </div>
-                `;
+                    `;
                 container.appendChild(card);
             });
         }
