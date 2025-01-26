@@ -157,6 +157,11 @@
             const message = encodeURIComponent(generateWhatsAppMessage());
             whatsappButton.href = `https://wa.me/5511986215473?text=${message}`;
         }
+        document.getElementById("view-cart-btn").addEventListener("click", () => {
+    document.getElementById("products-container").style.display = "none";
+    document.getElementById("cart-container").style.display = "block";
+});
+
 
         // Atualizar exibição do carrinho
         function updateCartView() {
