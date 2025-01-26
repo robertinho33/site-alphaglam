@@ -86,7 +86,7 @@
 </head>
 <body>
     <div class="container my-5">
-        <h1 class="text-center mb-4">Produtos</h1>
+        <h1 class="text-center mb-4">000Produtos</h1>
         
         <!-- Botões para alternar entre Produtos e Carrinho -->
         <div class="text-center mb-4">
@@ -214,6 +214,20 @@
                 container.appendChild(card);
             });
         }
+// Função para alternar a descrição
+function toggleDescription(productId) {
+    const descriptionElement = document.getElementById(`description-${productId}`);
+    const button = descriptionElement.nextElementSibling;
+
+    // Verifica se a descrição está expandida ou não
+    if (descriptionElement.classList.contains('expanded')) {
+        descriptionElement.classList.remove('expanded');
+        button.textContent = 'Ler mais'; // Modifica o texto do botão
+    } else {
+        descriptionElement.classList.add('expanded');
+        button.textContent = 'Ler menos'; // Modifica o texto do botão para "Ler menos"
+    }
+}
 
         // Atualizar botão do WhatsApp
             function updateWhatsAppButton() {
