@@ -273,6 +273,8 @@ function toggleDescription(productId) {
         }
 
         // Inicializar o carregamento dos produtos
+        document.getElementById("products-container").style.display = "flex";
+        document.getElementById("cart-container").style.display = "none";
         document.addEventListener("DOMContentLoaded", async () => {
             const products = await loadCSV("products.csv");
             if (products.length === 0) {
