@@ -36,6 +36,33 @@
 .card-text {
     font-size: 0.9rem;
     color: #555;
+    max-height: 5.4em; /* Limita a altura a 4 linhas */
+    overflow: hidden; /* Esconde o texto além do limite */
+    text-overflow: ellipsis; /* Adiciona reticências se o texto for cortado */
+    line-height: 1.35; /* Ajuste de altura da linha */
+    position: relative;
+}
+
+.card-description {
+    display: block;
+}
+
+.read-more-btn {
+    display: none;
+    background: none;
+    color: #007bff;
+    border: none;
+    font-size: 0.9rem;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.card-text.expanded {
+    max-height: none;
+}
+
+.card-text.expanded + .read-more-btn {
+    display: block; /* Mostra o botão "Ler mais" */
 }
 
 .cart-button {
@@ -169,8 +196,12 @@
                         <div class="card-body">
                             <h5 class="card-title">${product.title}</h5>
                             <p class="card-text"><strong>Categoria:</strong> ${product.category}</p>
-                            <p class="card-text"><strong>Descrição:</strong> ${product.descrition}</p>
-                            <p class="card-text"><strong>Preço:</strong> R$ ${parseFloat(product.price).toFixed(2)}</p>
+                           <!-- Dentro do card-body -->
+<p class="card-text" id="description-{{product.id}}" data-full-description="{{product.description}}">
+    {{product.description.slice(0, 100)}}...
+</p>
+<button class="read-more-btn" onclick="toggleDescription('{{product.id}}')">Ler mais</button>
+ <p class="card-text"><strong>Preço:</strong> R$ ${parseFloat(product.price).toFixed(2)}</p>
                             <button class="btn btn-primary cart-button" onclick='addToCart(${JSON.stringify(
                                 product
                             )})'>
