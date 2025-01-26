@@ -143,6 +143,25 @@
             });
         }
 
+        // Atualizar botão do WhatsApp
+            function updateWhatsAppButton() {
+                const whatsappButton = document.getElementById("whatsapp-button");
+                whatsappButton.onclick = () => {
+                    if (cart.length > 0) {
+                        const message = encodeURIComponent(generateWhatsAppMessage());
+                        window.open(`https://wa.me/5511986215473?text=${message}`, "_blank");
+
+                        // Limpa o carrinho após enviar o pedido
+                        cart.length = 0;
+                        updateCartView();
+                        alert("Pedido enviado com sucesso! O carrinho foi esvaziado.");
+                    } else {
+                        alert("Seu carrinho está vazio.");
+                    }
+                };
+            }
+
+
         // Função para carregar o CSV
         async function loadCSV(filePath) {
             try {
