@@ -188,8 +188,9 @@
             updateWhatsAppButton();
         }
 
-        // Renderizar produtos
-        function renderProducts(products) {
+       // Renderizar produtos
+function renderProducts(products) {
+    console.log('Produtos para renderizar:', products); // Log dos produtos a serem renderizados
     const container = document.getElementById("products-container");
     container.innerHTML = ""; // Limpa o container antes de renderizar
     products.forEach((product) => {
@@ -201,7 +202,6 @@
                 <div class="card-body">
                     <h5 class="card-title">${product.title}</h5>
                     <p class="card-text"><strong>Categoria:</strong> ${product.category}</p>
-                    <!-- Dentro do card-body -->
                     <p class="card-text" id="description-${product.id}" data-full-description="${product.description}">
                         ${product.description.slice(0, 100)}...
                     </p>
@@ -218,7 +218,6 @@
     });
 }
 
-// Função para alternar a descrição
 // Função para alternar a descrição
 function toggleDescription(productId) {
     const descriptionElement = document.getElementById(`description-${productId}`);
