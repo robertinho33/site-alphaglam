@@ -88,60 +88,60 @@
 
     <script>
         const cart = [];
-
+    
         // Função para adicionar produto ao carrinho
         function addToCart(product) {
             cart.push(product);
             alert(`Produto "${product.title}" adicionado ao carrinho!`);
             updateCartView();
         }
-
+    
         // Função para remover produto do carrinho
         function removeFromCart(index) {
             cart.splice(index, 1);
             alert("Produto removido do carrinho!");
             updateCartView();
         }
-
+    
         // Calcular total do carrinho
         function calculateCartTotal() {
             return cart.reduce((total, product) => total + parseFloat(product.price), 0).toFixed(2);
         }
-
+    
         // Gerar mensagem para WhatsApp
         function generateWhatsAppMessage() {
             if (cart.length === 0) {
                 return "Meu carrinho está vazio.";
             }
-
+    
             let message = "Olá, gostaria de realizar o seguinte pedido:\n\n";
             cart.forEach((product, index) => {
                 message += `${index + 1}. ${product.title} - R$ ${parseFloat(product.price).toFixed(2)}\n`;
             });
             message += `\nTotal: R$ ${calculateCartTotal()}`;
-
+    
             return message;
         }
-
+    
         // Atualizar botão do WhatsApp
         function updateWhatsAppButton() {
             const whatsappButton = document.getElementById("whatsapp-button");
             const message = encodeURIComponent(generateWhatsAppMessage());
             whatsappButton.href = `https://wa.me/5511986215473?text=${message}`;
         }
-
+    
         // Função para expandir descrição
         function toggleDescription(productId) {
             const description = document.getElementById(`description-${productId}`);
             const fullDescription = description.getAttribute("data-full-description");
-
+    
             if (description.textContent.length <= 75) {
                 description.textContent = fullDescription;
             } else {
                 description.textContent = fullDescription.slice(0, 75) + "...";
             }
         }
-
+    
         // Renderizar produtos
         function renderProducts(products) {
             const container = document.getElementById("products-container");
@@ -169,13 +169,13 @@
                 container.appendChild(card);
             });
         }
-
+    
         // Atualizar exibição do carrinho
         function updateCartView() {
             const cartList = document.getElementById("cart-list");
             const cartTotal = document.getElementById("cart-total");
             cartList.innerHTML = ""; // Limpa a lista
-
+    
             if (cart.length === 0) {
                 cartList.innerHTML = '<li class="list-group-item text-center">O carrinho está vazio.</li>';
                 cartTotal.textContent = "0.00";
@@ -191,23 +191,24 @@
                 });
                 cartTotal.textContent = calculateCartTotal();
             }
-
+    
             updateWhatsAppButton();
         }
-
+    
         // Função para carregar o CSV
         async function loadCSV(filePath) {
             try {
                 const response = await fetch(filePath);
                 if (!response.ok) throw new Error('Erro ao carregar o arquivo CSV.');
                 const data = await response.text();
+                console.log("CSV carregado:", data); // Verifica se o CSV foi carregado corretamente
                 return parseCSV(data);
             } catch (error) {
                 console.error(error.message);
                 return [];
             }
         }
-
+    
         // Função para processar os dados do CSV
         function parseCSV(data) {
             const lines = data.split('\n').filter(line => line.trim() !== ''); // Remove linhas vazias
@@ -217,7 +218,7 @@
                 return Object.fromEntries(headers.map((header, index) => [header, values[index]]));
             });
         }
-
+    
         // Inicializar o carregamento dos produtos
         document.addEventListener("DOMContentLoaded", async () => {
             const products = await loadCSV("products.csv");
@@ -227,18 +228,19 @@
             } else {
                 renderProducts(products);
             }
-
+    
             // Alternar entre produtos e carrinho
             document.getElementById("view-products-btn").addEventListener("click", () => {
                 document.getElementById("products-container").style.display = "flex";
                 document.getElementById("cart-container").style.display = "none";
             });
-
+    
             document.getElementById("view-cart-btn").addEventListener("click", () => {
                 document.getElementById("products-container").style.display = "none";
                 document.getElementById("cart-container").style.display = "block";
             });
         });
     </script>
+    
 </body>
 </html>
