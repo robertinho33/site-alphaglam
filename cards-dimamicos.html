@@ -7,14 +7,54 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
     <style>
         .card {
-            margin-bottom: 20px;
-        }
-        .cart-button, .whatsapp-button {
-            margin-top: 10px;
-        }
-        #cart-container {
-            display: none; /* Escondido inicialmente */
-        }
+    margin-bottom: 20px;
+    border-radius: 10px; /* Cantos arredondados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombras para dar profundidade */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Efeito suave ao passar o mouse */
+}
+
+.card:hover {
+    transform: translateY(-5px); /* Leve elevação ao passar o mouse */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Sombras mais intensas ao passar o mouse */
+}
+
+.card-body {
+    padding: 15px;
+}
+
+.card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px; /* Cantos arredondados na imagem */
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.card-text {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.cart-button {
+    font-size: 1rem;
+    padding: 8px 12px;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px; /* Espaço entre os cards */
+    justify-content: center; /* Alinha os cards no centro */
+}
+
+.col-md-4 {
+    flex: 0 0 32%; /* Cards ocupando 32% da largura para 3 por linha */
+    box-sizing: border-box;
+}
+
     </style>
 </head>
 <body>
