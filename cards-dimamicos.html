@@ -23,13 +23,24 @@
         }
 
         .card img {
-        max-width: 100%;       /* Permite que a imagem ocupe toda a largura disponível */
-        height: auto;     /* Limita a altura máxima a 200px */
-        object-fit: cover;     /* Mantém a proporção da imagem e preenche o contêiner */
-        border-radius: 8px;    /* Mantém cantos arredondados */
+        max-width: 100%;
+        height: auto; /* Preserva a proporção em todos os tamanhos */
+        max-height: 200px; /* Limita a altura máxima */
+        object-fit: cover; /* Garante que a imagem preencha o espaço sem distorcer */
+        border-radius: 8px;
         }
 
+        @media (min-width: 768px) {
+            .card img {
+                max-height: 300px; /* No desktop, aumente a altura máxima */
+            }
+        }
 
+        @media (min-width: 1200px) {
+            .card img {
+                max-height: 350px; /* Para telas maiores, ajuste novamente */
+            }
+}
 
         .card-title {
             font-size: 1.25rem;
