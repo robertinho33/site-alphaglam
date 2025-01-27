@@ -3,72 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Produtos para você</title>
+    <title>AlphaGlam - Salão de Beleza</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
-    <style>
-        .card {
-            margin-bottom: 20px;
-            border-radius: 10px; /* Cantos arredondados */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombras para dar profundidade */
-            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Efeito suave ao passar o mouse */
-        }
-
-        .card:hover {
-            transform: translateY(-5px); /* Leve elevação ao passar o mouse */
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Sombras mais intensas ao passar o mouse */
-        }
-
-        .card-body {
-            padding: 15px;
-        }
-
-        .card img {
-        max-width: 100%;
-        height: auto; /* Preserva a proporção em todos os tamanhos */
-        max-height: 200px; /* Limita a altura máxima */
-        object-fit: cover; /* Garante que a imagem preencha o espaço sem distorcer */
-        border-radius: 8px;
-        }
-
-        @media (min-width: 768px) {
-            .card img {
-                max-height: 275px; /* No desktop, aumente a altura máxima */
-            }
-        }
-
-        @media (min-width: 1200px) {
-            .card img {
-                max-height: 275px; /* Para telas maiores, ajuste novamente */
-            }
-}
-
-        .card-title {
-            font-size: 1.25rem;
-            font-weight: bold;
-        }
-
-        .card-text {
-            font-size: 0.9rem;
-            color: #555;
-        }
-
-        .cart-button {
-            font-size: 1rem;
-            padding: 8px 12px;
-        }
-
-        .row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px; /* Espaço entre os cards */
-            justify-content: center; /* Alinha os cards no centro */
-        }
-
-        .col-md-4 {
-            flex: 0 0 32%; /* Cards ocupando 32% da largura para 3 por linha */
-            box-sizing: border-box;
-        }
-    </style>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="../index.html">AlphaGlam</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                             <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                            <div class="dropdown-menu">
+                              <a class="dropdown-item" href="#">Ação</a>
+                              <a class="dropdown-item" href="#">Outra ação</a>
+                              <a class="dropdown-item" href="#">Algo mais aqui</a>
+                              <div class="dropdown-divider"></div>
+                              <a class="dropdown-item" href="#">Link isolado</a>
+                            </div>
+                          </li>
+                        <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../views/beauty-salon.html">Salão de Beleza</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../views/cosmetics.html">Cosméticos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../views/gym.html">Academia</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../views/fitness-clothing.html">Roupas Fitness</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../views/snack-bar.html">Lanchonete</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header> 
+    
 </head>
 <body>
     <div class="container my-5">
