@@ -187,12 +187,12 @@
                 card.innerHTML = `
                 <div class="card"> 
                     <img 
-                        src="assets/images/ecobelle/${product.image}" 
-                        class="card-img-top img-thumbnail" 
-                        alt="${product.title}" 
-                        onclick="showProductDetails(${JSON.stringify(product)})"
-                        style="cursor: pointer;">
-
+                    src="assets/images/ecobelle/${product.image}" 
+                    class="card-img-top img-thumbnail" 
+                    alt="${product.title}" 
+                    style="cursor: pointer;" 
+                    data-id="${product.id}" 
+                    onclick="showProductDetails(${JSON.stringify(product).replace(/'/g, "\\'").replace(/"/g, '&quot;')})">
                     <h5 class="card-title">${product.title}</h5>
                     <p class="card-descripion">Categoria:</strong> ${product.description}</p>
                      <p class="card-text"><strong>Categoria:</strong> ${product.category}</p>
