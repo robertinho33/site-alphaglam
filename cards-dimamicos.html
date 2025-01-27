@@ -99,6 +99,27 @@
             </div>
         </div>
     </div>
+    <!-- Modal para Detalhes do Produto -->
+    <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="productModalTitle"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img id="productModalImage" src="" alt="" class="img-fluid mb-3">
+                    <p id="productModalDescription"></p>
+                    <p><strong>Categoria:</strong> <span id="productModalCategory"></span></p>
+                    <p><strong>Preço:</strong> R$ <span id="productModalPrice"></span></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button id="addToCartModalButton" type="button" class="btn btn-primary">Adicionar ao Carrinho</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
         const cart = [];
@@ -165,7 +186,13 @@
                 card.classList.add("col-md-4");
                 card.innerHTML = `
                 <div class="card"> 
-                    <img src="assets/images/ecobelle/${product.image}" class="card-img-top img-thumbnail" alt="${product.title}">
+                    <img 
+                        src="assets/images/ecobelle/${product.image}" 
+                        class="card-img-top img-thumbnail" 
+                        alt="${product.title}" 
+                        onclick="showProductDetails(${JSON.stringify(product)})"
+                        style="cursor: pointer;">
+
                     <h5 class="card-title">${product.title}</h5>
                     <p class="card-descripion">Categoria:</strong> ${product.descrition}</p>
                      <p class="card-text"><strong>Categoria:</strong> ${product.category}</p>
@@ -181,7 +208,28 @@
                 container.appendChild(card);
             });
         }
-    
+        function showProductDetails(product) {
+            // Preenche os detalhes do produto no modal
+            document.getElementById("productModalTitle").textContent = product.title;
+            document.getElementById("productModalImage").src = `assets/images/ecobelle/${product.image}`;
+            document.getElementById("productModalImage").alt = product.title;
+            document.getElementById("productModalDescription").textContent = product.description;
+            document.getElementById("productModalCategory").textContent = product.category;
+            document.getElementById("productModalPrice").textContent = parseFloat(product.price).toFixed(2);
+
+            // Adiciona o evento ao botão "Adicionar ao Carrinho"
+            const addToCartButton = document.getElementById("addToCartModalButton");
+            addToCartButton.onclick = () => {
+                addToCart(product);
+                const modal = bootstrap.Modal.getInstance(document.getElementById("productModal"));
+                modal.hide(); // Fecha o modal após adicionar ao carrinho
+            };
+
+            // Mostra o modal
+            const productModal = new bootstrap.Modal(document.getElementById("productModal"));
+            productModal.show();
+        }
+
         // Atualizar exibição do carrinho
         function updateCartView() {
             const cartList = document.getElementById("cart-list");
