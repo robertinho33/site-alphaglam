@@ -72,7 +72,7 @@
 </head>
 <body>
     <div class="container my-5">
-        <h1 class="text-center mb-4">Produtosm</h1>
+        <h1 class="text-center mb-4">Produtos</h1>
 
         <!-- Botões para alternar entre Produtos e Carrinho -->
         <div class="text-center mb-4">
@@ -210,29 +210,6 @@
                 container.appendChild(card);
             });
         }
-        function showProductDetails(product) {
-    console.log("Exibindo detalhes do produto:", product); // Adicionado para depuração
-
-    // Preenche os detalhes do produto no modal
-    document.getElementById("productModalTitle").textContent = product.title;
-    document.getElementById("productModalImage").src = `assets/images/ecobelle/${product.image}`;
-    document.getElementById("productModalImage").alt = product.title;
-    document.getElementById("productModalDescription").textContent = product.description;
-    document.getElementById("productModalCategory").textContent = product.category;
-    document.getElementById("productModalPrice").textContent = parseFloat(product.price).toFixed(2);
-
-    // Adiciona o evento ao botão "Adicionar ao Carrinho"
-    const addToCartButton = document.getElementById("addToCartModalButton");
-    addToCartButton.onclick = () => {
-        addToCart(product);
-        const modal = bootstrap.Modal.getInstance(document.getElementById("productModal"));
-        modal.hide(); // Fecha o modal após adicionar ao carrinho
-    };
-
-    // Mostra o modal
-    const productModal = new bootstrap.Modal(document.getElementById("productModal"));
-    productModal.show();
-}
 
         // Atualizar exibição do carrinho
         function updateCartView() {
