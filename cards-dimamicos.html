@@ -18,10 +18,6 @@
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
 
-        .card-body {
-            padding: 15px;
-        }
-
         .card img {
             max-width: 100%;
             height: auto;
@@ -30,42 +26,9 @@
             border-radius: 8px;
         }
 
-        @media (min-width: 768px) {
-            .card img {
-                max-height: 275px;
-            }
-        }
-
         .card-title {
             font-size: 1.25rem;
             font-weight: bold;
-        }
-
-        .card-text {
-            font-size: 0.9rem;
-            color: #555;
-        }
-
-        .cart-button {
-            font-size: 1rem;
-            padding: 8px 12px;
-        }
-
-        .row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            justify-content: center;
-        }
-
-        .col-md-4 {
-            flex: 0 0 32%;
-            box-sizing: border-box;
-        }
-
-        #productModalImage {
-            max-height: 300px;
-            width: auto;
         }
 
         .toast {
@@ -80,28 +43,22 @@
     <div class="container my-5">
         <h1 class="text-center mb-4">Produtos</h1>
 
-        <!-- Botões para alternar entre Produtos e Carrinho -->
+        <!-- Alternância entre produtos e carrinho -->
         <div class="text-center mb-4">
             <button id="view-products-btn" class="btn btn-primary">Voltar às Compras</button>
             <button id="view-cart-btn" class="btn btn-secondary">Ver Carrinho</button>
         </div>
 
         <!-- Produtos -->
-        <div id="products-container" class="row">
-            <!-- Os cards serão inseridos aqui dinamicamente -->
-        </div>
+        <div id="products-container" class="row"></div>
 
         <!-- Carrinho -->
         <div id="cart-container" style="display: none;">
             <h2 class="text-center mb-4">Carrinho</h2>
-            <ul id="cart-list" class="list-group">
-                <!-- Os produtos do carrinho serão exibidos aqui -->
-            </ul>
+            <ul id="cart-list" class="list-group"></ul>
             <div class="text-center mt-4">
                 <p><strong>Total:</strong> R$ <span id="cart-total">0.00</span></p>
-                <a href="#" id="whatsapp-button" target="_blank" class="btn btn-success">
-                    Finalizar Pedido no WhatsApp
-                </a>
+                <a id="whatsapp-button" href="#" class="btn btn-success" target="_blank">Finalizar Pedido no WhatsApp</a>
             </div>
         </div>
     </div>
@@ -115,7 +72,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body text-center">
-                    <img id="productModalImage" src="" alt="" class="img-fluid mb-3">
+                    <img id="productModalImage" class="img-fluid mb-3" alt="">
                     <p id="productModalDescription"></p>
                     <p><strong>Categoria:</strong> <span id="productModalCategory"></span></p>
                     <p><strong>Preço:</strong> R$ <span id="productModalPrice"></span></p>
@@ -129,19 +86,48 @@
     </div>
 
     <script>
-        const cart = [];
+        let cart = [];
 
-        // Função para adicionar produto ao carrinho
         function addToCart(product) {
             cart.push(product);
-            showToast(`Produto "${product.title}" foi adicionado ao carrinho!`);
+            showToast(`"${product.title}" foi adicionado ao carrinho!`);
             updateCartView();
         }
 
-        // Função para exibir mensagens toast
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartView();
+        }
+
+        function updateCartView() {
+            const cartList = document.getElementById('cart-list');
+            const cartTotal = document.getElementById('cart-total');
+            const whatsappButton = document.getElementById('whatsapp-button');
+
+            cartList.innerHTML = '';
+            let total = 0;
+
+            cart.forEach((product, index) => {
+                total += parseFloat(product.price);
+                const item = document.createElement('li');
+                item.className = 'list-group-item d-flex justify-content-between align-items-center';
+                item.innerHTML = `
+                    ${product.title} - R$ ${parseFloat(product.price).toFixed(2)}
+                    <button class="btn btn-sm btn-danger" onclick="removeFromCart(${index})">Remover</button>
+                `;
+                cartList.appendChild(item);
+            });
+
+            cartTotal.textContent = total.toFixed(2);
+
+            // Gerar link para WhatsApp
+            const productList = cart.map(p => `${p.title} - R$ ${parseFloat(p.price).toFixed(2)}`).join('\n');
+            whatsappButton.href = `https://wa.me/5599999999999?text=Olá! Quero comprar:\n${encodeURIComponent(productList)}\nTotal: R$ ${total.toFixed(2)}`;
+        }
+
         function showToast(message) {
-            const toast = document.createElement("div");
-            toast.className = "toast align-items-center text-white bg-success border-0";
+            const toast = document.createElement('div');
+            toast.className = 'toast align-items-center text-white bg-success border-0';
             toast.innerHTML = `
                 <div class="d-flex">
                     <div class="toast-body">${message}</div>
@@ -149,28 +135,54 @@
                 </div>
             `;
             document.body.appendChild(toast);
+
             const bootstrapToast = new bootstrap.Toast(toast);
             bootstrapToast.show();
+
             setTimeout(() => toast.remove(), 3000);
         }
 
-        // Outras funções: removeFromCart, renderProducts, updateCartView, etc. mantêm as mesmas funcionalidades.
+        function renderProducts(products) {
+            const container = document.getElementById('products-container');
+            container.innerHTML = '';
 
-        async function loadCSV(filePath) {
-            const response = await fetch(filePath);
-            const data = await response.text();
-            const rows = data.split("\n").filter(line => line.trim() !== "");
-            const headers = rows[0].split(",");
-            return rows.slice(1).map(row => {
-                const values = row.split(",");
-                return Object.fromEntries(headers.map((header, i) => [header.trim(), values[i]?.trim()]));
+            products.forEach(product => {
+                const col = document.createElement('div');
+                col.className = 'col-md-4';
+
+                col.innerHTML = `
+                    <div class="card">
+                        <img src="${product.image}" class="card-img-top" alt="${product.title}">
+                        <div class="card-body">
+                            <h5 class="card-title">${product.title}</h5>
+                            <p class="card-text">${product.description}</p>
+                            <p class="card-text"><strong>R$ ${parseFloat(product.price).toFixed(2)}</strong></p>
+                            <button class="btn btn-primary" onclick='addToCart(${JSON.stringify(product)})'>Adicionar ao Carrinho</button>
+                        </div>
+                    </div>
+                `;
+
+                container.appendChild(col);
             });
         }
 
-        document.addEventListener("DOMContentLoaded", async () => {
-            const products = await loadCSV("products.csv");
-            const availableProducts = products.filter(p => parseInt(p.stock, 10) > 0);
-            renderProducts(availableProducts);
+        document.addEventListener('DOMContentLoaded', () => {
+            const products = [
+                { title: 'Produto 1', description: 'Descrição do Produto 1', price: 49.99, image: 'https://via.placeholder.com/150' },
+                { title: 'Produto 2', description: 'Descrição do Produto 2', price: 79.99, image: 'https://via.placeholder.com/150' },
+                { title: 'Produto 3', description: 'Descrição do Produto 3', price: 99.99, image: 'https://via.placeholder.com/150' }
+            ];
+            renderProducts(products);
+
+            document.getElementById('view-products-btn').addEventListener('click', () => {
+                document.getElementById('products-container').style.display = 'flex';
+                document.getElementById('cart-container').style.display = 'none';
+            });
+
+            document.getElementById('view-cart-btn').addEventListener('click', () => {
+                document.getElementById('products-container').style.display = 'none';
+                document.getElementById('cart-container').style.display = 'block';
+            });
         });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
