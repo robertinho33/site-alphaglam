@@ -72,7 +72,7 @@
 </head>
 <body>
     <div class="container my-5">
-        <h1 class="text-center mb-4">Produtos</h1>
+        <h1 class="text-center mb-4">Produtosm</h1>
 
         <!-- Botões para alternar entre Produtos e Carrinho -->
         <div class="text-center mb-4">
@@ -188,16 +188,17 @@
                 <div class="card"> 
                      <p class="card-text"><strong>ID:</strong> ${product.id}</p>
                      <img 
-                    src="assets/images/ecobelle/${product.image}" 
-                    class="card-img-top img-thumbnail" 
-                    alt="${product.title}" 
-                    style="cursor: pointer;" 
-                    data-id="${product.id}" 
-                    onclick="showProductDetails(${JSON.stringify(product).replace(/'/g, "\\'").replace(/"/g, '&quot;')})">
-                    <h5 class="card-title">${product.title}</h5>
-                    <p class="card-descripion">Categoria:</strong> ${product.description}</p>
-                     <p class="card-text"><strong>Categoria:</strong> ${product.category}</p>
-                    </div>
+    src="assets/images/ecobelle/${product.image}" 
+    class="card-img-top img-thumbnail" 
+    alt="${product.title}" 
+    style="cursor: pointer;" 
+    data-title="${product.title}" 
+    data-image="${product.image}" 
+    data-description="${product.description}" 
+    data-category="${product.category}" 
+    data-price="${product.price}" 
+    onclick="showProductDetailsFromData(this)">
+
                     <div class="card-footer">
                     <small class="text-muted"><strong>Preço:</strong> R$ ${parseFloat(product.price).toFixed(2)}</small>
                     </div> 
