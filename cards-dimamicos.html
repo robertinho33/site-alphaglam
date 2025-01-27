@@ -8,34 +8,65 @@
     <style>
         .card {
             margin-bottom: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 10px; /* Cantos arredondados */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombras para dar profundidade */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Efeito suave ao passar o mouse */
         }
 
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px); /* Leve elevação ao passar o mouse */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Sombras mais intensas ao passar o mouse */
+        }
+
+        .card-body {
+            padding: 15px;
         }
 
         .card img {
-            max-width: 100%;
-            height: auto;
-            max-height: 200px;
-            object-fit: cover;
-            border-radius: 8px;
+        max-width: 100%;
+        height: auto; /* Preserva a proporção em todos os tamanhos */
+        max-height: 200px; /* Limita a altura máxima */
+        object-fit: cover; /* Garante que a imagem preencha o espaço sem distorcer */
+        border-radius: 8px;
         }
+
+        @media (min-width: 768px) {
+            .card img {
+                max-height: 275px; /* No desktop, aumente a altura máxima */
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .card img {
+                max-height: 275px; /* Para telas maiores, ajuste novamente */
+            }
+}
 
         .card-title {
             font-size: 1.25rem;
             font-weight: bold;
         }
 
-        .toast {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1050;
+        .card-text {
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .cart-button {
+            font-size: 1rem;
+            padding: 8px 12px;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px; /* Espaço entre os cards */
+            justify-content: center; /* Alinha os cards no centro */
+        }
+
+        .col-md-4 {
+            flex: 0 0 32%; /* Cards ocupando 32% da largura para 3 por linha */
+            box-sizing: border-box;
         }
     </style>
 </head>
@@ -43,26 +74,31 @@
     <div class="container my-5">
         <h1 class="text-center mb-4">Produtos</h1>
 
-        <!-- Alternância entre produtos e carrinho -->
+        <!-- Botões para alternar entre Produtos e Carrinho -->
         <div class="text-center mb-4">
             <button id="view-products-btn" class="btn btn-primary">Voltar às Compras</button>
             <button id="view-cart-btn" class="btn btn-secondary">Ver Carrinho</button>
         </div>
 
         <!-- Produtos -->
-        <div id="products-container" class="row"></div>
+        <div id="products-container" class="row">
+            <!-- Os cards serão inseridos aqui dinamicamente -->
+        </div>
 
         <!-- Carrinho -->
-        <div id="cart-container" style="display: none;">
+        <div id="cart-container">
             <h2 class="text-center mb-4">Carrinho</h2>
-            <ul id="cart-list" class="list-group"></ul>
+            <ul id="cart-list" class="list-group">
+                <!-- Os produtos do carrinho serão exibidos aqui -->
+            </ul>
             <div class="text-center mt-4">
                 <p><strong>Total:</strong> R$ <span id="cart-total">0.00</span></p>
-                <a id="whatsapp-button" href="#" class="btn btn-success" target="_blank">Finalizar Pedido no WhatsApp</a>
+                <a href="#" id="whatsapp-button" target="_blank" class="btn btn-success">
+                    Finalizar Pedido no WhatsApp
+                </a>
             </div>
         </div>
     </div>
-
     <!-- Modal para Detalhes do Produto -->
     <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -72,7 +108,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body text-center">
-                    <img id="productModalImage" class="img-fluid mb-3" alt="">
+                    <img id="productModalImage" src="" alt="" class="img-fluid mb-3">
                     <p id="productModalDescription"></p>
                     <p><strong>Categoria:</strong> <span id="productModalCategory"></span></p>
                     <p><strong>Preço:</strong> R$ <span id="productModalPrice"></span></p>
@@ -86,105 +122,185 @@
     </div>
 
     <script>
-        let cart = [];
-
+        const cart = [];
+    
+        // Função para adicionar produto ao carrinho
         function addToCart(product) {
             cart.push(product);
-            showToast(`"${product.title}" foi adicionado ao carrinho!`);
+            alert(`Produto "${product.title}" adicionado ao carrinho!`);
             updateCartView();
         }
-
+    
+        // Função para remover produto do carrinho
         function removeFromCart(index) {
             cart.splice(index, 1);
+            alert("Produto removido do carrinho!");
             updateCartView();
         }
-
-        function updateCartView() {
-            const cartList = document.getElementById('cart-list');
-            const cartTotal = document.getElementById('cart-total');
-            const whatsappButton = document.getElementById('whatsapp-button');
-
-            cartList.innerHTML = '';
-            let total = 0;
-
+    
+        // Calcular total do carrinho
+        function calculateCartTotal() {
+            return cart.reduce((total, product) => total + parseFloat(product.price), 0).toFixed(2);
+        }
+    
+        // Gerar mensagem para WhatsApp
+        function generateWhatsAppMessage() {
+            if (cart.length === 0) {
+                return "Meu carrinho está vazio.";
+            }
+    
+            let message = "Olá, gostaria de realizar o seguinte pedido:\n\n";
             cart.forEach((product, index) => {
-                total += parseFloat(product.price);
-                const item = document.createElement('li');
-                item.className = 'list-group-item d-flex justify-content-between align-items-center';
-                item.innerHTML = `
-                    ${product.title} - R$ ${parseFloat(product.price).toFixed(2)}
-                    <button class="btn btn-sm btn-danger" onclick="removeFromCart(${index})">Remover</button>
-                `;
-                cartList.appendChild(item);
+                message += `${index + 1}. ${product.title} - R$ ${parseFloat(product.price).toFixed(2)}\n`;
             });
-
-            cartTotal.textContent = total.toFixed(2);
-
-            // Gerar link para WhatsApp
-            const productList = cart.map(p => `${p.title} - R$ ${parseFloat(p.price).toFixed(2)}`).join('\n');
-            whatsappButton.href = `https://wa.me/5599999999999?text=Olá! Quero comprar:\n${encodeURIComponent(productList)}\nTotal: R$ ${total.toFixed(2)}`;
+            message += `\nTotal: R$ ${calculateCartTotal()}`;
+    
+            return message;
         }
-
-        function showToast(message) {
-            const toast = document.createElement('div');
-            toast.className = 'toast align-items-center text-white bg-success border-0';
-            toast.innerHTML = `
-                <div class="d-flex">
-                    <div class="toast-body">${message}</div>
-                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-                </div>
-            `;
-            document.body.appendChild(toast);
-
-            const bootstrapToast = new bootstrap.Toast(toast);
-            bootstrapToast.show();
-
-            setTimeout(() => toast.remove(), 3000);
+    
+        // Atualizar botão do WhatsApp
+        function updateWhatsAppButton() {
+            const whatsappButton = document.getElementById("whatsapp-button");
+            const message = encodeURIComponent(generateWhatsAppMessage());
+            whatsappButton.href = `https://wa.me/5511986215473?text=${message}`;
         }
-
+    
+        // Função para expandir descrição
+        function toggleDescription(productId) {
+            const description = document.getElementById(`description-${productId}`);
+            const fullDescription = description.getAttribute("data-full-description");
+    
+            if (description.textContent.length <= 75) {
+                description.textContent = fullDescription;
+            } else {
+                description.textContent = fullDescription.slice(0, 75) + "...";
+            }
+        }
+    
+        // Renderizar produtos
         function renderProducts(products) {
-            const container = document.getElementById('products-container');
-            container.innerHTML = '';
+            const container = document.getElementById("products-container");
+            container.innerHTML = ""; // Limpa o container antes de renderizar
+            products.forEach((product) => {
+                const card = document.createElement("div");
+                card.classList.add("col-md-4");
+                card.innerHTML = `
+                <div class="card"> 
+                    <img 
+                        src="assets/images/ecobelle/${product.image}" 
+                        class="card-img-top img-thumbnail" 
+                        alt="${product.title}" 
+                        onclick="showProductDetails(${JSON.stringify(product)})"
+                        style="cursor: pointer;">
 
-            products.forEach(product => {
-                const col = document.createElement('div');
-                col.className = 'col-md-4';
-
-                col.innerHTML = `
-                    <div class="card">
-                        <img src="${product.image}" class="card-img-top" alt="${product.title}">
-                        <div class="card-body">
-                            <h5 class="card-title">${product.title}</h5>
-                            <p class="card-text">${product.description}</p>
-                            <p class="card-text"><strong>R$ ${parseFloat(product.price).toFixed(2)}</strong></p>
-                            <button class="btn btn-primary" onclick='addToCart(${JSON.stringify(product)})'>Adicionar ao Carrinho</button>
-                        </div>
+                    <h5 class="card-title">${product.title}</h5>
+                    <p class="card-descripion">Categoria:</strong> ${product.description}</p>
+                     <p class="card-text"><strong>Categoria:</strong> ${product.category}</p>
+                     </div>
+                    <div class="card-footer">
+                    <small class="text-muted"><strong>Preço:</strong> R$ ${parseFloat(product.price).toFixed(2)}</small>
+                    </div> 
+                    <button class="btn btn-primary cart-button" onclick='addToCart(${JSON.stringify(product)})'>
+                                Adicionar ao Carrinho
+                    </button>
                     </div>
-                `;
-
-                container.appendChild(col);
+                    `;
+                container.appendChild(card);
             });
         }
+        function showProductDetails(product) {
+            // Preenche os detalhes do produto no modal
+            document.getElementById("productModalTitle").textContent = product.title;
+            document.getElementById("productModalImage").src = `assets/images/ecobelle/${product.image}`;
+            document.getElementById("productModalImage").alt = product.title;
+            document.getElementById("productModalDescription").textContent = product.description;
+            document.getElementById("productModalCategory").textContent = product.category;
+            document.getElementById("productModalPrice").textContent = parseFloat(product.price).toFixed(2);
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const products = [
-                { title: 'Produto 1', description: 'Descrição do Produto 1', price: 49.99, image: 'https://via.placeholder.com/150' },
-                { title: 'Produto 2', description: 'Descrição do Produto 2', price: 79.99, image: 'https://via.placeholder.com/150' },
-                { title: 'Produto 3', description: 'Descrição do Produto 3', price: 99.99, image: 'https://via.placeholder.com/150' }
-            ];
-            renderProducts(products);
+            // Adiciona o evento ao botão "Adicionar ao Carrinho"
+            const addToCartButton = document.getElementById("addToCartModalButton");
+            addToCartButton.onclick = () => {
+                addToCart(product);
+                const modal = bootstrap.Modal.getInstance(document.getElementById("productModal"));
+                modal.hide(); // Fecha o modal após adicionar ao carrinho
+            };
 
-            document.getElementById('view-products-btn').addEventListener('click', () => {
-                document.getElementById('products-container').style.display = 'flex';
-                document.getElementById('cart-container').style.display = 'none';
+            // Mostra o modal
+            const productModal = new bootstrap.Modal(document.getElementById("productModal"));
+            productModal.show();
+        }
+
+        // Atualizar exibição do carrinho
+        function updateCartView() {
+            const cartList = document.getElementById("cart-list");
+            const cartTotal = document.getElementById("cart-total");
+            cartList.innerHTML = ""; // Limpa a lista
+    
+            if (cart.length === 0) {
+                cartList.innerHTML = '<li class="list-group-item text-center">O carrinho está vazio.</li>';
+                cartTotal.textContent = "0.00";
+            } else {
+                cart.forEach((product, index) => {
+                    const listItem = document.createElement("li");
+                    listItem.classList.add("list-group-item", "d-flex", "justify-content-between", "align-items-center");
+                    listItem.innerHTML = `
+                        ${product.title} - R$ ${parseFloat(product.price).toFixed(2)}
+                        <button class="btn btn-danger btn-sm" onclick="removeFromCart(${index})">Remover</button>
+                    `;
+                    cartList.appendChild(listItem);
+                });
+                cartTotal.textContent = calculateCartTotal();
+            }
+    
+            updateWhatsAppButton();
+        }
+    
+        // Função para carregar o CSV
+        async function loadCSV(filePath) {
+            try {
+                const response = await fetch(filePath);
+                if (!response.ok) throw new Error('Erro ao carregar o arquivo CSV.');
+                const data = await response.text();
+                console.log("CSV carregado:", data); // Verifica se o CSV foi carregado corretamente
+                return parseCSV(data);
+            } catch (error) {
+                console.error(error.message);
+                return [];
+            }
+        }
+    
+        // Função para processar os dados do CSV
+        function parseCSV(data) {
+            const lines = data.split('\n').filter(line => line.trim() !== ''); // Remove linhas vazias
+            const headers = lines[0].split(',').map(header => header.trim());
+            return lines.slice(1).map(line => {
+                const values = line.split(',').map(value => value.trim());
+                return Object.fromEntries(headers.map((header, index) => [header, values[index]]));
             });
-
-            document.getElementById('view-cart-btn').addEventListener('click', () => {
-                document.getElementById('products-container').style.display = 'none';
-                document.getElementById('cart-container').style.display = 'block';
+        }
+    
+        // Inicializar o carregamento dos produtos
+        document.addEventListener("DOMContentLoaded", async () => {
+            const products = await loadCSV("products.csv");
+            if (products.length === 0) {
+                document.getElementById("products-container").innerHTML =
+                    '<p class="text-center">Nenhum produto encontrado.</p>';
+            } else {
+                renderProducts(products);
+            }
+    
+            // Alternar entre produtos e carrinho
+            document.getElementById("view-products-btn").addEventListener("click", () => {
+                document.getElementById("products-container").style.display = "flex";
+                document.getElementById("cart-container").style.display = "none";
+            });
+    
+            document.getElementById("view-cart-btn").addEventListener("click", () => {
+                document.getElementById("products-container").style.display = "none";
+                document.getElementById("cart-container").style.display = "block";
             });
         });
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
 </body>
 </html>
