@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Inicializar o carregamento dos produtos
     document.addEventListener("DOMContentLoaded", async () => {
-        const products = await loadCSV("products.csv");
+        const products = await loadCSV("controllers/products.csv");
         if (products.length === 0) {
             document.getElementById("products-container").innerHTML =
                 '<p class="text-center">Nenhum produto encontrado.</p>';
