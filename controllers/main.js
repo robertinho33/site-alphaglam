@@ -38,4 +38,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Exibir os produtos da primeira categoria por padrão
     showCategory('descolorante');
-});
+        });
+    fetch('../resources/menu.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('menu-container').innerHTML = data;
+            })
+            .catch(error => console.error('Erro ao carregar o menu:', error));
+   
+    fetch('../resources/footer.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('footer-container').innerHTML = data;
+        })
+        .catch(error => console.error('Erro ao carregar o menu:', error));
