@@ -22,7 +22,9 @@
             </div>
         </nav>
     </header>
-
+   
+        <div id="footer-container"></div> <!-- Aqui será inserido o conteúdo do menu -->
+        
     <script>
         fetch('../resources/menu.html')
             .then(response => response.text())
@@ -31,6 +33,14 @@
             })
             .catch(error => console.error('Erro ao carregar o menu:', error));
     </script>
+ <script>
+    fetch('../resources/footer.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('footer-container').innerHTML = data;
+        })
+        .catch(error => console.error('Erro ao carregar o menu:', error));
+</script>
 </body>
 </html>
 
