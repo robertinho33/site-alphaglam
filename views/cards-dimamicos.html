@@ -115,24 +115,16 @@
             const message = encodeURIComponent(generateWhatsAppMessage());
             whatsappButton.href = `https://wa.me/5511986215473?text=${message}`;
         }
-    
-        // Função para expandir descrição
-        function toggleDescription(productId) {
-            const description = document.getElementById(`description-${productId}`);
-            const fullDescription = description.getAttribute("data-full-description");
-    
-            if (description.textContent.length <= 75) {
-                description.textContent = fullDescription;
-            } else {
-                description.textContent = fullDescription.slice(0, 75) + "...";
-            }
-        }
-        
-        // Renderizar produtos
-function renderProducts(products) {
+       
+            // Renderizar produtos
+            function renderProducts(products) {
     const container = document.getElementById("products-container");
     container.innerHTML = ""; // Limpa o container antes de renderizar
     products.forEach((product) => {
+        const truncatedDescription = product.description.length > 80 
+            ? product.description.slice(0, 80) + "..." 
+            : product.description;
+
         const card = document.createElement("div");
         card.classList.add("col-md-4");
         card.innerHTML = `
@@ -148,7 +140,7 @@ function renderProducts(products) {
                     data-category="${product.category}" 
                     data-price="${product.price}" 
                     onclick="showProductDetailsFromData(this)">
-                <p class="card-text"><strong>Descrição:</strong> ${product.description}</p> 
+                <p class="card-text"><strong>Descrição:</strong> ${truncatedDescription}</p> 
                 <div class="card-footer">
                     <small class="text-muted"><strong>Preço:</strong> R$ ${parseFloat(product.price).toFixed(2)}</small>
                 </div> 
