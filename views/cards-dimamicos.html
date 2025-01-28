@@ -139,10 +139,9 @@
                 <div class="card"> 
                      <p class="card-text"><strong>ID:</strong> ${product.id}</p>
                      <img 
-    src="assets/images/ecobelle/${product.image}" 
+    src="../assets/images/ecobelle/${product.image}" 
     class="card-img-top img-thumbnail" 
     alt="${product.title}" 
-    
     data-title="${product.title}" 
     data-image="${product.image}" 
     data-description="${product.description}" 
@@ -150,14 +149,14 @@
     data-price="${product.price}" 
     onclick="showProductDetailsFromData(this)">
 
-                    <div class="card-footer">
-                    <small class="text-muted"><strong>Preço:</strong> R$ ${parseFloat(product.price).toFixed(2)}</small>
-                    </div> 
-                    <button class="btn btn-primary cart-button" onclick='addToCart(${JSON.stringify(product)})'>
-                                Adicionar ao Carrinho
-                    </button>
-                    </div>
-                    `;
+    <div class="card-footer">
+    <small class="text-muted"><strong>Preço:</strong> R$ ${parseFloat(product.price).toFixed(2)}</small>
+    </div> 
+    <button class="btn btn-primary cart-button" onclick='addToCart(${JSON.stringify(product)})'>
+     Adicionar ao Carrinho
+    </button>
+    </div>
+            `;
                 container.appendChild(card);
             });
         }
