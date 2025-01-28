@@ -2,7 +2,8 @@ body {
     background: url('../images/b02.jpg') no-repeat center center fixed;
     background-size: cover;
     font-family: Arial, sans-serif;
-    color: #efefef;
+    background-color: #d4af37;
+    color: #484848;
 }
 
 h1 {
