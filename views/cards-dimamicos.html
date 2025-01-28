@@ -148,7 +148,7 @@
     data-category="${product.category}" 
     data-price="${product.price}" 
     onclick="showProductDetailsFromData(this)">
-
+    <small class="text-muted"><strong>Descrição:</strong> R$ ${parseFloat(product.description).toFixed(2)}</small> 
     <div class="card-footer">
     <small class="text-muted"><strong>Preço:</strong> R$ ${parseFloat(product.price).toFixed(2)}</small>
     </div> 
