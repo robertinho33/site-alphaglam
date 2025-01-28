@@ -27,7 +27,7 @@
 
         <!-- Botões para alternar entre Produtos e Carrinho -->
         <div class="text-center mb-4">
-            <button id="view-products-btn" class="btn btn-primary">333Voltar às Compras</button>
+            <button id="view-products-btn" class="btn btn-primary">Voltar às Compras</button>
             <button id="view-cart-btn" class="btn btn-secondary">Ver Carrinho</button>
         </div>
 
@@ -213,7 +213,7 @@
     
         // Inicializar o carregamento dos produtos
         document.addEventListener("DOMContentLoaded", async () => {
-            const products = await loadCSV("products.csv");
+            const products = await loadCSV("controllers/products.csv");
             if (products.length === 0) {
                 document.getElementById("products-container").innerHTML =
                     '<p class="text-center">Nenhum produto encontrado.</p>';
