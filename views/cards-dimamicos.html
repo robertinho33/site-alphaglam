@@ -50,28 +50,25 @@
             </div>
         </div>
     </div>
-    <!-- Modal para Detalhes do Produto -->
-    <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="productModalTitle"></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body text-center">
-                    <img id="productModalImage" src="" alt="" class="img-fluid mb-3">
-                    <p id="productModalDescription"></p>
-                    <p><strong>Categoria:</strong> <span id="productModalCategory"></span></p>
-                    <p><strong>Preço:</strong> R$ <span id="productModalPrice"></span></p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                    <button id="addToCartModalButton" type="button" class="btn btn-primary">Adicionar ao Carrinho</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
+    <!-- Modal para exibir descrição completa -->
+<div class="modal fade" id="descriptionModal" tabindex="-1" aria-labelledby="descriptionModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="descriptionModalLabel">Descrição Completa</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p id="fullDescription"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
     <script>
         const cart = [];
     
@@ -117,7 +114,7 @@
         }
        
             // Renderizar produtos
-            function renderProducts(products) {
+           function renderProducts(products) {
     const container = document.getElementById("products-container");
     container.innerHTML = ""; // Limpa o container antes de renderizar
     products.forEach((product) => {
@@ -134,13 +131,11 @@
                     src="../assets/images/ecobelle/${product.image}" 
                     class="card-img-top img-thumbnail" 
                     alt="${product.title}" 
-                    data-title="${product.title}" 
-                    data-image="${product.image}" 
-                    data-description="${product.description}" 
-                    data-category="${product.category}" 
-                    data-price="${product.price}" 
-                    onclick="showProductDetailsFromData(this)">
-                <p class="card-text"><strong>Descrição:</strong> ${truncatedDescription}</p> 
+                >
+                <p class="card-text">
+                    <strong>Descrição:</strong> ${truncatedDescription}
+                    <a href="#" class="text-primary" onclick="showFullDescription('${product.description}')">Leia mais</a>
+                </p> 
                 <div class="card-footer">
                     <small class="text-muted"><strong>Preço:</strong> R$ ${parseFloat(product.price).toFixed(2)}</small>
                 </div> 
@@ -151,6 +146,13 @@
         `;
         container.appendChild(card);
     });
+}
+
+    function showFullDescription(description) {
+    const fullDescriptionElement = document.getElementById("fullDescription");
+    fullDescriptionElement.textContent = description; // Define a descrição completa no modal
+    const descriptionModal = new bootstrap.Modal(document.getElementById("descriptionModal"));
+    descriptionModal.show(); // Abre o modal
 }
 
         // Atualizar exibição do carrinho
