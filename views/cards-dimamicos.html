@@ -103,6 +103,10 @@
 
     <script>
 
+            let cart = [];
+
+    
+           
     document.addEventListener("DOMContentLoaded", async () => {
     window.products = await loadCSV("../controllers/products.csv");
 
@@ -128,10 +132,16 @@
     
         // Função para adicionar produto ao carrinho
         function addToCart(product) {
-            cart.push(product);
-            alert(`Produto "${product.title}" adicionado ao carrinho!`);
-            updateCartView();
-        }
+    if (!product || !product.title || !product.price) {
+        alert("Erro ao adicionar produto. Tente novamente!");
+        return;
+    }
+    
+    cart.push(product);
+    alert(`Produto "${product.title}" adicionado ao carrinho!`);
+    updateCartView();
+}
+
         function updateCartView() {
     const cartList = document.getElementById("cart-list");
     const cartTotal = document.getElementById("cart-total");
@@ -175,8 +185,7 @@
             if (cart.length === 0) {
                 return "Meu carrinho está vazio.";
             }
-    
-            let message = "Olá, gostaria de realizar o seguinte pedido:\n\n";
+ let message = "Olá, gostaria de realizar o seguinte pedido:\n\n";
             cart.forEach((product, index) => {
                 message += `${index + 1}. ${product.title} - R$ ${parseFloat(product.price).toFixed(2)}\n`;
             });
@@ -199,14 +208,14 @@ function updateWhatsAppButton() {
     whatsappButton.href = `https://wa.me/5511986215473?text=${message}`;
 
     // Adiciona um evento para limpar o carrinho ao clicar no botão
-    whatsappButton.addEventListener("click", () => {
-        setTimeout(() => {
-            cart.length = 0; // Esvazia o array do carrinho
-            updateCartView(); // Atualiza a exibição
-            alert("Pedido enviado! O carrinho foi esvaziado.");
-        }, 1000); // Pequeno delay para garantir que a mensagem foi enviada antes de limpar
-    }, { once: true }); // Garante que o evento só será anexado uma vez
-}
+    document.getElementById("whatsapp-button").addEventListener("click", () => {
+    setTimeout(() => {
+        cart = []; // Reseta o carrinho
+        updateCartView();
+        alert("Pedido enviado! O carrinho foi esvaziado.");
+    }, 1000);
+}, { once: true }); // Garante que o evento não seja repetido
+
             // Renderizar produtos
             function renderProducts(products, selectedCategory = "all") {
     const container = document.getElementById("products-container");
@@ -270,9 +279,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     document.getElementById("view-cart-btn").addEventListener("click", () => {
-        document.getElementById("products-container").style.display = "none";
-        document.getElementById("cart-container").style.display = "block";
-    });
+    document.getElementById("products-container").style.display = "none";
+    document.getElementById("cart-container").style.display = "block";
+    updateWhatsAppButton(); // Garante que o link seja atualizado corretamente
+});
+
 });
 
     function showFullDescription(description) {
