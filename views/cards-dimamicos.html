@@ -103,27 +103,27 @@
 
     <script>
 
-        const cart = [];
-        document.addEventListener("DOMContentLoaded", async () => {
-    const productsContainer = document.getElementById("products-container");
-    const cartContainer = document.getElementById("cart-container");
+    document.addEventListener("DOMContentLoaded", async () => {
+    window.products = await loadCSV("../controllers/products.csv");
 
-    // Certifique-se de que o carrinho está escondido inicialmente
-    cartContainer.style.display = "none";
+    if (window.products.length === 0) {
+        document.getElementById("products-container").innerHTML =
+            '<p class="text-center">Nenhum produto encontrado.</p>';
+    } else {
+        renderProducts(window.products); // Exibir todos os produtos por padrão
+    }
 
-    // Botão para ver os produtos
     document.getElementById("view-products-btn").addEventListener("click", () => {
-        productsContainer.style.display = "flex";
-        cartContainer.style.display = "none";
+        document.getElementById("products-container").style.display = "flex";
+        document.getElementById("cart-container").style.display = "none";
     });
 
-    // Botão para ver o carrinho
     document.getElementById("view-cart-btn").addEventListener("click", () => {
-        productsContainer.style.display = "none";
-        cartContainer.style.display = "block";
-        updateCartView(); // Atualiza a exibição do carrinho
+        document.getElementById("products-container").style.display = "none";
+        document.getElementById("cart-container").style.display = "block";
     });
 });
+
 
     
         // Função para adicionar produto ao carrinho
@@ -310,27 +310,47 @@ document.addEventListener("DOMContentLoaded", async () => {
     
         // Função para carregar o CSV
         async function loadCSV(filePath) {
-            try {
-                const response = await fetch(filePath);
-                if (!response.ok) throw new Error('Erro ao carregar o arquivo CSV.');
-                const data = await response.text();
-                console.log("CSV carregado:", data); // Verifica se o CSV foi carregado corretamente
-                return parseCSV(data);
-            } catch (error) {
-                console.error(error.message);
-                return [];
-            }
+    try {
+        const response = await fetch(filePath);
+        if (!response.ok) throw new Error('Erro ao carregar o arquivo CSV.');
+        const data = await response.text();
+        return parseCSV(data);
+    } catch (error) {
+        console.error(error.message);
+        return [];
+    }
+}
+
+function parseCSV(data) {
+    const lines = data.split('\n').filter(line => line.trim() !== ''); // Remove linhas vazias
+    const headers = lines[0].split(',').map(header => header.trim());
+
+    const products = [];
+    const categories = new Set(); // Usamos um Set para evitar categorias duplicadas
+
+    lines.slice(1).forEach(line => {
+        const values = line.split(',').map(value => value.trim());
+        const product = Object.fromEntries(headers.map((header, index) => [header, values[index]]));
+
+        if (product.category) {
+            categories.add(product.category.toLowerCase()); // Adiciona a categoria ao Set
         }
-    
-        // Função para processar os dados do CSV
-        function parseCSV(data) {
-            const lines = data.split('\n').filter(line => line.trim() !== ''); // Remove linhas vazias
-            const headers = lines[0].split(',').map(header => header.trim());
-            return lines.slice(1).map(line => {
-                const values = line.split(',').map(value => value.trim());
-                return Object.fromEntries(headers.map((header, index) => [header, values[index]]));
-            });
-        }
+
+        products.push({
+            id: product.id,
+            title: product.title,
+            description: product.description,
+            price: parseFloat(product.price),
+            image: product.image,
+            category: product.category ? product.category.toLowerCase() : "outros"
+        });
+    });
+
+    // Converte o Set para Array e atualiza o dropdown de categorias
+    updateCategoryFilter([...categories]);
+
+    return products;
+}        
     
         // Inicializar o carregamento dos produtos
         document.addEventListener("DOMContentLoaded", async () => {
@@ -353,6 +373,21 @@ document.addEventListener("DOMContentLoaded", async () => {
                 document.getElementById("cart-container").style.display = "block";
             });
         });
+        function updateCategoryFilter(categories) {
+    const categoryFilter = document.getElementById("categoryFilter");
+
+    // Limpa as opções anteriores e mantém a opção "Todas"
+    categoryFilter.innerHTML = '<option value="all">Todas</option>';
+
+    // Adiciona as categorias únicas vindas do CSV
+    categories.forEach(category => {
+        const option = document.createElement("option");
+        option.value = category;
+        option.textContent = category.charAt(0).toUpperCase() + category.slice(1); // Capitaliza a primeira letra
+        categoryFilter.appendChild(option);
+    });
+}
+
     </script>
     
 
