@@ -155,13 +155,28 @@
             return message;
         }
     
-        // Atualizar botão do WhatsApp
-        function updateWhatsAppButton() {
-            const whatsappButton = document.getElementById("whatsapp-button");
-            const message = encodeURIComponent(generateWhatsAppMessage());
-            whatsappButton.href = `https://wa.me/5511986215473?text=${message}`;
-        }
-       
+       // Atualizar botão do WhatsApp
+function updateWhatsAppButton() {
+    const whatsappButton = document.getElementById("whatsapp-button");
+    const message = encodeURIComponent(generateWhatsAppMessage());
+    
+    // Se o carrinho estiver vazio, não muda o link
+    if (cart.length === 0) {
+        whatsappButton.href = "#";
+        return;
+    }
+
+    whatsappButton.href = `https://wa.me/5511986215473?text=${message}`;
+
+    // Adiciona um evento para limpar o carrinho ao clicar no botão
+    whatsappButton.addEventListener("click", () => {
+        setTimeout(() => {
+            cart.length = 0; // Esvazia o array do carrinho
+            updateCartView(); // Atualiza a exibição
+            alert("Pedido enviado! O carrinho foi esvaziado.");
+        }, 1000); // Pequeno delay para garantir que a mensagem foi enviada antes de limpar
+    }, { once: true }); // Garante que o evento só será anexado uma vez
+}
             // Renderizar produtos
            function renderProducts(products) {
     const container = document.getElementById("products-container");
