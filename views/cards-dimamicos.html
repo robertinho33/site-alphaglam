@@ -12,11 +12,24 @@
 
         <div class="container d-flex justify-content-between align-items-center">
             <a href="#" class="navbar-brand fw-bold">AlphaGlam Marketplace</a>
+            <div>
+                <div class="text-center mb-4">
+                    <label for="categoryFilter" class="fw-bold">Filtrar por categoria:</label>
+                    <select id="categoryFilter" class="form-select w-auto d-inline-block">
+                        <option value="all">Todas</option>
+                        <option value="shampoo">Shampoo</option>
+                        <option value="condicionador">Condicionador</option>
+                        <option value="mascara">Máscara</option>
+                        <!-- Adicione mais categorias conforme necessário -->
+                    </select>
+                </div>
+                
+            </div>
             <form class="d-flex w-50">
                 <input class="form-control me-2" type="search" placeholder="Buscar produtos..." aria-label="Search">
                 <button class="btn btn-dark" type="submit">Buscar</button>
             </form>
-            <div>
+           
 
 
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -194,10 +207,20 @@ function updateWhatsAppButton() {
     }, { once: true }); // Garante que o evento só será anexado uma vez
 }
             // Renderizar produtos
-           function renderProducts(products) {
+            function renderProducts(products, selectedCategory = "all") {
     const container = document.getElementById("products-container");
-    container.innerHTML = ""; // Limpa o container antes de renderizar
-    products.forEach((product) => {
+    container.innerHTML = "";
+
+    const filteredProducts = selectedCategory === "all"
+        ? products
+        : products.filter(product => product.category.toLowerCase() === selectedCategory.toLowerCase());
+
+    if (filteredProducts.length === 0) {
+        container.innerHTML = '<p class="text-center">Nenhum produto encontrado nesta categoria.</p>';
+        return;
+    }
+
+    filteredProducts.forEach((product) => {
         const truncatedDescription = product.description.length > 80 
             ? product.description.slice(0, 80) + "..." 
             : product.description;
@@ -205,16 +228,10 @@ function updateWhatsAppButton() {
         const card = document.createElement("div");
         card.classList.add("col-md-4");
         card.innerHTML = `
-         <section class="container mt-5">
-        <div class="row">     
-            <div class="card"> 
+            <div class="card">
                 <p class="card-text"><strong>ID:</strong> ${product.id}</p>
-               <h5> ${product.title}</h5>
-                <img 
-                    src="../assets/images/ecobelle/${product.image}" 
-                    class="card-img-top img-thumbnail" 
-                    alt="${product.title}" 
-                >
+                <h5>${product.title}</h5>
+                <img src="../assets/images/ecobelle/${product.image}" class="card-img-top img-thumbnail" alt="${product.title}">
                 <p class="card-text">
                     <strong>Descrição:</strong> ${truncatedDescription}
                     <a href="#" class="text-primary" onclick="showFullDescription('${product.description}')">Leia mais</a>
@@ -226,11 +243,15 @@ function updateWhatsAppButton() {
                     Adicionar ao Carrinho
                 </button>
             </div>
-            </div>
         `;
         container.appendChild(card);
     });
 }
+
+document.getElementById("categoryFilter").addEventListener("change", (event) => {
+    const selectedCategory = event.target.value;
+    renderProducts(products, selectedCategory);
+});
 
     function showFullDescription(description) {
     const fullDescriptionElement = document.getElementById("fullDescription");
