@@ -1,8 +1,78 @@
+/* Estilo geral */
 body {
-    background: url('../images/b02.jpg');
-    font-family: Arial, sans-serif;
-    color: #525151;
+    font-family: 'Arial', sans-serif;
+    background-color: #ebebeb;
 }
+
+/* Header estilo Mercado Livre */
+header {
+    background-color: #ffe600;
+    padding: 10px 0;
+}
+
+.navbar-brand {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+.navbar .form-control {
+    width: 50%;
+    border-radius: 20px;
+}
+
+.navbar .btn {
+    border-radius: 20px;
+}
+
+/* Botões principais */
+.btn-primary {
+    background-color: #3483fa;
+    border: none;
+}
+
+.btn-secondary {
+    background-color: #333;
+    border: none;
+}
+
+/* Layout dos produtos */
+.card {
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+    transform: scale(1.03);
+}
+
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-title {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.card-text {
+    font-size: 14px;
+}
+
+/* Rodapé */
+footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin-top: 20px;
+}
+
+
 img {
     max-width: 100%;
     height: auto;
