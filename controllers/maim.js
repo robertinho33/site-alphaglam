@@ -90,7 +90,26 @@ function generateWhatsAppMessage() {
     message += `\nTotal: R$ ${calculateCartTotal()}`;
 
     return message;
-}
+}document.addEventListener("DOMContentLoaded", () => {
+    const floatingCartBtn = document.getElementById("floating-cart-btn");
+    const floatingCheckoutBtn = document.getElementById("floating-checkout-btn");
+
+    if (floatingCartBtn) {
+        floatingCartBtn.addEventListener("click", () => {
+            document.getElementById("products-container").style.display = "none";
+            document.getElementById("cart-container").style.display = "block";
+            updateCartView();
+        });
+    }
+
+    if (floatingCheckoutBtn) {
+        floatingCheckoutBtn.addEventListener("click", () => {
+            alert("Redirecionando para finalização da compra!");
+            window.location.href = "checkout.html"; // Ajuste para a URL correta
+        });
+    }
+});
+
 
 // Atualizar botão do WhatsApp
 function updateWhatsAppButton() {
