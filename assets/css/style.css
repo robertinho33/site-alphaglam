@@ -4,6 +4,10 @@ body {
     font-family: Arial, sans-serif;
     color: #e9e7e7;
 }
+img {
+    max-width: 100%;
+    height: auto;
+  }
 
 h1 {
     color: #d4af37; /* Dourado */
