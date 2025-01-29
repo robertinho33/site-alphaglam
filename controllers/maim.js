@@ -3,6 +3,18 @@ document.addEventListener("DOMContentLoaded", async () => {
 const productsContainer = document.getElementById("products-container");
 const cartContainer = document.getElementById("cart-container");
 
+
+
+let allProducts = []; // Armazena todos os produtos carregados
+
+document.addEventListener("DOMContentLoaded", async () => {
+    allProducts = await loadCSV("../controllers/products.csv"); // Carrega os produtos
+    renderProducts(allProducts); // Exibe os produtos inicialmente
+});
+
+
+
+
 // Certifique-se de que o carrinho está escondido inicialmente
 cartContainer.style.display = "none";
 
@@ -219,26 +231,32 @@ document.addEventListener("DOMContentLoaded", async () => {
         document.getElementById("cart-container").style.display = "block";
     });
 });
-document.addEventListener("DOMContentLoaded", async () => {
-    const searchForm = document.getElementById("search-form");
+
+document.addEventListener("DOMContentLoaded", () => {
     const searchInput = document.getElementById("search-input");
-    const categoryFilter = document.getElementById("category-filter");
+    const searchBtn = document.getElementById("search-btn");
 
-    let products = await loadCSV("../controllers/products.csv");
-
-    // Filtrar produtos ao enviar o formulário
-    searchForm.addEventListener("submit", (event) => {
-        event.preventDefault();
-
-        const searchText = searchInput.value.toLowerCase();
-        const selectedCategory = categoryFilter.value;
-
-        const filteredProducts = products.filter((product) => {
-            const matchesName = product.title.toLowerCase().includes(searchText);
-            const matchesCategory = selectedCategory === "" || product.category === selectedCategory;
-            return matchesName && matchesCategory;
-        });
-
-        renderProducts(filteredProducts);
+    // Evento para buscar ao clicar no botão
+    searchBtn.addEventListener("click", () => {
+        filterProducts();
     });
+
+    // Evento para buscar enquanto o usuário digita
+    searchInput.addEventListener("input", () => {
+        filterProducts();
+    });
+
+    function filterProducts() {
+        const searchTerm = searchInput.value.trim().toLowerCase();
+
+        // Filtra os produtos que contêm o termo de busca no título ou categoria
+        const filteredProducts = allProducts.filter(product =>
+            product.title.toLowerCase().includes(searchTerm) ||
+            product.category.toLowerCase().includes(searchTerm)
+        );
+
+        // Atualiza a exibição dos produtos filtrados
+        renderProducts(filteredProducts);
+    }
 });
+
