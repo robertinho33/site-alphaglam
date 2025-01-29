@@ -219,3 +219,35 @@ document.addEventListener("DOMContentLoaded", async () => {
         document.getElementById("cart-container").style.display = "block";
     });
 });
+document.addEventListener("DOMContentLoaded", () => {
+    const searchInput = document.getElementById("searchInput");
+    const subcategoryFilter = document.getElementById("subcategoryFilter");
+    const searchButton = document.getElementById("searchButton");
+
+    // Função para filtrar os produtos
+    function filterProducts() {
+        const searchText = searchInput.value.toLowerCase();
+        const selectedSubcategory = subcategoryFilter.value.toLowerCase();
+
+        const filteredProducts = products.filter(product => {
+            const matchesSearch = product.title.toLowerCase().includes(searchText);
+            const matchesSubcategory = selectedSubcategory === "" || product.subcategory.toLowerCase() === selectedSubcategory;
+            return matchesSearch && matchesSubcategory;
+        });
+
+        renderProducts(filteredProducts);
+    }
+
+    // Evento de busca ao clicar no botão
+    searchButton.addEventListener("click", filterProducts);
+
+    // Evento de busca ao pressionar "Enter" no campo de pesquisa
+    searchInput.addEventListener("keypress", event => {
+        if (event.key === "Enter") {
+            filterProducts();
+        }
+    });
+
+    // Evento ao mudar a subcategoria
+    subcategoryFilter.addEventListener("change", filterProducts);
+});
