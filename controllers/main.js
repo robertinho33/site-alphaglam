@@ -191,3 +191,32 @@ document.addEventListener('DOMContentLoaded', function () {
                     container.innerHTML = '<p>Não foi possível carregar os produtos.</p>';
                 });
         }
+        document.addEventListener("DOMContentLoaded", () => {
+            const cartBtn = document.getElementById("floating-cart-btn");
+            const checkoutBtn = document.getElementById("floating-checkout-btn");
+        
+            // Exibir o carrinho ao clicar no botão "Ver Carrinho"
+            cartBtn.addEventListener("click", () => {
+                document.getElementById("products-container").style.display = "none";
+                document.getElementById("cart-container").style.display = "block";
+            });
+        
+            // Finalizar compra e limpar carrinho
+            checkoutBtn.addEventListener("click", () => {
+                if (cart.length === 0) {
+                    alert("Seu carrinho está vazio!");
+                    return;
+                }
+        
+                const message = encodeURIComponent(generateWhatsAppMessage());
+                window.open(`https://wa.me/5511986215473?text=${message}`, "_blank");
+        
+                // Limpar carrinho após a compra
+                setTimeout(() => {
+                    cart.length = 0;
+                    updateCartView();
+                    alert("Pedido finalizado! O carrinho foi esvaziado.");
+                }, 1000);
+            });
+        });
+        

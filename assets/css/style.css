@@ -153,3 +153,20 @@ border-radius: 8px;
     flex: 0 0 32%; /* Cards ocupando 32% da largura para 3 por linha */
     box-sizing: border-box;
 }
+.floating-buttons {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 1000;
+}
+
+.floating-buttons .btn {
+    width: 180px;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 50px;
+}
