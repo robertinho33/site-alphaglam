@@ -1,12 +1,13 @@
 body {
-    background: url('../images/b02.jpg') no-repeat center center fixed;
- 
+    background: url('../images/b02.jpg');
     font-family: Arial, sans-serif;
-    color: #e9e7e7;
+    color: #525151;
 }
 img {
     max-width: 100%;
     height: auto;
+    opacity: 0.5;
+
   }
 
 h1 {
