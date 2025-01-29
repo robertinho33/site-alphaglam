@@ -37,19 +37,18 @@
             </div>
       
         <!-- Carrinho -->
-        <div id="cart-container">
-            <h2 class="text-center mb-4">Carrinho</h2>
-            <ul id="cart-list" class="list-group">
-                <!-- Os produtos do carrinho serão exibidos aqui -->
-            </ul>
-            <div class="text-center mt-4">
-                <p><strong>Total:</strong> R$ <span id="cart-total">0.00</span></p>
-                <a href="#" id="whatsapp-button" target="_blank" class="btn btn-success">
-                    Finalizar Pedido no WhatsApp
-                </a>
-            </div>
-        </div>
+<div id="cart-container" style="display: none;">
+    <h2 class="text-center mb-4">Carrinho</h2>
+    <ul id="cart-list" class="list-group">
+        <!-- Os produtos do carrinho serão exibidos aqui -->
+    </ul>
+    <div class="text-center mt-4">
+        <p><strong>Total:</strong> R$ <span id="cart-total">0.00</span></p>
+        <a href="#" id="whatsapp-button" target="_blank" class="btn btn-success">
+            Finalizar Pedido no WhatsApp
+        </a>
     </div>
+</div>
 
    <!-- Modal para exibir descrição completa -->
 <div class="modal fade" id="descriptionModal" tabindex="-1" aria-labelledby="descriptionModalLabel" aria-hidden="true">
@@ -73,7 +72,29 @@
 </div>
 
     <script>
+
         const cart = [];
+        document.addEventListener("DOMContentLoaded", async () => {
+    const productsContainer = document.getElementById("products-container");
+    const cartContainer = document.getElementById("cart-container");
+
+    // Certifique-se de que o carrinho está escondido inicialmente
+    cartContainer.style.display = "none";
+
+    // Botão para ver os produtos
+    document.getElementById("view-products-btn").addEventListener("click", () => {
+        productsContainer.style.display = "flex";
+        cartContainer.style.display = "none";
+    });
+
+    // Botão para ver o carrinho
+    document.getElementById("view-cart-btn").addEventListener("click", () => {
+        productsContainer.style.display = "none";
+        cartContainer.style.display = "block";
+        updateCartView(); // Atualiza a exibição do carrinho
+    });
+});
+
     
         // Função para adicionar produto ao carrinho
         function addToCart(product) {
@@ -81,6 +102,31 @@
             alert(`Produto "${product.title}" adicionado ao carrinho!`);
             updateCartView();
         }
+        function updateCartView() {
+    const cartList = document.getElementById("cart-list");
+    const cartTotal = document.getElementById("cart-total");
+
+    cartList.innerHTML = ""; // Limpa o carrinho antes de atualizar
+
+    if (cart.length === 0) {
+        cartList.innerHTML = '<li class="list-group-item text-center">O carrinho está vazio.</li>';
+        cartTotal.textContent = "0.00";
+    } else {
+        cart.forEach((product, index) => {
+            const listItem = document.createElement("li");
+            listItem.classList.add("list-group-item", "d-flex", "justify-content-between", "align-items-center");
+            listItem.innerHTML = `
+                ${product.title} - R$ ${parseFloat(product.price).toFixed(2)}
+                <button class="btn btn-danger btn-sm" onclick="removeFromCart(${index})">Remover</button>
+            `;
+            cartList.appendChild(listItem);
+        });
+        cartTotal.textContent = calculateCartTotal();
+    }
+
+    updateWhatsAppButton(); // Atualiza link do WhatsApp
+}
+
     
         // Função para remover produto do carrinho
         function removeFromCart(index) {
@@ -163,29 +209,30 @@
 }
 
         // Atualizar exibição do carrinho
-        function updateCartView() {
-            const cartList = document.getElementById("cart-list");
-            const cartTotal = document.getElementById("cart-total");
-            cartList.innerHTML = ""; // Limpa a lista
-    
-            if (cart.length === 0) {
-                cartList.innerHTML = '<li class="list-group-item text-center">O carrinho está vazio.</li>';
-                cartTotal.textContent = "0.00";
-            } else {
-                cart.forEach((product, index) => {
-                    const listItem = document.createElement("li");
-                    listItem.classList.add("list-group-item", "d-flex", "justify-content-between", "align-items-center");
-                    listItem.innerHTML = `
-                        ${product.title} - R$ ${parseFloat(product.price).toFixed(2)}
-                        <button class="btn btn-danger btn-sm" onclick="removeFromCart(${index})">Remover</button>
-                    `;
-                    cartList.appendChild(listItem);
-                });
-                cartTotal.textContent = calculateCartTotal();
-            }
-    
-            updateWhatsAppButton();
-        }
+       function updateCartView() {
+    const cartList = document.getElementById("cart-list");
+    const cartTotal = document.getElementById("cart-total");
+
+    cartList.innerHTML = ""; // Limpa o carrinho antes de atualizar
+
+    if (cart.length === 0) {
+        cartList.innerHTML = '<li class="list-group-item text-center">O carrinho está vazio.</li>';
+        cartTotal.textContent = "0.00";
+    } else {
+        cart.forEach((product, index) => {
+            const listItem = document.createElement("li");
+            listItem.classList.add("list-group-item", "d-flex", "justify-content-between", "align-items-center");
+            listItem.innerHTML = `
+                ${product.title} - R$ ${parseFloat(product.price).toFixed(2)}
+                <button class="btn btn-danger btn-sm" onclick="removeFromCart(${index})">Remover</button>
+            `;
+            cartList.appendChild(listItem);
+        });
+        cartTotal.textContent = calculateCartTotal();
+    }
+
+    updateWhatsAppButton(); // Atualiza link do WhatsApp
+}
     
         // Função para carregar o CSV
         async function loadCSV(filePath) {
