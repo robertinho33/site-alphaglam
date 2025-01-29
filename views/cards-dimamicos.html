@@ -212,6 +212,7 @@ function updateWhatsAppButton() {
     const container = document.getElementById("products-container");
     container.innerHTML = "";
 
+    // Filtra os produtos conforme a categoria escolhida
     const filteredProducts = selectedCategory === "all"
         ? products
         : products.filter(product => product.category.toLowerCase() === selectedCategory.toLowerCase());
@@ -251,7 +252,27 @@ function updateWhatsAppButton() {
 
 document.getElementById("categoryFilter").addEventListener("change", (event) => {
     const selectedCategory = event.target.value;
-    renderProducts(products, selectedCategory);
+    renderProducts(window.products, selectedCategory);
+});
+document.addEventListener("DOMContentLoaded", async () => {
+    window.products = await loadCSV("../controllers/products.csv");
+
+    if (window.products.length === 0) {
+        document.getElementById("products-container").innerHTML =
+            '<p class="text-center">Nenhum produto encontrado.</p>';
+    } else {
+        renderProducts(window.products); // Exibir todos os produtos por padrão
+    }
+
+    document.getElementById("view-products-btn").addEventListener("click", () => {
+        document.getElementById("products-container").style.display = "flex";
+        document.getElementById("cart-container").style.display = "none";
+    });
+
+    document.getElementById("view-cart-btn").addEventListener("click", () => {
+        document.getElementById("products-container").style.display = "none";
+        document.getElementById("cart-container").style.display = "block";
+    });
 });
 
     function showFullDescription(description) {
