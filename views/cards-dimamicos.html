@@ -104,30 +104,6 @@
     <script>
 
              let cart = [];
-
-
-    document.addEventListener("DOMContentLoaded", async () => {
-    window.products = await loadCSV("../controllers/products.csv");
-
-    if (window.products.length === 0) {
-        document.getElementById("products-container").innerHTML =
-            '<p class="text-center">Nenhum produto encontrado.</p>';
-    } else {
-        renderProducts(window.products); // Exibir todos os produtos por padrão
-    }
-
-    document.getElementById("view-products-btn").addEventListener("click", () => {
-        document.getElementById("products-container").style.display = "flex";
-        document.getElementById("cart-container").style.display = "none";
-    });
-
-    document.getElementById("view-cart-btn").addEventListener("click", () => {
-        document.getElementById("products-container").style.display = "none";
-        document.getElementById("cart-container").style.display = "block";
-    });
-});
-
-
     
         // Função para adicionar produto ao carrinho
         function addToCart(product) {
@@ -253,30 +229,6 @@ function updateWhatsAppButton() {
     });
 }
 
-document.getElementById("categoryFilter").addEventListener("change", (event) => {
-    const selectedCategory = event.target.value;
-    renderProducts(window.products, selectedCategory);
-});
-document.addEventListener("DOMContentLoaded", async () => {
-    window.products = await loadCSV("../controllers/products.csv");
-
-    if (window.products.length === 0) {
-        document.getElementById("products-container").innerHTML =
-            '<p class="text-center">Nenhum produto encontrado.</p>';
-    } else {
-        renderProducts(window.products); // Exibir todos os produtos por padrão
-    }
-
-    document.getElementById("view-products-btn").addEventListener("click", () => {
-        document.getElementById("products-container").style.display = "flex";
-        document.getElementById("cart-container").style.display = "none";
-    });
-
-    document.getElementById("view-cart-btn").addEventListener("click", () => {
-        document.getElementById("products-container").style.display = "none";
-        document.getElementById("cart-container").style.display = "block";
-    });
-});
 
     function showFullDescription(description) {
     const fullDescriptionElement = document.getElementById("fullDescription");
