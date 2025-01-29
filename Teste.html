@@ -14,15 +14,22 @@
         <div class="container d-flex justify-content-between align-items-center">
             <a href="#" class="navbar-brand fw-bold">AlphaGlam Marketplace</a>
             <form class="d-flex w-50">
-                function debounce(func, delay) {
-                    let timeout;
-                    return function (...args) {
-                        clearTimeout(timeout);
-                        timeout = setTimeout(() => func(...args), delay);
-                    };
-                }
-                searchInput.addEventListener("input", debounce(filterProducts, 300));
-                
+                <input class="form-control me-2" type="search" placeholder="Buscar produtos..." aria-label="Search">
+                <button class="btn btn-dark" type="submit">Buscar</button>
+                <form id="search-form" class="d-flex w-50">
+                    <select id="category-filter" class="form-select me-2">
+                        <option value="">Todas as Categorias</option>
+                        <option value="cabelos">Cabelos</option>
+                        <option value="pele">Pele</option>
+                        <option value="maquiagem">Maquiagem</option>
+                        <option value="unhas">Unhas</option>
+                        <option value="unhas">xc</option>
+                        <option value="unhas">xcc</option>
+                        <option value="unhas">cx</option>
+                    </select>
+                    <form action="">
+                    <input id="search-input" class="form-control me-2" type="search" placeholder="Buscar produtos..." aria-label="Search">
+                    <button class="btn btn-dark" type="submit">Buscar</button>
                 </form>
 
                 <form class="d-flex w-50" onsubmit="return false;">
@@ -35,6 +42,7 @@
                 <a href="#" class="text-dark me-3">Login</a>
                 <a href="#" class="text-dark">Carrinho</a>
             </div>
+            </form>
         </div>
     </header>
 
