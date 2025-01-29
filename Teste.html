@@ -55,52 +55,61 @@
      <div>
     <section class="container mt-5">
         <h2 class="mb-4">Produtos em Destaque</h2>
-        <div class="row">
-            <!-- Produto 1 -->
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="https://via.placeholder.com/200" class="card-img-top" alt="Produto 1">
-                    <div class="card-body">
-                        <h5 class="card-title">Produto 1</h5>
-                        <p class="card-text">R$ 199,90</p>
-                        <a href="#" class="btn btn-primary">Comprar</a>
-                    </div>
-                </div>
+       
+    <!-- Botões Flutuantes -->
+<div class="floating-buttons">
+    <button id="floating-cart-btn" class="btn btn-warning">🛒 Ver Carrinho</button>
+    <button id="floating-checkout-btn" class="btn btn-success">✅ Finalizar Compra</button>
+</div>
+
+    <div class="container my-5">
+        <h1 class="text-center mb-4">Produtos</h1>
+
+        <!-- Botões para alternar entre Produtos e Carrinho -->
+        <div class="text-center mb-4">
+            <button id="view-products-btn" class="btn btn-primary">Voltarr às Compras</button>
+            <button id="view-cart-btn" class="btn btn-secondary">Ver Carrinho</button>
+        
+        </div>
+            <!-- Produtos -->
+            <div id="products-container" class="row col-mb-4">
+            <!-- Os cards serão inseridos aqui dinamicamente -->
             </div>
-            <!-- Produto 2 -->
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="https://via.placeholder.com/200" class="card-img-top" alt="Produto 2">
-                    <div class="card-body">
-                        <h5 class="card-title">Produto 2</h5>
-                        <p class="card-text">R$ 299,90</p>
-                        <a href="#" class="btn btn-primary">Comprar</a>
-                    </div>
-                </div>
+      
+        <!-- Carrinho -->
+<div id="cart-container" style="display: none;">
+    <h2 class="text-center mb-4">Carrinho</h2>
+    <ul id="cart-list" class="list-group">
+        <!-- Os produtos do carrinho serão exibidos aqui -->
+    </ul>
+    <div class="text-center mt-4">
+        <p><strong>Total:</strong> R$ <span id="cart-total">0.00</span></p>
+        <a href="#" id="whatsapp-button" target="_blank" class="btn btn-success">
+            Finalizar Pedido no WhatsApp
+        </a>
+    </div>
+</div>
+
+   <!-- Modal para exibir descrição completa -->
+<div class="modal fade" id="descriptionModal" tabindex="-1" aria-labelledby="descriptionModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="descriptionModalLabel">Descrição Completa <p>Aproveite essa oferta!</p></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <!-- Produto 3 -->
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="https://via.placeholder.com/200" class="card-img-top" alt="Produto 3">
-                    <div class="card-body">
-                        <h5 class="card-title">Produto 3</h5>
-                        <p class="card-text">R$ 149,90</p>
-                        <a href="#" class="btn btn-primary">Comprar</a>
-                    </div>
-                </div>
+            <div class="modal-body">
+                <p id="fullDescription"></p>
             </div>
-            <!-- Produto 4 -->
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="https://via.placeholder.com/200" class="card-img-top" alt="Produto 4">
-                    <div class="card-body">
-                        <h5 class="card-title">Produto 4</h5>
-                        <p class="card-text">R$ 99,90</p>
-                        <a href="#" class="btn btn-primary">Comprar</a>
-                    </div>
-                </div>
+            <div class="modal-footer">
+                <button id="addToCartModal" class="btn btn-primary">
+                    Adicionar ao Carrinho
+                </button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
             </div>
         </div>
+    </div>
+</div>
     </section>
 </div>
     <!-- FOOTER -->
