@@ -123,22 +123,14 @@
             : product.description;
 
         const card = document.createElement("div");
-        card.classList.add("col-md-2");
+        card.classList.add("col-md-4");
         card.innerHTML = `
-          
-        <div class="card">
-                <div class="card">
-                    <img src="../assets/images/ecobelle/${product.image}"  class="card-img-top" alt="Produto em alta "${product.title}">
-                    <div class="card-body">
-                        <h5 class="card-title">${product.title}</h5>
-                        <strong>Descrição:</strong> ${truncatedDescription}
-                         <a href="#" class="text-primary" onclick="showFullDescription('${product.description}')">Leia mais</a>
-                        <p class="card-text"><small class="text-muted"><strong>Preço:</strong> R$ ${parseFloat(product.price).toFixed(2)}</small></p>
-                        <a href="#" class="btn btn-primary">Comprar</a>
-                    </div>
-                </div>
-            </div>
-
+         <section class="container mt-5">
+        <h2 class="mb-4">Produtos em Destaque</h2>
+        <div class="row">
+           
+            <div class="col-md-3">
+                
             <div class="card"> 
                 <p class="card-text"><strong>ID:</strong> ${product.id}</p>
                 <img 
@@ -157,6 +149,9 @@
                     Adicionar ao Carrinho
                 </button>
             </div>
+            </div>
+            </div>
+            
         `;
         container.appendChild(card);
     });
