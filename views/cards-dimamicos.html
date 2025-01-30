@@ -17,8 +17,14 @@
                 
             </div>
             <form class="d-flex w-50">
-                <input class="form-control me-2" type="search" placeholder="Buscar produtos..." aria-label="Search">
-                <button class="btn btn-dark" type="submit">Buscar</button>
+                <label for="categoryFilter" class="fw-bold">Filtrar por categoria:</label>
+                    <select id="categoryFilter" class="form-select w-auto d-inline-block">
+                        <option value="all">Todas</option>
+                        <option value="shampoo">Shampoo</option>
+                        <option value="xc">1</option>
+                        <option value="xcc">2</option>
+                        <!-- Adicione mais categorias conforme necessário -->
+                    </select>
             </form>
            
 
@@ -34,14 +40,8 @@
                 </div>
             </div>
             <div class="text-center mb-4">
-                    <label for="categoryFilter" class="fw-bold">Filtrar por categoria:</label>
-                    <select id="categoryFilter" class="form-select w-auto d-inline-block">
-                        <option value="all">Todas</option>
-                        <option value="shampoo">Shampoo</option>
-                        <option value="xc">1</option>
-                        <option value="xcc">2</option>
-                        <!-- Adicione mais categorias conforme necessário -->
-                    </select>
+                    <input class="form-control me-2" type="search" placeholder="Buscar produtos..." aria-label="Search">
+                <button class="btn btn-dark" type="submit">Buscar</button>
                 </div>
                 </nav>
             </div>
