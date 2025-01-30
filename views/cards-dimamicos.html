@@ -8,21 +8,15 @@
     <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
-     <header>
-
+    <header>
         <div class="container d-flex justify-content-between align-items-center">
             <a href="#" class="navbar-brand fw-bold">AlphaGlam Marketplace</a>
-            <div>
-                
-                
-            </div>
             <form class="d-flex w-50">
                 <input class="form-control me-2" type="search" placeholder="Buscar produtos..." aria-label="Search">
                 <button class="btn btn-dark" type="submit">Buscar</button>
             </form>
-           
-
-
+        </div>
+    
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
                 <a class="navbar-brand" href="../index.html">AlphaGlam</a>
@@ -33,19 +27,17 @@
                     <div id="menu-container"></div> <!-- Aqui será inserido o conteúdo do menu -->
                 </div>
             </div>
-            <div class="text-center mb-4">
-                    <label for="categoryFilter" class="fw-bold">Filtrar por categoria:</label>
-                    <select id="categoryFilter" class="form-select w-auto d-inline-block">
-                        <option value="all">Todas</option>
-                        <option value="shampoo">Shampoo</option>
-                        <option value="xc">1</option>
-                        <option value="xcc">2</option>
-                        <!-- Adicione mais categorias conforme necessário -->
-                    </select>
-                </div>
         </nav>
-    </header>
-<body>
+    
+        <div class="text-center mb-4">
+            <label for="categoryFilter" class="fw-bold">Filtrar por categoria:</label>
+            <select id="categoryFilter" class="form-select w-auto d-inline-block">
+                <option value="all">Todas</option>
+            </select>
+        </div>
+    </header> <!-- FECHAMENTO CORRIGIDO -->
+    
+
     <!-- Botões Flutuantes -->
 <div class="floating-buttons">
     <button id="floating-cart-btn" class="btn btn-warning">🛒 Ver Carrinho</button>
@@ -57,7 +49,7 @@
 
         <!-- Botões para alternar entre Produtos e Carrinho -->
         <div class="text-center mb-4">
-            <button id="view-products-btn" class="btn btn-primary">Voltarr às Compras</button>
+            <button id="view-products-btn" class="btn btn-primary">Voltar às Compras</button>
             <button id="view-cart-btn" class="btn btn-secondary">Ver Carrinho</button>
         
         </div>
@@ -111,32 +103,7 @@
             alert(`Produto "${product.title}" adicionado ao carrinho!`);
             updateCartView();
         }
-        function updateCartView() {
-    const cartList = document.getElementById("cart-list");
-    const cartTotal = document.getElementById("cart-total");
-
-    cartList.innerHTML = ""; // Limpa o carrinho antes de atualizar
-
-    if (cart.length === 0) {
-        cartList.innerHTML = '<li class="list-group-item text-center">O carrinho está vazio.</li>';
-        cartTotal.textContent = "0.00";
-    } else {
-        cart.forEach((product, index) => {
-            const listItem = document.createElement("li");
-            listItem.classList.add("list-group-item", "d-flex", "justify-content-between", "align-items-center");
-            listItem.innerHTML = `
-                ${product.title} - R$ ${parseFloat(product.price).toFixed(2)}
-                <button class="btn btn-danger btn-sm" onclick="removeFromCart(${index})">Remover</button>
-            `;
-            cartList.appendChild(listItem);
-        });
-        cartTotal.textContent = calculateCartTotal();
-    }
-
-    updateWhatsAppButton(); // Atualiza link do WhatsApp
-}
-
-    
+         
         // Função para remover produto do carrinho
         function removeFromCart(index) {
             cart.splice(index, 1);
@@ -165,18 +132,18 @@
         }
     
        // Atualizar botão do WhatsApp
-function updateWhatsAppButton() {
+       function updateWhatsAppButton() {
     const whatsappButton = document.getElementById("whatsapp-button");
     const message = encodeURIComponent(generateWhatsAppMessage());
-    
-    // Se o carrinho estiver vazio, não muda o link
+
     if (cart.length === 0) {
         whatsappButton.href = "#";
         return;
     }
 
     whatsappButton.href = `https://wa.me/5511986215473?text=${message}`;
-
+    whatsappButton.replaceWith(whatsappButton.cloneNode(true)); // Garante que eventos não se dupliquem
+}
     // Adiciona um evento para limpar o carrinho ao clicar no botão
     whatsappButton.addEventListener("click", () => {
         setTimeout(() => {
@@ -185,8 +152,7 @@ function updateWhatsAppButton() {
             alert("Pedido enviado! O carrinho foi esvaziado.");
         }, 1000); // Pequeno delay para garantir que a mensagem foi enviada antes de limpar
     }, { once: true }); // Garante que o evento só será anexado uma vez
-}
-            // Renderizar produtos
+          // Renderizar produtos
             function renderProducts(products, selectedCategory = "all") {
     const container = document.getElementById("products-container");
     container.innerHTML = "";
