@@ -11,15 +11,7 @@
      <header>
 
         <div class="container d-flex justify-content-between align-items-center">
-            <form class="d-flex w-50">
-                <label for="categoryFilter" class="fw-bold">Filtrar por categoria:</label>
-                    <select id="categoryFilter" class="form-select w-auto d-inline-block">
-                        <option value="all">Todas</option>
-                        <option value="xc">1</option>
-                        <option value="xcc">2</option>
-                        <!-- Adicione mais categorias conforme necessário -->
-                    </select>
-            </form>
+           
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
                 <a class="navbar-brand" href="../index.html">AlphaGlam</a>
@@ -31,8 +23,17 @@
                 </div>
             </div>
             <div class="text-center mb-4">
-                    <input class="form-control me-2" type="search" placeholder="Buscar produtos..." aria-label="Search">
-                <button class="btn btn-dark" type="submit">Buscar</button>
+                <form class="d-flex w-50">
+                    <label for="categoryFilter" class="fw-bold">Filtrar por categoria:</label>
+                        <select id="categoryFilter" class="form-select w-auto d-inline-block">
+                            <option value="all">Todas</option>
+                            <option value="xc">1</option>
+                            <option value="xcc">2</option>
+                            <!-- Adicione mais categorias conforme necessário -->
+                        </select>
+                </form>
+                     <!--  <input class="form-control me-2" type="search" placeholder="Buscar produtos..." aria-label="Search">
+               --> <button class="btn btn-dark" type="submit">Buscar</button>
                 </div>
                 </nav>
             </div>
