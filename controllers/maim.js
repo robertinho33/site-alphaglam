@@ -1,15 +1,14 @@
 const cart = [];
+document.addEventListener("DOMContentLoaded", async () => {
+const productsContainer = document.getElementById("products-container");
+const cartContainer = document.getElementById("cart-container");
+
+let allProducts = []; // Armazena todos os produtos carregados
 
 document.addEventListener("DOMContentLoaded", async () => {
-    const productsContainer = document.getElementById("products-container");
-    const cartContainer = document.getElementById("cart-container");
-
-    let allProducts = []; // Armazena todos os produtos carregados
-
     allProducts = await loadCSV("../controllers/products.csv"); // Carrega os produtos
     renderProducts(allProducts); // Exibe os produtos inicialmente
 });
-
 
 // Certifique-se de que o carrinho está escondido inicialmente
 cartContainer.style.display = "none";
