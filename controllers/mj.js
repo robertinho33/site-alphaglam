@@ -7,12 +7,13 @@ async function initApp() {
     const cartContainer = document.getElementById("cart-container");
     const searchInput = document.getElementById("search-input");
     const searchBtn = document.getElementById("search-btn");
+    const categoryFilter = document.getElementById("categoryFilter");
     const viewProductsBtn = document.getElementById("view-products-btn");
     const viewCartBtn = document.getElementById("view-cart-btn");
 
     // Verifica se os elementos existem antes de continuar
-    if (!productsContainer || !cartContainer || !searchInput || !searchBtn || !viewProductsBtn || !viewCartBtn) {
-        console.error("Erro: Elementos do DOM não encontrados.");
+    if (!productsContainer || !cartContainer || !searchInput || !searchBtn || !categoryFilter || !viewProductsBtn || !viewCartBtn) {
+        console.error("Erro: Elementos não encontrados.");
         return;
     }
 
@@ -33,7 +34,7 @@ async function initApp() {
         });
 
         // Adiciona evento de busca no botão e no campo de entrada
-        [searchBtn, searchInput].forEach(element => {
+        [searchBtn, searchInput, categoryFilter].forEach(element => {
             element.addEventListener("input", () => filterProducts(allProducts));
         });
     } catch (error) {
@@ -43,14 +44,13 @@ async function initApp() {
 
 function filterProducts(allProducts) {
     const searchTerm = document.getElementById("search-input").value.trim().toLowerCase();
-    if (!searchTerm) {
-        renderProducts(allProducts);
-        return;
-    }
+    const selectedCategory = document.getElementById("categoryFilter").value.toLowerCase();
 
-    const filteredProducts = allProducts.filter(product =>
-        product.title.toLowerCase().includes(searchTerm) ||
-        product.category.toLowerCase().includes(searchTerm)
-    );
+    let filteredProducts = allProducts.filter(product => {
+        const matchesName = product.title.toLowerCase().includes(searchTerm);
+        const matchesCategory = selectedCategory === "all" || product.category.toLowerCase() === selectedCategory;
+        return matchesName && matchesCategory;
+    });
+
     renderProducts(filteredProducts);
 }
