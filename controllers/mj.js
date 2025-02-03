@@ -15,14 +15,30 @@ async function initApp() {
 
     try {
         let allProducts = await loadCSV("../controllers/products.csv");
+
+        // Carregar categorias dinâmicas
+        loadCategories(allProducts);
+
         renderProducts(allProducts);
 
-        // Filtros: Categoria e Nome
+        // Eventos de filtro
         searchInput.addEventListener("input", () => filterProducts(allProducts));
         categoryFilter.addEventListener("change", () => filterProducts(allProducts));
     } catch (error) {
         console.error("Erro ao carregar produtos:", error);
     }
+}
+
+function loadCategories(products) {
+    const categoryFilter = document.getElementById("categoryFilter");
+
+    // Pegar todas as categorias únicas
+    let categories = ["all", ...new Set(products.map(product => product.category))];
+
+    // Popular o <select> de categorias
+    categoryFilter.innerHTML = categories
+        .map(category => `<option value="${category.toLowerCase()}">${category}</option>`)
+        .join("");
 }
 
 function filterProducts(allProducts) {
