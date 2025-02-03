@@ -1,56 +1,37 @@
-document.addEventListener("DOMContentLoaded", () => {
-    initApp();
-});
-
-async function initApp() {
+document.addEventListener("DOMContentLoaded", async () => {
     const productsContainer = document.getElementById("products-container");
     const cartContainer = document.getElementById("cart-container");
     const searchInput = document.getElementById("search-input");
     const searchBtn = document.getElementById("search-btn");
-    const categoryFilter = document.getElementById("categoryFilter");
-    const viewProductsBtn = document.getElementById("view-products-btn");
-    const viewCartBtn = document.getElementById("view-cart-btn");
 
-    // Verifica se os elementos existem antes de continuar
-    if (!productsContainer || !cartContainer || !searchInput || !searchBtn || !categoryFilter || !viewProductsBtn || !viewCartBtn) {
-        console.error("Erro: Elementos não encontrados.");
-        return;
-    }
+    let allProducts = await loadCSV("../controllers/products.csv");
 
-    try {
-        let allProducts = await loadCSV("../controllers/products.csv");
-        renderProducts(allProducts);
+    // Exibe os produtos na tela
+    renderProducts(allProducts);
 
-        // Alternar entre produtos e carrinho
-        viewProductsBtn.addEventListener("click", () => {
-            productsContainer.style.display = "flex";
-            cartContainer.style.display = "none";
-        });
+    // Alternar entre produtos e carrinho
+    document.getElementById("view-products-btn").addEventListener("click", () => {
+        productsContainer.style.display = "flex";
+        cartContainer.style.display = "none";
+    });
 
-        viewCartBtn.addEventListener("click", () => {
-            productsContainer.style.display = "none";
-            cartContainer.style.display = "block";
-            updateCartView();
-        });
+    document.getElementById("view-cart-btn").addEventListener("click", () => {
+        productsContainer.style.display = "none";
+        cartContainer.style.display = "block";
+        updateCartView();
+    });
 
-        // Adiciona evento de busca no botão e no campo de entrada
-        [searchBtn, searchInput, categoryFilter].forEach(element => {
-            element.addEventListener("input", () => filterProducts(allProducts));
-        });
-    } catch (error) {
-        console.error("Erro ao carregar produtos:", error);
-    }
-}
+    // Adiciona evento de busca
+    [searchBtn, searchInput].forEach(element => {
+        element.addEventListener("input", () => filterProducts(allProducts));
+    });
+});
 
 function filterProducts(allProducts) {
     const searchTerm = document.getElementById("search-input").value.trim().toLowerCase();
-    const selectedCategory = document.getElementById("categoryFilter").value.toLowerCase();
-
-    let filteredProducts = allProducts.filter(product => {
-        const matchesName = product.title.toLowerCase().includes(searchTerm);
-        const matchesCategory = selectedCategory === "all" || product.category.toLowerCase() === selectedCategory;
-        return matchesName && matchesCategory;
-    });
-
+    const filteredProducts = allProducts.filter(product =>
+        product.title.toLowerCase().includes(searchTerm) ||
+        product.category.toLowerCase().includes(searchTerm)
+    );
     renderProducts(filteredProducts);
 }
