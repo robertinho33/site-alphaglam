@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
-    <!-- 🔹 CABEÇALHO -->
     <header class="bg-warning py-2">
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light">
@@ -17,7 +16,6 @@
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav me-auto">
                             <li class="nav-item"><a class="nav-link text-dark fw-bold" href="#">Início</a></li>
@@ -25,13 +23,7 @@
                             <li class="nav-item"><a class="nav-link text-dark fw-bold" href="#">Sobre</a></li>
                             <li class="nav-item"><a class="nav-link text-dark fw-bold" href="#">Contato</a></li>
                         </ul>
-
-                        <!-- 🔹 FILTRO & BUSCA -->
                         <form class="d-flex align-items-center">
-                            <label for="categoryFilter" class="fw-bold me-2">Filtrar:</label>
-                            <select id="categoryFilter" class="form-select form-select-sm me-2">
-                                <option value="all">Todas</option>
-                            </select>
                             <input id="search-input" class="form-control form-control-sm me-2" type="search" placeholder="Buscar...">
                             <button id="search-btn" class="btn btn-dark btn-sm">Buscar</button>
                         </form>
@@ -41,20 +33,13 @@
         </div>
     </header>  
 
-    <!-- 🔹 CONTEÚDO PRINCIPAL -->
     <div class="container my-5">
         <h1 class="text-center mb-4">Produtos</h1>
-
-        <!-- 🔹 BOTÕES PARA ALTERAR VISÃO -->
         <div class="text-center mb-4">
             <button id="view-products-btn" class="btn btn-primary">Ver Produtos</button>
             <button id="view-cart-btn" class="btn btn-secondary">Ver Carrinho</button>
         </div>   
-
-        <!-- 🔹 LISTA DE PRODUTOS -->
         <div id="products-container" class="row"></div>
-
-        <!-- 🔹 CARRINHO -->
         <div id="cart-container" style="display: none;">
             <h2 class="text-center mb-4">Carrinho</h2>
             <ul id="cart-list" class="list-group"></ul>
@@ -65,77 +50,55 @@
         </div>
     </div>
 
-    <!-- 🔹 BOTÕES FLUTUANTES -->
-    <div class="floating-buttons">
-        <button id="floating-cart-btn" class="btn btn-warning">🛒 Ver Carrinho</button>
-        <button id="floating-checkout-btn" class="btn btn-success">✅ Finalizar Compra</button>
-    </div>
-
-    <!-- 🔹 MODAL PARA DESCRIÇÃO COMPLETA -->
-    <div class="modal fade" id="descriptionModal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Descrição Completa</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <p id="fullDescription"></p>
-                </div>
-                <div class="modal-footer">
-                    <button id="addToCartModal" class="btn btn-primary">Adicionar ao Carrinho</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 🔹 JAVASCRIPT DIRETO NO HTML -->
     <script>
-        let allProducts = [
-            { id: 1, name: "Batom Vermelho", price: 29.90 },
-            { id: 2, name: "Base Líquida", price: 45.50 },
-            { id: 3, name: "Máscara de Cílios", price: 35.00 }
-        ];
+        let allProducts = [];
         let cart = [];
 
-        document.addEventListener("DOMContentLoaded", () => {
-            renderProducts();
+        document.addEventListener("DOMContentLoaded", async () => {
+            await loadProducts();
             setupEventListeners();
         });
 
-        function setupEventListeners() {
-            document.getElementById("view-cart-btn").addEventListener("click", showCart);
-            document.getElementById("view-products-btn").addEventListener("click", showProducts);
-            document.getElementById("search-btn").addEventListener("click", (e) => {
-                e.preventDefault();
-                filterProducts();
-            });
-            document.getElementById("floating-cart-btn").addEventListener("click", showCart);
-            document.getElementById("checkout-btn").addEventListener("click", checkout);
+        async function loadProducts() {
+            try {
+                const response = await fetch("/products"); // Lendo CSV do servidor
+                const data = await response.text();
+                allProducts = parseCSV(data);
+                renderProducts();
+            } catch (error) {
+                console.error("Erro ao carregar produtos:", error);
+            }
+        }
+
+        function parseCSV(csvText) {
+            const lines = csvText.split("\n").slice(1); // Remove cabeçalho
+            return lines.map(line => {
+                const [id, name, price, image] = line.split(",");
+                return { id: Number(id), name, price: parseFloat(price), image };
+            }).filter(product => product.name); // Remove linhas vazias
         }
 
         function renderProducts() {
             const container = document.getElementById("products-container");
             container.innerHTML = "";
-            allProducts.forEach((product) => {
-                const productCard = document.createElement("div");
-                productCard.className = "col-md-4 mb-4";
-                productCard.innerHTML = `
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">${product.name}</h5>
-                            <p class="card-text">R$ ${product.price.toFixed(2)}</p>
-                            <button class="btn btn-primary" onclick="addToCart(${product.id})">Adicionar</button>
+            allProducts.forEach(product => {
+                container.innerHTML += `
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <img src="${product.image}" class="card-img-top" alt="${product.name}">
+                            <div class="card-body">
+                                <h5 class="card-title">${product.name}</h5>
+                                <p class="card-text">R$ ${product.price.toFixed(2)}</p>
+                                <button class="btn btn-primary" onclick="addToCart(${product.id})">Adicionar</button>
+                            </div>
                         </div>
                     </div>
                 `;
-                container.appendChild(productCard);
             });
         }
 
         function addToCart(productId) {
-            const product = allProducts.find((p) => p.id === productId);
+            const product = allProducts.find(p => p.id === productId);
             cart.push(product);
             updateCart();
         }
@@ -175,6 +138,12 @@
             alert("Compra finalizada!");
             cart = [];
             updateCart();
+        }
+
+        function setupEventListeners() {
+            document.getElementById("view-cart-btn").addEventListener("click", showCart);
+            document.getElementById("view-products-btn").addEventListener("click", showProducts);
+            document.getElementById("checkout-btn").addEventListener("click", checkout);
         }
     </script>
 </body>
