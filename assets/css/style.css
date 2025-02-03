@@ -4,26 +4,46 @@ body {
     background-color: #ebebeb;
 }
 
-/* Header estilo Mercado Livre */
+/* HEADER */
 header {
     background-color: #ffe600;
     padding: 10px 0;
 }
 
 .navbar-brand {
-    font-size: 24px;
+    font-size: 26px;
     font-weight: bold;
     color: #333;
 }
 
-.navbar .form-control {
-    width: 50%;
+.navbar .form-control,
+.navbar .form-select {
     border-radius: 20px;
+    font-size: 14px;
 }
 
 .navbar .btn {
     border-radius: 20px;
+    font-size: 14px;
 }
+
+/* Ajuste para telas menores */
+@media (max-width: 768px) {
+    .navbar-collapse {
+        text-align: center;
+    }
+    
+    .navbar .form-control,
+    .navbar .form-select {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .navbar .btn {
+        width: 100%;
+    }
+}
+
 
 /* Botões principais */
 .btn-primary {
