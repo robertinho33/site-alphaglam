@@ -19,7 +19,6 @@ async function initApp() {
         // Carregar categorias dinâmicas
         loadCategories(allProducts);
 
-        // Exibir todos os produtos ao carregar a página
         renderProducts(allProducts);
 
         // Eventos de filtro
@@ -40,9 +39,6 @@ function loadCategories(products) {
     categoryFilter.innerHTML = categories
         .map(category => `<option value="${category.toLowerCase()}">${category}</option>`)
         .join("");
-
-    // Sempre definir "all" como valor inicial
-    categoryFilter.value = "all";
 }
 
 function filterProducts(allProducts) {
@@ -57,3 +53,29 @@ function filterProducts(allProducts) {
 
     renderProducts(filteredProducts);
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+    const productsContainer = document.getElementById("products-container");
+
+function displayProducts() {
+    productsContainer.innerHTML = ""; // Limpa antes de adicionar novos produtos
+    products.forEach(product => {
+        const productCard = `
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="../assets/images/${product.image}" class="card-img-top" alt="${product.title}">
+                    <div class="card-body">
+                        <h5 class="card-title">${product.title}</h5>
+                        <p class="card-text">${product.description}</p>
+                        <p class="fw-bold">R$ ${product.price.toFixed(2)}</p>
+                        <button class="btn btn-primary add-to-cart" data-id="${product.id}">Adicionar ao Carrinho</button>
+                    </div>
+                </div>
+            </div>
+        `;
+        productsContainer.innerHTML += productCard;
+    });
+}
+
+displayProducts();
+});
