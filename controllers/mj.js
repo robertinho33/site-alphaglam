@@ -19,6 +19,7 @@ async function initApp() {
         // Carregar categorias dinâmicas
         loadCategories(allProducts);
 
+        // Exibir todos os produtos ao carregar a página
         renderProducts(allProducts);
 
         // Eventos de filtro
@@ -39,6 +40,9 @@ function loadCategories(products) {
     categoryFilter.innerHTML = categories
         .map(category => `<option value="${category.toLowerCase()}">${category}</option>`)
         .join("");
+
+    // Sempre definir "all" como valor inicial
+    categoryFilter.value = "all";
 }
 
 function filterProducts(allProducts) {
