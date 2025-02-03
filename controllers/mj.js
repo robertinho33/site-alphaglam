@@ -54,28 +54,45 @@ function filterProducts(allProducts) {
     renderProducts(filteredProducts);
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-    const productsContainer = document.getElementById("products-container");
+   // Renderizar produtos
+   function renderProducts(products, selectedCategory = "all") {
+    const container = document.getElementById("products-container");
+    container.innerHTML = "";
 
-function displayProducts() {
-    productsContainer.innerHTML = ""; // Limpa antes de adicionar novos produtos
-    products.forEach(product => {
-        const productCard = `
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <img src="../assets/images/${product.image}" class="card-img-top" alt="${product.title}">
-                    <div class="card-body">
-                        <h5 class="card-title">${product.title}</h5>
-                        <p class="card-text">${product.description}</p>
-                        <p class="fw-bold">R$ ${product.price.toFixed(2)}</p>
-                        <button class="btn btn-primary add-to-cart" data-id="${product.id}">Adicionar ao Carrinho</button>
-                    </div>
-                </div>
+    // Filtra os produtos conforme a categoria escolhida
+    const filteredProducts = selectedCategory === "all"
+        ? products
+        : products.filter(product => product.category.toLowerCase() === selectedCategory.toLowerCase());
+
+    if (filteredProducts.length === 0) {
+        container.innerHTML = '<p class="text-center">Nenhum produto encontrado nesta categoria.</p>';
+        return;
+    }
+
+    filteredProducts.forEach((product) => {
+        const truncatedDescription = product.description.length > 80 
+            ? product.description.slice(0, 80) + "..." 
+            : product.description;
+
+        const card = document.createElement("div");
+        card.classList.add("col-md-4");
+        card.innerHTML = `
+            <div class="card">
+                <p class="card-text"><strong>ID:</strong> ${product.id}</p>
+                <h5>${product.title}</h5>
+                <img src="../assets/images/ecobelle/${product.image}" class="card-img-top img-thumbnail" alt="${product.title}">
+                <p class="card-text">
+                    <strong>Descrição:</strong> ${truncatedDescription}
+                    <a href="#" class="text-primary" onclick="showFullDescription('${product.description}')">Leia mais</a>
+                </p> 
+                <div class="card-footer">
+                    <small class="text-muted"><strong>Preço:</strong> R$ ${parseFloat(product.price).toFixed(2)}</small>
+                </div> 
+                <button class="btn btn-primary cart-button" onclick='addToCart(${JSON.stringify(product)})'>
+                    Adicionar ao Carrinho
+                </button>
             </div>
         `;
-        productsContainer.innerHTML += productCard;
+        container.appendChild(card);
     });
 }
-
-displayProducts();
-});
