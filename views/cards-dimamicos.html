@@ -6,7 +6,36 @@
     <title>AlphaGlam - Cosméticos</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/css/style.css">
-</head>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+    initApp();
+    setupEventListeners();
+});
+
+function setupEventListeners() {
+    document.getElementById("view-cart-btn").addEventListener("click", showCart);
+    document.getElementById("view-products-btn").addEventListener("click", showProducts);
+    document.getElementById("search-btn").addEventListener("click", (e) => {
+        e.preventDefault();
+        filterProducts(allProducts);
+    });
+
+    document.getElementById("floating-cart-btn").addEventListener("click", showCart);
+}
+
+// Mostrar Carrinho
+function showCart() {
+    document.getElementById("cart-container").style.display = "block";
+    document.getElementById("products-container").style.display = "none";
+}
+
+// Mostrar Produtos
+function showProducts() {
+    document.getElementById("cart-container").style.display = "none";
+    document.getElementById("products-container").style.display = "flex";
+}
+
+</script></head>
 <body>
     <header class="bg-warning py-2">
         <div class="container">
