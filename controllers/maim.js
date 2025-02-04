@@ -146,7 +146,7 @@ card.innerHTML = `
         <p class="card-text"><strong>ID:</strong> ${product.id}</p>
        <h5> ${product.title}</h5>
         <img 
-            src="../assets/images/ecobelle/${product.image}" 
+            "../assets/images/ecobelle/<img src=${product.image}"  alt="${produto.titulo}" width="200">
             class="card-img-top img-thumbnail" 
             alt="${product.title}" 
         >
