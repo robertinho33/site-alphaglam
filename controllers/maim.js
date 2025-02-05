@@ -128,45 +128,62 @@ setTimeout(() => {
 }, 1000); // Pequeno delay para garantir que a mensagem foi enviada antes de limpar
 }, { once: true }); // Garante que o evento só será anexado uma vez
 }
+const produtos = [
+    {
+        id: 18291835,
+        titulo: "Condicionador Extrato de Algas Marinhas Eco Belle – 1 L",
+        imagem: "https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/condicionador-extrato-de-algas-marinhas-eco-belle-1-l-65faedce4c2fc-medium.png",
+        preco: "39,90"
+    },
+    {
+        id: 18291881,
+        titulo: "Shampoo Remineralizante Extrato de Algas Marinhas Eco Belle – 1 L",
+        imagem: "https://images.yampi.me/assets/stores/grupo-ecobelle/uploads/images/shampoo-remineralizante-extrato-de-algas-marinhas-eco-belle-1-l-65faebd9b4e35-medium.png",
+        preco: "42,90"
+    }
+];
+
     // Renderizar produtos
-   function renderProducts(products) {
-const container = document.getElementById("products-container");
-container.innerHTML = ""; // Limpa o container antes de renderizar
-products.forEach((product) => {
-const truncatedDescription = product.description.length > 80 
-    ? product.description.slice(0, 80) + "..." 
-    : product.description;
-
-const card = document.createElement("div");
-card.classList.add("col-md-4");
-card.innerHTML = `
- <section class="container mt-5">
-<div class="row">     
-    <div class="card"> 
-        <p class="card-text"><strong>ID:</strong> ${product.id}</p>
-       <h5> ${product.title}</h5>
-        <img 
-            "../assets/images/ecobelle/<img src=${product.image}"  alt="${produto.titulo}" width="200">
-            class="card-img-top img-thumbnail" 
-            alt="${product.title}" 
-        >
-        <p class="card-text">
-            <strong>Descrição:</strong> ${truncatedDescription}
-            <a href="#" class="text-primary" onclick="showFullDescription('${product.description}')">Leia mais</a>
-        </p> 
-        <div class="card-footer">
-            <small class="text-muted"><strong>Preço:</strong> R$ ${parseFloat(product.price).toFixed(2)}</small>
-        </div> 
-        <button class="btn btn-primary cart-button" onclick='addToCart(${JSON.stringify(product)})'>
-            Adicionar ao Carrinho
-        </button>
-    </div>
-    </div>
-`;
-container.appendChild(card);
-});
-}
-
+    document.addEventListener("DOMContentLoaded", function () {
+        const container = document.getElementById("products-container");
+    
+        produtos.forEach(produto => {
+            const card = document.createElement("div");
+            card.classList.add("col-md-4", "mb-4");
+    
+            card.innerHTML = `
+                <div class="card h-100">
+                    <img src="${produto.imagem}" class="card-img-top" alt="${produto.titulo}">
+                    <div class="card-body">
+                        <h5 class="card-title">${produto.titulo}</h5>
+                        <p class="card-text"><strong>Preço: R$ ${produto.preco}</strong></p>
+                        <button class="btn btn-primary add-to-cart" data-id="${produto.id}" data-title="${produto.titulo}" data-preco="${produto.preco}">
+                            Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+            `;
+    
+            container.appendChild(card);
+        });
+    
+        // Adiciona evento aos botões "Adicionar ao Carrinho"
+        document.querySelectorAll(".add-to-cart").forEach(button => {
+            button.addEventListener("click", function () {
+                const id = this.getAttribute("data-id");
+                const titulo = this.getAttribute("data-title");
+                const preco = this.getAttribute("data-preco");
+    
+                adicionarAoCarrinho(id, titulo, preco);
+            });
+        });
+    });
+    
+    // Função para adicionar ao carrinho
+    function adicionarAoCarrinho(id, titulo, preco) {
+        alert(`Produto "${titulo}" adicionado ao carrinho por R$ ${preco}`);
+    }
+    
 function showFullDescription(description) {
 const fullDescriptionElement = document.getElementById("fullDescription");
 fullDescriptionElement.textContent = description; // Define a descrição completa no modal
