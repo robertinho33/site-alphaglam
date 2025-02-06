@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     allProducts = await loadCSV("../controllers/products.csv");
     renderProducts(allProducts);
 
-    // Esconder carrinho inicialmente
+    // Esconder carrinho inicialmente 
     cartContainer.style.display = "none";
 
     // Alternar entre produtos e carrinho
