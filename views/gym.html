@@ -3,71 +3,249 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cards Dinâmicos com CSV</title>
+    <title>AlphaGlam - Salão de Beleza</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
-    <style>
-        .card {
-            margin-bottom: 20px;
-        }
-    </style>
+    <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
-    <div class="container my-5">
-        <h1 class="text-center mb-4">Produtos</h1>
-        <div id="products-container" class="row">
-            <!-- Os cards serão inseridos aqui dinamicamente -->
-        </div>
+    <header>
+       
+</header>
+
+<main class="container mt-5">
+   <h1 class="text-center mb-4">Salão de Beleza - AlphaGlam</h1>
+   <p class="text-center">Navegue pelos serviços exclusivos do nosso salão e agende sua experiência de luxo.</p>
+
+   <div class="row">
+       <!-- Card 1 -->
+       <div class="col-md-4">
+           <div class="card h-100">
+               <img src="../../assets/images/salaoalpha/feminino1.jpg" class="card-img-top" alt="Cortes de Cabelo">
+               <div class="card-body">
+                   <h5 class="card-title">Cortes de Cabelo</h5>
+                   <p class="card-text">Confira cortes femininos, masculinos e infantis com styling personalizado.</p>
+                   <a href="services/cortes-de-cabelo.html" class="btn btn-primary">Ver Serviços</a>
+               </div>
+           </div>
+       </div>
+
+       <!-- Card 2 -->
+       <div class="col-md-4">
+           <div class="card h-100">
+               <img src="../../assets/images/salaoalpha/feminino2.jpg" class="card-img-top" alt="Cortes de Cabelo">
+               <div class="card-body">
+                   <h5 class="card-title">Coloração</h5>
+                   <p class="card-text">Descubra colorações completas, ombré hair, mechas e correções de cor.</p>
+                   <a href="services/coloracao.html" class="btn btn-primary">Ver Serviços</a>
+               </div>
+           </div>
+       </div>
+
+       <!-- Card 3 -->
+       <div class="col-md-4">
+           <div class="card h-100">
+               <img src="../../assets/images/salaoalpha/feminino3.jpg" class="card-img-top" alt="Cortes de Cabelo">
+               <div class="card-body">
+                   <h5 class="card-title">Tratamentos Capilares</h5>
+                   <p class="card-text">Cuide dos seus cabelos com hidratação, botox capilar e muito mais.</p>
+                   <a href="services/tratamentos-capilares.html" class="btn btn-primary">Ver Serviços</a>
+               </div>
+           </div>
+       </div>
+   </div>
+
+   <div class="row mt-4">
+       <!-- Card 4 -->
+       <div class="col-md-4">
+           <div class="card h-100">
+               <img src="../../assets/images/salaoalpha/feminino4.jpg" class="card-img-top" alt="Cortes de Cabelo">
+               <div class="card-body">
+                   <h5 class="card-title">Manicure e Pedicure</h5>
+                   <p class="card-text">Manicure clássica, spa para os pés, alongamentos e arte em unhas.</p>
+                   <a href="services/manicure-pedicure.html" class="btn btn-primary">Ver Serviços</a>
+               </div>
+           </div>
+       </div>
+
+       <!-- Card 5 -->
+       <div class="col-md-4">
+           <div class="card h-100">
+               <img src="../../assets/images/salaoalpha/feminino5.jpg" class="card-img-top" alt="Cortes de Cabelo">
+               <div class="card-body">
+                   <h5 class="card-title">Maquiagem</h5>
+                   <p class="card-text">Maquiagem social, para noivas e eventos. Realce sua beleza com estilo.</p>
+                   <a href="services/maquiagem.html" class="btn btn-primary">Ver Serviços</a>
+               </div>
+           </div>
+       </div>
+
+       <!-- Card 6 -->
+       <div class="col-md-4">
+           <div class="card h-100">
+               <img src="../../assets/images/salaoalpha/feminino6.jpg" class="card-img-top" alt="Cortes de Cabelo">
+               <div class="card-body">
+                   <h5 class="card-title">Estética Facial</h5>
+                   <p class="card-text">Limpeza de pele, peeling e tratamentos anti-idade.</p>
+                   <a href="services/estetica-facial.html" class="btn btn-primary">Ver Serviços</a>
+               </div>
+           </div>
+       </div>
+</nav>
+</header>
+<!-- Card 1 -->
+<div class="col-md-4">
+    <div class="card h-100">
+    <img src="../../assets/images/salaoalpha/masculino1.jpg" class="card-img-top" alt="Cortes de Cabelo">
+    <div class="card-body">
+       <h5 class="card-title">Coloração</h5>
+       <p class="card-text">Descubra colorações completas, ombré hair, mechas e correções de cor.</p>
+       <a href="services/coloracao.html" class="btn btn-primary">Ver Serviços</a>
+    </div>
+    </div>
     </div>
 
-    <script>
-        // Função para carregar o CSV
-        async function loadCSV(filePath) {
-            const response = await fetch(filePath);
-            const data = await response.text();
-            return parseCSV(data);
-        }
+<!-- Card 2 -->
+<div class="col-md-4">
+    <div class="card h-100">
+    <img src="../../assets/images/salaoalpha/masculino2.jpg" class="card-img-top" alt="Cortes de Cabelo">
+    <div class="card-body">
+       <h5 class="card-title">Coloração</h5>
+       <p class="card-text">Descubra colorações completas, ombré hair, mechas e correções de cor.</p>
+       <a href="services/coloracao.html" class="btn btn-primary">Ver Serviços</a>
+    </div>
+    </div>
+    </div>
 
-        // Função para processar o CSV em um array de objetos
-        function parseCSV(data) {
-            const lines = data.split('\n');
-            const headers = lines[0].split(',');
-            const products = lines.slice(1).map(line => {
-                const values = line.split(',');
-                const product = {};
-                headers.forEach((header, index) => {
-                    product[header] = values[index];
-                });
-                return product;
-            });
-            return products;
-        }
+<!-- Card 3 -->
+<div class="col-md-4">
+<div class="card h-100">
+<img src="../../assets/images/salaoalpha/masculino3.jpg" class="card-img-top" alt="Cortes de Cabelo">
+<div class="card-body">
+   <h5 class="card-title">Tratamentos Capilares</h5>
+   <p class="card-text">Cuide dos seus cabelos com hidratação, botox capilar e muito mais.</p>
+   <a href="services/tratamentos-capilares.html" class="btn btn-primary">Ver Serviços</a>
+</div>
+</div>
+</div>
+</div>
 
-        // Função para renderizar os cards na página
-        function renderProducts(products) {
-            const container = document.getElementById('products-container');
-            products.forEach(product => {
-                const card = document.createElement('div');
-                card.classList.add('col-md-4');
-                card.innerHTML = `
-                    <div class="card h-100">
-                        <img src="${product.img}" class="card-img-top" alt="${product.title}">
-                        <div class="card-body">
-                            <h5 class="card-title">${product.title}</h5>
-                            <p class="card-text">${product.description}</p>
-                            <p class="card-text"><strong>Categoria:</strong> ${product.category}</p>
-                            <p class="card-text"><strong>Preço:</strong> R$ ${parseFloat(product.price).toFixed(2)}</p>
-                        </div>
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-        }
+<div class="row mt-4">
+    <!-- Card 4 -->
+    <div class="col-md-4">
+    <div class="card h-100">
+    <img src="../../assets/images/salaoalpha/masculino4.jpg" class="card-img-top" alt="Cortes de Cabelo">
+    <div class="card-body">
+       <h5 class="card-title">Manicure e Pedicure</h5>
+       <p class="card-text">Manicure clássica, spa para os pés, alongamentos e arte em unhas.</p>
+       <a href="services/manicure-pedicure.html" class="btn btn-primary">Ver Serviços</a>
+    </div>
+    </div>
+    </div>
+    
+    <!-- Card 5 -->
+    <div class="col-md-4">
+    <div class="card h-100">
+    <img src="../../assets/images/salaoalpha/masculino5.jpg" class="card-img-top" alt="Cortes de Cabelo">
+    <div class="card-body">
+       <h5 class="card-title">Maquiagem</h5>
+       <p class="card-text">Maquiagem social, para noivas e eventos. Realce sua beleza com estilo.</p>
+       <a href="services/maquiagem.html" class="btn btn-primary">Ver Serviços</a>
+    </div>
+    </div>
+    </div>
+    
+    <!-- Card 6 -->
+    <div class="col-md-4">
+    <div class="card h-100">
+    <img src="../../assets/images/salaoalpha/masculino6.jpg" class="card-img-top" alt="Cortes de Cabelo">
+    <div class="card-body">
+       <h5 class="card-title">Estética Facial</h5>
+       <p class="card-text">Limpeza de pele, peeling e tratamentos anti-idade.</p>
+       <a href="services/estetica-facial.html" class="btn btn-primary">Ver Serviços</a>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="row mt-4">
+        <!-- Card 4 -->
+        <div class="col-md-4">
+        <div class="card h-100">
+        <img src="../../assets/images/salaoalpha/luzes1.jpg" class="card-img-top" alt="Cortes de Cabelo">
+        <div class="card-body">
+           <h5 class="card-title">Manicure e Pedicure</h5>
+           <p class="card-text">Manicure clássica, spa para os pés, alongamentos e arte em unhas.</p>
+           <a href="services/manicure-pedicure.html" class="btn btn-primary">Ver Serviços</a>
+        </div>
+        </div>
+        </div>
+        
+        <!-- Card 5 -->
+        <div class="col-md-4">
+        <div class="card h-100">
+        <img src="../../assets/images/salaoalpha/luzes2.jpg" class="card-img-top" alt="Cortes de Cabelo">
+        <div class="card-body">
+           <h5 class="card-title">Maquiagem</h5>
+           <p class="card-text">Maquiagem social, para noivas e eventos. Realce sua beleza com estilo.</p>
+           <a href="services/maquiagem.html" class="btn btn-primary">Ver Serviços</a>
+        </div>
+        </div>
+        </div>
+        
+        <!-- Card 6 -->
+        <div class="col-md-4">
+        <div class="card h-100">
+        <img src="../../assets/images/salaoalpha/luzes3.jpg" class="card-img-top" alt="Cortes de Cabelo">
+        <div class="card-body">
+           <h5 class="card-title">Estética Facial</h5>
+           <p class="card-text">Limpeza de pele, peeling e tratamentos anti-idade.</p>
+           <a href="services/estetica-facial.html" class="btn btn-primary">Ver Serviços</a>
+        </div>
+        </div>
+        </div>
+        </div>
+        <div class="row mt-4">
+            <!-- Card 4 -->
+            <div class="col-md-4">
+            <div class="card h-100">
+            <img src="../../assets/images/salaoalpha/luzes4.jpg" class="card-img-top" alt="Cortes de Cabelo">
+            <div class="card-body">
+               <h5 class="card-title">Manicure e Pedicure</h5>
+               <p class="card-text">Manicure clássica, spa para os pés, alongamentos e arte em unhas.</p>
+               <a href="services/manicure-pedicure.html" class="btn btn-primary">Ver Serviços</a>
+            </div>
+            </div>
+            </div>
+            
+            <!-- Card 5 -->
+            <div class="col-md-4">
+            <div class="card h-100">
+            <img src="../../assets/images/salaoalpha/luzes5.jpg" class="card-img-top" alt="Cortes de Cabelo">
+            <div class="card-body">
+               <h5 class="card-title">Maquiagem</h5>
+               <p class="card-text">Maquiagem social, para noivas e eventos. Realce sua beleza com estilo.</p>
+               <a href="services/maquiagem.html" class="btn btn-primary">Ver Serviços</a>
+            </div>
+            </div>
+            </div>
+            
+            <!-- Card 6 -->
+            <div class="col-md-4">
+            <div class="card h-100">
+            <img src="../../assets/images/salaoalpha/luzes6.jpg" class="card-img-top" alt="Cortes de Cabelo">
+            <div class="card-body">
+               <h5 class="card-title">Estética Facial</h5>
+               <p class="card-text">Limpeza de pele, peeling e tratamentos anti-idade.</p>
+               <a href="services/estetica-facial.html" class="btn btn-primary">Ver Serviços</a>
+            </div>
+            </div>
+            </div>
+            </div>
+    </main>
 
-        // Inicializa o carregamento dos produtos
-        document.addEventListener('DOMContentLoaded', async () => {
-            const products = await loadCSV('products.csv');
-            renderProducts(products);
-        });
-    </script>
+    <footer class="footer mt-5 bg-light text-center py-3">
+        <p>&copy; 2025 AlphaGlam. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
