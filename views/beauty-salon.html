@@ -21,26 +21,7 @@
                 </div>
             </div>
         </nav>
-        <div class="container">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="container-fluid">
-                    <a class="navbar-brand fw-bold text-dark" href="#">Salão de Beleza</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav1">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNav1">
-                        <ul class="navbar-nav me-auto">
-                            <li class="nav-item"><a class="nav-link text-dark fw-bold" href="cadastro-clientes.html">Cadastro</a></li>
-                            <li class="nav-item"><a class="nav-link text-dark fw-bold" href="atendimento.html">Atendimento</a></li>
-                            <li class="nav-item"><a class="nav-link text-dark fw-bold" href="entrada-produtos.html">Entrada de Produtos</a></li>
-                            <li class="nav-item"><a class="nav-link text-dark fw-bold" href="agendamento.html">Agendamento</a></li>
-                            <li class="nav-item"><a class="nav-link text-dark fw-bold" href="historico-atendimento.html">Histórico de Atendimento</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </div>
-        
+        <div id="menu-container"></div>
     </header>
 
     <main class="container mt-5">
@@ -124,8 +105,29 @@
         </div>
     </main>
    
-    <div id="footer-container"></div> <!-- Aqui será inserido o conteúdo do menu -->
-        
+    <div id="footer-container"></div>
+     <!-- Aqui será inserido o conteúdo do menu -->
+     <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let menuContainer = document.getElementById("menu-container");
+            
+            if (menuContainer) {
+                fetch("../resources/menu-salao.html")  // Ajuste o caminho aqui
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error("Erro ao carregar o menu: " + response.statusText);
+                        }
+                        return response.text();
+                    })
+                    .then(html => {
+                        menuContainer.innerHTML = html;
+                    })
+                    .catch(error => console.error("Erro ao carregar o menu:", error));
+            } else {
+                console.error("Erro: Elemento #menu-container não encontrado!");
+            }
+        });
+    </script>       
     <script src="../controllers/main.js"></script> <!-- Verifique se o caminho está correto -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
