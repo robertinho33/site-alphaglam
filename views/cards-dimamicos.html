@@ -9,7 +9,7 @@
 </head>
 <body>
     <header>
-        <div id="menu-container"></div>
+        <div id="menu-comum-paginas"></div>
         <script src="menu.js"></script> <!-- (Caso tenha colocado o script externo) -->        
 </header>
 
@@ -248,10 +248,10 @@
     </footer>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            fetch("menu-geral.html")
+            fetch("menu-comum-paginas.html")
                 .then(response => response.text())
                 .then(html => {
-                    document.getElementById("menu-container").innerHTML = html;
+                    document.getElementById("menu-comum-paginas").innerHTML = html;
                 })
                 .catch(error => console.error("Erro ao carregar o menu:", error));
         });
