@@ -31,7 +31,7 @@
   <!-- Script para carregar o menu -->
   <script>
     document.addEventListener("DOMContentLoaded", function() {
-      fetch("menu-salao.html")
+      fetch("../resources/menu-salao.html")
         .then(response => response.text())
         .then(html => document.getElementById("menu-container").innerHTML = html)
         .catch(error => console.error("Erro ao carregar o menu:", error));
