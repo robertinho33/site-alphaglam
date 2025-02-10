@@ -1,143 +1,89 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AlphaGlam - Marketplace</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Estudando Firebase</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            max-width: 400px;
+            margin-top: 50px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        body {
+            background: #f4f4f4;
+        }
+    </style>
 </head>
 <body>
-
-    <!-- HEADER -->
-    <header class="bg-warning py-3">
-        <div class="container d-flex justify-content-between align-items-center">
-            <a href="#" class="navbar-brand fw-bold">AlphaGlam Marketplace</a>
-            <form class="d-flex w-50">
-                <input class="form-control me-2" type="search" placeholder="Buscar produtos..." aria-label="Search">
-                <button class="btn btn-dark" type="submit">Buscar</button>
-                <form id="search-form" class="d-flex w-50">
-                    <select id="category-filter" class="form-select me-2">
-                        <option value="">Todas as Categorias</option>
-                        <option value="cabelos">Cabelos</option>
-                        <option value="pele">Pele</option>
-                        <option value="maquiagem">Maquiagem</option>
-                        <option value="unhas">Unhas</option>
-                        <option value="unhas">xc</option>
-                        <option value="unhas">xcc</option>
-                        <option value="unhas">cx</option>
-                    </select>
-                    <form action="">
-                    <input id="search-input" class="form-control me-2" type="search" placeholder="Buscar produtos..." aria-label="Search">
-                    <button class="btn btn-dark" type="submit">Buscar</button>
-                </form>
-
-                <form class="d-flex w-50" onsubmit="return false;">
-                    <input id="search-input" class="form-control me-2" type="search" placeholder="Busca busca..." aria-label="Search">
-                    <button id="search-btn" class="btn btn-dark" type="button">Buscar</button>
-                </form>
-                
-            </form>
-            <div>
-                <a href="#" class="text-dark me-3">Login</a>
-                <a href="#" class="text-dark">Carrinho</a>
-            </div>
-            </form>
+    <form id="loginForm">
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
         </div>
-    </header>
-
-    <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="#">Eletrônicos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Moda</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Casa & Jardim</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Beleza</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Esportes</a></li>
-                </ul>
-            </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1">
         </div>
-    </nav>
-
-    <!-- BANNER -->
-    <div class="container mt-4">
-        <div class="row">
-            <div class="col">
-                <img src="https://via.placeholder.com/1200x400" class="img-fluid rounded" alt="Promoção Especial">
-            </div>
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">Check me out</label>
         </div>
-    </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
 
-    <!-- PRODUTOS EM DESTAQUE -->
-     <div>
-    <section class="container mt-5">
-        <h2 class="mb-4">Produtos Sugeridos</h2>
-       
-    <!-- Botões Flutuantes -->
-<div class="floating-buttons">
-    <button id="floating-cart-btn" class="btn btn-warning">🛒 Ver Carrinho</button>
-    <button id="floating-checkout-btn" class="btn btn-success">✅ Finalizar Compra</button>
-</div>
+    <script type="module">
+        // Importando funções do Firebase
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.3.0/firebase-app.js";
+        import { getAuth, signInWithRedirect, GoogleAuthProvider, onAuthStateChanged, getRedirectResult } from "https://www.gstatic.com/firebasejs/11.3.0/firebase-auth.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.3.0/firebase-analytics.js";
 
-    <div class="container my-5">
-        <h1 class="text-center mb-4">Produtos</h1>
+        // Configuração do Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyCmgFJKohjK3uGHyDeSugHTnXHHHO61c1U",
+            authDomain: "alpha-bd-fb.firebaseapp.com",
+            projectId: "alpha-bd-fb",
+            storageBucket: "alpha-bd-fb.firebasestorage.app",
+            messagingSenderId: "523061370516",
+            appId: "1:523061370516:web:9390d984186ed09e3a1e81",
+            measurementId: "G-5577YNFYZ2"
+        };
 
-        <!-- Botões para alternar entre Produtos e Carrinho -->
-        <div class="text-center mb-4">
-            <button id="view-products-btn" class="btn btn-primary">Voltarr às Compras</button>
-            <button id="view-cart-btn" class="btn btn-secondary">Ver Carrinho</button>
-        
-        </div>
-            <!-- Produtos -->
-            <div id="products-container" class="row col-mb-4">
-            <!-- Os cards serão inseridos aqui dinamicamente -->
-            </div>
-      
-        <!-- Carrinho -->
-<div id="cart-container" style="display: none;">
-    <h2 class="text-center mb-4">Carrinho</h2>
-    <ul id="cart-list" class="list-group">
-        <!-- Os produtos do carrinho serão exibidos aqui -->
-    </ul>
-    <div class="text-center mt-4">
-        <p><strong>Total:</strong> R$ <span id="cart-total">0.00</span></p>
-        <a href="#" id="whatsapp-button" target="_blank" class="btn btn-success">
-            Finalizar Pedido no WhatsApp
-        </a>
-    </div>
-</div>
+        // Inicializando Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const auth = getAuth(app);
+        const provider = new GoogleAuthProvider();
 
-   <!-- Modal para exibir descrição completa -->
-<div class="modal fade" id="descriptionModal" tabindex="-1" aria-labelledby="descriptionModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="descriptionModalLabel">Descrição Completa <p>Aproveite essa oferta!</p></h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p id="fullDescription"></p>
-            </div>
-            <div class="modal-footer">
-                <button id="addToCartModal" class="btn btn-primary">
-                    Adicionar ao Carrinho
-                </button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-            </div>
-        </div>
-    </div>
-</div>
-    </section>
-</div>
-    <!-- FOOTER -->
-    <div id="footer-container"></div> <!-- Aqui será inserido o conteúdo do menu -->
-        
-    <script src="../controllers/maim.js"></script> <!-- Verifique se o caminho está correto -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+        // Verifica se o usuário está autenticado
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                alert(`Logado com sucesso! Bem-vindo, ${user.displayName}`);
+            } else {
+                console.log("Usuário não autenticado. Iniciando login...");
+                getRedirectResult(auth).then((result) => {
+                    if (!result) {
+                        signInWithRedirect(auth, provider);
+                    }
+                }).catch((error) => {
+                    console.error("Erro ao autenticar:", error.message);
+                });
+            }
+        });
+
+        // Ação do formulário de login
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault(); // Impede o envio padrão do formulário
+            signInWithRedirect(auth, provider); // Chama o login com Google
+        });
+    </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
