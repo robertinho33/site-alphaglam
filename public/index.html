@@ -1,103 +1,129 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="pt-BR">
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to Firebase Hosting</title>
-
-    <!-- update the version number as needed -->
-    <script defer src="/__/firebase/11.3.0/firebase-app-compat.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/11.3.0/firebase-auth-compat.js"></script>
-    <script defer src="/__/firebase/11.3.0/firebase-database-compat.js"></script>
-    <script defer src="/__/firebase/11.3.0/firebase-firestore-compat.js"></script>
-    <script defer src="/__/firebase/11.3.0/firebase-functions-compat.js"></script>
-    <script defer src="/__/firebase/11.3.0/firebase-messaging-compat.js"></script>
-    <script defer src="/__/firebase/11.3.0/firebase-storage-compat.js"></script>
-    <script defer src="/__/firebase/11.3.0/firebase-analytics-compat.js"></script>
-    <script defer src="/__/firebase/11.3.0/firebase-remote-config-compat.js"></script>
-    <script defer src="/__/firebase/11.3.0/firebase-performance-compat.js"></script>
-    <!-- 
-      initialize the SDK after all desired features are loaded, set useEmulator to false
-      to avoid connecting the SDK to running emulators.
-    -->
-    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
-
-    <style media="screen">
-      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
-      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
-      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
-      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
-      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
-      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
-      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
-      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
-      @media (max-width: 600px) {
-        body, #message { margin-top: 0; background: white; box-shadow: none; }
-        body { border-top: 16px solid #ffa100; }
-      }
+    <title>Cadastro e Consulta de Nomes</title>
+    <script defer src="https://www.gstatic.com/firebasejs/9.8.0/firebase-app.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/9.8.0/firebase-database.js"></script>
+    <script defer src="/__/firebase/init.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; }
+        .container { max-width: 600px; margin: 50px auto; padding: 20px; background-color: #fff; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }
+        h1 { text-align: center; color: #333; }
+        label { font-size: 18px; margin-bottom: 10px; display: block; }
+        input { width: 100%; padding: 10px; font-size: 16px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 5px; }
+        button { width: 100%; padding: 10px; background-color: #28a745; color: white; border: none; font-size: 16px; cursor: pointer; border-radius: 5px; }
+        button:hover { background-color: #218838; }
+        ul { list-style: none; padding-left: 0; }
+        li { padding: 8px; background-color: #f4f4f4; margin: 4px 0; border-radius: 4px; }
     </style>
-  </head>
-  <body>
-    <header>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <div class="container-fluid">
-              <a class="navbar-brand" href="../index.html">AlphaGlam</a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarNav">
-                  <div id="menu-container"></div> <!-- Aqui será inserido o conteúdo do menu -->
-              </div>
-          </div>
-      </nav>
-  </header>
-       
-  <div class="container mt-5">
-     <img src="assets/images/welcomejpg.jpg" alt="" srcset="">
-  </div>
+</head>
+<body>
 
-  <div id="footer-container"></div> <!-- Aqui será inserido o conteúdo do menu -->
-      
-  <script src="../controllers/main.js"></script> <!-- Verifique se o caminho está correto -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <div class="container">
+        <h1>Cadastro e Consulta de Nomes</h1>
+        
+        <!-- Formulário de cadastro -->
+        <form id="name-form">
+            <label for="name">Nome:</label>
+            <input type="text" id="name" placeholder="Digite seu nome" required>
+            <button type="submit">Cadastrar</button>
+        </form>
+
+        <!-- Exibição do status -->
+        <p id="status"></p>
+
+        <hr>
+
+        <!-- Lista de nomes cadastrados -->
+        <h2>Lista de Nomes Cadastrados</h2>
+        <ul id="names-list">
+            <!-- Os nomes cadastrados serão listados aqui -->
+        </ul>
+    </div>
+
     <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        const loadEl = document.querySelector('#load');
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-        // // The Firebase SDK is initialized and available here!
-        //
-        // firebase.auth().onAuthStateChanged(user => { });
-        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
-        // firebase.firestore().doc('/foo/bar').get().then(() => { });
-        // firebase.functions().httpsCallable('yourFunction')().then(() => { });
-        // firebase.messaging().requestPermission().then(() => { });
-        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-        // firebase.analytics(); // call to activate
-        // firebase.analytics().logEvent('tutorial_completed');
-        // firebase.performance(); // call to activate
-        //
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+      // Inicializar Firebase com a versão 9 ou mais recente
+      import { initializeApp } from "firebase/app";
+      import { getDatabase, ref, push, set, get, child } from "firebase/database";
 
-        try {
-          let app = firebase.app();
-          let features = [
-            'auth', 
-            'database', 
-            'firestore',
-            'functions',
-            'messaging', 
-            'storage', 
-            'analytics', 
-            'remoteConfig',
-            'performance',
-          ].filter(feature => typeof app[feature] === 'function');
-          loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
-        } catch (e) {
-          console.error(e);
-          loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
-        }
+      // Configuração Firebase
+      const firebaseConfig = {
+          apiKey: "AIzaSyCmgFJKohjK3uGHyDeSugHTnXHHHO61c1U",
+          authDomain: "alpha-bd-fb.firebaseapp.com",
+          databaseURL: "https://alpha-bd-fb.firebaseio.com",  // URL do seu Realtime Database
+          projectId: "alpha-bd-fb",
+          storageBucket: "alpha-bd-fb.appspot.com",
+          messagingSenderId: "523061370516",
+          appId: "1:523061370516:web:40aec0a26e8bdd293a1e81",
+          measurementId: "G-728KXR4RC5"
+      };
+
+      // Inicializar o aplicativo Firebase
+      const app = initializeApp(firebaseConfig);
+      const database = getDatabase(app);
+
+      // Referência ao formulário e à lista
+      const form = document.getElementById('name-form');
+      const statusMessage = document.getElementById('status');
+      const namesList = document.getElementById('names-list');
+
+      // Função para listar todos os nomes cadastrados
+      function fetchNames() {
+          const dbRef = ref(database, 'nomes');
+          get(dbRef).then((snapshot) => {
+              if (snapshot.exists()) {
+                  const data = snapshot.val();
+                  namesList.innerHTML = ''; // Limpar a lista antes de adicionar os novos nomes
+                  for (const id in data) {
+                      const li = document.createElement('li');
+                      li.textContent = data[id].nome;
+                      namesList.appendChild(li);
+                  }
+              } else {
+                  namesList.innerHTML = '<li>Nenhum nome cadastrado ainda.</li>';
+              }
+          }).catch((error) => {
+              statusMessage.textContent = 'Erro ao consultar os nomes: ' + error.message;
+              statusMessage.style.color = 'red';
+          });
+      }
+
+      // Executar consulta de nomes ao carregar a página
+      fetchNames();
+
+      // Evento para o envio do formulário de cadastro
+      form.addEventListener('submit', function(event) {
+          event.preventDefault(); // Impede o envio padrão do formulário
+
+          const name = document.getElementById('name').value;
+
+          if (name) {
+              // Salvar no Realtime Database
+              const refPath = ref(database, 'nomes');
+              const newNameRef = push(refPath); // Cria uma nova entrada única
+              set(newNameRef, {
+                  nome: name
+              })
+              .then(function() {
+                  statusMessage.textContent = 'Nome cadastrado com sucesso!';
+                  statusMessage.style.color = 'green';
+                  fetchNames(); // Atualizar a lista após o cadastro
+              })
+              .catch(function(error) {
+                  statusMessage.textContent = 'Erro ao cadastrar o nome: ' + error.message;
+                  statusMessage.style.color = 'red';
+              });
+          } else {
+              statusMessage.textContent = 'Por favor, digite um nome.';
+              statusMessage.style.color = 'red';
+          }
+
+          // Limpar o campo de nome
+          document.getElementById('name').value = '';
       });
     </script>
-  </body>
+
+</body>
 </html>
