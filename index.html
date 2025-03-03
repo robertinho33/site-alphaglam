@@ -118,6 +118,39 @@
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js"></script>
 
+
+    <script>
+        const apiUrl = "https://script.google.com/macros/s/SEU_CODIGO_EXECUCAO/exec"; // URL do Apps Script
+    
+        async function carregarProdutos() {
+            try {
+                const response = await fetch(apiUrl);
+                const produtos = await response.json();
+    
+                const container = document.querySelector(".produtos");
+                container.innerHTML = ""; // Limpa antes de adicionar novos produtos
+    
+                produtos.forEach(produto => {
+                    const card = document.createElement("div");
+                    card.classList.add("produto");
+                    card.innerHTML = `
+                        <h2>${produto.nome}</h2>
+                        <p><strong>Marca:</strong> ${produto.marca}</p>
+                        <p><strong>Preço:</strong> R$ ${produto.valor_de_presente || "Indisponível"}</p>
+                        <img src="${produto.link_foto_principal}" alt="${produto.nome}" style="width:100px; height:auto;">
+                        <button onclick="adicionarProduto('${produto.nome}', '${produto.valor_de_presente}')">Adicionar ao Carrinho</button>
+                    `;
+                    container.appendChild(card);
+                });
+            } catch (error) {
+                console.error("Erro ao carregar produtos:", error);
+            }
+        }
+    
+        window.onload = carregarProdutos;
+    </script>
+
+
     <!-- Configuração do Firebase -->
 <!-- Firebase SDK -->
 <script type="module">
