@@ -159,16 +159,17 @@
     import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 
     // Configuração do Firebase (projeto alphaglamstart)
-    const firebaseConfig = {
-        apiKey: "AIzaSyB3785y6GPsFH7xuwfwjcBoPjvUfE3kSMw",
-        authDomain: "alphaglamstart.firebaseapp.com",
-        databaseURL: "https://alphaglamstart-default-rtdb.firebaseio.com",
-        projectId: "alphaglamstart",
-        storageBucket: "alphaglamstart.appspot.com",
-        messagingSenderId: "885178660314",
-        appId: "1:885178660314:web:0e69cd20d4fceafadefce3",
-        measurementId: "G-1GD2SCS8PB"
-    };
+   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyB3785y6GPsFH7xuwfwjcBoPjvUfE3kSMw",
+  authDomain: "alphaglamstart.firebaseapp.com",
+  databaseURL: "https://alphaglamstart-default-rtdb.firebaseio.com",
+  projectId: "alphaglamstart",
+  storageBucket: "alphaglamstart.firebasestorage.app",
+  messagingSenderId: "885178660314",
+  appId: "1:885178660314:web:1bb3a78be9fa7fdcdefce3",
+  measurementId: "G-094SYXW35Q"
+};
 
     // Inicializar Firebase
     const app = initializeApp(firebaseConfig);
