@@ -119,58 +119,46 @@
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js"></script>
 
     <!-- Configuração do Firebase -->
-    <script>
-        // Função para inicializar o Firebase após os scripts carregarem
-        function initializeFirebase() {
-            console.log("Inicializando Firebase...");
+<!-- Firebase SDK -->
+<script type="module">
+    // Importação correta do Firebase v9+ usando ES Modules
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 
-            // Configuração do Firebase (projeto alphaglamstart)
-            const firebaseConfig = {
-                apiKey: "AIzaSyB3785y6GPsFH7xuwfwjcBoPjvUfE3kSMw",
-                authDomain: "alphaglamstart.firebaseapp.com",
-                databaseURL: "https://alphaglamstart-default-rtdb.firebaseio.com",
-                projectId: "alphaglamstart",
-                storageBucket: "alphaglamstart.appspot.com",
-                messagingSenderId: "885178660314",
-                appId: "1:885178660314:web:0e69cd20d4fceafadefce3",
-                measurementId: "G-1GD2SCS8PB"
-            };
+    // Configuração do Firebase (projeto alphaglamstart)
+    const firebaseConfig = {
+        apiKey: "AIzaSyB3785y6GPsFH7xuwfwjcBoPjvUfE3kSMw",
+        authDomain: "alphaglamstart.firebaseapp.com",
+        databaseURL: "https://alphaglamstart-default-rtdb.firebaseio.com",
+        projectId: "alphaglamstart",
+        storageBucket: "alphaglamstart.appspot.com",
+        messagingSenderId: "885178660314",
+        appId: "1:885178660314:web:0e69cd20d4fceafadefce3",
+        measurementId: "G-1GD2SCS8PB"
+    };
 
-            try {
-                const app = firebase.initializeApp(firebaseConfig);
-                const db = firebase.firestore();
-                console.log("Firebase inicializado com sucesso! Firestore pronto.");
+    // Inicializar Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
 
-                // Função para adicionar produto ao Firestore
-                window.adicionarProduto = function(nome, preco) {
-                    console.log("Tentando adicionar produto:", nome, preco);
-                    db.collection("produtos").add({
-                        nome: nome,
-                        preco: preco,
-                        data: new Date().toISOString()
-                    })
-                    .then((docRef) => {
-                        console.log("Produto adicionado com ID:", docRef.id);
-                        alert("Produto " + nome + " adicionado com sucesso!");
-                    })
-                    .catch((error) => {
-                        console.error("Erro ao adicionar produto:", error);
-                        alert("Erro ao adicionar produto: " + error.message);
-                    });
-                };
-            } catch (error) {
-                console.error("Erro ao inicializar Firebase:", error);
-                alert("Erro ao inicializar Firebase: " + error.message);
-            }
+    console.log("Firebase inicializado com sucesso!");
+
+    // Função para adicionar um produto ao Firestore
+    window.adicionarProduto = async function(nome, preco) {
+        try {
+            const docRef = await addDoc(collection(db, "produtos"), {
+                nome: nome,
+                preco: preco,
+                data: new Date().toISOString()
+            });
+            console.log("Produto adicionado com ID:", docRef.id);
+            alert("Produto " + nome + " adicionado com sucesso!");
+        } catch (error) {
+            console.error("Erro ao adicionar produto:", error);
+            alert("Erro ao adicionar produto: " + error.message);
         }
+    };
+</script>
 
-        // Verifica se os scripts do Firebase carregaram
-        if (typeof firebase === "undefined") {
-            console.error("Firebase SDK não carregou corretamente.");
-            alert("Erro: Firebase SDK não carregou. Verifique sua conexão ou o servidor.");
-        } else {
-            initializeFirebase();
-        }
-    </script>
 </body>
 </html>
