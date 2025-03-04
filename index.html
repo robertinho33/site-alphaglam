@@ -118,6 +118,47 @@
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js"></script>
 
+    <script>
+        async function carregarProdutos() {
+            const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQcl5R1I3Wf7hXsmDdr4wBzQ7qpt4hIgHrTBqTvuxL5KF6wZDeJT32ppYJCgJef0plAxBCjMvb7XBLo/pub?output=csv"; // Substitua pelo link da planilha publicada
+        
+            try {
+                const response = await fetch(url);
+                const data = await response.text();
+                const linhas = data.split("\n").map(linha => linha.split(","));
+                
+                const cabecalho = linhas[0]; // Captura os nomes das colunas
+                const produtos = linhas.slice(1); // Remove a linha de cabeçalho
+        
+                const container = document.querySelector(".produtos");
+                container.innerHTML = ""; // Limpa os produtos existentes
+        
+                produtos.forEach(produto => {
+                    if (produto.length < 3) return; // Pula linhas vazias
+        
+                    const nome = produto[cabecalho.indexOf("nome")];
+                    const preco = produto[cabecalho.indexOf("valor_de_presente")];
+                    const imagem = produto[cabecalho.indexOf("link_foto_principal")];
+        
+                    const card = `
+                        <div class="produto">
+                            <img src="${imagem}" alt="${nome}" style="width:100%; height:150px;">
+                            <h2>${nome}</h2>
+                            <p><strong>R$ ${preco}</strong></p>
+                            <button onclick="adicionarProduto('${nome}', ${preco})">Comprar</button>
+                        </div>
+                    `;
+                    container.innerHTML += card;
+                });
+        
+            } catch (error) {
+                console.error("Erro ao carregar produtos:", error);
+            }
+        }
+        
+        document.addEventListener("DOMContentLoaded", carregarProdutos);
+        </script>
+        
 
     <script>
         const apiUrl = "https://script.google.com/macros/s/SEU_CODIGO_EXECUCAO/exec"; // URL do Apps Script
