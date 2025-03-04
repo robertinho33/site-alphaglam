@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loja Virtual - Vendas Online</title>
+    <title>Loja Ro - Vendas Online</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -60,6 +60,8 @@
             text-align: center;
             width: 200px;
             margin: 10px;
+            font-size: 18px;
+            font-weight: bold;
         }
         footer {
             background-color: #333;
@@ -74,7 +76,7 @@
 </head>
 <body>
     <nav class="menu">
-        <div class="logo">Minha Loja</div>
+        <div class="logo">ro Loja</div>
         <div class="search-bar">
             <input type="text" placeholder="Buscar produtos...">
         </div>
@@ -87,7 +89,7 @@
     </nav>
 
     <header>
-        <h1>Minha Loja Virtual</h1>
+        <h1>Minha Loja Roberto</h1>
         <p>Os melhores produtos com os melhores preços!</p>
     </header>
 
@@ -97,11 +99,12 @@
         <p>© 2025 Minha Loja Virtual - Todos os direitos reservados</p>
     </footer>
 
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js"></script>
+      <!-- Firebase SDK -->
+      <script type="module">
+        // Importação correta dos módulos Firebase
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 
-    <script>
         // Configuração do Firebase
         const firebaseConfig = {
             apiKey: "AIzaSyB3785y6GPsFH7xuwfwjcBoPjvUfE3kSMw",
@@ -120,59 +123,53 @@
 
         // Função para carregar os produtos da planilha Google Sheets
         async function carregarProdutos() {
-            const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQcl5R1I3Wf7hXsmDdr4wBzQ7qpt4hIgHrTBqTvuxL5KF6wZDeJT32ppYJCgJef0plAxBCjMvb7XBLo/pub?output=csv";
-            
-            try {
-                const response = await fetch(url);
-                const data = await response.text();
-                const linhas = data.split("\n").map(linha => linha.split(",")); // Corrigido para vírgula como separador
-                
-                const cabecalho = linhas[0]; // Captura os nomes das colunas
-                const produtos = linhas.slice(1); // Remove a linha de cabeçalho
-                
-                const container = document.querySelector(".produtos");
-                container.innerHTML = ""; // Limpa os produtos existentes
-                
-                produtos.forEach(produto => {
-                    if (produto.length < 3) return; // Pula linhas vazias
-                    
-                    const nome = produto[cabecalho.indexOf("nome")];
-                    const preco = produto[cabecalho.indexOf("valor_de_presente")];
-                    const imagem = produto[cabecalho.indexOf("link_foto_principal")];
-                    
-                    const card = `
-                        <div class="produto">
-                            <img src="${imagem}" alt="${nome}" style="width:100%; height:150px;">
-                            <h2>${nome}</h2>
-                            <p><strong>R$ ${preco}</strong></p>
-                            <button onclick="adicionarProduto('${nome}', ${preco})">Adicionar ao Banco</button>
-                        </div>
-                    `;
-                    container.innerHTML += card;
-                });
-                
-            } catch (error) {
-                console.error("Erro ao carregar produtos:", error);
-            }
-        }
+    const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQcl5R1I3Wf7hXsmDdr4wBzQ7qpt4hIgHrTBqTvuxL5KF6wZDeJT32ppYJCgJef0plAxBCjMvb7XBLo/pub?output=csv";
+    
+    try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error("Erro na requisição: " + response.status);
+        const data = await response.text();
+        const linhas = data.split("\n").map(linha => linha.split(","));
 
-        // Função para adicionar produto ao banco Firestore
-        window.adicionarProduto = async function(nome, preco) {
-            try {
-                const docRef = await addDoc(collection(db, "produtos"), {
-                    nome: nome,
-                    preco: preco,
-                    data: new Date().toISOString()
-                });
-                console.log("Produto adicionado com ID:", docRef.id);
-                alert("Produto " + nome + " adicionado com sucesso!");
-            } catch (error) {
-                console.error("Erro ao adicionar produto:", error);
-                alert("Erro ao adicionar produto: " + error.message);
-            }
-        };
+        const cabecalho = linhas[0]; // Primeira linha como cabeçalho
+        const produtos = linhas.slice(1); // Dados dos produtos
 
-        document.addEventListener("DOMContentLoaded", carregarProdutos);
+        // Encontrando os índices corretos no cabeçalho
+        const nomeIndex = cabecalho.indexOf("nome");
+        const valorIndex = cabecalho.indexOf("valor_de_presente");
+        const descricaoIndex = cabecalho.indexOf("descricao");
+        const imagemIndex = cabecalho.indexOf("link_foto_principal");
+
+        const container = document.querySelector(".produtos");
+        container.innerHTML = ""; // Limpa o container
+
+        produtos.forEach(produto => {
+            if (produto.length < 1 || !produto[0]) return; // Pula linhas vazias
+
+            // Obtém os valores, verificando se os índices existem
+            const nome = nomeIndex !== -1 ? produto[nomeIndex] : "Produto sem nome";
+            const valor = valorIndex !== -1 ? produto[valorIndex] : "Preço indisponível";
+            const descricao = descricaoIndex !== -1 ? produto[descricaoIndex] : "Sem descrição disponível.";
+            const imagem = imagemIndex !== -1 ? produto[imagemIndex].trim() : "";
+
+            const card = `
+                <div class="produto">
+                    <img src="${imagem}" alt="${nome}" onerror="this.onerror=null;this.src='https://via.placeholder.com/200';" style="width:100%; height:auto; max-width:200px;">
+                    <p><strong>${nome}</strong></p>
+                    <p>Preço: ${valor}</p>
+                    <p>${descricao}</p>
+                </div>
+            `;
+            container.innerHTML += card;
+        });
+    } catch (error) {
+        console.error("Erro ao carregar produtos:", error);
+        document.querySelector(".produtos").innerHTML = "<p>Erro ao carregar produtos.</p>";
+    }
+}
+
+document.addEventListener("DOMContentLoaded", carregarProdutos);
+
     </script>
 </body>
 </html>
