@@ -204,88 +204,51 @@
             document.addEventListener("DOMContentLoaded", carregarProdutos);
             </script>
             
-            <style>
-                body {
-                    font-family: Arial, sans-serif;
-                    margin: 0;
-                    padding: 0;
-                }
+            async function carregarProdutos() {
+                const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQcl5R1I3Wf7hXsmDdr4wBzQ7qpt4hIgHrTBqTvuxL5KF6wZDeJT32ppYJCgJef0plAxBCjMvb7XBLo/pub?output=csv"; // Substitua pelo link da planilha publicada
             
-                .menu {
-                    background-color: #ffe600;
-                    padding: 10px 20px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-                }
+                try {
+                    const response = await fetch(url);
+                    const data = await response.text();
+                    const linhas = data.split("\n").map(linha => linha.split("\t")); // Usando tab (\t) como separador, conforme seu cabeçalho
             
-                .menu .logo {
-                    font-size: 24px;
-                    font-weight: bold;
-                    color: #333;
-                }
+                    const cabecalho = linhas[0]; // Captura os nomes das colunas
+                    const produtos = linhas.slice(1); // Remove a linha de cabeçalho
             
-                .menu .search-bar {
-                    flex-grow: 1;
-                    margin: 0 20px;
-                }
+                    const container = document.querySelector(".produtos");
+                    container.innerHTML = ""; // Limpa os produtos existentes
             
-                .menu .search-bar input {
-                    width: 100%;
-                    padding: 8px;
-                    border: 1px solid #ccc;
-                    border-radius: 4px;
-                }
+                    let html = "<div class='produtos-grid'>";
+                    produtos.forEach((produto, index) => {
+                        if (produto.length < 3) return; // Pula linhas vazias
             
-                .menu .nav-links a {
-                    margin-left: 20px;
-                    text-decoration: none;
-                    color: #333;
-                    font-weight: bold;
-                }
+                        // Extraindo os dados relevantes do produto
+                        const nome = produto[cabecalho.indexOf("nome")];
+                        const preco = produto[cabecalho.indexOf("valor_de_presente")];
+                        const imagem = produto[cabecalho.indexOf("link_foto_principal")];
             
-                .menu .nav-links a:hover {
-                    color: #000;
-                }
+                        html += `
+                            <div class="produto">
+                                <img src="${imagem}" alt="${nome}" style="width:100%; height:150px;">
+                                <h2>${nome}</h2>
+                                <p><strong>R$ ${preco}</strong></p>
+                                <button onclick="adicionarProduto('${nome}', ${preco})">Comprar</button>
+                            </div>
+                        `;
             
-                header {
-                    background-color: #333;
-                    color: white;
-                    text-align: center;
-                    padding: 20px;
-                }
+                        // Garantir que há no máximo 3 produtos por linha
+                        if ((index + 1) % 3 === 0) html += "</div><div class='produtos-grid'>";
+                    });
+                    html += "</div>";
+                    container.innerHTML = html;
             
-                .produtos-grid {
-                    display: flex;
-                    flex-wrap: wrap;
-                    justify-content: space-between;
-                    gap: 20px;
-                    padding: 10px;
+                } catch (error) {
+                    console.error("Erro ao carregar produtos:", error);
                 }
+            }
             
-                .produto {
-                    flex: 1 1 calc(33.333% - 20px);
-                    box-sizing: border-box;
-                    border: 1px solid #ccc;
-                    padding: 10px;
-                    text-align: center;
-                    background-color: #fff;
-                    border-radius: 5px;
-                }
+            document.addEventListener("DOMContentLoaded", carregarProdutos);
             
-                footer {
-                    background-color: #333;
-                    color: white;
-                    text-align: center;
-                    padding: 10px;
-                    position: fixed;
-                    bottom: 0;
-                    width: 100%;
-                }
-            </style>
-            
-
     <!-- Configuração do Firebase -->
 <!-- Firebase SDK -->
 <script type="module">
