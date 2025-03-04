@@ -4,79 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Loja Ro - Vendas Online</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        .menu {
-            background-color: #ffe600;
-            padding: 10px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .menu .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: #333;
-        }
-        .menu .search-bar {
-            flex-grow: 1;
-            margin: 0 20px;
-        }
-        .menu .search-bar input {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .menu .nav-links a {
-            margin-left: 20px;
-            text-decoration: none;
-            color: #333;
-            font-weight: bold;
-        }
-        .menu .nav-links a:hover {
-            color: #000;
-        }
-        header {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 20px;
-        }
-        .produtos {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            padding: 20px;
-        }
-        .produto {
-            border: 1px solid #ccc;
-            padding: 10px;
-            text-align: center;
-            width: 200px;
-            margin: 10px;
-            font-size: 18px;
-            font-weight: bold;
-        }
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 10px;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-    </style>
+    <link rel="stylesheet" href="assets/css/w.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <body>
+    <!-- Menu de Navegação -->
     <nav class="menu">
-        <div class="logo">ro Loja</div>
+        <div class="logo">Ro Loja</div>
         <div class="search-bar">
             <input type="text" placeholder="Buscar produtos...">
         </div>
@@ -85,91 +19,61 @@
             <a href="#">Ofertas</a>
             <a href="#">Minha Conta</a>
             <a href="#">Carrinho</a>
-        </div>
-    </nav>
+            <button id="login-btn">Login com Google</button>
+            <button id="logout-btn" style="display: none;">Sair</button>
 
+        </div>
+        
+    </nav>
+<button id="login-btn">Login com Google</button>
+<button id="logout-btn" style="display: none;">Sair</button>
+
+    <!-- Cabeçalho -->
     <header>
         <h1>Minha Loja Roberto</h1>
         <p>Os melhores produtos com os melhores preços!</p>
     </header>
 
+    <!-- Seção dos Produtos -->
     <section class="produtos"></section>
 
+    <!-- Rodapé -->
     <footer>
         <p>© 2025 Minha Loja Virtual - Todos os direitos reservados</p>
     </footer>
+    <!-- Script para carregar produtos do Google Sheets -->
+     <!-- Firebase SDK -->
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+    import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+    import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
 
-      <!-- Firebase SDK -->
-      <script type="module">
-        // Importação correta dos módulos Firebase
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-        import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+    // Configuração do Firebase
+    const firebaseConfig = {
+        apiKey: "AIzaSyB3785y6GPsFH7xuwfwjcBoPjvUfE3kSMw",
+        authDomain: "alphaglamstart.firebaseapp.com",
+        databaseURL: "https://alphaglamstart-default-rtdb.firebaseio.com",
+        projectId: "alphaglamstart",
+        storageBucket: "alphaglamstart.appspot.com",
+        messagingSenderId: "885178660314",
+        appId: "1:885178660314:web:1bb3a78be9fa7fdcdefce3",
+        measurementId: "G-094SYXW35Q"
+    };
 
-        // Configuração do Firebase
-        const firebaseConfig = {
-            apiKey: "AIzaSyB3785y6GPsFH7xuwfwjcBoPjvUfE3kSMw",
-            authDomain: "alphaglamstart.firebaseapp.com",
-            databaseURL: "https://alphaglamstart-default-rtdb.firebaseio.com",
-            projectId: "alphaglamstart",
-            storageBucket: "alphaglamstart.firebasestorage.app",
-            messagingSenderId: "885178660314",
-            appId: "1:885178660314:web:1bb3a78be9fa7fdcdefce3",
-            measurementId: "G-094SYXW35Q"
-        };
+    // Inicializar Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const auth = getAuth();
+    const provider = new GoogleAuthProvider();
 
-        // Inicializar Firebase
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
+    window.firebaseAuth = auth; // Torna a autenticação acessível no alpha.js
+    window.firebaseProvider = provider;
+</script>
 
-        // Função para carregar os produtos da planilha Google Sheets
-        async function carregarProdutos() {
-    const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQcl5R1I3Wf7hXsmDdr4wBzQ7qpt4hIgHrTBqTvuxL5KF6wZDeJT32ppYJCgJef0plAxBCjMvb7XBLo/pub?output=csv";
-    
-    try {
-        const response = await fetch(url);
-        if (!response.ok) throw new Error("Erro na requisição: " + response.status);
-        const data = await response.text();
-        const linhas = data.split("\n").map(linha => linha.split(","));
-
-        const cabecalho = linhas[0]; // Primeira linha como cabeçalho
-        const produtos = linhas.slice(1); // Dados dos produtos
-
-        // Encontrando os índices corretos no cabeçalho
-        const nomeIndex = cabecalho.indexOf("nome");
-        const valorIndex = cabecalho.indexOf("valor_de_presente");
-        const descricaoIndex = cabecalho.indexOf("descricao");
-        const imagemIndex = cabecalho.indexOf("link_foto_principal");
-
-        const container = document.querySelector(".produtos");
-        container.innerHTML = ""; // Limpa o container
-
-        produtos.forEach(produto => {
-            if (produto.length < 1 || !produto[0]) return; // Pula linhas vazias
-
-            // Obtém os valores, verificando se os índices existem
-            const nome = nomeIndex !== -1 ? produto[nomeIndex] : "Produto sem nome";
-            const valor = valorIndex !== -1 ? produto[valorIndex] : "Preço indisponível";
-            const descricao = descricaoIndex !== -1 ? produto[descricaoIndex] : "Sem descrição disponível.";
-            const imagem = imagemIndex !== -1 ? produto[imagemIndex].trim() : "";
-
-            const card = `
-                <div class="produto">
-                    <img src="${imagem}" alt="${nome}" onerror="this.onerror=null;this.src='https://via.placeholder.com/200';" style="width:100%; height:auto; max-width:200px;">
-                    <p><strong>${nome}</strong></p>
-                    <p>Preço: ${valor}</p>
-                    <p>${descricao}</p>
-                </div>
-            `;
-            container.innerHTML += card;
-        });
-    } catch (error) {
-        console.error("Erro ao carregar produtos:", error);
-        document.querySelector(".produtos").innerHTML = "<p>Erro ao carregar produtos.</p>";
-    }
-}
-
-document.addEventListener("DOMContentLoaded", carregarProdutos);
-
-    </script>
+<!-- Importando o alpha.js depois do Firebase estar carregado -->
+    <script type="module" src="controllers/alpha.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
 </html>
