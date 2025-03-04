@@ -108,7 +108,7 @@
             try {
                 const response = await fetch(url);
                 const data = await response.text();
-                const linhas = data.split("\n").map(linha => linha.split("\t")); // Usando tab (\t) como separador, conforme seu cabeçalho
+                const linhas = data.split("\n").map(linha => linha.split(",")); // Alterando para usar vírgula como separador
                 
                 const cabecalho = linhas[0]; // Captura os nomes das colunas
                 const produtos = linhas.slice(1); // Remove a linha de cabeçalho
