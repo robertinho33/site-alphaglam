@@ -80,14 +80,17 @@ document.addEventListener("DOMContentLoaded", carregarProdutos);
 function login() {
     signInWithPopup(auth, provider)
         .then((result) => {
+            // O resultado contém informações sobre o usuário autenticado
             const user = result.user;
-            alert(`Bem-vindo, ${user.displayName}`);
+            console.log('Login bem-sucedido:', user);
         })
         .catch((error) => {
-            console.error("Erro ao autenticar", error);
+            console.error('Falha no login:', error);
+            alert('Houve um erro ao tentar fazer login. Tente novamente.');
         });
 }
 
+  
 // 🔹 Função para logout
 function logout() {
     signOut(auth)
