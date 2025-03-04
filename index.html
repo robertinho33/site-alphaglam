@@ -160,37 +160,72 @@
         </script>
         
 
-    <script>
-        const apiUrl = "https://script.google.com/macros/s/SEU_CODIGO_EXECUCAO/exec"; // URL do Apps Script
-    
-        async function carregarProdutos() {
-            try {
-                const response = await fetch(apiUrl);
-                const produtos = await response.json();
-    
-                const container = document.querySelector(".produtos");
-                container.innerHTML = ""; // Limpa antes de adicionar novos produtos
-    
-                produtos.forEach(produto => {
-                    const card = document.createElement("div");
-                    card.classList.add("produto");
-                    card.innerHTML = `
-                        <h2>${produto.nome}</h2>
-                        <p><strong>Marca:</strong> ${produto.marca}</p>
-                        <p><strong>Preço:</strong> R$ ${produto.valor_de_presente || "Indisponível"}</p>
-                        <img src="${produto.link_foto_principal}" alt="${produto.nome}" style="width:100px; height:auto;">
-                        <button onclick="adicionarProduto('${produto.nome}', '${produto.valor_de_presente}')">Adicionar ao Carrinho</button>
-                    `;
-                    container.appendChild(card);
-                });
-            } catch (error) {
-                console.error("Erro ao carregar produtos:", error);
+        <script>
+            async function carregarProdutos() {
+                const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQcl5R1I3Wf7hXsmDdr4wBzQ7qpt4hIgHrTBqTvuxL5KF6wZDeJT32ppYJCgJef0plAxBCjMvb7XBLo/pub?output=csv"; // Substitua pelo link da planilha publicada
+            
+                try {
+                    const response = await fetch(url);
+                    const data = await response.text();
+                    const linhas = data.split("\n").map(linha => linha.split(","));
+                    
+                    const cabecalho = linhas[0]; // Captura os nomes das colunas
+                    const produtos = linhas.slice(1); // Remove a linha de cabeçalho
+            
+                    const container = document.querySelector(".produtos");
+                    container.innerHTML = ""; // Limpa os produtos existentes
+            
+                    let html = "<div class='produtos-grid'>";
+                    produtos.forEach((produto, index) => {
+                        if (produto.length < 3) return; // Pula linhas vazias
+            
+                        const nome = produto[cabecalho.indexOf("nome")];
+                        const preco = produto[cabecalho.indexOf("valor_de_presente")];
+                        const imagem = produto[cabecalho.indexOf("link_foto_principal")];
+            
+                        html += `
+                            <div class="produto">
+                                <img src="${imagem}" alt="${nome}" style="width:100%; height:150px;">
+                                <h2>${nome}</h2>
+                                <p><strong>R$ ${preco}</strong></p>
+                                <button onclick="adicionarProduto('${nome}', ${preco})">Comprar</button>
+                            </div>
+                        `;
+            
+                        if ((index + 1) % 3 === 0) html += "</div><div class='produtos-grid'>";
+                    });
+                    html += "</div>";
+                    container.innerHTML = html;
+                } catch (error) {
+                    console.error("Erro ao carregar produtos:", error);
+                }
             }
-        }
-    
-        window.onload = carregarProdutos;
-    </script>
-
+            
+            document.addEventListener("DOMContentLoaded", carregarProdutos);
+            </script>
+            
+            <style>
+            .produtos-grid {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                gap: 10px;
+            }
+            .produto {
+                flex: 1 1 calc(33.333% - 10px);
+                box-sizing: border-box;
+                border: 1px solid #ccc;
+                padding: 10px;
+                text-align: center;
+                background-color: #fff;
+                border-radius: 5px;
+            }
+            .produtos {
+                max-height: 80vh;
+                overflow-y: auto;
+                padding: 10px;
+            }
+            </style>
 
     <!-- Configuração do Firebase -->
 <!-- Firebase SDK -->
