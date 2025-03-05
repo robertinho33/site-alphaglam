@@ -21,9 +21,7 @@
             <a href="#">Carrinho</a>
             <button id="login-btn">Login com Google</button>
             <button id="logout-btn" style="display: none;">Sair</button>
-
         </div>
-        
     </nav>
 
     <!-- Cabeçalho -->
@@ -39,40 +37,86 @@
     <footer>
         <p>© 2025 Minha Loja Virtual - Todos os direitos reservados</p>
     </footer>
+
     <!-- Script para carregar produtos do Google Sheets -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js"></script>
-    
-     <!-- Firebase SDK -->
-<script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-    import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
-    import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
 
-    // Configuração do Firebase
-    const firebaseConfig = {
-        apiKey: "AIzaSyB3785y6GPsFH7xuwfwjcBoPjvUfE3kSMw",
-        authDomain: "alphaglamstart.firebaseapp.com",
-        databaseURL: "https://alphaglamstart-default-rtdb.firebaseio.com",
-        projectId: "alphaglamstart",
-        storageBucket: "alphaglamstart.appspot.com",
-        messagingSenderId: "885178660314",
-        appId: "1:885178660314:web:1bb3a78be9fa7fdcdefce3",
-        measurementId: "G-094SYXW35Q"
-    };
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
 
-    // Inicializar Firebase
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-    const auth = getAuth();
-    const provider = new GoogleAuthProvider();
+        // Configuração do Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyB3785y6GPsFH7xuwfwjcBoPjvUfE3kSMw",
+            authDomain: "alphaglamstart.firebaseapp.com",
+            databaseURL: "https://alphaglamstart-default-rtdb.firebaseio.com",
+            projectId: "alphaglamstart",
+            storageBucket: "alphaglamstart.appspot.com",
+            messagingSenderId: "885178660314",
+            appId: "1:885178660314:web:1bb3a78be9fa7fdcdefce3",
+            measurementId: "G-094SYXW35Q"
+        };
 
-    window.firebaseAuth = auth; // Torna a autenticação acessível no alpha.js
-    window.firebaseProvider = provider;
-</script>
+        // Inicializar Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const provider = new GoogleAuthProvider();
 
-<!-- Importando o alpha.js depois do Firebase estar carregado -->
+        // Função para login com Google
+        function login() {
+            signInWithPopup(auth, provider)
+                .then((result) => {
+                    const user = result.user;
+                    console.log("Usuário logado:", user.displayName);
+                    alert("Login bem-sucedido!");
+                })
+                .catch((error) => {
+                    console.error("Erro no login:", error);
+                    alert("Erro ao realizar login. Tente novamente.");
+                });
+        }
+
+        // Função para logout
+        function logout() {
+            signOut(auth)
+                .then(() => {
+                    console.log("Usuário deslogado");
+                    alert("Logout realizado com sucesso!");
+                })
+                .catch((error) => {
+                    console.error("Erro ao sair", error);
+                });
+        }
+
+        // Verificar estado de autenticação
+        onAuthStateChanged(auth, (user) => {
+            const btnLogin = document.getElementById("login-btn");
+            const btnLogout = document.getElementById("logout-btn");
+
+            if (user) {
+                if (btnLogin) btnLogin.style.display = "none";
+                if (btnLogout) btnLogout.style.display = "block";
+            } else {
+                if (btnLogin) btnLogin.style.display = "block";
+                if (btnLogout) btnLogout.style.display = "none";
+            }
+        });
+
+        // Adicionar eventos de clique para login e logout
+        document.addEventListener("DOMContentLoaded", () => {
+            const btnLogin = document.getElementById("login-btn");
+            const btnLogout = document.getElementById("logout-btn");
+
+            if (btnLogin) btnLogin.addEventListener("click", login);
+            if (btnLogout) btnLogout.addEventListener("click", logout);
+        });
+    </script>
+
+    <!-- Importando o alpha.js depois do Firebase estar carregado -->
     <script type="module" src="controllers/alpha.js"></script>
+
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
