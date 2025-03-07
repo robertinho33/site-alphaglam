@@ -34,7 +34,7 @@ async function carregarProdutos() {
         const nomeIndex = cabecalho.indexOf("nome");
         const valorIndex = cabecalho.indexOf("valor_de_presente");
         const descricaoIndex = cabecalho.indexOf("descricao");
-        const imagemIndex = cabecalho.indexOf("link_foto_principal");
+        const imagemIndex = cabecalho.indexOf("foto");
 
         const container = document.querySelector(".produtos");
         container.innerHTML = "";
