@@ -6,6 +6,10 @@
     <title>Loja Ro - Vendas Online</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <style>
+          body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
         .card {
             border-radius: 10px;
             overflow: hidden;
@@ -37,14 +41,53 @@
         .btn-comprar:hover {
             background-color: #e65c00;
         }
-        .carrinho {
+        .sacola {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #28a745;
-            color: white;
-            padding: 10px 20px;
+            top: 50%;
+            right: -350px;
+            transform: translateY(-50%);
+            background: white;
+            padding: 20px;
             border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            width: 350px;
+            max-height: 500px;
+            overflow-y: auto;
+            transition: right 0.3s ease-in-out;
+        }
+        .sacola.mostrar {
+            right: 20px;
+        }
+        .sacola-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .btn-remover {
+            background: red;
+            color: white;
+            border: none;
+            padding: 5px;
+            cursor: pointer;
+        }
+        .btn-sacola {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #ff6600;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn-voltar {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
             cursor: pointer;
         }
     </style>
@@ -55,30 +98,38 @@
         <p>Os melhores produtos com os melhores preços!</p>
     </header>
 
-    <div class="container">
+    <button class="btn-sacola" onclick="toggleSacola()">🛒 Sacola</button>
+
+    <div class="container mt-4">
         <div class="row" id="produtos"></div>
     </div>
 
-    <div class="carrinho" onclick="finalizarCompra()">
-        Sacola de Compras (<span id="quantidade-itens">0</span>)
+    <div class="sacola" id="sacola">
+        <h4>Sacola de Compras</h4>
+        <div id="itens-sacola"></div>
+        <p><strong>Total: R$ <span id="total-sacola">0,00</span></strong></p>
+        <button onclick="limparSacola()" class="btn btn-danger btn-sm">Limpar Sacola</button>
+        <button onclick="finalizarCompra()" class="btn btn-success btn-sm">Finalizar Pedido</button>
+        <button onclick="voltarCompras()" class="btn-voltar btn-sm">Voltar às Compras</button>
     </div>
 
     <script>
-        let carrinho = [];
-
+        let sacola = [];
+        
         async function carregarProdutos() {
             const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQcl5R1I3Wf7hXsmDdr4wBzQ7qpt4hIgHrTBqTvuxL5KF6wZDeJT32ppYJCgJef0plAxBCjMvb7XBLo/pub?gid=0&single=true&output=tsv";
             
             try {
                 const response = await fetch(url);
                 const data = await response.text();
+
                 const linhas = data.split("\n");
                 const produtos = linhas.slice(1).map(linha => {
                     const colunas = linha.split("\t");
                     return {
                         nome: colunas[6] || "Produto Sem Nome",
-                        preco: colunas[7] || "0,00",
-                        imagem: colunas[29] || "https://via.placeholder.com/250x250?text=Imagem+Indisponível"
+                        preco: parseFloat(colunas[7]) || 0,
+                        imagem: colunas[29] || "https://via.placeholder.com/250x250?text=Imagem+Indispon%C3%ADvel"
                     };
                 });
 
@@ -93,8 +144,8 @@
                                     <img src="${produto.imagem}" class="card-img-top" alt="${produto.nome}">
                                     <div class="card-body">
                                         <h5 class="card-title">${produto.nome}</h5>
-                                        <p class="card-text"><strong>R$ ${produto.preco}</strong></p>
-                                        <button class="btn-comprar" onclick="adicionarAoCarrinho(${index}, '${produto.nome}', '${produto.preco}')">Adicionar</button>
+                                        <p class="card-text"><strong>R$ ${produto.preco.toFixed(2)}</strong></p>
+                                        <button class="btn-comprar" onclick="adicionarSacola(${index}, '${produto.nome}', ${produto.preco})">Comprar</button>
                                     </div>
                                 </div>
                             </div>
@@ -107,27 +158,54 @@
             }
         }
 
-        function adicionarAoCarrinho(id, nome, preco) {
-            carrinho.push({ id, nome, preco });
-            atualizarCarrinho();
+        function toggleSacola() {
+            document.getElementById("sacola").classList.toggle("mostrar");
         }
 
-        function atualizarCarrinho() {
-            document.getElementById("quantidade-itens").innerText = carrinho.length;
+        function adicionarSacola(id, nome, preco) {
+            sacola.push({ id, nome, preco });
+            atualizarSacola();
+        }
+
+        function removerItem(index) {
+            sacola.splice(index, 1);
+            atualizarSacola();
+        }
+
+        function limparSacola() {
+            sacola = [];
+            atualizarSacola();
+        }
+
+        function atualizarSacola() {
+            const itensSacola = document.getElementById("itens-sacola");
+            itensSacola.innerHTML = "";
+            
+            let total = 0;
+            sacola.forEach((item, index) => {
+                itensSacola.innerHTML += `
+                    <div class="sacola-item">
+                        <span>${item.nome} - R$ ${item.preco.toFixed(2)}</span>
+                        <button class="btn-remover" onclick="removerItem(${index})">X</button>
+                    </div>
+                `;
+                total += item.preco;
+            });
+
+            document.getElementById("total-sacola").innerText = total.toFixed(2);
         }
 
         function finalizarCompra() {
-            if (carrinho.length === 0) {
-                alert("Seu carrinho está vazio!");
+            if (sacola.length === 0) {
+                alert("Sua sacola está vazia!");
                 return;
             }
-            
-            let mensagem = "Olá, gostaria de comprar os seguintes produtos:%0A%0A";
-            carrinho.forEach(item => {
-                mensagem += `- ${item.nome} por R$ ${item.preco}%0A`;
-            });
-            
-            window.open(`https://wa.me/5511986215473?text=${mensagem}`, "_blank");
+            const mensagem = sacola.map(item => `${item.nome} - R$ ${item.preco.toFixed(2)}`).join("%0A");
+            window.open(`https://wa.me/11986215473?text=Meu%20pedido:%0A${mensagem}`, "_blank");
+        }
+
+        function voltarCompras() {
+            toggleSacola(); // Fecha a sacola
         }
 
         document.addEventListener("DOMContentLoaded", carregarProdutos);
