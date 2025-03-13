@@ -99,12 +99,17 @@
     </header>
 
     <button class="btn-sacola" onclick="toggleSacola()">🛒 Sacola</button>
-  <!-- Menu suspenso para categorias -->
-  <div class="container mt-3">
+ 
+ <!-- Menu suspenso para categorias -->
+<div class="container mt-3">
     <label for="categoriaFiltro"><strong>Filtrar por Categoria:</strong></label>
     <select id="categoriaFiltro" class="form-control" onchange="filtrarProdutos()">
         <option value="Todos">Todos</option>
     </select>
+</div>
+
+<div class="container mt-4">
+    <div class="row" id="produtos"></div>
 </div>
 
 <div class="container mt-4">
@@ -248,84 +253,97 @@
     
         document.addEventListener("DOMContentLoaded", carregarProdutos);
    
-    let produtos = [];
+        let produtos = [];
 
-    async function carregarProdutos() {
-        const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQcl5R1I3Wf7hXsmDdr4wBzQ7qpt4hIgHrTBqTvuxL5KF6wZDeJT32ppYJCgJef0plAxBCjMvb7XBLo/pub?gid=0&single=true&output=tsv";
-        
-        try {
-            const response = await fetch(url);
-            const data = await response.text();
+async function carregarProdutos() {
+    const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQcl5R1I3Wf7hXsmDdr4wBzQ7qpt4hIgHrTBqTvuxL5KF6wZDeJT32ppYJCgJef0plAxBCjMvb7XBLo/pub?gid=0&single=true&output=tsv";
 
-            const linhas = data.split("\n");
-            let categorias = new Set();
+    try {
+        const response = await fetch(url);
+        const data = await response.text();
+        const linhas = data.split("\n");
+        const cabecalho = linhas[0].split("\t").map(h => h.trim().toLowerCase()); // Normaliza os nomes das colunas para evitar erros
 
-            produtos = linhas.slice(1).map(linha => {
-                const colunas = linha.split("\t");
-                const categoria = colunas["categorias"]?.trim() || "Sem Categoria"; // Coluna 31 (índice 30)
-                categorias.add(categoria);
+        // Pegando os índices corretos das colunas
+        const indiceNome = cabecalho.indexOf("nome");
+        const indicePreco = cabecalho.indexOf("valor_de_presente");
+        const indiceImagem = cabecalho.indexOf("link_foto_principal");
+        const indiceDescricao = cabecalho.indexOf("descricao");
+        const indiceCategoria = cabecalho.indexOf("categorias");
 
-                return {
-                    nome: colunas[6] || "Produto Sem Nome",
-                    preco: parseFloat(colunas[7]) || 0,
-                    imagem: colunas[29] || "https://via.placeholder.com/250x250?text=Imagem+Indispon%C3%ADvel",
-                    descricao: colunas[15] || "Descrição indisponível",
-                    categoria: categoria
-                };
-            });
-
-            carregarCategorias([...categorias]);
-            exibirProdutos(produtos);
-        } catch (error) {
-            console.error("Erro ao carregar produtos:", error);
+        if (indiceNome === -1 || indicePreco === -1 || indiceCategoria === -1) {
+            console.error("Erro: Colunas obrigatórias não encontradas!");
+            return;
         }
-    }
 
-    function carregarCategorias(categorias) {
-        const select = document.getElementById("categoriaFiltro");
-        categorias.forEach(cat => {
-            const option = document.createElement("option");
-            option.value = cat;
-            option.textContent = cat;
-            select.appendChild(option);
+        let categorias = new Set();
+
+        produtos = linhas.slice(1).map(linha => {
+            const colunas = linha.split("\t");
+            const categoria = colunas[indiceCategoria]?.trim() || "Sem Categoria";
+            categorias.add(categoria);
+
+            return {
+                nome: colunas[indiceNome] || "Produto Sem Nome",
+                preco: parseFloat(colunas[indicePreco]) || 0,
+                imagem: colunas[indiceImagem] || "https://via.placeholder.com/250x250?text=Imagem+Indispon%C3%ADvel",
+                descricao: colunas[indiceDescricao] || "Descrição indisponível",
+                categoria: categoria
+            };
         });
+
+        carregarCategorias([...categorias]); // Popula o filtro com categorias únicas
+        exibirProdutos(produtos); // Exibe os produtos na página
+    } catch (error) {
+        console.error("Erro ao carregar produtos:", error);
     }
+}
 
-    function exibirProdutos(lista) {
-        const container = document.getElementById("produtos");
-        container.innerHTML = "";
+function carregarCategorias(categorias) {
+    const select = document.getElementById("categoriaFiltro");
+    categorias.forEach(cat => {
+        const option = document.createElement("option");
+        option.value = cat;
+        option.textContent = cat;
+        select.appendChild(option);
+    });
+}
 
-        lista.forEach((produto, index) => {
-            if (produto.nome && produto.preco) {
-                const card = `
-                    <div class="col-md-4 mb-4">
-                        <div class="card">
-                            <img src="${produto.imagem}" class="card-img-top" alt="${produto.nome}">
-                            <div class="card-body">
-                                <h5 class="card-title">${produto.nome}</h5>
-                                <p class="card-text"><strong>R$ ${produto.preco.toFixed(2)}</strong></p>
-                                <p class="card-text">${produto.descricao}</p>
-                                <button class="btn-comprar" onclick="adicionarSacola(${index}, '${produto.nome}', ${produto.preco})">Comprar</button>
-                            </div>
+function exibirProdutos(lista) {
+    const container = document.getElementById("produtos");
+    container.innerHTML = "";
+
+    lista.forEach((produto, index) => {
+        if (produto.nome && produto.preco) {
+            const card = `
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="${produto.imagem}" class="card-img-top" alt="${produto.nome}">
+                        <div class="card-body">
+                            <h5 class="card-title">${produto.nome}</h5>
+                            <p class="card-text"><strong>R$ ${produto.preco.toFixed(2)}</strong></p>
+                            <p class="card-text">${produto.descricao}</p>
+                            <button class="btn-comprar" onclick="adicionarSacola(${index}, '${produto.nome}', ${produto.preco})">Comprar</button>
                         </div>
                     </div>
-                `;
-                container.innerHTML += card;
-            }
-        });
-    }
-
-    function filtrarProdutos() {
-        const categoriaSelecionada = document.getElementById("categoriaFiltro").value;
-        if (categoriaSelecionada === "Todos") {
-            exibirProdutos(produtos);
-        } else {
-            const produtosFiltrados = produtos.filter(produto => produto.categoria === categoriaSelecionada);
-            exibirProdutos(produtosFiltrados);
+                </div>
+            `;
+            container.innerHTML += card;
         }
-    }
+    });
+}
 
-    document.addEventListener("DOMContentLoaded", carregarProdutos);
+function filtrarProdutos() {
+    const categoriaSelecionada = document.getElementById("categoriaFiltro").value;
+    if (categoriaSelecionada === "Todos") {
+        exibirProdutos(produtos);
+    } else {
+        const produtosFiltrados = produtos.filter(produto => produto.categoria === categoriaSelecionada);
+        exibirProdutos(produtosFiltrados);
+    }
+}
+
+document.addEventListener("DOMContentLoaded", carregarProdutos);
 </script>
 
     
