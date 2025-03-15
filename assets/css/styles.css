@@ -1,0 +1,202 @@
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+.card {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+.card:hover {
+    transform: scale(1.05);
+}
+.card-img-top {
+    width: 100%;
+    height: auto;
+    max-height: 250px;
+    object-fit: contain;
+    background: #f8f8f8;
+    padding: 10px;
+}
+.card-body {
+    text-align: center;
+}
+.btn-comprar {
+    background-color: #ff6600;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.btn-comprar:hover {
+    background-color: #e65c00;
+}
+.sacola {
+    position: fixed;
+    top: 50%;
+    right: -350px;
+    transform: translateY(-50%);
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    width: 350px;
+    max-height: 500px;
+    overflow-y: auto;
+    transition: right 0.3s ease-in-out;
+}
+.sacola.mostrar {
+    right: 20px;
+}
+.sacola-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.btn-remover {
+    background: red;
+    color: white;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+}
+.btn-sacola {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #ff6600;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.btn-voltar {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.popup-descricao {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 500px;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000; /* Para garantir que fique acima de outros elementos */
+    display: none; /* Inicialmente escondido */
+}
+
+.popup-content {
+    text-align: center;
+}
+
+.close-popup {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+.sacola {
+    display: none; /* Inicialmente oculta */
+}
+
+.sacola.mostrar {
+    display: block; /* Exibe a sacola quando a classe "mostrar" for adicionada */
+}
+
+.popup-descricao {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 500px;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000; /* Para garantir que fique acima de outros elementos */
+}
+
+.close-popup {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-text {
+    margin-bottom: 10px;
+}
+
+.sacola {
+    display: none;
+    position: fixed;
+    top: 50%;
+    right: -350px;
+    transform: translateY(-50%);
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    width: 350px;
+    max-height: 500px;
+    overflow-y: auto;
+    transition: right 0.3s ease-in-out;
+}
+
+.sacola.mostrar {
+    display: block;
+    right: 20px;
+}
+
+
+.sacola-item button {
+    background: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#categoriaFiltro {
+    max-width: 200px;
+}
+
+#produtos {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.btn-comprar {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.btn-comprar:hover {
+    background-color: #218838;
+}
