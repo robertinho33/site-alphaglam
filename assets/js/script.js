@@ -72,7 +72,7 @@ function exibirProdutos(listaProdutos) {
                         <p class="card-text"><strong>R$ ${produto.preco.toFixed(2)}</strong></p>
                       
                        <button class="btn btn-info" onclick="mostrarDescricao('${produto.nome}', \`${produto.descricao.replace(/`/g, "\\`")}\`)">Detalhes</button>
-                       <button class="btn-comprar" onclick="adicionarSacola('${produto.nome}', ${produto.preco})">Comprar</button>
+                        <button class="btn-comprar" onclick="adicionarSacola('${produto.nome}', ${produto.preco})">Comprar</button>
                     </div>
                 </div>
             `;
@@ -135,7 +135,7 @@ function finalizarCompra() {
 
     const mensagemFinal = `Meu pedido:%0A${mensagem}%0A%0ATotal: R$ ${total.toFixed(2)}%0AForma de pagamento: ${formaPagamento}`;
 
-    window.open(`https://wa.me/+(55)11986215473?text=${mensagemFinal}`, "_blank");
+    window.open(`https://wa.me/+5511986215473?text=${mensagemFinal}`, "_blank");
 }
 
 function voltarCompras() {
