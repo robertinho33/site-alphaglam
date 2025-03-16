@@ -135,7 +135,7 @@ function finalizarCompra() {
 
     const mensagemFinal = `Meu pedido:%0A${mensagem}%0A%0ATotal: R$ ${total.toFixed(2)}%0AForma de pagamento: ${formaPagamento}`;
 
-    window.open(`https://wa.me/11986215473?text=${mensagemFinal}`, "_blank");
+    window.open(`https://wa.me/+(55)11986215473?text=${mensagemFinal}`, "_blank");
 }
 
 function voltarCompras() {
