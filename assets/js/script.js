@@ -120,22 +120,71 @@ function toggleSacola() {
     document.getElementById("sacola").classList.toggle("mostrar");
 }
 
-function finalizarCompra() {
+async function finalizarCompra() {
     if (sacola.length === 0) {
         alert("Sua sacola está vazia!");
         return;
     }
 
+    const nomeCliente = prompt("Digite seu nome:");
+    const telefoneCliente = prompt("Digite seu telefone (com DDD):");
+
+    if (!nomeCliente || !telefoneCliente) {
+        alert("Nome e telefone são obrigatórios!");
+        return;
+    }
+
     const formaPagamento = document.getElementById("forma-pagamento").value;
     let total = 0;
-    const mensagem = sacola.map(item => {
+    const itensPedido = sacola.map(item => {
         total += item.preco;
         return `${item.nome} - R$ ${item.preco.toFixed(2)}`;
-    }).join("%0A");
+    }).join(", ");
 
-    const mensagemFinal = `Meu pedido:%0A${mensagem}%0A%0ATotal: R$ ${total.toFixed(2)}%0AForma de pagamento: ${formaPagamento}`;
+    const dadosPedido = {
+        nomeCliente,
+        telefone: telefoneCliente,
+        itens: itensPedido,
+        total: total.toFixed(2),
+        pagamento: formaPagamento
+    };
 
-    window.open(`https://wa.me/+5511986215473?text=${mensagemFinal}`, "_blank");
+    // Enviar pedido para o Google Sheets
+    const webhookURL = "https://script.google.com/macros/s/AKfycbwCxt4cIDtwgGJLHu6z6iYcsnneYwuA0hxXCr2c_gZfB1pwkPVAfXw9nSIrochQLTP-/exec"; // Substitua pela URL do Apps Script
+    
+    try {
+        const response = await fetch(webhookURL, {
+            method: "POST",
+            body: JSON.stringify(dadosPedido),
+            headers: { "Content-Type": "application/json" }
+        });
+
+        const resposta = await response.json();
+        if (resposta.success) {
+            alert("Pedido enviado com sucesso!");
+            
+            // Criar a mensagem do WhatsApp
+            const mensagemWhatsApp = encodeURIComponent(
+                `Novo Pedido!%0A%0A` +
+                `Nome: ${nomeCliente}%0A` +
+                `Telefone: ${telefoneCliente}%0A` +
+                `Itens: ${itensPedido}%0A` +
+                `Total: R$ ${total.toFixed(2)}%0A` +
+                `Forma de Pagamento: ${formaPagamento}`
+            );
+
+            // Redirecionar para o WhatsApp
+            window.open(`https://wa.me/+5511986215473?text=${mensagemWhatsApp}`, "_blank");
+
+            // Limpar a sacola após o pedido
+            limparSacola();
+        } else {
+            throw new Error(resposta.error);
+        }
+    } catch (erro) {
+        console.error("Erro ao salvar pedido:", erro);
+        alert("Erro ao salvar pedido. Tente novamente.");
+    }
 }
 
 function voltarCompras() {
