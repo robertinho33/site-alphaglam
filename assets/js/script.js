@@ -150,7 +150,7 @@ async function finalizarCompra() {
     };
 
     // Enviar pedido para o Google Sheets
-    const webhookURL = "https://script.google.com/macros/s/AKfycbwCxt4cIDtwgGJLHu6z6iYcsnneYwuA0hxXCr2c_gZfB1pwkPVAfXw9nSIrochQLTP-/exec"; // Substitua pela URL do Apps Script
+    const webhookURL = "https://script.google.com/macros/library/d/1FkIZyzRaBdt7187pEDiV1WbLNrurPIG35a6CjkiWy4A3vN66pktQGA2d/2"; // Substitua pela URL do Apps Script
     
     try {
         const response = await fetch(webhookURL, {
@@ -158,6 +158,7 @@ async function finalizarCompra() {
             body: JSON.stringify(dadosPedido),
             headers: { "Content-Type": "application/json" }
         });
+        
 
         const resposta = await response.json();
         if (resposta.success) {
@@ -203,3 +204,73 @@ function filtrarProdutos() {
 }
 
 document.addEventListener("DOMContentLoaded", carregarProdutos);
+
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyCVenp_Ev_M0cPa_IGoEuPDNBfgz26dAUU",
+  authDomain: "novo-b4adb.firebaseapp.com",
+  projectId: "novo-b4adb",
+  storageBucket: "novo-b4adb.firebasestorage.app",
+  messagingSenderId: "578134453072",
+  appId: "1:578134453072:web:41d485a508c128c39b9a55",
+  measurementId: "G-Z3SBF4EGXX"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
+    // ✅ Função para salvar pedidos
+    async function salvarPedido(nome, telefone, itens, total, pagamento) {
+        try {
+            const dadosPedido = {
+                data: new Date().toISOString(),
+                nome: nome,
+                telefone: telefone,
+                itens: itens,
+                total: parseFloat(total),
+                pagamento: pagamento
+            };
+
+            // Salvar no Firestore na coleção "pedidos"
+            await addDoc(collection(db, "pedidos"), dadosPedido);
+            alert("Pedido salvo com sucesso!");
+
+            // Criar mensagem para o WhatsApp
+            const mensagemWhatsApp = encodeURIComponent(
+                `Novo Pedido!%0A%0A` +
+                `Nome: ${nome}%0A` +
+                `Telefone: ${telefone}%0A` +
+                `Itens: ${itens}%0A` +
+                `Total: R$ ${parseFloat(total).toFixed(2)}%0A` +
+                `Forma de Pagamento: ${pagamento}`
+            );
+
+            window.open(`https://wa.me/+5511986215473?text=${mensagemWhatsApp}`, "_blank");
+
+            document.getElementById("pedidoForm").reset();
+        } catch (erro) {
+            console.error("Erro ao salvar pedido:", erro);
+            alert("Erro ao salvar pedido. Tente novamente.");
+        }
+    }
+
+    // 📌 Evento de envio do formulário de pedidos
+    document.getElementById("pedidoForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const nome = document.getElementById("nomePedido").value;
+        const telefone = document.getElementById("telefone").value;
+        const itens = document.getElementById("itens").value;
+        const total = document.getElementById("total").value;
+        const pagamento = document.getElementById("pagamento").value;
+        await salvarPedido(nome, telefone, itens, total, pagamento);
+    });
+
+
